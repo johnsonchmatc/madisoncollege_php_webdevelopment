@@ -1,0 +1,31 @@
+h2. In-class Lab 12.1
+
+<hr />
+
+h3. Exercise 1
+
+# If using your Linux VM, create directory *lab12* under your */var/www/labs* directory, if it does not exist. Otherwise create directory *lab12* under the document root of whatever web server you are using. On the MATC Windows lab computers that will be: C:\Inetpub\wwwroot
+# In jEdit or another text editor, create a PHP script file named *lab12x1.php*. In this script, you will connect to the class MySQL server, select the *Northwind* database, and fetch a row of data to display. You should use HTML tags in your file, including a title (*@<title>@*) in the *@<head>@* section and in the *@<body>@* section (using *@<h1>@*).
+# First, connect to the class server using the mysql_connect() function:
+<br /><pre>
+$db = mysql_connect('itins3.matcmadison.edu','astudent','password');
+</pre>
+Only use your instructor-assigned username and password for the class server.
+# Next, test whether connection to the database was successful and exit your script with an appropriate message if not.
+# Select the "Northwind" database using the *@mysql_select_db()@* function. Note that, because the class server runs the Linux operating system, both database names and table names are case sensitive, and the Northwind database uses initcaps for the database name and all table names!
+# Again be sure to test whether the database was successfully selected and exit with an error message if selection failed.
+# Run the following SELECT query against the Northwind database using the *@mysql_query()@* function and saving the result set in a variable.
+<br /><pre>
+$result = mysql_query("SELECT * FROM Customers", $db);
+</pre>
+# Test the variable containing the result set to determine whether the query failed. If it failed, exit with an appropriate error message.
+# Use the *@mysql_fetch_assoc()@* function to fetch the first row of the result set into a variable, as an associative array.
+# Then, use a *foreach* loop to traverse the columns of the row (record) returned by *@mysql_fetch_assoc()@* printing out each key-value pair of the array, which corresponds to the name and value of each column in that row of the database table. Use *@<br />@* tags so that each key-value pair prints on a separate line.
+# Finally, explicitly close your connection to the database using *@mysql_close()@* .
+# Test your script to be sure it successfully connects to the class server database and displays a row from the "Customers" table of the Northwind database. Show the working script to your instructor.
+
+<br />
+
+<hr />
+
+[[Unit Twelve => 152-166 Unit Twelve Index]]

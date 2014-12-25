@@ -1,0 +1,131 @@
+<HTML>
+<HEAD>
+<TITLE>exception.inc</TITLE>
+<STYLE TYPE="text/css"><!--
+.syntax0 {
+color: #000000;
+}
+.syntax1 {
+color: #cc0000;
+}
+.syntax2 {
+color: #cc0000;
+}
+.syntax3 {
+color: #cc0000;
+}
+.syntax4 {
+color: #cc6600;
+}
+.syntax5 {
+color: #ff0000;
+}
+.syntax6 {
+color: #000000;
+}
+.syntax7 {
+background: #ffffcc;
+color: #ff0066;
+}
+.syntax8 {
+color: #000000;
+font-weight: bold;
+}
+.syntax9 {
+color: #000000;
+font-weight: bold;
+}
+.syntax10 {
+color: #000000;
+font-weight: bold;
+}
+.syntax11 {
+color: #000000;
+font-weight: bold;
+}
+.syntax12 {
+color: #cc0000;
+}
+.syntax13 {
+color: #0000cc;
+}
+.syntax14 {
+color: #0000cc;
+}
+.syntax15 {
+color: #0000cc;
+}
+.syntax16 {
+color: #0000cc;
+}
+.syntax17 {
+color: #0000ff;
+}
+.syntax18 {
+color: #000000;
+font-weight: bold;
+}
+.gutter {
+background: #dbdbdb;
+color: #000000;
+}
+.gutterH {
+background: #dbdbdb;
+color: #990066;
+}
+-->
+</STYLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+<PRE><SPAN CLASS="gutter"> 1:</SPAN><SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutter"> 2:</SPAN><SPAN CLASS="syntax8">class</SPAN> Exception <SPAN CLASS="syntax18">{</SPAN>
+<SPAN CLASS="gutter"> 3:</SPAN>  <SPAN CLASS="syntax8">function</SPAN> <SPAN CLASS="syntax6">__construct</SPAN>(string <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">message</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax10">NULL</SPAN><SPAN CLASS="syntax18">,</SPAN> int <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">code</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax5">0</SPAN>) <SPAN CLASS="syntax18">{</SPAN>
+<SPAN CLASS="gutter"> 4:</SPAN>    <SPAN CLASS="syntax8">if</SPAN> (<SPAN CLASS="syntax9">func_num_args</SPAN>()) <SPAN CLASS="syntax18">{</SPAN>
+<SPAN CLASS="gutterH"> 5:</SPAN>      <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">this</SPAN><SPAN CLASS="syntax18">-&gt;</SPAN>message <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">message</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter"> 6:</SPAN>    <SPAN CLASS="syntax18">}</SPAN>
+<SPAN CLASS="gutter"> 7:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">this</SPAN><SPAN CLASS="syntax18">-&gt;</SPAN>code <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">code</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter"> 8:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">this</SPAN><SPAN CLASS="syntax18">-&gt;</SPAN><SPAN CLASS="syntax9">file</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax10">__FILE__</SPAN><SPAN CLASS="syntax18">;</SPAN> <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">of</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">throw</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">clause</SPAN>
+<SPAN CLASS="gutter"> 9:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">this</SPAN><SPAN CLASS="syntax18">-&gt;</SPAN>line <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax10">__LINE__</SPAN><SPAN CLASS="syntax18">;</SPAN> <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">of</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">throw</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">clause</SPAN>
+<SPAN CLASS="gutterH">10:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">this</SPAN><SPAN CLASS="syntax18">-&gt;</SPAN>trace <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax9">debug_backtrace</SPAN>()<SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">11:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">this</SPAN><SPAN CLASS="syntax18">-&gt;</SPAN>string <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax6">StringFormat</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">this</SPAN>)<SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">12:</SPAN>  <SPAN CLASS="syntax18">}</SPAN>
+<SPAN CLASS="gutter">13:</SPAN>  <SPAN CLASS="syntax8">protected</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">message</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax13">Unknown</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">exception</SPAN><SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax18">;</SPAN> <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">exception</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">message</SPAN>
+<SPAN CLASS="gutter">14:</SPAN>  <SPAN CLASS="syntax8">protected</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">code</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax5">0</SPAN><SPAN CLASS="syntax18">;</SPAN> <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">user</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">defined</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">exception</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">code</SPAN>
+<SPAN CLASS="gutterH">15:</SPAN>  <SPAN CLASS="syntax8">protected</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">file</SPAN><SPAN CLASS="syntax18">;</SPAN> <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">source</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">filename</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">of</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">exception</SPAN>
+<SPAN CLASS="gutter">16:</SPAN>  <SPAN CLASS="syntax8">protected</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">line</SPAN><SPAN CLASS="syntax18">;</SPAN> <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">source</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">line</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">of</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">exception</SPAN>
+<SPAN CLASS="gutter">17:</SPAN>
+<SPAN CLASS="gutter">18:</SPAN>  <SPAN CLASS="syntax8">private</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">trace</SPAN><SPAN CLASS="syntax18">;</SPAN> <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">backtrace</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">of</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">exception</SPAN>
+<SPAN CLASS="gutter">19:</SPAN>  <SPAN CLASS="syntax8">private</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">string</SPAN><SPAN CLASS="syntax18">;</SPAN> <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">internal</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">only!!</SPAN>
+<SPAN CLASS="gutterH">20:</SPAN>
+<SPAN CLASS="gutter">21:</SPAN>  <SPAN CLASS="syntax8">final</SPAN> <SPAN CLASS="syntax8">function</SPAN> <SPAN CLASS="syntax6">getMessage</SPAN>()<SPAN CLASS="syntax18">{</SPAN>
+<SPAN CLASS="gutter">22:</SPAN>    <SPAN CLASS="syntax8">return</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">this</SPAN><SPAN CLASS="syntax18">-&gt;</SPAN>message<SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">23:</SPAN>  <SPAN CLASS="syntax18">}</SPAN>
+<SPAN CLASS="gutter">24:</SPAN>  <SPAN CLASS="syntax8">final</SPAN> <SPAN CLASS="syntax8">function</SPAN> <SPAN CLASS="syntax6">getCode</SPAN>() <SPAN CLASS="syntax18">{</SPAN>
+<SPAN CLASS="gutterH">25:</SPAN>    <SPAN CLASS="syntax8">return</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">this</SPAN><SPAN CLASS="syntax18">-&gt;</SPAN>code<SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">26:</SPAN>  <SPAN CLASS="syntax18">}</SPAN>
+<SPAN CLASS="gutter">27:</SPAN>  <SPAN CLASS="syntax8">final</SPAN> <SPAN CLASS="syntax8">function</SPAN> <SPAN CLASS="syntax6">getFile</SPAN>() <SPAN CLASS="syntax18">{</SPAN>
+<SPAN CLASS="gutter">28:</SPAN>    <SPAN CLASS="syntax8">return</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">this</SPAN><SPAN CLASS="syntax18">-&gt;</SPAN><SPAN CLASS="syntax9">file</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">29:</SPAN>  <SPAN CLASS="syntax18">}</SPAN>
+<SPAN CLASS="gutterH">30:</SPAN>  <SPAN CLASS="syntax8">final</SPAN> <SPAN CLASS="syntax8">function</SPAN> <SPAN CLASS="syntax6">getTrace</SPAN>() <SPAN CLASS="syntax18">{</SPAN>
+<SPAN CLASS="gutter">31:</SPAN>    <SPAN CLASS="syntax8">return</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">this</SPAN><SPAN CLASS="syntax18">-&gt;</SPAN>trace<SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">32:</SPAN>  <SPAN CLASS="syntax18">}</SPAN>
+<SPAN CLASS="gutter">33:</SPAN>  <SPAN CLASS="syntax8">final</SPAN> <SPAN CLASS="syntax8">function</SPAN> <SPAN CLASS="syntax6">getTraceAsString</SPAN>() <SPAN CLASS="syntax18">{</SPAN>
+<SPAN CLASS="gutter">34:</SPAN>    <SPAN CLASS="syntax8">return</SPAN> self<SPAN CLASS="syntax18">:</SPAN><SPAN CLASS="syntax18">:</SPAN><SPAN CLASS="syntax6">TraceFormat</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">this</SPAN>)<SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">35:</SPAN>  <SPAN CLASS="syntax18">}</SPAN>
+<SPAN CLASS="gutter">36:</SPAN>  <SPAN CLASS="syntax8">function</SPAN> <SPAN CLASS="syntax6">_toString</SPAN>() <SPAN CLASS="syntax18">{</SPAN>
+<SPAN CLASS="gutter">37:</SPAN>    <SPAN CLASS="syntax8">return</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">this</SPAN><SPAN CLASS="syntax18">-&gt;</SPAN>string<SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">38:</SPAN>  <SPAN CLASS="syntax18">}</SPAN>
+<SPAN CLASS="gutter">39:</SPAN>  <SPAN CLASS="syntax8">static</SPAN> <SPAN CLASS="syntax8">private</SPAN> <SPAN CLASS="syntax8">function</SPAN> <SPAN CLASS="syntax6">StringFormat</SPAN>(Exception <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">exception</SPAN>) <SPAN CLASS="syntax18">{</SPAN>
+<SPAN CLASS="gutterH">40:</SPAN>    <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">...</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">a</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">function</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">not</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">available</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">in</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">PHP</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">scripts</SPAN>
+<SPAN CLASS="gutter">41:</SPAN>    <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">that</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">returns</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">all</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">relevant</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">information</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">as</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">a</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">string</SPAN>
+<SPAN CLASS="gutter">42:</SPAN>  <SPAN CLASS="syntax18">}</SPAN>
+<SPAN CLASS="gutter">43:</SPAN>  <SPAN CLASS="syntax8">static</SPAN> <SPAN CLASS="syntax8">private</SPAN> <SPAN CLASS="syntax8">function</SPAN> <SPAN CLASS="syntax6">TraceFormat</SPAN>(Exception <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">exception</SPAN>) <SPAN CLASS="syntax18">{</SPAN>
+<SPAN CLASS="gutter">44:</SPAN>    <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">...</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">a</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">function</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">not</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">available</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">in</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">PHP</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">scripts</SPAN>
+<SPAN CLASS="gutterH">45:</SPAN>    <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">that</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">returns</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">the</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">backtrace</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">as</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">a</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">string</SPAN>
+<SPAN CLASS="gutter">46:</SPAN>  <SPAN CLASS="syntax18">}</SPAN>
+<SPAN CLASS="gutter">47:</SPAN><SPAN CLASS="syntax18">}</SPAN>
+<SPAN CLASS="gutter">48:</SPAN><SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutter">49:</SPAN>
+</PRE></BODY>
+</HTML>
+

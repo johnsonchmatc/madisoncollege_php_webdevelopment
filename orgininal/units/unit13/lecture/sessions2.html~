@@ -1,0 +1,902 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>More Sessions</title>
+<link href="../../../css/basic.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" language="JavaScript">
+<!--
+function putSemester() {
+    var today=new Date();
+    var thisMonth=today.getMonth()+1;
+    var thisYear=today.getFullYear();
+    if(thisMonth <=6) {
+        return "Spring, " + thisYear;
+    }
+    else {
+       return "Fall, " + thisYear;
+    }
+}//-->
+</script>
+<style type="text/css">
+<!--
+    .bgStripes {
+        background-image:url(../../../images/Xstripes.gif);
+        background-attachment: fixed;
+    }
+    body {
+        background-color:white;
+    }
+    strong {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+-->
+</style>
+</head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
+<table class="bgStripes" border="0" width="100%">
+<tbody>
+<tr name="firstRow">
+<td valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+<script type="text/javascript">
+<!--
+    document.write(putSemester());
+-->
+</script>
+</span> <br>
+</td>
+<td style="text-align: center;"><span style="font-weight: bold; font-size: medium; color: darkblue;">
+PHP Web Development with MySQL
+</span> </td>
+<td align="right" valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+3 Credits</span> </td>
+</tr>
+<tr>
+<td colspan="3" style="text-align: center;"><span style="font-size: xx-small; font-weight: bold;">
+152-166</span> </td>
+</tr>
+</tbody>
+</table>
+<!--The heading for the slides --> <br>
+<table class="headTable1" border="0">
+<tbody>
+<tr>
+<td width="100"><a href="sessions1.html"><img alt="" src="../../../images/btn_lArrow.gif" border="0"></a><a href="index.html"><img alt="" src="../../../images/btn_upArrow.gif" border="0"></a><a href="index.html"><img alt="" src="../../../images/btn_rArrow.gif" border="0"></a></td>
+<td>More About Sessions</td>
+</tr>
+</tbody>
+</table>
+<br>
+<div class="disp1">
+<ul class="slidesUl1">
+<li><p>
+Sessions Without Cookies
+</p><p>
+As we have seen in the previous examples, a cookie is used to hold the session ID.
+This is the default and considered the most secure way to handle session data.
+</p><p>
+The problem with cookies, however, is that the user can disable them for his or
+her browser or refuse to accept them.
+</p><p>
+To overcome the obstacle of a cookieless client, the other way to send the
+session ID is in the URL or by using hidden fields with GET/POST.
+</p><p>
+When propagating the session ID with GET/POST, it must be done only when the
+URL resides on your local Web server and is not passed to an external URL.
+</p></li>
+<li><p>
+Using a Hidden Form Element
+</p><p>
+When working with HTML the session ID can be propagated through the use of a
+hidden form element.
+</p><p>
+When assigning the name and value to the hidden input field, the name will be
+the name of the current session and the value, the session ID.
+</p><p>
+You can use the <b>session_name()</b> and <b>session_id()</b> functions to get
+those values.
+</p><p>
+The <b>SID</b> constant can also be used to get the current session ID.
+For example:
+</p>
+<code><small><pre>
+&lt;FORM ACTION="order.php" METHOD=GET&gt;
+&lt;INPUT TYPE="hidden" NAME="&lt;?php echo session_name(); ?&gt;"
+                     VALUE="&lt;?php echo session_id(); ?&gt;"&gt;
+&lt;!-- The remainder of the form HTML code //--&gt;
+&lt;/FORM&gt;
+</pre></small></code>
+<h4>
+Filename: noCookies.php - Page 1
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Disable</span><span class="syntax2"> </span><span class="syntax2">cookies</span><span class="syntax2"> </span><span class="syntax2">for</span><span class="syntax2"> </span><span class="syntax2">this</span><span class="syntax2"> </span><span class="syntax2">session</span>
+<span class="gutter">   3:</span>  <span class="syntax9">ini_set</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">session.use_cookies</span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax5">0</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   4:</span>  <span class="syntax9">ob_start</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">   5:</span>
+<span class="gutter">   6:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">start</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">session</span>
+<span class="gutter">   7:</span>  <span class="syntax9">session_start</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   8:</span>
+<span class="gutter">   9:</span>  <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax8">isset</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_GET</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">mycolor</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutterH">  10:</span>    <span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">favorite_color</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">_GET</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">mycolor</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span>    <span class="syntax10">$</span><span class="syntax10">sess_name</span> <span class="syntax18">=</span> <span class="syntax9">session_name</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>    <span class="syntax10">$</span><span class="syntax10">sess_id</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">_GET</span><span class="syntax18">[</span><span class="syntax10">$</span><span class="syntax10">sess_name</span><span class="syntax18">]</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>    <span class="syntax9">header</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">Location:noCookies2.php?</span><span class="syntax13">'</span><span class="syntax18">.</span> <span class="syntax10">$</span><span class="syntax10">sess_name</span> <span class="syntax18">.</span><span class="syntax13">'</span><span class="syntax13">=</span><span class="syntax13">'</span><span class="syntax18">.</span> <span class="syntax10">$</span><span class="syntax10">sess_id</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>  <span class="syntax18">}</span>
+<span class="gutterH">  15:</span><span class="syntax17">?&gt;</span>
+<span class="gutter">  16:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">  17:</span> <span class="syntax17">&lt;body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  18:</span>  <span class="syntax17">&lt;h1</span><span class="syntax17">&gt;</span> Select Favorite Color<span class="syntax17">&lt;/h1</span><span class="syntax17">&gt;</span>
+<span class="gutter">  19:</span>  <span class="syntax17">&lt;form</span><span class="syntax17"> </span><span class="syntax17">action</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax17">&lt;?php</span> <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax18">{</span>_SERVER<span class="syntax18">}</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">PHP_SELF</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">;</span> <span class="syntax17">?&gt;</span><span class="syntax14">&quot;</span><span class="syntax17"> </span><span class="syntax17">method</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">GET</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  20:</span>   <span class="syntax17">&lt;select</span><span class="syntax17"> </span><span class="syntax17">name</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">mycolor</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">  21:</span>   Please select<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  22:</span>    <span class="syntax17">&lt;option</span><span class="syntax17"> </span><span class="syntax17">selected</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">green</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>Green<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  23:</span>    <span class="syntax17">&lt;option</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">white</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>White<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  24:</span>    <span class="syntax17">&lt;option</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">blue</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>Blue<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  25:</span>    <span class="syntax17">&lt;option</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">red</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>Red<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  26:</span>    <span class="syntax17">&lt;option</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">yellow</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>Yellow<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  27:</span>    <span class="syntax17">&lt;option</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">gray</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>Gray<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  28:</span>   <span class="syntax17">&lt;/select</span><span class="syntax17">&gt;</span>
+<span class="gutter">  29:</span>   <span class="syntax17">&lt;input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">hidden</span><span class="syntax14">&quot;</span><span class="syntax17"> </span><span class="syntax17">name</span><span class="syntax18">=</span><span class="syntax13">'</span><span class="syntax13">PHPSESSID</span><span class="syntax13">'</span>
+<span class="gutterH">  30:</span><span class="syntax17"> </span><span class="syntax17"> </span><span class="syntax17"> </span><span class="syntax17"> </span><span class="syntax17"> </span><span class="syntax17"> </span><span class="syntax17"> </span><span class="syntax17"> </span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax17">&lt;?php</span> <span class="syntax8">echo</span> <span class="syntax9">session_id</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span> <span class="syntax17">?&gt;</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">  31:</span>   <span class="syntax17">&lt;input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">submit</span><span class="syntax14">&quot;</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">Set</span><span class="syntax14"> </span><span class="syntax14">color</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">  32:</span>  <span class="syntax17">&lt;/form</span><span class="syntax17">&gt;</span>
+<span class="gutter">  33:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  34:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  35:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">  36:</span>  <span class="syntax9">ob_end_flush</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  37:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+The <b>ini_set()</b> function is used to change the configuration value for the
+duration of this script, in this case to temporarily disable the use cookies.
+The session will try to use them if they are not disabled.
+</p><p>
+<b>Note:</b> Make sure that your browser also has cookies disabled when you run
+this script. Otherwise it will not work correctly!
+</p><p>
+The ob_start() function turns on output buffering.
+</p><p>
+The session_start() function creates a session or resumes the current one based
+on the current session ID that is being passed via a request, such as GET,
+POST, or a cookie.
+</p><p>
+If the HTML form has been submitted, the variable $_GET['mycolor'] has been set
+and the if block is executed.
+</p><p>
+A session variable called $_SESSION['favorite_color'] is assigned the value
+of $_GET['mycolor'].
+</p><p>
+The session_name() function returns the name of this session.
+</p><p>
+The value of the session ID is stored in the hidden field in the form.
+$_GET[$sess_name] is an associative array where the key is the session name,
+PHPSESSID, and the value is the session ID number, the number visible in the
+URL when this file is viewed in the browser.
+</p><p>
+The header() function sends an HTTP header — in this example, a redirection
+header to send the user to the location <b>noCookies2.php</b> —
+and passes, as part of the URL, the session ID listed after the "?".
+</p><p>
+The self-processing form starts on line 16; the method is GET.
+</p><p>
+The name and value of the session ID are assigned to a hidden field in the form
+on lines 29-30.
+</p>
+<h4>
+Filename: noCookies2.php - Page 2
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+   <?php
+1      session_start();
+2      if ( isset($_SESSION['favorite_color'])){
+          print "favorite_color is registered< br />";
+3         $color = $_SESSION['favorite_color'];
+       }
+   ?>
+   <html>
+   <body bgcolor="<?php echo $color; ?>">
+   <h1>Your Favorite Color</h1>
+   Your favorite color is <b><?php echo $color; ?></b>.
+   <?php
+4      unset( $_SESSION['favorite_color']);
+5      session_destroy();
+   ?>
+   </body>
+   </html>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+1	The session is started for this redirection page. It gets the session ID from the URL that pointed to this page.
+2	The favorite color of the user is passed in the session variable.
+3	The favorite color of the user is assigned as the background color of the page, as shown in Figure 16.31.
+4	The unset() function destroys a single session variable.
+5	The session_destroy() function removes the entire session.
+</p><p>
+Figure 16.31. The user is redirected to this page with a location header.
+
+[View full size image]
+</p></li>
+<li><p>
+Passing Session IDs with a Link
+</p><p>
+If cookies are not available because the user has disabled them, another alternative is to pass session IDs via a link. There are two ways to do this: manually or automatically. The manual way requires that for every relevant page in your site, you attach the session ID to the link and PHP will send it to the linked page. The automatic method requires changing the session.use_trans_sid setting in the php.ini file.
+</p></li>
+<li><p>
+The SID Constant
+</p><p>
+If you have disabled cookies, the SID constant holds the value of the session ID. If cookies are enabled, this constant is empty.
+</p><p>
+The SID constant can be concatenated to the URL in a hyperlink to pass it to another page as shown here:
+</p>
+<code><small>
+$sid=SID;
+&lt;a href="phpscript.php?&lt;?=echo $sid"&gt; Order now!&lt;/a&gt;<br><br>
+echo '&lt;a href="checkout.php?' SID . '"&gt;Checkout&lt;a/&gt;';<br>
+</small></code>
+<p>
+If there are a lot of links in your Web site, automatic URL rewriting is a PHP feature that adds the session ID automatically to all the links within linked the pages. To enable this feature, you need to edit the PHP php.ini configuration file. Look for the line
+</p><p>
+session.use_trans_sid
+
+</p><p>
+and set it to 1, save the changes, and restart your Web server. Then the session ID will be added to all relative links within your PHP pages. Notice that by default this feature is turned off for security reasons, so proceed with caution. There is also a performance cost because PHP has to add the session ID to every page where the link is relative, whereas a cookie is only set once.
+</p><p>
+From the php.ini file:
+</p><p>
+; trans sid support is disabled by default.
+; Use of trans sid may risk your users security.
+; Use this option with caution.
+; - User may send URL contains active session ID
+;   to other person via. email/irc/etc.
+; - URL that contains active session ID may be stored
+;   in publically accessible computer.
+; - User may access your site with the same session ID
+;   always using URL stored in browser's history or bookmarks.
+session.use_trans_sid = 1
+
+</p><p>
+To summarize, when automatically passing a session ID via a URL, the following should be considered:
+</p>
+</li>
+</ul>
+<blockquote>
+<ol type="1">
+<li class="row1">
+<p>
+The browser does not accept cookies.
+</p></li>
+<li class="row0">
+<p>
+The session.use_trans_sid directive in the php.ini file is set to 1.
+You will need to restart your Web server for this directive to take effect.
+</p></li>
+<li class="row1">
+<p>
+The URL in the PHP script must be a relative path name.
+</p></li>
+<li class="row0">
+<p>
+If using the constant, SID, use striptags(). Remember the SID is not available
+unless cookies are disabled.
+</p></li>
+</ol>
+</blockquote>
+<ul class="slidesUl1">
+<li>
+<p>
+Example 16.20.
+
+Code View: Scroll / Show All
+
+   (Page 1)
+   <?php
+1      ob_start();  // Turn on output buffering
+2      ini_set('session.use_cookies', 0); // Don't accept cookies
+   ?>
+   <html><head><title>Sessions and Links</title>
+   </head>
+   <body bgcolor="lavender">
+   <font face="verdana" size='+1'>
+   <h2>Sessions and Links</h2>
+
+   <?php
+3      session_start();
+4      $_SESSION['user']="John Doe";
+       $_SESSION['color']="aqua";
+   ?>
+
+   <?php
+5      if(! empty($_SESSION['color'])){
+          echo "<pre>";
+          print_r($_SESSION);
+          echo "</pre>";
+6         $sid = session_id();
+          echo "SessionID is ", $sid, "< br />";
+       }
+   ?>
+7  <a href="/exemples/sessions/link2file1.php"> Click here</a>
+   </font>
+   </body>
+   </html>
+
+					  
+
+</p><p>
+Explanation
+</p><p>
+1	The ob_start() function turns on output buffering, so that any PHP headers will be sent before the rest of the program's output is sent. Without this function, the program will produce a warning when the program tries to ouput header information:
+
+Warning: session_start() [function.session-start]: Cannot send session cache limiter - headers already sent (output started at c:\wamp\www\exemples\ sessions\session_url.php:11) in c:\wamp\www\exemples\sessions\session_url.php on line 12
+2	This directive states that cookies will not be turned on for this session. You can also turn off cookies in your browser, but then they will be turned off until you enable them again.
+3	The session_start() function starts a new session and generates a new session ID.
+4	The session variables are registered and assigned to the global $_SESSION array.
+5	This line checks to see if a session variable has been set.
+6	Once the session is started, PHP generates a session ID, shown in Figure 16.32.
+7	This link will take the user to the next page. Along with the link, PHP will automatically send the session ID to the file link2file1.php.
+</p><p>
+Figure 16.32. Page 1: Passing the session ID in a link. Output from Example 16.20.
+
+</p><p>
+Example 16.21.
+
+Code View: Scroll / Show All
+
+   (Page 2)
+   <?php
+1      ini_set('session.use_cookies', 0); // Turn cookies off
+2      session_start();  // Start a session
+   ?>
+   <html>
+3  <body bgcolor="<?php echo ${_SESSION}[color]; ?>">
+   <h3>
+   <?php
+4      print_r($_GET);
+5      echo "< br />The session id is " , session_id(), "< br />";
+6      echo "The session name is " , session_name(), "< br />";
+7      echo "SID is ", SID;
+   ?>
+   </h3>
+   <h2>
+   Hi <?php echo $_SESSION['user']; ?>. You like <b>
+      <?php echo $_SESSION['color']; ?></b>.
+8  <a href="/exemples/sessions/link2file2.php">
+   Click here</a>
+   </h3>
+   </body>
+   </html>
+
+					  
+
+
+Explanation
+</p><p>
+1	For this session, cookies are turned off.
+2	The session starts.
+3	The session ID was passed in from the link on page 1. The background color of the page is set to the value of the $_SESSION['color'] assigned and registered on page 1.
+4, 5	The $_GET[] array contains information coming in from the link; that is, the session name and the session ID. See the first line of output for page 2.
+5, 6	The session_id() function returns the value of the session ID that came in from the link on page 1 and the session_name() function returns the name of the session.
+7	The constant SID contains the name and ID for the session. This constant is not set if cookies are turned on.
+8	Now we link to yet another file. The session ID will be passed through this link. For output of this example, see Figure 16.33.
+</p><p>
+Figure 16.33. Page 2: The session ID and data passed in from a link in page 1. Output from Example 16.21.
+
+[View full size image]
+</p><p>
+Example 16.22.
+
+   (Page 3)
+   <?php
+1      session_start();
+2      extract($_SESSION);
+3      printf("%s",SID);  // Print the session ID
+4      echo "The session id is " , session_id()," < br />";
+   ?>
+   <html>
+   <body bgcolor="<?php echo $color?;>">
+   <h2>
+5  Hi again <?php echo $user;?>. You still like <b>
+            <?php echo $color;?></b>.
+   </h2>
+   </body>
+   </html>
+
+
+Explanation
+</p><p>
+1	Start the session for this page.
+2	The session data is extracted from the $_SESSION[] array and assigned to variables.
+3	The value of the constant SID is printed, the same values as in the previous page.
+4	The session values are still available, all passed through the links. Because the value of the session ID is visible in the URL, it can easily be hijacked by someone else, which is not a secure situation.
+5	The session data values are displayed in Figure 16.34.
+</p><p>
+Figure 16.34. Page 3: Passing session data to another page with a link. Output from Example 16.22
+
+[View full size image]
+</p></li>
+<li><p>
+Changing the Session ID
+</p><p>
+Using the URL to pass session IDs can lead to security problems, as they are plainly visible in the URL, bookmarkable, and accessible in HTTP_REFERER entries. To deal with the possibility of "leaking" the session ID, you should make sure that sessions are cleared frequently either by destroying them or by giving them a probable lifetime. (See the gc_probability directive in the php.ini file.)
+</p><p>
+Another technique is to change the session ID number with the session_regenerate_id() function. This function will change the ID number and leave the data intact so that if a session ID has been "hijacked," the data will no longer be available to the hijacker, but you will still have access to to it through the new session ID.
+</p><p>
+The only argument to this function is a boolean value, which determines whether or not to delete the old session file associated with the session ID being changed. The default is false.
+</p><p>
+Format:
+</p><p>
+
+bool session_regenerate_id ( [bool delete_old_session] )
+
+</p><p>
+Example:
+</p><p>
+session_regenerate_id();
+session_regenerate_id(TRUE);
+
+</p><p>
+Example 16.23.
+
+   <?php
+1      session_start();
+2      $current_sessionid = session_id();
+3      session_regenerate_id();
+4      $new_session_id = session_id();
+       echo "Session id was: $current_sessionid< br />";
+       echo "Regenerated session id is: $new_session_id< br />";
+   ?>
+
+
+Explanation
+</p><p>
+1	A session is started. A session ID will be generated for this session if this is a new session.
+2	The session_id() function returns the session ID number.
+3	The session_regenerate_id() function will change the session ID number and leave the data intact that was associated with the session ID number just changed.
+4	The new session ID is printed, as shown in Figure 16.35.
+</p><p>
+Figure 16.35. Regenerating a new session ID. Output from Example 16.23.
+
+[View full size image]
+</p></li>
+<li><p>
+Ending a Session
+</p><p>
+PHP really has no way to know when the user has left a session, so it provides several functions to help you control when to end a session. The following sections describe how to unset session variables and how to destroy the session files associated with them.
+</p></li>
+<li><p>
+Deleting Session Variables
+</p><p>
+If you are sending the session ID via cookies, the cookie by default is deleted when the user closes his or her browser, but the session data still remains in the session file on the server. To destroy the session data, you can unset all the values in the $_SESSION array and then use the setcookie() function to remove the cookie by changing the expiration time of the cookie to an earlier date. Finally, you can force the session to end with the session_destroy() function, which deletes the session and the session file.
+</p><p>
+The PHP manual suggests that the nice way check for the existence of cookies is by simply calling print_r($_COOKIE).
+</p><p>
+Here are some examples:
+</p><p>
+// Unset a single session variable
+unset($_SESSION['color']);
+
+// Unset all of the session variables
+$_SESSION = array();
+// Delete the session cookie
+if (isset($_COOKIE[session_name()])) {
+   setcookie(session_name(), '', time() - 32000, '/');
+}
+
+</p></li>
+<li><p>
+The session_write_close() Function
+</p><p>
+If more than one script is using a session at any time, for example, two or three frames are loading one by one, PHP locks the session until each page has finished loading. This feature prevents two pages from writing out session data concurrently to the $_SESSION array and thereby corrupting the data. However, if the pages are primarily reading session data, then this locking feature can be worked around with the session_write_close() function. After the session data has been written, this function ends the current session and makes sure the session data is stored as soon as all changes have been made (see Example 16.26 at the end of this chapter). Normally, you will not need to use this function, as PHP takes care of storing session data and ending the session.
+</p><p>
+Format:
+</p><p>
+void session_write_close ( void )
+
+</p><p>
+Example:
+</p><p>
+session_write_close();
+
+</p></li>
+<li><p>
+The session_destroy() Function
+</p><p>
+The session_destroy() function deletes the session file and all of its data for the current session, but it does not unset a cookie or any global variables such as the $_COOKIE or $_SESSION arrays currently cached for the current session.
+</p><p>
+Format:
+</p><p>
+
+bool session_destroy ( void )
+
+</p><p>
+Example:
+</p><p>
+
+session_destroy();
+
+</p><p>
+Example 16.24.
+
+Code View: Scroll / Show All
+
+   (Page 3)
+   <?php
+1      session_start();
+2      extract($_SESSION);
+       printf("%s",SID); // Print the session ID
+       echo "The session id is " , session_id(), "< br />";
+   ?>
+   <html>
+   <body bgcolor="<?= $color?>">
+   <h2>
+   Hi again <?= $user?>. You still like <b><?= $color ?></b>.
+   <?php
+       // Individually remove session variables
+3      unset($_SESSION["user"]);
+       unset($_SESSION["color"]);
+4      //$_SESSION = array();   // Remove all session variables
+5      session_destroy();
+       exit();
+   ?>
+   </h2>
+   </body>
+   </html>
+
+					  
+
+
+Explanation
+</p><p>
+1	A session is started for this page that was called from another page where form information was gathered.
+2	The session data is extracted and assigned to variables.
+3	The unset() function removes individual session variables.
+4	The array() function without arguments causes the $_SESSION array to be emptied. All session variables are removed.
+5	The session_destroy() function removes the session and all its data.
+</p><p>
+Cleaning up Session Files and Garbage Collection
+</p><p>
+If you look in the directory or folder where your sessions are stored, you will see that the number of session files builds up quickly. Garbage collection is the process of cleaning up old sessions, a task left to PHP. If cookies are being used, the server does not know whether or not the cookie file still exists on the user's browser. Also, session files have a default lifetime of 24 minutes and then they will be cleaned up by the PHP garbage collector unless you extend their lifetime. The gc_maxlifetime configuration directive is used to determine how long PHP should wait (in seconds) before destroying a session based on how long the session has been idle since the last time was it was accessed.
+</p><p>
+For example:
+</p><p>
+$garbage_timeout = 3600; // 3600 seconds = 60 minutes = 1 hour
+ini_set('session.gc_maxlifetime', $garbage_timeout);
+
+</p><p>
+The garbage collector does not just jump up and start removing files every time a session is invoked. It collects garbage based on a probability factor set in the session.gc_probability directive in the php.ini file. This directive specifies with what probability the files identified as garbage should be removed. If gc_probability is 100, the cleanup is performed on every request (i.e., with a probability of 100 percent); if it is 1, as it is by default, old sessions will be removed with a probability of 1 percent every time a session starts.
+</p><p>
+After setting these two configuration directives, the last bit of advice is to move the timed session files into their own directory. Otherwise, the garbage collector will not be able to differentiate between timeouts on a per-file basis.
+</p><p>
+For a complete and very readable explanation on PHP garbage collection, see http://www.captain.at/howto-php-sessions.php.
+</p></li>
+<li><p>
+Session Runtime Configuration
+</p><p>
+PHP session management has many configuration options for us to choose from.
+</p></li>
+<li><p>
+PHP Session Functions
+</p><p>
+PHP provides the functions shown in Table 16.4 to handle sessions, many of which we have covered in this chapter. Each of these functions is documented in the PHP manual at http://us3.php.net/session.
+</p><p>
+Table: PHP Session Functions
+</p>
+<table>
+<tr>
+<td><code><b><u>
+Function</u></b></code></td>
+<td><code><b><u>
+Definition</u></b></code></td>
+</tr><tr>
+<td><code>
+session_cache_expire()</code></td>
+<td><code>
+Returns the current setting of session.cache_expire, default 180 minutes.</code></td>
+</tr><tr>
+<td><code>
+session_cache_limiter()</code></td>
+<td><code>
+Returns the name of the current cache limiter that defines the cache control
+HTTP headers sent to the client and what rules determine how the page content
+can be cached.</code></td>
+</tr><tr>
+<td><code>
+session_commit()</code></td>
+<td><code>
+An alias for session_write_close().</code></td>
+</tr><tr>
+<td><code>
+session_decode()</code></td>
+<td><code>
+Decodes the session data.</code></td>
+</tr><tr>
+<td><code>
+session_destroy()</code></td>
+<td><code>
+Destroys all of the data associated with the current session, but does not
+unset any of the global variables associated with the session, or unset the
+session cookie.</code></td>
+</tr><tr>
+<td><code>
+session_encode()</code></td>
+<td><code>
+Encodes the current session data as a string.</code></td>
+</tr><tr>
+<td><code>
+session_get_cookie_params()&nbsp;</code></td>
+<td><code>
+Returns an array with the current session cookie information, including lifetime,
+path, domain, and secure.</code></td>
+</tr><tr>
+<td><code>
+session_id()</code></td>
+<td><code>
+Returns the session ID for the current session.</code></td>
+</tr><tr>
+<td><code>
+session_is_registered()</code></td>
+<td><code>
+Returns TRUE if there is a global variable if its name is registered in the
+current session.</code></td>
+</tr><tr>
+<td><code>
+session_module_name()</code></td>
+<td><code>
+Returns the name of the current session module. If module is specified, that
+module will be used instead.</code></td>
+</tr><tr>
+<td><code>
+session_name()</code></td>
+<td><code>
+Returns the name of the current session or if a name is specified, changes the
+name of the current session.</code></td>
+</tr><tr>
+<td><code>
+session_regenerate_id()</code></td>
+<td><code>
+Replaces the current session ID with a new one, and keeps the current session date.</code></td>
+</tr><tr>
+<td><code>
+session_register()</code></td>
+<td><code>
+Registers one or more global variables with the current session.</code></td>
+</tr><tr>
+<td><code>
+session_save_path()</code></td>
+<td><code>
+Returns the path of the current directory used to save session data or sets a
+new path.</code></td>
+</tr><tr>
+<td><code>
+session_set_cookie_params()</code></td>
+<td><code>
+Sets cookie parameters defined in the php.ini file. The effect of this function
+lasts only for the duration of the script.</code></td>
+</tr><tr>
+<td><code>
+session_set_save_handler()</code></td>
+<td><code>
+Sets the user-level session storage functions that are used for storing and
+retrieving data associated with a session; for example, for file and database
+storage.</code></td>
+</tr><tr>
+<td><code>
+session_start()</code></td>
+<td><code>
+Starts a session.</code></td>
+</tr><tr>
+<td><code>
+session_unregister()</code></td>
+<td><code>
+Unregistered a global session variable.</code></td>
+</tr><tr>
+<td><code>
+session_unset()</code></td>
+<td><code>
+Unsets all session data currently registered.</code></td>
+</tr><tr>
+<td><code>
+session_write_close()</code></td>
+<td><code>
+Stores the session data and closes the session.</code></td>
+</tr>
+</table>
+</li>
+<li><p>
+Implementing a Login System with Sessions
+</p><p>
+The following example consists of three separate files.
+</p>
+</li>
+</ul>
+<blockquote>
+<ol type="1">
+<li class="row1">
+<p>
+The first file is a simple HTML form, the login page, where the user enters a
+username and password.
+</p></li>
+<li class="row0">
+<p>
+The second file, the authentication page, is a PHP script that will verify
+the username and password, and establish a "logged in state" if the username
+and password are valid. This file will also be used for logging out the user.
+</p><p>
+The action to log in depends on the parameter (login) provided by the POST
+method from the HTML form (hidden input element). The action to log out is
+performed after the user has logged on, been redirected to the third page with
+protected content, and clicks on the logout link.
+</p></li>
+<li class="row0">
+<p>
+The third file is a PHP script that will show protected content only if the
+user is logged in. This file also describes a simple way to conditionally
+display a whole HTML block.
+</p></li>
+</ol>
+</blockquote>
+<ul class="slidesUl1">
+<li>
+<p>
+Sessions are used to remember users who are logged in and their password. In a real-world situation, you will probably use a database to store the username and password, and the protected content could be stored in a text file or database.
+</p><p>
+Example 16.25.
+
+Code View: Scroll / Show All
+
+   (Page 1)
+   ##### begin #####
+   ##### login.html #####
+   <html>
+   <head>
+       <title>Simple login page</title>
+   </head>
+   <body>
+       <p>
+1          <a href="protected.php">Protected content</a>
+       </p>
+       <p> Type phpbee for both username and password </p>
+2      <form action="auth.php" method="post">
+           Username< br />
+3          <input type="text" name="username">< br />
+           Password< br />
+4          <input type="password" name="password">< br />
+5          <input type="hidden" name="login">< br />
+           <input type="submit"> <input type="reset">
+       </form>
+    </body>
+    </html>
+
+    ##### login.html #####
+    ##### end #####
+
+					  
+
+
+Explanation
+</p><p>
+1	This is a link to the protected page (page 3) where special content can be read only if the visitor has typed in a valid username and password.
+2	After the form has been submitted, the PHP script (page 2), auth.php, will be executed. This page will determine whether or not the visitor is authorized to log in.
+3	The visitor is asked to type in the username here. See Figures 16.36 and 16.37.
+4	This is where the user types in the password.
+5	To submit information that is not entered by the visitor, a hidden field is used and assigned the value "login".
+</p><p>
+Figure 16.36. Page 1: The login.html file.
+
+
+Figure 16.37. Page 1: The visitor fills out the form.
+
+</p><p>
+Example 16.26.
+
+Code View: Scroll / Show All
+
+   (Page 2)
+   ##### begin #####
+   ##### auth.php #####
+
+   <?php
+1      session_start();
+       // User is logging in
+2      if (isset($_POST["login"])){
+3         if (isset($_POST["username"]) && ($_POST["username"]
+              == "phpbee")
+          && isset($_POST["password"]) && ($_POST["password"]
+            == "phpbee"){
+4           $_SESSION["Authenticated"] = 1;
+          }
+          else{
+5            $_SESSION["Authenticated"] = 0;
+          }
+6         session_write_close();
+7         header("Location: protected.php");
+       }
+       // User is logging out
+8      if (isset($_GET["logout"])){
+9         session_destroy();
+10        header("Location: login.html");
+       }
+    ?>
+
+    ##### auth.php #####
+    ##### end ####
+
+					  
+
+
+Explanation
+</p><p>
+1	The session for this page starts here for auth.php (page 2).
+2	If the user has filled out the login form in login.html (page 1), then the $_POST["login"] variable will be set, and the statements in the if block will be executed.
+3	If the username is set and has a value "phpbee", and the password is set and also has the value "phpbee", the statement in line 4 is executed.
+4	The session variable is set to 1. The value of 1 will be used later to determine that the user is logged in.
+5	If either a valid username or password were not entered, the session variable is set to 0. A value of 0 will be used to determine that the user is not logged in.
+6	The session_write_close() function stores the session data now and closes the session.
+7	The user is directed to protected.php (page 3). This is the page that is not accessible to anyone who is not logged in.
+8	If the user entered the protected page and clicked the link to log out, the variable $_GET["logout"] will be set, and the statements in the if block will be executed.
+9	The session and all its data are destroyed.
+10	The user is redirected back to the login page. Because the session was destroyed, he or she is no longer authenticated to go to the protected page.
+</p><p>
+Example 16.27.
+
+Code View: Scroll / Show All
+
+   (Page 3)
+   ##### begin #####
+   ##### protected.php #####
+
+   <?php
+1      session_start();
+   ?>
+       <html><head><title>Protected page</title></head>
+       <body>
+   <?php
+2      if (isset($_SESSION["Authenticated"])
+          && ($_SESSION["Authenticated"] == 1)){
+   ?>
+3      <h2>Protected content</h2>
+       <p>Hello. Since you are logged in, you can view protected content</p>
+4      <p>You can also <a href="auth.php?logout">log out</a></p>
+   <?php
+       }
+       else{
+   ?>
+       <h2>You are not logged in</h2>
+       <p>Hello. Since you are not logged in, you cannot view protected content</p>
+5      <p>But you can <a href="login.html">log in</a></p>
+   <?php
+       }
+   ?>
+   </body>
+   </html>
+
+   ##### protected.php #####
+   ##### end #####
+
+					  
+
+
+Explanation
+</p><p>
+1	The session starts for page 3. See Figure 16.38.
+2	If, on page 2, the session variables were set and $SESSION["Authenticated"] was set to 1, the visitor is logged in and will be able to read whatever is on line 3.
+3	This is where the content would be added for this page, the content only viewable if the user successfully logged in.
+4	This link will send the user back to page 2, auth.php. The word logout appended to the question mark, will be passed via the GET method and assigned to the $_GET[] array.
+5	This link returns the visitor back to the login page, page 1.
+</p><p>
+Figure 16.38. Page 3: The visitor is logged in.
+
+</p>
+</li>
+</ul>
+</div>
+</body>
+</html>

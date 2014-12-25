@@ -1,0 +1,25 @@
+h2. What does MySQL do?
+
+---
+
+h3. What is MySQL?
+
+h4. The short answer:
+
+* MySQL (AKA the little database that could!) is a widely-used Open Source (with some caveats) relational database management system (RDBMS) using the industry standard SQL query language that is very scalable and especially suited for Web development. 
+
+h4. A longer answer:
+
+* From its beginnings in 1996 as a simple SQL implementation, MySQL has become the world's most popular open-source database. As of 2003, according to information published by MySQL AB (the developers of MySQL), it powered over 4 million web sites. It is actively used by organizations such as Sony, Xerox, HP and NASA. In short, it is incredibly popular, and is only going to become more so!
+
+h4. So, what does it do? 
+
+* The MySQL RDBMS consists of two components:
+** Server-side tools: These include the MySQL datrabase server, which is the core software engine responsible for creating and managing databases, executing queries and returning query results, and maintaining security. They also include additional tools to manage multiple MySQL servers, optimize and repair MySQL tables, and create bug reports.
+** Client-side tools: These include a command line MySQL client, tools to manage MySQL user permissions, and utilities to import and export MySQL databases. Also included are command line tools to view and copy MySQL databases and tables, and retrieve server status information. This course will focus on using MySQL as the backend for PHP applications, not on the administration of MySQL databases. For further information on MySQL visit: http://mysql.com
+
+<br />
+
+---
+
+[[Unit One => 152-166 Unit One Index]]

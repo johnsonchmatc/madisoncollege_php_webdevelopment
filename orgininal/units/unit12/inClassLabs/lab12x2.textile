@@ -1,0 +1,34 @@
+h2. In-class Lab 12.2
+
+
+h3. Exercise 1
+
+# In this lab, we are going to implement the Guest Book example at the end of Unit 12. You should download the Unit 12 PHP scripts from Blackboard to your virtual machine or lab computer if you have not already done so. We will mofify the *messages.php* and *guestbook.php* scripts and use them in this lab.
+# First we need to create the "messages" table used by the two scripts. Here is the SQL to create the table:
+<br /><pre>
+create TABLE messages
+( id INT NOT NULL AUTO_INCREMENT
+, subject VARCHAR(150)
+, body TEXT
+, PRIMARY KEY(id)
+);
+</pre>
+# You may either create the "messages" table using *phpMyAdmin* on the class server. Follow this link from the Blackboard version of this lab, to do so: http://itins3.matcmadison.edu/phpmyadmin/
+# Or you may create the table using the MySQL command-line client. Connect to the class server database from your local MySQL client using a command similar to:
+<br /><pre>
+mysql -u astudent -h itins3.matcmadison.edu -p
+</pre>
+# You have full access to a MySQL database schema on the class server with the same name as your MySQL username (your first initial and last name, all lowercase).
+# If using your Linux VM, create directory *lab12* under your */var/www/labs* directory, if it does not exist. Otherwise create directory *lab12* under the document root of whatever web server you are using. On the MATC Windows lab computers that will be: C:\Inetpub\wwwroot
+# Copy the *messages.php* and *guestbook.php* scripts to the *lab12* directory you created.
+# Modify the two scripts to connect to the class server rather than "localhost", to use your MySQL username and password, and to connect to your personal database on the class server (where you created the messages table).
+# First add a few messages to your table using your modified *messages.php* script. Then use your modified *guestbook.php* script to display all messages from your table.
+# Just to be sure, inspect your "messages" table directly using either the MySQL command-line tool or phpMyAdmin to verify it contains the messages you wrote.
+# Test your version of the Guest Book application to be sure it works correctly, and show it to your instructor.
+
+<br />
+
+<hr />
+
+[[Unit Twelve => 152-166 Unit Twelve Index]]
+

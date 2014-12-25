@@ -1,0 +1,570 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>Function Reference</title>
+<link href="basic.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" language="JavaScript">
+<!--
+function putSemester() {
+    var today=new Date();
+    var thisMonth=today.getMonth()+1;
+    var thisYear=today.getFullYear();
+    if(thisMonth <=6) {
+        return "Spring, " + thisYear;
+    }
+    else {
+       return "Fall, " + thisYear;
+    }
+}//-->
+</script>
+<style type="text/css">
+<!--
+    .bgStripes {
+        background-image:url(images/Xstripes.gif);
+        background-attachment: fixed;
+    }
+    body {
+        background-color:white;
+    }
+    strong {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+-->
+</style>
+</head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
+<table class="bgStripes" border="0" width="100%">
+<tbody>
+<tr name="firstRow">
+<td valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+<script type="text/javascript">
+<!--
+    document.write(putSemester());
+-->
+</script>
+</span> <br />
+</td>
+<td style="text-align: center;"><span style="font-weight: bold; font-size: medium; color: darkblue;">
+PHP Web Development with MySQL
+</span> </td>
+<td align="right" valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+3 Credits</span> </td>
+</tr>
+<tr>
+<td colspan="3" style="text-align: center;"><span style="font-size: xx-small; font-weight: bold;">
+152-166</span> </td>
+</tr>
+</tbody>
+</table>
+<!--The heading for the slides --> <br />
+<table class="headTable1" border="0">
+<tbody>
+<tr>
+<td width="100"><a href="strings2.html"><img alt="" src="images/btn_lArrow.gif" border="0"></a><a href="index.html"><img alt="" src="images/btn_upArrow.gif" border="0"></a><a href="index.html"><img alt="" src="images/btn_rArrow.gif" border="0"></a></td>
+<td>List of Useful String Functions for Reference</td>
+</tr>
+</tbody>
+</table>
+<br />
+<div class="disp1">
+<ul class="slidesUl1">
+<li><p>
+This Unit has focused on some of the most useful string functions,
+but PHP provides many more useful string functions. Here is a reference list of
+the most commonly used ones.
+</p><p>
+Table: PHP String Functions
+</p>
+<table>
+<tr>
+<td><code><u><b>
+Function</b></u></code></td>
+<td><code><u><b>
+What It Does</b></u></code></td>
+</tr><tr>
+<td><code>
+addcslashes</code></td>
+<td><code>
+Quotes string with slashes in a C style.</code></td>
+</tr><tr>
+<td><code>
+addslashes</code></td>
+<td><code>
+Quotes string with slashes.</code></td>
+</tr><tr>
+<td><code>
+bin2hex</code></td>
+<td><code>
+Converts binary data into hexadecimal representation.</code></td>
+</tr><tr>
+<td><code>
+chop</code></td>
+<td><code>
+Alias of rtrim().</code></td>
+</tr><tr>
+<td><code>
+chr</code></td>
+<td><code>
+Returns a specific character.</code></td>
+</tr><tr>
+<td><code>
+chunk_split</code></td>
+<td><code>
+Splits a string into smaller chunks.</code></td>
+</tr><tr>
+<td><code>
+convert_cyr_string</code></td>
+<td><code>
+Converts from one Cyrillic character set to another.</code></td>
+</tr><tr>
+<td><code>
+convert_uudecode</code></td>
+<td><code>
+Decodes a uuencoded string.</code></td>
+</tr><tr>
+<td><code>
+convert_uuencode</code></td>
+<td><code>
+Uuencodes a string.</code></td>
+</tr><tr>
+<td><code>
+count_chars</code></td>
+<td><code>
+Returns information about characters used in a string.</code></td>
+</tr><tr>
+<td><code>
+crc32</code></td>
+<td><code>
+Calculates the crc32 polynomial of a string.</code></td>
+</tr><tr>
+<td><code>
+crypt</code></td>
+<td><code>
+One-way string encryption (hashing).</code></td>
+</tr><tr>
+<td><code>
+echo</code></td>
+<td><code>
+Outputs one or more strings.</code></td>
+</tr><tr>
+<td><code>
+explode</code></td>
+<td><code>
+Splits a string by string.</code></td>
+</tr><tr>
+<td><code>
+fprintf</code></td>
+<td><code>
+Writes a formatted string to a stream.</code></td>
+</tr><tr>
+<td><code>
+get_html_translation_table&nbsp;</code></td>
+<td><code>
+Returns the translation table used by htmlspecialchars() and htmlentities().
+</code></td>
+</tr><tr>
+<td><code>
+hebrev</code></td>
+<td><code>
+Converts logical Hebrew text to visual text.</code></td>
+</tr><tr>
+<td><code>
+hebrevc</code></td>
+<td><code>
+Converts logical Hebrew text to visual text with newline conversion.</code></td>
+</tr><tr>
+<td><code>
+html_entity_decode</code></td>
+<td><code>
+Converts all HTML entities to their applicable characters.</code></td>
+</tr><tr>
+<td><code>
+htmlentities</code></td>
+<td><code>
+Converts all applicable characters to HTML entities.</code></td>
+</tr><tr>
+<td><code>
+htmlspecialchars_decode</code></td>
+<td><code>
+Converts special HTML entities back to characters.</code></td>
+</tr><tr>
+<td><code>
+htmlspecialchars</code></td>
+<td><code>
+Converts special characters to HTML entities.</code></td>
+</tr><tr>
+<td><code>
+implode</code></td>
+<td><code>
+Joins array elements with a string.</code></td>
+</tr><tr>
+<td><code>
+join</code></td>
+<td><code>
+Alias of implode().</code></td>
+</tr><tr>
+<td><code>
+levenshtein</code></td>
+<td><code>
+Calculates Levenshtein distance between two strings.</code></td>
+</tr><tr>
+<td><code>
+localeconv</code></td>
+<td><code>
+Gets numeric formatting information.</code></td>
+</tr><tr>
+<td><code>
+ltrim</code></td>
+<td><code>
+Strips whitespace (or other characters) from the beginning of a string.</code></td>
+</tr><tr>
+<td><code>
+md5_file</code></td>
+<td><code>
+Calculates the md5 hash of a given file.</code></td>
+</tr><tr>
+<td><code>
+md5</code></td>
+<td><code>
+Calculates the md5 hash of a string.</code></td>
+</tr><tr>
+<td><code>
+metaphone</code></td>
+<td><code>
+Calculates the metaphone key of a string.</code></td>
+</tr><tr>
+<td><code>
+money_format</code></td>
+<td><code>
+Formats a number as a currency string.</code></td>
+</tr><tr>
+<td><code>
+nl_langinfo</code></td>
+<td><code>
+Query language and locale information.</code></td>
+</tr><tr>
+<td><code>
+nl2br</code></td>
+<td><code>
+Inserts HTML line breaks before all newlines in a string.</code></td>
+</tr><tr>
+<td><code>
+number_format</code></td>
+<td><code>
+Formats a number with grouped thousands.</code></td>
+</tr><tr>
+<td><code>
+ord</code></td>
+<td><code>
+Returns ASCII value of character.</code></td>
+</tr><tr>
+<td><code>
+parse_str</code></td>
+<td><code>
+Parses the string into variables.</code></td>
+</tr><tr>
+<td><code>
+print</code></td>
+<td><code>
+Outputs a string.</code></td>
+</tr><tr>
+<td><code>
+printf</code></td>
+<td><code>
+Outputs a formatted string.</code></td>
+</tr><tr>
+<td><code>
+quoted_printable_decode</code></td>
+<td><code>
+Converts a quoted-printable string to an 8-bit string.</code></td>
+</tr><tr>
+<td><code>
+quotemeta</code></td>
+<td><code>
+Quotes metacharacters.</code></td>
+</tr><tr>
+<td><code>
+rtrim</code></td>
+<td><code>
+Strips whitespace (or other characters) from the end of a string.</code></td>
+</tr><tr>
+<td><code>
+setlocale</code></td>
+<td><code>
+Sets locale information.</code></td>
+</tr><tr>
+<td><code>
+sha1_file</code></td>
+<td><code>
+Calculates the sha1 hash of a file.</code></td>
+</tr><tr>
+<td><code>
+sha1</code></td>
+<td><code>
+Calculates the sha1 hash of a string.</code></td>
+</tr><tr>
+<td><code>
+similar_text</code></td>
+<td><code>
+Calculates the similarity between two strings.</code></td>
+</tr><tr>
+<td><code>
+soundex</code></td>
+<td><code>
+Calculates the soundex key of a string.</code></td>
+</tr><tr>
+<td><code>
+sprintf</code></td>
+<td><code>
+Returns a formatted string.</code></td>
+</tr><tr>
+<td><code>
+sscanf</code></td>
+<td><code>
+Parses input from a string according to a format.</code></td>
+</tr><tr>
+<td><code>
+str_ireplace</code></td>
+<td><code>
+Case-insensitive version of str_replace().</code></td>
+</tr><tr>
+<td><code>
+str_pad</code></td>
+<td><code>
+Pads a string to a certain length with another string.</code></td>
+</tr><tr>
+<td><code>
+str_repeat</code></td>
+<td><code>
+Repeats a string.</code></td>
+</tr><tr>
+<td><code>
+str_replace</code></td>
+<td><code>
+Replaces all occurrences of the search string with the replacement string.
+</code></td>
+</tr><tr>
+<td><code>
+str_rot13</code></td>
+<td><code>
+Performs the rot13 transform on a string.</code></td>
+</tr><tr>
+<td><code>
+str_shuffle</code></td>
+<td><code>
+Randomly shuffles a string.</code></td>
+</tr><tr>
+<td><code>
+str_split</code></td>
+<td><code>
+Converts a string to an array.</code></td>
+</tr><tr>
+<td><code>
+str_word_count</code></td>
+<td><code>
+Returns information about words used in a string.</code></td>
+</tr><tr>
+<td><code>
+strcasecmp</code></td>
+<td><code>
+Binary-safe case-insensitive string comparison.</code></td>
+</tr><tr>
+<td><code>
+strchr</code></td>
+<td><code>
+Alias of strstr().</code></td>
+</tr><tr>
+<td><code>
+strcmp</code></td>
+<td><code>
+Binary-safe string comparison.</code></td>
+</tr><tr>
+<td><code>
+strcoll</code></td>
+<td><code>
+Locale-based string comparison.</code></td>
+</tr><tr>
+<td><code>
+strcspn</code></td>
+<td><code>
+Finds length of initial segment not matching mask.</code></td>
+</tr><tr>
+<td><code>
+strip_tags</code></td>
+<td><code>
+Strips HTML and PHP tags from a string.</code></td>
+</tr><tr>
+<td><code>
+stripcslashes</code></td>
+<td><code>
+Unquotes string quoted with addcslashes().</code></td>
+</tr><tr>
+<td><code>
+stripos</code></td>
+<td><code>
+Finds position of first occurrence of a case-insensitive string.</code></td>
+</tr><tr>
+<td><code>
+stripslashes</code></td>
+<td><code>
+Unquotes string quoted with addslashes().</code></td>
+</tr><tr>
+<td><code>
+stristr</code></td>
+<td><code>
+Case-insensitive strstr().</code></td>
+</tr><tr>
+<td><code>
+strlen</code></td>
+<td><code>
+Gets string length.</code></td>
+</tr><tr>
+<td><code>
+strnatcasecmp</code></td>
+<td><code>
+Case-insensitive string comparisons using a "natural order" algorithm.
+</code></td>
+</tr><tr>
+<td><code>
+strnatcmp</code></td>
+<td><code>
+String comparisons using a "natural order" algorithm.</code></td>
+</tr><tr>
+<td><code>
+strncasecmp</code></td>
+<td><code>
+Binary-safe case-insensitive string comparison of the first n characters.
+</code></td>
+</tr><tr>
+<td><code>
+strncmp</code></td>
+<td><code>
+Binary-safe string comparison of the first n characters.</code></td>
+</tr><tr>
+<td><code>
+strpbrk</code></td>
+<td><code>
+Searches a string for any of a set of characters.</code></td>
+</tr><tr>
+<td><code>
+strpos</code></td>
+<td><code>
+Finds position of first occurrence of a string.</code></td>
+</tr><tr>
+<td><code>
+strrchr</code></td>
+<td><code>
+Finds the last occurrence of a character in a string.</code></td>
+</tr><tr>
+<td><code>
+strrev</code></td>
+<td><code>
+Reverses a string.</code></td>
+</tr><tr>
+<td><code>
+strripos</code></td>
+<td><code>
+Finds position of last occurrence of a case-insensitive string in a string.
+</code></td>
+</tr><tr>
+<td><code>
+strrpos</code></td>
+<td><code>
+Finds position of last occurrence of a character in a string.</code></td>
+</tr><tr>
+<td><code>
+strspn</code></td>
+<td><code>
+Finds length of initial segment matching mask.</code></td>
+</tr><tr>
+<td><code>
+strstr</code></td>
+<td><code>
+Finds first occurrence of a string.</code></td>
+</tr><tr>
+<td><code>
+strtok</code></td>
+<td><code>
+Tokenizes string.</code></td>
+</tr><tr>
+<td><code>
+strtolower</code></td>
+<td><code>
+Makes a string lowercase.</code></td>
+</tr><tr>
+<td><code>
+strtoupper</code></td>
+<td><code>
+Makes a string uppercase.</code></td>
+</tr><tr>
+<td><code>
+strtr</code></td>
+<td><code>
+Translates certain characters.</code></td>
+</tr><tr>
+<td><code>
+substr_compare</code></td>
+<td><code>
+Binary-safe optionally case-insensitive comparison of two strings from an offset,
+up to length characters.</code></td>
+</tr><tr>
+<td><code>
+substr_count</code></td>
+<td><code>
+Counts the number of substring occurrences.</code></td>
+</tr><tr>
+<td><code>
+substr_replace</code></td>
+<td><code>
+Replaces text within a portion of a string.</code></td>
+</tr><tr>
+<td><code>
+substr</code></td>
+<td><code>
+Returns part of a string.</code></td>
+</tr><tr>
+<td><code>
+trim</code></td>
+<td><code>
+Strips whitespace (or other characters) from the beginning and end of a string.
+</code></td>
+</tr><tr>
+<td><code>
+ucfirst</code></td>
+<td><code>
+Makes a string's first character uppercase.</code></td>
+</tr><tr>
+<td><code>
+ucwords</code></td>
+<td><code>
+Uppercases the first character of each word in a string.</code></td>
+</tr><tr>
+<td><code>
+vfprintf</code></td>
+<td><code>
+Writes a formatted string to a stream.</code></td>
+</tr><tr>
+<td><code>
+vprintf</code></td>
+<td><code>
+Outputs a formatted string.</code></td>
+</tr><tr>
+<td><code>
+vsprintf</code></td>
+<td><code>
+Returns a formatted string.</code></td>
+</tr><tr>
+<td><code>
+wordwrap</code></td>
+<td><code>
+Wraps a string to a given number of characters using a string break character.
+</code></td>
+</tr>
+</table>
+</li>
+</ul>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,1709 @@
+Chapter 10. More on PHP Forms
+
+10.1. Introduction
+
+We discussed forms briefly in Chapter 3, "PHP Quick Start," and now we are ready to delve into a more thorough discussion about how PHP handles form information. The first part of this chapter is a review of how to set up HTML forms, the HTTP (HyperText Transmission Protocol) methods, and how form information is transmitted from the browser to the server and back. If you browse through the following HTML review section and feel comfortable with the information provided there, then you might want to skip this section and go directly to "PHP and Forms" on page 390.
+
+10.2. Review of HTML Forms
+
+Forms are essential to any Web page that communicates with users. When you order a book or a pillow, register for a course, sign up for a cruise, pay bills online, get directions to a street address, you fill out a form. Once you have filled out the form, you push an Order now! or Submit type button, and the form is submitted. The information you entered is collected by the browser, URL encoded, and sent to a server. The server might then send the encoded information to a program for processing. Traditionally the server would start up a CGI program to process the information, but PHP makes this processing much easier. PHP will decode and process the information according to the instructions in the PHP program that gets it. It might send an e-mail back to the user, store or update the information in a database, save preferences in a cookie, session, and so on.
+
+Working with forms is a two-step process:
+1.
+	
+Create the HTML form.
+
+2.
+	
+Process the information entered into the form.
+
+10.2.1. The Browser's Role
+
+HTML forms are created in a text file and displayed in a browser window. They consist of fields or buttons that request user interaction (see Figure 10.1). After the user fills out the form, the form data is URL encoded[1] by the browser and submitted to a server for further processing. Example 10.1 shows a really simple HTML form consisting of two input fields, a text box, and a submit button. Figures 10.2 and 10.3 are screen shots of the form before and after it is filled out.
+
+    [1] For a complete discussion on URL encoding, see Chapter 9, "User-Defined Functions," or go to http://www.blooberry.com/indexdot/html/topics/urlencoding.htm.
+
+Figure 10.1. Working with HTML forms.
+
+[View full size image]
+
+Example 10.1.
+
+<html><title><Simple Form></title>
+<body>
+<form>
+   What is your name?
+   <input type=text name="myname"><br />
+   <input type=submit>
+</form>
+</body>
+</html>
+
+
+Figure 10.2. A simple HTML form.
+
+[View full size image]
+
+Figure 10.3. The user fills out the form.
+
+[View full size image]
+
+There are different ways of sending this data to the server called HTTP request methods. (HTTP is the standard way of sending documents over the Web.[2]) The GET and POST methods are the two most common request types. Essentially these methods perform the same function but how they handle the input data is different.
+
+    [2] To learn more about HTTP, go to http://www.w3.org/Protocols/rfc2616/rfc2616-sec1.html#sec1.
+
+The GET Method
+
+If the processing of a form has no lasting observable effect on the state of the world, then the form method should be GET[3] (i.e., it handles requests where the response page will never change). The GET method is the simplest type of method and is used mainly for the simple retrieval of static HTML documents, images, or results of a database query as shown in the URL of Google's search engine in Figure 10.4..
+
+    [3] Quoted from http://www.cs.tut.fi/~jkorpela/forms/methods.html#fund.
+
+Figure 10.4. URL using the GET method. The query string is encoded, visible, and can be bookmarked.
+
+[View full size image]
+
+If a method is not supplied as an attribute of the <form> tag, the GET method is the default. The GET method sends submitted data to the server by attaching it to the end of the URL in what is called the query string. After the user presses the submit button, the browser encodes the content, and appends it to the current URL as a set of key–value pairs (prepended with a question mark). The key is the name given to the input device, and the value (URL encoded) is whatever the user typed in that field. In the URL shown next, the form information has been highlighted; that is, the string appended to the question mark. The name of the text field is "myname" and the value typed into the field by the user is "Joe H. Shmoe". The browser, Mozilla Firefox in this example, encoded the spaces in Joe's name with + signs. See Figure 10.5.
+
+Figure 10.5. The GET method and the URL.
+
+[View full size image]
+
+http://localhost/exemples/ch4variables/form_simple.html?myname=Joe+H.+Shmoe
+
+Disadvantages of the GET method are that all the form data is sent via the URL, which is visible to the user and limited in size. Servers often have size limitations on the length of the URL. For example, UNIX servers limit the size to 1240 bytes. If a lot of information is being passed to the server, the POST method should be used. Another disadvantage is that the input data might be cached, and the browser might pull previous request results from its cache instead of the most recent one.
+The POST Method
+
+The POST method is used if the processing of a form causes side effects, like the modification of a database, updating a shopping cart, or sending an e-mail message. When the POST method is used, the browser does not put the encoded data in a query string, but rather bundles up the data and puts it into an HTTP header message body. Unlike the query string created by the GET method, the message body does not have size restrictions, is not visible in the Location box of the browser, and cannot be bookmarked. Because the POST method does not append input to the URL, it is often used in processing forms where there is a lot of data being transferred and will send data to a database, send e-mail, or change something. The form data is URL encoded but not limited in size as it was with the GET method. It cannot be bookmarked and is not visible in the URL.
+
+The POST is invoked by adding a METHOD attribute to the <FORM> tag in your HTML document as shown in Example 10.2. The variables sent are sorted and available to the PHP script in the same way as with GET, but the query string is not set. The form is shown in the browser in Figure 10.6.
+
+Example 10.2.
+
+<html><title><Simple Form></title>
+<body>
+<form METHOD="POST">
+   What is your name?
+   <input type=text name="myname"><br />
+   <input type=submit>
+</form>
+</body>
+</html>
+
+
+Figure 10.6. A simple HTML form created using the POST method. Output from Example 10.2.
+
+[View full size image]
+
+10.2.2. The Server's Role
+
+When the browser requests a Web page from the server, it establishes a TCP/IP connection and sends a request in an HTTP format. The server examines the request and responds. The first line of the HTTP request might look like this:
+
+GET /file.php HTTP/1.1
+
+
+This line specifies that the method to handle the incoming data is GET, that the file to retrieve is file.php, and that the version of HTTP is 1.1. PHP runs as part of the server and has access to the form data passed from the browser to the server. After the server gets the file, it sends it to PHP to be processed. PHP knows how the form was sent and provides special variables to hold both GET and POST data as well as variables containing information about the environment, such as server, browser, and so on. PHP automatically converts the names of the form elements into PHP variables and executes any PHP statements, substituting the output within the HTML document (discussed in Chapter 9, "User-Defined Functions"). After PHP has finished handling the form data, the server will send back a response header and send the processed information back to the browser.
+
+A server response looks like this:
+
+HTTP/1.1 200 OK
+Content-type: text/html
+
+<Contents of HTML Document>
+
+
+When the browser receives the page, it renders the HTML code and then displays the page in the browser.
+10.2.3. Creating HTML Forms
+
+Before getting PHP to process the form, you might need a short refresher course on how to create forms, the types of forms, how the information is passed from the browser to the server, and so on. This section reviews basic HTML form creation. To create an HTML form, you start in an editor with a filename ending in .html or .htm. A form starts with a <form> tag and its attributes, followed by the input devices you will need, such as text fields, buttons, check boxes, and so on, a submission button, and ends with the closing </form> tag.[4] (The HTML file is normally stored under the server's root in a directory called htdocs.) Let's start by displaying an HTML form that contains text fields, radio buttons, check boxes, and pop-up menus (see Figure 10.7). After displaying the form, we look at the HTML code that produced it in Example 10.3.
+
+    [4] For a complete introduction to forms, see http://www.w3.org/TR/REC-html40/interact/forms.html#h-17.2.
+
+Figure 10.7. A form as it is initially displayed.
+
+[View full size image]
+
+The Steps to Produce a Form
+
+The following steps are essential in producing a form. The next example illustrates how each of these steps is applied.
+1.
+	
+START: Start the form with the HTML <form> tag.
+
+2.
+	
+ACTION: The action attribute of the <form> tag is the URL of the PHP script that will process the data input from the form.
+
+3.
+	
+METHOD: Provide an HTTP method on how to process the data input. The default is the GET method, but the POST method is most commonly used with forms.
+
+4.
+	
+CREATE: Create the form with buttons, boxes, and whatever looks attractive using HTML tags and fields.
+
+5.
+	
+SUBMIT: Create a submit button so that the form can be processed. This will launch the program listed in the action attribute.
+
+6.
+	
+END: End the form with the </form> tag. End the HTML document with the </html> tag.
+
+Example 10.3.
+
+Code View: Scroll / Show All
+
+1  <html>
+   <head>
+2  <title>first html form</title>
+   </head>
+       <body bgcolor=yellow>
+       <hr />
+3      <form action="/phpforms/form1.php" method="GET">
+4         <b>Type your name here: </b>
+5         <input type="text" name="namestring" size=50>
+
+6         <p/><b>Talk about yourself here: </b><br />
+7         <textarea name="comments" rows=5
+                    cols=50>i was born... </textarea>
+
+8         <p/><b> Choose your food: </b>
+9         <input type="radio" name="choice" value="burger"
+                    />Hamburger
+          <input type="radio" name="choice" value="fish" />Fish
+          <input type="radio" name="choice" value="steak" />Steak
+          <input type="radio" name="choice" value="yogurt" />Yogurt
+
+          <p /> <b>Choose a work place:</b> <br />
+10        <input type="checkbox" name="place1" value="LA"
+                    />Los Angeles
+          <br />
+          <input type="checkbox" name="place2" value="SJ" />San Jose
+          <br />
+          <input type="checkbox" name="place3"
+                    value="SF" Checked>San Francisco
+11        <p/><b>Choose a vacation spot: </b>
+12        <select name="location"> <option selected value="hawaii"
+                    /> Hawaii
+             <option value="bali" />Bali
+             <option value="maine" />Maine
+             <option value="paris" />Paris
+          </select>
+
+          <p/>
+13        <input type="submit" value="submit">
+          </p>
+          <input type="reset" value="clear">
+14     </form>
+       <hr />
+   </body>
+   </html>
+
+					  
+
+
+Explanation
+
+1	This tag says that this is the start of an HTML document.
+2	The <title> tag; the title appears outside of the browser's main window.
+3	This is the beginning of a <form> tag that specifies where the browser will send the input data and the method that will be used to process it. The default method is the GET method. When the data is submitted, the PHP script (or some other program, such as CGI script) will be executed by the server. In this example, the PHP script is stored in a directory called formstuff below the server's document root directory, in this case the www directory.
+4	The <p> tag starts a new paragraph. The <b> tag says the text that follows will be in bold type. The user is asked for input.
+5	The input type is a text box that will hold up to 50 characters. When the user types text into the text box, that text will be stored in the user-defined name value, namestring. For example, if the user types Stefan Lundstom, the browser will assign to the query string, namestring=Stefan Lundstrom. If assigned a value attribute, the text field can take a default; that is, text that appears in the text box when it is initially displayed by the browser.
+6	The user is asked for input.
+7	The text area is similar to the text field, but will allow input that scans multiple lines. The textarea tag will produce a rectangle (name comments) with dimensions in rows and columns (5 rows by 50 columns) and an optional default value (I was born...).
+8	The user is asked to pick from a series of menu items.
+9	The first input type is a list of radio buttons. Only one button can be selected. The input type has two attributes: a type and a name. The value of the name attribute "choice", for example, will be assigned "burger" if the user clicks on the Hamburger option, choice=burger is passed onto the PHP program. If the user selects Fish, choice=fish will be assigned to the query string, and so on. These key–value pairs are used to build a query string to pass onto the PHP program after the Submit button is pressed.
+10	The input type this time is in the form of check boxes. More than one check box might be selected. The optional default box is already checked. When the user selects one of the check boxes, the value of the name attribute will be assigned one of the values from the value attribute; for example, place1=LA if Los Angeles is checked.
+11	The user is asked for input.
+12	The select tag is used to produce a pop-up menu (also called a drop-down list) or a scrollable list. The name option is required. It is used to define the name for the set of options. For a pop-up menu, the size attribute is not necessary; it defaults to 1. The pop-up menu initially displays one option and expands to a menu when that option is clicked. Only one selection can be made from the menu. If a size attribute is given, that many items will be displayed. If the multiple attribute is given (e.g., SELECT MULTIPLE NAME=whatever), the menu appears as a scrollable list, displaying all of the options.
+13	If the user clicks the Submit button, the PHP script listed in the form's action attribute will be launched. In this example, the script was not programmed to do anything. An error message is sent to the server's error log and to the browser.
+14	If the Clear button is pressed, all input boxes are reset back to their defaults.
+
+After the user fills out the form in Figure 10.8, he or she will click the Submit button. This causes submission of the form. The browser will collect all the input that was entered, URL encode it, package it up, and send it to the server listed in the action attribute of the <form> tag. The server sends the encoded information to the program listed in the URL of the action attribute. (The input in this example will not be processed, thus causing an error to be sent to the server's error log when the Submit button is selected. Nothing will be displayed by the browser.)
+
+Figure 10.8. A form filled with user input.
+
+[View full size image]
+
+Table 10.1 describes a list of form input types and their possible attributes.
+
+Table 10.1. Form Input Types
+Input Type	Attributes	Description
+text	name
+
+size
+
+maxlength
+	Creates a text box for user input. size specifies the size of the text box. maxlength specifies the maximum number of characters allowed.
+textarea	name
+
+size rows
+
+size cols
+	Creates a text area that can take input spanning multiple lines. size rows and size cols specify the size of the box.
+password	name
+
+value
+	Like a text box but input is hidden. Asterisks appear in the box to replace characters typed.
+checkbox	name
+
+value
+	Displays a square box that can be checked. Creates name–value pairs from user input. Multiple boxes can be checked.
+radio	name
+
+value
+	Like check boxes, except only one box (or circle) can be checked.
+select	name
+
+option size
+
+multiple
+	Provides pop-up menus and scrollable lists. Only one can be selected. Attribute multiple creates a visibly scrollable list. A size of 1 creates a pop-up menu with only one visible box.
+file	name	Specifies files to be uploaded to the server. MIME type must be multipart/form-data.
+hidden	name
+
+value
+	Provides name–value pair without displaying an object on the screen.
+submit	name
+
+value
+	When pressed, executes the form; launches CGI.
+image	src
+
+value
+
+align
+	Same as submit button, but displays an image instead of text. The image is in a file found at SRC.
+reset	name
+
+value
+	Resets the form to its original position; clears all input fields.
+
+The method Attribute
+
+In an HTML document, the <form> tag starts the form. The method attribute of the <form> tag tells the browser how to send the input data collected from the user, and the action attribute tells the browser where to send the data. The most commonly used methods are GET and POST, discussed earlier in this chapter. In processing forms, use the POST method as a general rule. With the POST method, the variables and their values are sent in the body of the URL request, not the header, thus allowing the transfer of large amounts of data to the server, whereas with the GET method, the default, the variables and their values are sent in the header of the URL request appended as part of the URL itself in a query string. You can see these values in the browser's Navigation bar, a string appended to the question mark following the Web address. (If the GET method is used, the method attribute can be left out, as GET is the default.) The following line illustrates the use of the method attribute (case insensitive):
+
+<form action="/phpforms/form1.php" method="POST">
+
+
+The action Attribute
+
+The action attribute is where the form data is going. This is the URL of a program on the server that will process the data by decoding the URL-encoded query string or message body; that is, replacing + signs with spaces, hexadecimal characters with their ASCII equivalent, removing ampersands, and so on. Once decoded, the program can do whatever needs to be done with it, such as sending the data to a database, updating a file, sending an e-mail message to the user, setting preferences, and so on. The action listed here sends the form date to a PHP script under the document root of the server. The method is POST.
+
+<form action="/phpforms/form1.php" method="POST">
+
+10.3. PHP and Forms
+
+There are number of ways that a PHP script can accept user input. As you might recall, in an HTML form, the form elements are given names. For example, in the following simple text box, the name is an attribute of the input device:
+
+(The HTML Form)
+
+What is your zip code?
+<input type="text" name="zipcode" maxlength = 20>
+
+
+(In the Browser)
+
+The user sees this text box:
+
+and enters his or her zip code:
+
+(The PHP script)
+
+echo "You entered ", $zipcode , "<br />"; // Short style
+echo "You entered ", $_GET["zipcode"] , "<br />"; // Medium style
+echo "You entered ", $HTTP_GET_VARS["zipcode" , "<br />"; // Long style
+
+
+In this example, when PHP collects form information from the server, it decodes it, and assigns it to variables, making them automatically available to PHP scripts. PHP has three styles for storing form information: the short style, the medium style, and the long, old style.
+
+In Chapter 4, "The Building Blocks," we used the short style where PHP creates a variable with the same name as its respective HTML input device. If, for example, a text field is named zipcode, then the resulting PHP variable will be named $zipcode and its value is whatever the user entered in that field. (See "The register_globals Directive" next.) Another better approach is to use the superglobal associative arrays such as $_POST and $_GET. PHP assigns the names of the input devices as keys to these special arrays, and the value is what the user typed into the input device.
+
+The three ways that PHP creates variables to hold form information are:
+
+   1.
+
+      The simple short style, for example, $name, $id (discussed in Chapter 4, "The Building Blocks").
+   2.
+
+      The medium style, for example, $_GET['name'], $_POST['id'].
+   3.
+
+      The long style, for example, $HTTP_GET_VARS['name'], $HTTP_POST_VARS['id'].
+
+10.3.1. The register_globals Directive
+
+The method you use to create variables to hold form information depends on your version of PHP. If you are using a version of PHP earlier than 4.2.0, register_globals in the php.ini file is set to "On," allowing you to use the short style described in Chapter 4, "The Building Blocks." The problem with using the short style is that a simple variable like $zipcode could refer to input coming from the URL, cookies or session data, the environment, file uploads, and so on, and not necessarily just from a form. Not knowing where the data came from could present a security risk. To circumvent this problem, the PHP designers decided that using simple variables with the short style should be disabled and register_globals should be set to "Off" in the php.ini file. Using the recommended middle style (e.g., $_POST['zipcode']) more precisely states that the data was posted to the server using a specified method attribute, in this example, the POST method. PHP superglobal arrays were introduced to help you determine where the data came from.
+
+To use the short style, you have to either enable the register_globals directive in the php.ini file (not recommended) or extract the form parameters from the superglobal $_REQUEST array (see "Form Parameters the $_REQUEST Array" on page 396); otherwise, use the middle, recommended style. The more explicit, old style is discussed here for completeness, but it too, is no longer normally used. The following shows the current setting (PHP 5) for register_globals in the php.ini file:
+Code View: Scroll / Show All
+
+; You should do your best to write your scripts so that they do not require
+; register_globals to be on; Using form variables as globals can easily lead
+; to possible security problems, if the code is not very well thought of.
+register_globals = Off
+
+					  
+
+
+10.3.2. PHP Superglobals for Retrieving Form Data
+
+If you are not using the short style to retrieve information from an HTML form, PHP provides the superglobal arrays. The superglobal arrays allow you to specify where the input data came from; that is, what method was used. These superglobals are listed in Table 10.2 by their older long name, and the newer one (called the alias[5]), which is the middle recommended style, followed by a description of what each array contains. The older predefined variables in the first column of Table 10.2 still exist, but as of PHP 5.0.0, you can disable them by setting the register_long_arrays directive to "Off" in the php.ini file as shown next. In fact, the PHP manual recommends that, for performance reasons, you do set this directive to off. Instead, use the aliases (medium style); for example, use $_POST rather than $_HTTP_POST_VARS, or $_GET rather than $_HTTP_POST_VARS. From the php.ini file:
+
+    [5] Although the older style and the medium style represent the same data, they are different variables, so that if you use an older style and its alias in the same program, changing one does not change the other.
+
+; Whether or not to register the old-style input arrays, HTTP_GET_VARS
+; and friends. If you're not using them, it's recommended to turn them off,
+; for performance reasons.
+register_long_arrays = Off
+
+
+Table 10.2. PHP Superglobal Arrays[a]
+Array Name (Deprecated)	Alias	What It Contains
+ 	$GLOBALS	Contains a reference to every variable currently available within the global scope of the script. The keys of this array are the names of the global variables.
+$_HTTP_COOKIE_VARS	$_COOKIE	Values provided to the script with cookies. (See Chapter 16, "Cookies and Sessions.")
+$_HTTP_GET_VARS	$_GET	A global associative array of variables passed to the script via the HTTP GET method.
+$_HTTP_POST_VARS	$_POST	A global associative array of variables passed to the current script via the HTTP GET method.
+$_HTTP_POST_FILES	$_FILES	Variables provided to the script via HTTP POST file uploads.
+$_HTTP_SERVER_VARS	$_SERVER	Variables set by the Web server.
+$_HTTP_ENV_VARS	$_ENV	Variables provided to the script via the environment.
+ 	$_REQUEST	Variables provided to the script via the GET, POST, and COOKIE input types (not considered safe).
+ 	$_SESSION	Variables currently registered to a script's session.
+
+    [a] See http://us2.php.net/manual/en/language.variables.predefined.php#language.variables.superglobals.
+
+10.3.3. The Request Method
+
+As discussed in Chapter 4, "The Building Blocks," the two most commonly used HTTP methods for passing form information from the browser to the server are GET and POST. PHP assigns input submitted in a form or passed in the URL to some superglobal arrays containing the same name as its respective method. If, for example, the GET method was used, the $_GET array contains the URL and form information, and if the POST method is used the $_POST array holds the input data. PHP also has access to the type of request being used in the $_SERVER['REQUEST_METHOD'] special superglobal array. To check which method is used, the following conditional can be included in your PHP script:
+
+if ( $_SERVER['REQUEST_METHOD'] == 'GET'){ do something;}
+if ( $_SERVER['REQUEST_METHOD'] == 'POST'){do something;}
+
+
+10.3.4. Strange Characters in Form Field Names and User Input
+
+Because the HTML form fields and the user input are so closely linked with your PHP script, what you name your HTML fields and what the user types into them must be dealt with when PHP receives the data from the browser. Did the field names translate nicely into PHP variables or did the user enter weird characters when he or she filled out the fields?
+Dots and Spaces in HTML Input Device Names
+
+A valid PHP variable name starts with a letter or underscore, followed by any number of letters, numbers, or underscores. Recall that when PHP gets information from a form, the name of the HTML input device becomes a variable if using the simple short style or a key to an array if using the medium or long style. What the user types into the form field is assigned to the variable or key. Typically, PHP does not alter these names when they are passed into a script. However, if dots or spaces are used in the names of the HTML input devices, PHP will replace them with an underscore to make them valid PHP variable names. When creating an HTML form, keep this in mind when naming fields. Consider the next example in which the field names contains dots and spaces.
+
+Example 10.4.
+
+Code View: Scroll / Show All
+
+    (The HTML File)
+    <html><head><title>textbox</title></head>
+    <body bgcolor="lightgreen">
+        <form action="formdots.php" method="get">
+            Please enter your first name:<br />
+1           <input type="text" name="first.name" size="20" />
+            <br />
+            Please enter your last name:<br />
+2           <input type="text" name="last.name" size="20" />
+            <br />
+            Please enter your birth date:<br />
+3           <input type="text" name="birth date" size="20" />
+            <br />
+            <input type="submit">
+        </form>
+    </body>
+    </html>
+----------------------------------------------------------------------
+    (The PHP Script)
+    <?php
+        foreach ($_REQUEST as $key => $value){
+4           echo "Input device name=<b>$key</b><br />";
+        }
+    ?>
+
+					  
+
+
+Explanation
+
+1, 2	This input device name contains a dot. When PHP tries to create a variable from this name, the dot is an illegal character, so it will be replaced with an underscore in your PHP script.
+3	This text box name has a space in it. PHP variables cannot contain spaces.
+4	The foreach loop is used to cycle through the $_REQUEST array and for each iteration, get the key and value. Notice that where there were spaces and dots in the input device name, PHP has replaced them with the underscore to make them valid variable names. See Figure 10.9.
+
+Figure 10.9. PHP replaced spaces and dots with an underscore.
+
+
+Stripping out Slashes
+
+If the magic_quotes_gpc directive is enabled in the php.ini file (and it is by default), most functions that return data from any external source such as databases and text files will have quotes escaped with a backslash. From the php.ini file:
+
+; Magic quotes
+;
+
+; Magic quotes for incoming GET/POST/Cookie data.
+magic_quotes_gpc = On
+
+
+The PHP stripslashes() function removes backslashes from the raw data passed from the form. If the user enters quotation marks in his or her input, PHP will escape those quote marks using the backslash character. So, if the user typed "Help me!", PHP will convert the string to \"Help me!\". If the user enters a backslash character, PHP will add another slash to escape it. The stripslashes() function removes the backslashes and returns the string as it was originally typed by the user when he or she filled out the form.
+Format
+
+string stripslashes ( string str )
+
+
+Example:
+
+echo stripslashes("O\'Neil") // Becomes O'Neil
+
+
+Double backslashes (\\) are made into a single backslash (\).
+
+In Figure 10.10, a user has filled out an HTML form with input containing quotes and backslashes. The PHP script in Example 10.5 demonstrates how the stripslashes() function handles this input.
+
+Figure 10.10. The user enters quotes and backslashes.
+
+
+Example 10.5.
+
+(The PHP Script)
+<?php
+1   foreach ($_REQUEST as $key => $value){
+        echo "User input= <b>$value</b><br />";
+    }
+?>
+----------------------------------------------------------------------
+<?php
+2   foreach ($_REQUEST as $key => $value){
+        echo "User input= <b>".stripslashes($value)."</b><br />";
+    }
+?>
+
+
+Explanation
+
+1	After the form in Figure 10.10 has been submitted, this PHP script extracts the input data from the $_REQUEST array. Each key–value pair is displayed in the browser shown in Figure 10.11 (left). Note the backslashes preceding the quotes and the other backslash character.
+2	This time the stripslashes() function has removed the backslashes. See Figure 10.11 (right).
+
+Figure 10.11. Before stripslashes() (left) . Output after stripslashes() (right).
+
+[View full size image]
+
+10.3.5. Form Parameters the $_REQUEST Array
+
+The $_REQUEST superglobal associative array can be used to collect the form input data. Because it merges the form information found in either $_GET or $_POST and $_COOKIE arrays, you do not have to know what method was used or where the data really came from; it could come form the URL, a link, a cookie, and so on, and therefore, although easy to use, getting the values from $_REQUEST is not secure. (See "The POST Method" on page 382 to lessen the vulnerability of input parameters.)
+
+The values from this array can be extracted and then assigned to variables.
+
+Example 10.6.
+
+Code View: Scroll / Show All
+
+(HTML File)
+<html><head><title>HTML Form</title></head>
+    <body bgcolor="#9999CC">
+    <font face="verdana" size="+1">
+        <form action="get.php" >
+        <p>
+        Enter your name:
+        <br />
+        <input type="text" size=50 name="your_name" />
+        <p>
+        Enter your phone:
+        <br />
+        <input type="text" size=50 name="your_phone" />
+        <p>
+        Enter your email address:
+        <br />
+        <input type="text" size=50 name="your_email_addr" />
+        <p>
+        <input type=submit name="send" value="submit" />
+        <input type=reset value="clear" />
+        </form>
+    <hr>
+    </body>
+</html>
+
+					  
+
+
+Explanation
+
+After the user has filled out the form (see Figure 10.12) and pressed the Submit button, the action in the <form> tag's action attribute is triggered, sending the data to the server and then to the PHP program listed in the URL. The superglobal $_REQUEST array receives the form data. Example 10.7 is the PHP program used to process the form input.
+
+Figure 10.12. The HTML form (left). Data has been entered into the HTML form (right).
+
+[View full size image]
+
+Example 10.7.
+
+   <html><head><title>Processing First Form</title></head>
+   <body bgcolor = "lightgreen"><font size="+1">
+   <p>
+   <b>The Contents of the $_REQUEST Array</b>
+
+   <?php
+1      foreach ($_REQUEST as $key=>$val){
+2          echo "$key => $val <br />";
+       }
+   ?>
+
+   </p>
+   </body>
+   </html>
+
+
+Explanation
+
+1	The foreach loop is used to iterate through the $_REQUEST array, retrieving both keys and values.
+2	The keys of the $_REQUEST array are the names of the input devices, and the values are what the user entered as input when he or she filled out the form. See Figure 10.13.
+
+Figure 10.13. The $_REQUEST array and forms. Output from Example 10.7.
+
+
+Using the extract() Function
+
+You can use the built-in extract() function, discussed in Chapter 8, "Arrays," to create variables from an associative array. The variables are named after the keys in the $_REQUEST array, and the values assigned to them are the corresponding values in the associative array. For example, if the array has a key–value pair consisting of "first_name" => "John", the extract() function would create a variable called $first_name and assign it the value "John".
+
+Example 10.8.
+
+   (The PHP program)
+   <html><head><title>Processing First Form</title>
+   </head>
+   <body bgcolor = "lightgreen"><font size="+1">
+   <h2>Here is the form input:</h2>
+   <?php
+1      extract($_REQUEST); // Get the form input
+2      print "Welcome to PHP $name<br />";
+       print "Can I call you at $phone<br />";
+       print "Is it ok to send you email at $email<br />";
+   ?>
+   </body>
+   </html>
+
+
+Explanation
+
+1	The extract() function will create variables from the $_REQUEST associative array. The variables will be named after keys in the array, and their values will be what the user typed into the form field. The form is shown in Figure 10.12.
+2	Now we can use the new variables created by the extract() function. See Figure 10.14 and the program output in Figure 10.15.
+
+Figure 10.14. The $_REQUEST array from Example 10.8 creates variables named after its keys (first column) and assigns values to each key from the second column.
+
+
+Figure 10.15. After PHP has processed the form from Example 10.8.
+
+[View full size image]
+
+10.3.6. Form Parameters and the Medium Style
+
+The medium style is recommended for processing form input and does not require that register_globals is turned on. You can retrieve form variables from the superglobal $_GET and $_POST arrays, depending on what HTTP method was specified in the action attribute of the HTML form, GET or POST. Remember, if no action is specified, the GET method is the default. (The superglobal arrays, like $_GET and $_POST, became available in PHP 4.1.0.) When creating the HTML <form> tag, the action attribute looks something like this:
+Code View: Scroll / Show All
+
+<form action="/phpforms/form1.php" method="GET">
+<form action="/phpforms/form1.php">    // No method specified, default is GET
+<form action="/phpforms/form1.php" method="POST">
+
+					  
+
+
+When data is submitted in the form, it will be transmitted to the server by one of the methods. PHP will receive the data in one of its superglobal arrays, depending on the method that was used.
+The $_GET Array
+
+The $_GET superglobal associative array contains all the values entered into the HTML form fields when the GET method is used. As you know, each form element has attributes such as its type, name, and so on. PHP uses the value given to name attribute of the HTML element to identify that element. The name of the element will become the key to the $_GET array and its value whatever the user types into the form field.
+
+The following form is displayed in the browser as shown in Figure 10.16.
+
+Figure 10.16. The HTML form and the GET method from Example 10.9.
+
+
+Example 10.9.
+
+Code View: Scroll / Show All
+
+   (The HTML form)
+   <html><head><title>HTML Form</title></head>
+   <body bgcolor="#9999CC">
+   <font face="verdana" size="+1">
+   <form action="get.php" method="GET">
+       <p>
+       Enter your name:
+       <br />
+       <input type="text" size=50 name="your_name" />
+       <p>
+       Enter your phone:
+       <br />
+       <input type="text" size=50 name="your_phone" />
+       <p>
+       Enter your email address:
+       <br />
+       <input type="text" size=50 name="your_email_addr" />
+       <p>
+       <input type=submit value="submit" />
+       <input type=reset value="clear" />
+   </form>
+   <hr />
+   </body></html>
+
+----------------------------------------------------------------------
+   (The PHP Script to Handle the Form)
+   <html><head><title>Processing Form</title>
+   </head>
+   <body>
+
+   <?php
+       // Medium style; use superglobal array
+1      $name = $_GET['your_name'];
+2      $phone = $_GET['your_phone'];
+3      $email = $_GET['your_email_addr'];
+   ?>
+
+   <div align="center">
+       <table>
+           <tr><td><font face="verdana" size="+1" color="#000066">
+4               Welcome to PHP, <em><?= $name ?>.</em>
+           </td></tr>
+           <tr><td><font face="verdana" size="+1" color="#000066">
+5               Can I call you at <em><?=$phone ?>? </em>
+           </td></tr>
+           <tr><td><font face="verdana" size="+1" color="#000066">
+6          Is it ok to send you email at <em><?=$email ?>?</em>
+           </td></tr>
+       </table>
+   </div>
+   </body>
+   </html>
+
+					  
+
+
+Explanation
+
+1	PHP gets the form data from the superglobal $_GET array. The key "your_name" is the name assigned to the input device in the HTML form and the value is what the user typed into the text box, in this example "Jack Sprat" (see Figure 10.16). This value is assigned to the PHP variable, $name.
+2	The name assigned to this text box was "your_phone". The value associated with it is the user's phone number. That value is assigned to the PHP variable, $phone.
+3	The name assigned to this text box was "your_email_addr". The value associated with it is the user's e-mail address. That value is assigned to the PHP variable, $email.
+4–6	The PHP variables are embedded in shortcut tags to be displayed within an HTML table (without a border). (The HTML table was used to center and align the output on the page.) See Figure 10.17.
+
+Figure 10.17. PHP and the GET method. Field values visible in the URL.
+
+[View full size image]
+
+Security
+
+A rule of caution would be to use the GET method for passing form information that is not a security risk, such as passwords or login IDs, and if you need to use the GET method, then your program should take additional measures to ensure the safety of the incoming data. Anyone can see what was typed into the form fields simply by looking at the URL in his browser where the key–value pairs are appended to a question mark. And anyone can manually change the parameters right in the URL by typing information that can then easily be passed and stored in the $_GET superglobal. In Figure 10.18, the URL is modified by assigning a different name to "your_name". To help solve this problem, the POST method can be used with some extra checking within the PHP script.
+
+Figure 10.18. The user can easily change the URL. The name was changed in the URL, sent to the server, and then to PHP where it was assigned to the $_GET[] array.
+
+[View full size image]
+
+The $_POST Array
+
+The $_POST superglobal array contains all the names the values entered into the HTML form fields when the POST method is used. With the POST method, the value of parameters is not visible in browser's URL, but POST data is not invulnerable and be can be intercepted. You will need to perform checks in your program to assure that your input data is being retrieved as expected.
+Example 10.10.
+
+Code View: Scroll / Show All
+
+   (The HTML form)
+   <html><head><title>HTML Form</title></head>
+   <body bgcolor="#9999CC">
+   <font face="verdana" size="+1">
+   <form action="post.php" method="POST">
+       <p>
+       Enter your name:
+       <br />
+       <input type="text" size=50 name="your_name" />
+       <p>
+       Enter your phone:
+       <br />
+       <input type="text" size=50 name="your_phone" />
+       <p>
+       Enter your email address:
+       <br />
+       <input type="text" size=50 name="your_email_addr" />
+       <p>
+       <input type=submit name="send" value="submit" />
+       <input type=reset value="clear" />
+   </form>
+   <hr />
+   </body>
+   </html>
+----------------------------------------------------------------------
+   (The PHP Script)
+   <html><head><title>Processing Form</title>
+   </head>
+   <body>
+   <?php
+1      if(! empty ($_GET) ){
+           die("Parameter wrong. Try again<br />");
+       }
+2      if( $_POST['send'] == "submit"){
+           // Medium style; use superglobal array
+3          $name = $_POST['your_name'];
+           $phone = $_POST['your_phone'];
+           $email = $_POST['your_email_addr'];
+       }
+       ?>
+   <div align="center"
+   <table>
+       <tr><td><font face="verdana" size="+1" color="#000066">
+4          Welcome PHP, <em><?= $name ?>.</em>
+       </td></tr>
+       <tr><td><font face="verdana" size="+1" color="#000066">
+5          Can I call you at <em><?=$phone ?>? </em>
+       </td></tr>
+       <tr><td><font face="verdana" size="+1" color="#000066">
+6          Is it ok to send you email at <em><?=$email ?>?</em>
+       </td></tr>
+   </table>
+   </div></body></html>
+
+					  
+
+
+Explanation
+
+1	The HTML form fields are filled in, as shown in Figure 10.19. If data is entered through the GET method (e.g., by adding it to the URL), the program will die and the die construct will send the error message, as displayed in Figure 10.21. Even though the program is using the POST method, if the user were to assign parameters to the URL, the superglobal $_GET would be assigned the unwanted information. This prevents a user from being able to send unwarranted information via the GET method.
+2	If the POST method was used in the HTML form, then PHP will check to see if the submit button was pressed, but testing the value assigned to the name of the submit button. If $_POST['name'] evaluates to "submit", then the form was submitted, and the if block is entered.
+3	The key–value pairs of the $_POST array are the names and values of the input devices in the HTML form. The keys are: 'send', 'your_name', 'your_phone', and 'email_addr'. Their values (i.e., what the user typed into the form fields) are stored in PHP variables, $name, $phone, and $email, respectively.
+4–6	The values of the PHP variables are displayed in the browser. See Figure 10.20.
+
+Figure 10.19. The HTML form and the POST method.
+
+
+Figure 10.20. PHP and the POST method. Field values not visible in the URL.
+
+[View full size image]
+
+Figure 10.21. User tries to append data to the URL and fails.
+
+[View full size image]
+
+10.3.7. Form Parameters and the Long (Old) Style
+
+As of PHP 5.0.0, these long predefined variables can be disabled with the register_long_arrays directive and are no longer commonly used. The only reason for including the old long style form parameters here is that they still show up in older scripts that you might be reading or editing.
+Example 10.11.
+
+<html><head><title>Processing First Form</title>
+</head>
+<body bgcolor = "lightgreen"><font size="+1">
+<h2>Here is the form input:</h2>
+<?php
+    $name = $HTTP_GET_VARS['name'];   // Long style with GET method
+    $phone = $HTTP_GET_VARS['phone'];
+    $email = $HTTP_GET_VARS['email_addr'];
+    print "Welcome to PHP $name<br />";
+    print "Can I call you at $phone<br />";
+    print "Is it ok to send you email at $email<br />";
+?>
+</body>
+</html>
+
+
+10.3.8. Processing Forms with Multiple Selections
+
+HTML forms that allow the user to pick more than one selection in a list or a check box are created with select tags (when the "multiple" attribute is set) and checkbox input types. Instead of PHP generating a single variable for multiple choices, an array is better suited for that task. To create the array, you simply add a set of square brackets to the name of the input device in your HTML document:
+
+<select name="movies[]">
+<input type=checkbox name="colors[]" value="red">
+
+
+When the user submits the form, if using the simple form, PHP will create an array of choices with each element of the array assigned the value selected by the user.
+Creating the Form with Select and Check Boxes
+
+With the select and checkbox input devices, the name of the device is appended with a set of array brackets when multiple choices can be selected.
+
+Example 10.12.
+
+Code View: Scroll / Show All
+
+   (The HTML form)
+   <html><head><title>Multiple Choice</title></head>
+   <body bgcolor="aqua">
+1  <form action="checkbox.php" method="POST">
+   <b>Choose a vacation spot:</b>
+   br />
+2  <select name="location[]" multiple="multiple">
+       <option>Maui
+       <option>Bali
+       <option>Miami
+       <option>Riviera
+   </select> <p>
+   <b>Select a city:</b>
+   <br />
+3  <input type="checkbox" name="place[]" value="New York" />New York
+   <br />
+   <input type="checkbox" name="place[]" value="Chicago" />Chicago
+   <br />
+   <input type="checkbox" name="place[]" value="London" />London
+   <br />
+   <input type="checkbox" name="place[]" value="Tokyo" />Tokyo
+   <br />
+4  <input type="checkbox" name="place[]" value="San Francisco"
+       Checked />San Francisco
+   <p>
+   <input type="submit" value="submit" />
+   <input type="reset" value="clear" />
+   </form>
+   </body>
+   </html>
+
+					  
+
+
+Explanation
+
+1	The HTTP method selected for this form is the POST method. The form is displayed in Figure 10.22.
+2	A select drop-down menu starts here and it will allow for the user to select more than one option when "multiple" is specified as an attribute. (Press the Control key at the same time you click the mouse to get multiple options highlighted.) The name of the select menu is appended with [] so that when PHP recieves the input, it will be accepted as an array.
+3	This input type is a select menu that is designed to accept multiple checks. Its name is also appended with the [] to indicate that an array will be created when PHP gets the form input.
+4	This value has been checked as the default.
+
+Figure 10.22. An HTML form with multiple selections. Output from Example 10.12.
+
+
+Processing the Form with Multiple Selections
+
+With the medium style, we use an associative array, $_POST, $_GET, or $_REQUEST, to receive the input values, the name of the input device.
+Example 10.13.
+
+Code View: Scroll / Show All
+
+   <html><head><title><Forms and User-defined Arrays>
+   </title></head>
+   <body bgcolor="8CCCCA">
+   <br />
+   <fieldset><legend><b>Vacation Choices</b></legend>
+
+   <?php
+       // Medium style
+1      if (is_array($_POST['location'])){
+          print "<ul>";
+2         foreach ( $_POST['location'] as $key=>$value ){
+             print "<li>$key=>$value</li>";
+          }
+          print "</ul>";
+       }
+   ?>
+   </fieldset>
+   <fieldset><legend><b>City Choices</b></legend>
+   <?php
+3      extract($_POST);
+       if (is_array($place)){
+          print "<ul>";
+4         foreach ( $place as $key=>$value ){
+             print "<li>$key=>$value</li>";
+          }
+          print "</ul>";
+       }
+   ?>
+   </fieldset></body></html>
+
+					  
+
+
+Explanation
+
+1	The is_array() function will return true if the form was submitted and the $_POST superglobal array has a value.
+2	The foreach loop will iterate through each element of the $POST['location'] array, listing both keys and values. The key is the index of the location array, where the option was selected, and the value is text after the option attribute. See Figure 10.22, Vacation Choices.
+3	The extract() function is used to get the keys and values from the $_POST associative array. The name of the array that is returned is $place. It consists of the key– value pairs representing the check boxes that were selected.
+4	The foreach loop will iterate through each element of the $place array indicating where check boxes were selected. See Figure 10.22, City Choices.
+
+10.3.9. Forms Using an Image Button
+
+If a Web page has a form for ordering some special item, such as a gift item, it might be cute to use a picture of the item for submitting the order rather than the standard boring submit button.[6] This is done by using a clickable image, also called an image map. Instead of an input type of "submit", you will use the input type of "image", the src, location of the .gif or .jpg file, and a name for the input type:
+
+    [6] Some designers warn against changing the standard submit button for the sake of consistency across the board and so as not to confuse users with unfamiliar widgets. Others change the look of the standard button with style sheets.
+
+<input type="image" src="toy_car.gif" name="toy" />
+
+
+Even though there is only one image, when the user clicks somewhere on it, the accompanying form will be sent to the server with the location of where the user clicked his or her mouse on the picture; that is, the pixel coordinates represented as two variables in the PHP script, image_name_x and image_name_y (image_name is the name assigned to the name attribute of the image input type; that is, toy_x and toy_y). The actual variable names sent by the browser contain a period rather than an underscore (toy.x and toy.y) but, as we discussed earlier in this chapter, PHP will automatically convert a period (or space) to an underscore because periods (and spaces) are not legal characters in PHP variable names. In the following example, after the user clicks on any of the check boxes, he or she will then click on the picture of the pizza man. This causes the form to be submitted with an array of values selected from the check boxes, as well as the x/y coordinates of where the user clicked on the image button.
+Example 10.14.
+
+Code View: Scroll / Show All
+
+   (The HTML File)
+   <html> <head><title>Image Button</title> </head>
+   <body bgColor="#CCFF33">
+   <font face="verdana"><b>
+1  <form method="post" action="image_button.php" >
+          Pick your pizza:<p>
+2      <input type="checkbox"
+          name="topping[]"
+          value="tomatoes" />Tomato and Cheese<br />
+       <input type="checkbox"
+          name="topping[]"
+          value="salami" />Salami<br />
+       <input type=checkbox
+          name="topping[]"
+          value="pineapple" />Pineapple and Ham<br />
+       <input type=checkbox
+          name="topping[]"
+          value="Canadian bacon" />Canadian bacon<br />
+       <input type=checkbox
+          name="topping[]"
+          value="extra cheese" />Plain Cheese<br />
+       <p><font size="-1">
+       Press the pizza man to order!
+       <br />
+3      <input type="image" name='pizzas' src="Pizza_chef.jpg" />
+       <br /><br />
+       <input type=reset value="Clear the form" />
+   </form>
+   </body>
+   </html>
+----------------------------------------------------------------------
+   (The PHP Script)
+   <html><head><title>Finding Pixel Coordinates</title></head>
+   <body bgcolor="8CCCCA">
+   <br />
+   <fieldset><legend><b>Pizza Choices</b></legend>
+   <?php
+4      if ($_POST['topping']){
+          print "<ul>";
+5         foreach ( $_POST['topping'] as $value ){
+             print "<li>$value</li>";
+          }
+          print "</ul>";
+       }
+       print "The pixel coordinates of the image are: <br />";
+6      $coord1 = $_POST['pizzas_x'];
+       $coord2 = $_POST['pizzas_y'];
+       print "$coord1, $coord2<br />";
+   ?>
+   </fieldset>
+   </body>
+   </html>
+
+					  
+
+
+Explanation
+
+1	The form, shown in Figure 10.23, is being submitted to a PHP script using the POST method.
+2	The form consists of a set of check boxes that will be passed to PHP as an array called "topping".
+3	Here is where we create the image button to be used to submit the form. It is given a name of 'pizzas' and the image src is "Pizza_chef.jpg" located in the current working directory or folder. When the user clicks on this picture, the form will be submitted.
+4	If the user has posted the form, there will be a value in the $_POST array, the expression will test true, and the block will be entered.
+5	For each of the toppings in the $_POST array, the values will be printed. See Figure 10.24.
+6	The x/y coordinates represent the place in the image (pixel position) where the user clicked his or her mouse button. To check whether or not the form was submitted, you can test if these variables are not empty with the empty() function: if ( ! empty($coord1 )
+
+Figure 10.23. PHP output after processing multiple selections.
+
+
+Figure 10.24. Using an image to submit a form.
+
+[View full size image]
+
+Figure 10.25. After the form input has been processed, the user's choices are listed as well as the pixel positions of the image button (the pizza man).
+
+[View full size image]
+
+10.3.10. Self-Processing HTML Forms
+
+Rather than creating a separate HTML document to display a form and another PHP script to process the user input, you might want to combine the HTML document containing the form and the PHP script that processess it all into one script. This is done by assigning the $_SERVER['PHP_SELF'] array to the action attribute of the HTML <form> tag as shown in Example 10.15. When the user submits the form information by pressing the submit button, the action attribute of the form references the URL of the same page that displayed the form. Because both the HTML form data and the PHP processing code are in the same script, you will need a conditional check in your PHP program to see if the form has been submitted. For example, you can check to see if a field has a value, the submit button has been clicked, or check the request method used. The following examples demonstrate how this is done.
+Checking If the Form Was Submitted
+
+Example 10.15 shows the script that checks whether a form was submitted.
+Example 10.15.
+
+Code View: Scroll / Show All
+
+   <?php
+1  if ( isset($_POST['submit'])){ // Was the form submitted?
+2         $your_name=$_POST[your_name];
+          $your_phone=$_POST[your_phone];
+          print "<b>Your name is $your_name<br />";
+          print "Your phone is $your_phone<br />";
+3         print "The path to this file is: ".
+                $_SERVER['PHP_SELF']."<br />";
+   }
+4  else{  ?>
+      <html><head><title>First HTML Form</title></head>
+      <body bgcolor="lightblue"><font size="+1">
+5     <form action="<?php echo $_SERVER['PHP_SELF']; ?>"
+          method="POST">
+          <p />
+6         Please enter your name: <br />
+          <input type="text" size=50 name="your_name">
+          <p />
+          Please enter your phone: <br />
+          <input type="text" size=50 name="your_phone">
+          <p />
+          <input type="submit" name="submit" value="Send Now">
+          <input type=reset value="Clear">
+      </form>
+      <hr>
+      </html>
+   <?php } ?>
+
+					  
+
+
+Explanation
+
+1	The PHP isset() function checks to see if the form has been submitted using the POST method. If it has, the program continues at line 2; if not, then program control goes to line 4, and the form will be displayed in the browser.
+2	Because the form has already been submitted, the values that were entered into the fields can be displayed as variables. See Figure 10.27.
+3	The superglobal $_SERVER['SELF'] array contains information about the path where this script is found starting at the document root of the server, not the root of the file system.
+4	If the form has not been submitted, the script jumps into this block where we switch from PHP into the HTML mode to produce the form. See Figure 10.26.
+5	The action attribute is assigned the address of the current script. The program temporarily switches back into PHP mode to get the path of the script from the $_SERVER['PHP_SELF'] variable. When the user presses the submit button, this same script will be reexecuted, this time to process the form data.
+6	The user is presented with two text boxes, as shown in Figure 10.26.
+
+Figure 10.26. The script displays the form.
+
+
+Figure 10.27. The same script processes the form.
+
+[View full size image]
+
+10.3.11. Using Hidden Fields
+
+If your Web page contains multiple forms, you can use hidden fields to help identify what form needs to be processed by giving each form its own name. By checking the existence and value of the hidden field, you can determine which form should be displayed and when it should be processed.
+
+You can also use hidden fields to include information that can be used when processing the form but is not something that you do not care to display, such as the date the form was created, your name, and so on.
+Example 10.16.
+
+Code View: Scroll / Show All
+
+   <html
+   <html><head><title>Hidden Fields</title></head>
+   <body bgcolor="#ff66ff">
+   <font face="verdana">
+   <div align="center">
+   <b>
+   <?php
+1      if (isset($_POST['feedback1']) && ($_POST['feedback1'] ==
+                 'process_form1')){
+          process_form1();
+       }
+2      else{
+           display_form1();
+       }
+
+3      function display_form1(){
+4          echo <<<EOF
+5          <form action="$_SERVER[PHP_SELF]" method="post">
+           Rate this page
+            <br /><b /r>
+           <input type="radio" name="rating" value="excellent"
+                 />Really kewl
+           <input type="radio" name="rating" value="average" />OK
+           <input type="radio" name="rating" value="poor" />Boring
+           <input type="radio" name="rating" value="hopeless"
+                 />Totally hopeless
+6          <input type="hidden" name="feedback1"
+                 value="process_form1">
+7          <input type="hidden" name="creation_date"
+                 value="Feb. 2006" />
+           <p>
+           <input type="submit" value="submit rating" />
+           <input type="reset" value="clear" />
+           </form>
+8      EOF;
+       }
+
+9      function process_form1(){
+           echo "So you think this page is $_POST[rating]!";
+       }
+   ?>
+   </b>
+   </div>
+   </body>
+   </html>
+
+					  
+
+
+Explanation
+
+1	The isset() function will check to see if the variable $_POST['feedback1'] has been set and if it contains the value assigned to the hidden field. If both conditions are true, then the form has already been displayed on the browser and sent back to this PHP script. Because the page has already been displayed and submitted, it is now time to process the form. The user-defined function, process_form(), is called.
+2	If the test on line 1 fails, then the form has not been previously displayed. The user-defined function, display_form(), is called.
+3	The function display_form() will be responsible for creating the form and displaying it in the browser.
+4	This is the start of a here-doc used to print out the HTML form and interpolate any variables. Remember that when in a here-doc you are essentially in a quoted block of text. Adding additional quotes to the array elements will produce an error.
+5	The $_SERVER['PHP_SELF'] is a reference to the current script. When the user presses the submit button, the action is specified to call this same script again.
+6	The hidden field is set as an input type of the <form> tag. Although it will not be visible when the form is displayed, its name and value will be sent to the PHP script, along with the name and value of the radio button selected by the user.
+7	The hidden field is assigned the month and year when this form was created. No one needs to see this information, except maybe you if you are trying to keep track of the development of this page.
+8	The user-defined terminator, EOF, for marking the end of the here-doc, cannot have spaces on either side; that is, it must be butted up against the left margin, immediately followed by a newline.
+9	After the user has filled out the form, this function processes the input received from the server.
+
+Figure 10.28. Using hidden fields to determine when to process this form. Output from Example 10.16.
+
+[View full size image]
+
+Figure 10.29. Output based on what radio button was selected in Figure 10.28.
+
+[View full size image]
+
+10.3.12. Redirecting the User
+
+What if your Web site has moved to a new location? Now when your users go to the old site, you want to redirect them to the new one. What if you want to send the user to a different page depending on some condition: Is the user logged on? Did he or she forget his or her password? What language does he or she speak? Is it a holiday?
+The Location Header
+
+Redirecting a user to another page is easy and quick with PHP. It is done with the built-in header() function to modify the HTTP response header sent by the server. The location header can be changed by sending an HTTP Location followed by the URL of the new location.
+
+<?php
+   header( 'Location: http://www.mysite.com/new_page.html' ) ;
+?>
+
+
+The header information must be sent to the browser before any HTML and text; therefore, it is important that the header() function is executed first. The following example would be wrong because the program is trying to send the echo output before the header information. The warning is displayed in Figure 10.30. (See "Buffering and HTTP Headers" on page 689 if you want to move the header after other output lines.)
+
+Figure 10.30. The header must be sent first.
+
+
+Example 10.17.
+
+<?php
+   echo "You are going to be redirected to a new page!<br />"; // Wrong!
+   header("Location: /www/ellieq.com");
+?>
+
+
+Explanation
+
+After being redirected, a user's Back button will take the user where he or she was before the redirection page, not back to the redirection page itself.
+Using the Correct URI for Redirection
+
+The Location can be assigned the absolute URI of the redirection page such as the scheme, host name, and absolute path. Then the server will return a "redirect" header to the browser to retrieve the specified page directly.
+
+Location: http://marakana.com/company.html
+
+
+If you want to reference another file on your own server, you can output a partial URL, such as the following:
+
+Location: /tutorial/PHP/index.html
+
+
+You can make use of PHP's $_SERVER array variables to specify an absoute path. For example, the $_SERVER['HTTP_HOST'], the $_SERVER['PHP_SELF'], and the path of the the current script returned by the dirname() function can be concatenated together to make an absolute URL from a relative one. The following PHP code defines a header described in the PHP manual:
+
+<?php
+   header("Location: http://" . $_SERVER['HTTP_HOST']) .
+          dirname($_SERVER['PHP_SELF']) . "/my_newpage.php");
+?>
+
+
+If you are redirecting a user to a new Web site, it is also a good idea to let him or her know what is happening by adding a line such as "Our site has moved. You will automatically be redirected there."
+Example 10.18.
+
+Code View: Scroll / Show All
+
+   (The HTML File)
+   <html><head><title>Redirecting the User</title></head>
+   <body bgcolor="#33ff33">
+1  <form action="http://localhost/exemples/ch10forms/redirect.php"
+          method="post">
+       <b>
+       Select a search engine<br />
+       </b>
+2      <select name="new_url">
+           <option value="http://www.google.com" />Google
+           <option value="http://www.yahoo.com" /> Yahoo!
+           <option value="http://www.lycos.com" /> Lycos
+              <option value="/index.php" /> PHP Index
+       </select>
+3      <input type="submit" value=" Get the Web Page!" />
+   </form>
+   </body>
+   </html>
+----------------------------------------------------------------------
+   (The PHP Script)
+   <?
+4      if($_POST[new_url] == ""){
+          exit;
+       }
+       else {
+5         header("Location: $_POST[new_url]");
+          exit;
+       }
+   ?>
+
+					  
+
+
+Explanation
+
+1	The form's action attribute is assigned the path to the PHP script that will handle the redirect once the form is submitted. The HTML form is shown in Figure 10.31.
+2	The HTML select menu will give the user options to choose from.
+3	As soon as the user clicks the submit button, the form information will be sent to the server and handled by the PHP script listed in the form's action attribute.
+4	If the user did not select anything, the value of $_POST[new_url] will be empty, and the script will exit.
+5	If the user selected one of the search engines in the menu (Figure 10.32), he or she will be directed to that Web site with the PHP header() function. The value of $_POST[new_url] is the address of the selected Web site; for example, http://www.lycos.com. Once the user is redirected, he or she can use the brower's Back button to go back to the page where the selection was made.
+
+Figure 10.31. The HTML Web page before viewing the menu and selecting an option.
+
+[View full size image]
+
+Figure 10.32. The user selects "PHP Index" from the drop-down menu and presses "Get the Web Page!" to redirect to that site.
+
+
+10.3.13. Uploading Files
+
+In an HTML form, users can upload files from a browser to a Web server. The files might be text files, binary files (such as images or compressed files), spreadsheets, or other data (see http://www.faqs.org/rfcs/rfc1867.html). Being able to upload files is also useful if the information is easier to handle from a separate file, such as a registration form or a résumé. To upload files, you will need to create a form using the "file" type.
+Attributes for the <Form> Tag and the file Type
+
+To upload files the <form> tag has three attributes:
+
+   1.
+
+      The action attribute of the <form> tag specifies the PHP script that will process the form.
+   2.
+
+      The enctype attribute determines how the form data is encoded by the browser. The default value is application/x-www-form-urlencoded, which is the default for almost any kind of form data. However, if you are going to upload files then you must specify that the data is of enctype multi-part/form-data. The browser encodes form data differently for application/x-www-form-urlencoded and multipart/form-data.
+   3.
+
+      The method attribute should be "POST".
+
+Example 10.19.
+
+    (Sample File Upload Form Values)
+1   <form enctype="multipart/form-data"
+2         action="PHPscript.php"
+3         method="POST">
+<!--MAX_FILE_SIZE is optional and must precede the file input field-->
+4   <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+5   Choose a file to upload: <input name="uploadfile" type="file" />
+    <input type="submit" value="Send File" />
+    </form>
+
+
+In addition to the three attributes, the form's input type is "file"; for example:
+
+<input type="file" name="uploadfile"
+
+
+With an input type of type "file", the browser might show a display of (previously selected) file names, and a Browse button or selection method. Selecting the Browse button would cause the browser to enter into a file selection mode, allowing you to select from a list of files from different directories or folders. See Figure 10.34.
+
+You can also specify the MAX_FILE_SIZE field size, the maximum number of bytes that will be accepted, but this only advises what size the file should be. This cannot be larger than upload_max_filesize defined in the php.ini file (default 2MB). Note also that this hidden field must precede the file input field in the HTML.
+
+Files will, by default, be stored in the server's default temporary directory, unless another location has been given with the upload_tmp_dir directive in php.ini. You can use the built-in move_uploaded_file() function to store an uploaded file somewhere permanently (see Example 10.21).
+
+From the php.ini file:
+Code View: Scroll / Show All
+
+; File Uploads ;
+;;;;;;;;;;;;;;;;
+
+; Whether to allow HTTP file uploads.
+file_uploads = On
+
+; Temporary directory for HTTP uploaded files (will use system default if not
+; specified).
+upload_tmp_dir = "c:/wamp/tmp"
+
+; Maximum allowed size for uploaded files.
+upload_max_filesize = 2M
+
+					  
+
+
+PHP's $_FILES Array
+
+When the file is sent to the server, PHP stores all the uploaded file information in the $_FILES superglobal array (see Table 10.3), a two-dimensional array that contains the name of the file input device as the first index and one of the attributes of the file type as the second index.
+
+Table 10.3. The $_FILES Superglobal Array
+Array	Description
+$_FILES['userfile']['name']	The original name of the file on the client machine.
+$_FILES['userfile']['type']	The MIME type of the file, if the browser provided this information. An example would be "image/gif".
+$_FILES['userfile']['size']	The size, in bytes, of the uploaded file.
+$_FILES['userfile']['tmp_name']	The temporary filename of the file in which the uploaded file was stored on the server.
+$_FILES['userfile']['error']	The error code associated with this file upload. ['error'] was added in PHP 4.2.0.
+
+Example 10.20.
+
+Code View: Scroll / Show All
+
+   (The HTML File)
+   <html><head><title>Uploading Files</title></head>
+   <body bgcolor="lavender">
+   <h3>Uploading Files</h3>
+1  <form
+2      enctype="multipart/form-data"
+3      action="upload_file.php"
+4      method="post">
+       Type the name of the file to upload: <br />
+5      <input name="user_file"
+              type="file"/>
+       <br />
+       <input type=submit value="Get File"/>
+   </form>
+   </body>
+   </html>
+--------------------------------------------------
+   (The PHP Script--upload_file.php)
+   <?php
+6      $handle=fopen($_FILES['user_file']['tmp_name'], "r");
+7      while(!feof($handle)){
+8          $text=fgets($handle);
+           echo $text,"<br />";
+       }
+   ?>
+
+					  
+
+
+Explanation
+
+1	The form starts here and is displayed in Figure 10.33.
+2	The attribute to the form type is enctype and assigned "multipart/form-data". This encoding type is used to send data from files.
+3	The action attribute specifies the PHP script that will process the uploaded files.
+4	Uploaded files must be sent via the POST method.
+5	The input device is of type "file" and will be assigned the name "user_file". The name is how the uploaded file will be identified in the PHP file, not the real name of the file. See Figure 10.35.
+6	The $_FILES['user_file']['tmp_name'] array holds the name of the temporary file that PHP gave to the uploaded file. The fopen() function will open that file for reading and return a filehandle that allows access to the file. (See "The fopen() Function" on page 448.)
+
+Figure 10.33. The file upload form from Example 10.20 in the browser.
+
+
+Figure 10.34. The user selects the Browse button in the form.
+
+[View full size image]
+
+Figure 10.35. The user then selects a file.
+
+[View full size image]
+
+Moving the Uploaded File
+
+PHP provides the move_uploaded_file() function to move an uploaded file to a new location.
+Format
+
+bool move_uploaded_file ( string filename, string destination )
+
+
+This function checks to ensure that the file designated by filename is a valid upload file (meaning that it was uploaded using the POST method). If the file is valid, it will be moved to the filename given as a destination.
+
+If the filename is not a valid upload file, then no action will occur, and move_uploaded_file() function will return FALSE with a warning.
+Example 10.21.
+
+Code View: Scroll / Show All
+
+   (The HTML Form)
+   <html><head><title>Uploading Pictures</title></head>
+   <body bgcolor="lavender">
+   <h3>Uploading Files</h3>
+   <form
+1      enctype="multipart/form-data"
+       action="upload_move_file.php"
+       method="post">
+
+       Browse and select the picture you want to upload: <br />
+2      <input name="picture_file" type="file" />
+       <br />
+       <input type=submit value="Get File"/>
+   </form>
+   </body>
+   </html>
+---------------------------------------------------------------
+   (The PHP Script)
+   <html><head><title>File Uploads</title></head>
+   <body bgcolor="#33ff33">
+   <font face="verdana" size="+1">
+   <?php
+       echo "The uploaded file is: ", $_FILES['picture_file']
+             ['tmp_name'], "<br />";
+       $filename=$_FILES['picture_file']['name'];
+       $filesize=$_FILES['picture_file']['size'];
+       $directory='c:/wamp/www/exemples/formsphp/
+             picture_uploads/';
+3      $uploadFile = $directory . $filename;
+       echo "The moved file is: $uploadFile<br />";
+4      if (move_uploaded_file($_FILES['picture_file']['tmp_name'],
+                $uploadFile)){
+          echo "The file is valid and was successfully uploaded.
+                <br /> ";
+          echo "The image file, $filename, is $filesize bytes.<br />";
+       }
+   ?>
+   <center>
+   <br />
+   <img src=<?php
+       echo "/exemples/formsphp/picture_uploads/$filename";?>
+   width="250" height="175" border="3">
+   </center>
+   </font>
+   </body>
+   </html>
+
+					  
+
+
+Explanation
+
+1	To upload files the encoding type must be "multipart/form-data" and the method, POST.
+2	The uploaded file must be of type "file". Its name is "picture_file", the name used to identify the file in the $_FILES[] associative array. The file being uploaded is shown in Figure 10.36.
+3	The variable, $uploadFile, contains the directory and filename to where the picture will be moved.
+4	The move_uploaded_file() function moves the uploaded file to its new location. Its first argument is the original file and its second argument is the destination.
+
+Figure 10.36. Uploading and moving Images.
+
+[View full size image]
+
+10.3.14. Sticky Forms
+
+A sticky form is a form that remembers the values you typed in the input fields. A typical example is when you fill out a form to purchase some products or fill out a registration form and you left out a field or typed the credit card information wrong. When you submit the order, the page comes back with the form and tells you what you did wrong and asks you to resubmit the order. If the order form is long and contains lots of boxes, how many times will you resubmit it, if you have to start all over again? With a sticky form, the input data can be saved so that when the form is redisplayed, the data is still there. The following example checks if the user left any fields empty and if he or she did, redisplays the form with an error showing what fields need to filled. The fields that had data in them still contain the data. (For a complete discussion on form validation, see Chapter 12, "Regular Expressions and Pattern Matching.")
+
+Example 10.22.
+
+Code View: Scroll / Show All
+
+   <html><head><title>Empty Fields</title>
+   <body><div align="center">
+   <h2>Validating Input</h2>
+   <?php
+1      $errors=array();
+2      if(isset($_REQUEST['submit'])){ // If the form was submitted
+3          validate_input(); // Check for empty fields
+4          if(count($errors) != 0){ // If there are errors,
+                                    // redisplay the form
+              display_form();
+           }
+5          else{ echo "<b>OK! Go ahead and Process the form!</b>
+              <br />"; }
+       }
+6      else{display_form();} // Display the form for the first time
+7      function validate_input(){
+8          global $errors;
+           if($_POST["name"] == ""){
+9             $errors['name']="<font color='red'>
+              ***Your name?***</font>";
+           }
+           if($_POST["phone"] == ""){
+              $errors['phone']="<font color='red'>
+              ***Your phone?***</font>";
+           }
+       }
+10     function display_form(){
+           global $errors;
+           ?>
+           <b>
+11         <form method="post"
+                 action="<?php echo $_SERVER['PHP_SELF'];
+           ?>">
+           What is your name? <br />
+12         <input type="text" name="name"
+                 value="<?php echo $_POST[name]; ?>">
+           <br />
+13         <?php echo $errors['name']; ?>
+           <br />
+           What is your phone number?<br />
+           <input type="text" name="phone"
+                value="<?php echo $_POST[phone]; ?>">
+           <br />
+14         <?php echo $errors['phone']; ?>
+           <br />
+           <input type="reset">
+           <input type="submit" name="submit">
+           <br />
+           <form>
+       <?php
+       }
+   ?>
+   </b>
+   </div>
+   </body>
+   </html>
+
+					  
+
+
+Explanation
+
+1	The $errors array is initialized. It will be used to build a string error message.
+2	If the isset() function returns true, the user has already submitted the form and program control will go to line 3.
+3	The user-defined function, validate_input(), is called.
+4	If the PHP count() function finds that the $errors array is not empty, the display_form() function is called and the same form is displayed again with the error messages displayed in red. See Figures 10.38 and 10.39.
+5	If there are no errors, then the form will be processed. We do not do any real processing here, but if we did, this is where the code would go.
+6	If line 1 is false (i.e., the form has not yet been displayed), the form will be shown in the browser for the first time.
+7	This is a user-defined function that will determine whether or not the user filled in the required fields.
+8	The global keyword makes this array available within the function.
+9	If the user did not fill the "name" field, the $errors array will be assigned a string of text as its value. The key 'name' is the name of the text box.
+10	This function displays the form, as displayed in Figure 10.37.
+11	The form is a self-processing form when the action attribute $_SERVER[PHP_SELF] is assigned this value.
+12	When the input type is named, the value given to it will be empty the first time it is displayed because PHP has not yet processed the input. If the form has already been displayed and there was an error, then the value of the field, if there was one, will be assigned by switching over to PHP mode and using the value of $_POST[name]. This is what makes the form "sticky." If the user had typed his or her name, PHP would have put the value back in the text box, but if the user did not type his or her name, the value of $_POST[name] will be empty and nothing will be restored to the text box. Instead the user will see an error in red text as shown on line 13.
+13	If the user did not enter his or her name in the text box field, this error will be printed right below it. If the user did enter his or her name, the value in this array element will be empty and nothing will be printed.
+14	If the user did not enter his or her phone number in the text field box, an error will be printed, as shown in Figure 10.38.
+
+Figure 10.37. The initial HTML form from Example 10.22.
+
+[View full size image]
+
+Figure 10.38. The user left one field empty.
+
+[View full size image]
+
+Figure 10.39. The user left both fields empty.
+
+[View full size image]
+
+10.3.15. Where to Get Information About Superglobal Arrays
+
+As we have seen throughout this chapter, PHP superglobal arrays (also called autoglobal), such as _GET and _POST are defined as part of the global namespace of your PHP script and used to store the user input coming from HTML forms. Other superglobals, such as the server's configuration, cookies, or information about the environment are also accessible in your PHP script in superglobal arrays. These predefined arrays are referred collectively as EGPCS (Environment, GET, POST, Cookie, and Server information). They are called superglobals because they are available in every part of your program. (Cookies are discussed in Chapter 16, "Cookies and Sessions.")
+The phpinfo() Function
+
+To see the available predefined variables on your system, you can use the phpinfo() function that includes not only all of the EGPCS information, but a huge amount of information about PHP, such as version, operating system, environment, compilation options, server information, HTTP headers, and so on. Table 10.4 lists arguments used to customize the output of the phpinfo() function. You can use either the constant value in column 1 or the number value in column 2. Column 3 describes the output. In the following example phpinfo() displays the EGPCS predefined variables.
+
+<?php
+    phpinfo(INFO_VARIABLES);  // phpinfo(32) does the same thing
+?>
+
+
+Table 10.4. phpinfo() Options[a]
+Name (Constant)	Value	Description
+INFO_GENERAL	1	The configuration line, php.ini location, build date, Web server, system, and more.
+INFO_CREDITS	2	PHP credits. See also phpcredits().
+INFO_CONFIGURATION	4	Current local and master values for PHP directives. See also ini_get().
+INFO_MODULES	8	Loaded modules and their respective settings. See also get_loaded_extensions().
+INFO_ENVIRONMENT	16	Environment variable information that is also available in $_ENV.
+INFO_VARIABLES	32	Shows all predefined variables from EGPCS (Environment, GET, POST, Cookie, Server).
+INFO_LICENSE	64	PHP License information. See also the license FAQ.
+INFO_ALL	–1	Shows all of the above. This is the default value.
+
+    [a] From http://us2.php.net/phpinfo. For a complete list and definitions see http://us3.php.net/manual/en/reserved.variables.php.
+
+10.3.16. How to Get Server Information
+
+We have been working with HTML forms and PHP, going back and forth between the server and browser. PHP makes information about your server available to your scripts. The Web server assigns values to the PHP superglobal $_SERVER array such as header, path, script locations, and version information. All servers are not consistent in the information they provide. Table 10.5 defines some of the superglobals (from the PHP manual) you will encounter in the following chapters. See Figure 10.40 for a partial output.
+
+Table 10.5. Retrieving Server Information
+$_SERVER Key	Description of Value
+PHP_SELF	The filename of the currently executing script, relative to the document root. For instance, $_SERVER['PHP_SELF'] in a script at the address http://example.com/test.php/foo.bar would be /test.php/foo.bar. The __FILE__ constant contains the full path and filename of the current (i.e., included) file.
+GATEWAY_INTERFACE	The CGI specification the server is using (i.e., CGI/1.1).
+SERVER_NAME	The name of the server host under which the current script is executing. If the script is running on a virtual host, this will be the value defined for that virtual host.
+SERVER_SOFTWARE	Server identification string, given in the headers when responding to requests.
+SERVER_PROTOCOL	Name and revision of the information protocol via which the page was requested (i.e., HTTP/1.0).
+REQUEST_METHOD	Which request method was used to access the page (i.e., GET, HEAD, POST, PUT).
+REQUEST_TIME	The timestamp of the start of the request. Available since PHP 5.1.0.
+QUERY_STRING	The query string, if any, via which the page was accessed.
+DOCUMENT_ROOT	The document root directory under which the current script is executing, as defined in the server's configuration file.
+HTTP_ACCEPT	Contents of the Accept: header from the current request, if there is one.
+HTTP_CONNECTION	Contents of the Connection: header from the current request, if there is one. Example: Keep-Alive.
+HTTP_HOST	Contents of the Host: header from the current request, if there is one.
+HTTP_REFERER	The address of the page (if any) that referred the user agent to the current page. This is set by the user agent. Not all user agents will set this, and some provide the ability to modify HTTP_REFERER as a feature. In short, it cannot really be trusted.
+HTTP_USER_AGENT	Contents of the User-Agent: header from the current request, if there is one. A typical example is:
+
+Mozilla/4.5 [en] (X11; U; Linux 2.2.9 i586)
+
+
+See also the get_browser() function.
+REMOTE_ADDR	The IP address from which the user is viewing the current page.
+REMOTE_HOST	The host name from which the user is viewing the current page. The reverse DNS lookup is based off the REMOTE_ADDR of the user.
+REMOTE_PORT	The port being used on the user's machine to communicate with the Web server.
+SCRIPT_FILENAME	The absolute pathname of the currently executing script. Note: If a script is executed with the CLI, as a relative path, such as file.php or ../file.php, $_SERVER['SCRIPT_FILENAME'] will contain the relative path specified by the user.
+SERVER_PORT	The port on the server machine being used by the Web server for communication, default is port 80; using SSL is your defined secure HTTP port.
+SERVER_SIGNATURE	String containing the server version and virtual host name that are added to server-generated pages, if enabled.
+PATH_TRANSLATED	The path of the file system (not document root) related to the current script.
+SCRIPT_NAME	Contains the current script's path. This is useful for self-processing pages. The __FILE__ constant contains the full path and filename of the current (i.e., included) file.
+REQUEST_URI	The URI that was given to access this page; for instance, /index.html.
+
+Figure 10.40. The $_SERVER array (partial output).
+
+[View full size image]
+
+Example 10.23.
+
+<html><head><title>Server Information</title></head>
+<body bgcolor="yellow">
+<table border="1">
+<?php
+    foreach($_SERVER as $key=>$value){
+        echo "<tr>";
+        echo "<td><b>$key</td><td>$value</td>";
+        echo "</tr>";
+    }
+?>
+</table>
+</body>
+</html>
+
+
+Explanation
+
+A partial output of the $_SERVER array is displayed in Figure 10.40.
+
+Example 10.24.
+
+   <html><head><title>Server Info</title></head>
+   <body bgcolor="silver">
+   <font face="verdana" size="+1">
+   <?php
+1      echo "My server is \"", $_SERVER["SERVER_NAME"], "\".\n<br />";
+2      echo "The server's IP address is \"", $_SERVER["REMOTE_ADDR"],
+          "\".\n<br />";
+3      echo "My browser is \"", $_SERVER["HTTP_USER_AGENT"], "\".
+          \n<br />";
+4      echo "The PHP script being executed is \"",
+          $_SERVER["PHP_SELF"], "\".\n<br />";
+   ?>
+   </body>
+   </html>
+
+
+Explanation
+
+1	The server handling this page is called "localhost", the default name for the server on the local computer.
+2	This is the IP address for the server referred to as "localhost" on the currently used computer. This address can be used by TCP/IP applications.
+3	The HTTP_USER_AGENT refers to the browser ID or user-agent string identifying the browser that is sending the request. In an HTTP transaction, this information is sent by the server to the browser as a header followed by a blank line. The browser is Firefox.
+4	$_SERVER["PHP_SELF"] is the filename of the currently executing script, relative to the document root. This variable is useful in creating self-processing forms. (See "Self-Processing HTML Forms" on page 413 for more on self-processing forms.) See the output in Figure 10.41.
+
+Figure 10.41. Server variables.
+
+[View full size image]
+
+10.3.17. How to Get Information About the Environment
+
+The environment variables are predefined variables containing information about the operating system, shell, path, CGI variables,[7] and computer under which PHP is running (see Figure 10.42).
+
+    [7] If PHP is running as a CGI program, then the environment variables are used to pass data about the information request from the server to the script. The environment variables are set when the server executes the gateway program.
+
+Figure 10.42. Environment variables.
+
+[View full size image]
+
+The $_ENV array contains the environment variables that can also be displayed with phpinfo() built-in function. To access the name of the remote host, you would use the following syntax:
+
+echo $_ENV['REMOTE_HOST'];
+
+
+or you can use the PHP getenv() function to get the value of an environment variable:
+
+echo getenv('REMOTE_HOST');
+
+
+The output will vary from one system to another because there are a number of shells, different servers, and so on. For example, you might be running PHP in the Apache server on a Solaris operating system using the Bash shell while I'm using Redhat Linux and the TCshell. The variations can be enormous, resulting in enormous variations in output.
+
+<?php
+   phpinfo(16); // Display information about PHP environment
+?>
+
+10.4. Chapter Summary
+10.4.1. What You Should Know
+
+We have yet to discuss how to validate form input, how to send form data to files and databases, how to track users and their preferences, security issues, and so on. All of that is yet to come, but by now you should be able to answer the following questions:
+
+1.	What are the attributes of an HTML <form> tag?
+2.	How does the form information get from the browser to the server?
+3.	What is the difference between the GET and POST methods?
+4.	How does PHP handle form information?
+5.	What are the three styles that PHP uses to assign form input to a variable? Which of these is the recommended style and why?
+6.	What is the register_globals directive? What is the recommended setting?
+7.	What are superglobals?
+8.	What is a self-processing script?
+9.	How does PHP handle forms with multiple selections?
+10.	What is the purpose of the $_REQUEST array?
+11.	What are hidden fields used for?
+	
+12.	What are the attributes and input type needed to upload a file?
+13.	What is a redirection header?
+14.	What are the rules for uploading a file?
+15.	What is meant by a "sticky" form?
+16.	How can you get information about your server from PHP?
+10.4.2. What's Next?
+
+Much of what you do in PHP will deal with files. In Chapter 11, "Files and Directories," we talk about files and how to open and close them, read from them and write to them, copy them, lock them, upload them, compress them, and more, all from within a PHP script.
+
+Chapter 10 Lab
+
+1.	Open the datebook file and print its contents back to the file with line numbers. Now display the names, phone numbers, and birthdates of everyone born in November or December.
+2.	From the datebook file, display all entries with a salary greater than $45,000. Output should look as follows:
+
+[View full size image]
+	
+3.	Write a self-processing PHP script. It will produce a form to ask for a name, phone, address, birthday, and salary. This information will be appended to the datebook file. Sort the file and display it with the new entry. If the user enters input such as Joe O'Donald, PHP will precede any quotes with backslashes. Make sure the backslashes are removed. If any of the fields are empty, exit.
+4.	Create a form with a select menu to accept multiple selections of artists. Based on the user's selection, write a PHP script that will process the selections and display an image(s) for each selected artist. The submit button in the form will be an image. The select menu should look similar to the following:
+
+5.	Create a form that uploads a file from Google images and displays the image file.
+6.	Write a PHP program that will ask for a user's name and password. The program will generate an MD5-encrypted password. Store the username and the new password in a file called db.passwords. Now create a PHP program that will ask for the username and password and admit the user only if his username and password match. If they match, show him the contents of the datebook file.
+
+The md5() function is a one-way encryption program, meaning you cannot unencrypt the password. You can verify the password by comparing it to the password initially created by md5():
+
+$password=md5($password);
+
+

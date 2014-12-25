@@ -1,0 +1,684 @@
+h2. The Building Blocks: Variables, and Constants
+
+
+
+h3. Variable Definition and Assignment
+
+* Variables are fundamental to all programming languages. They are data items that represent a memory storage location in the computer.
+* Variables are containers that hold data such as numbers and strings. In PHP programs there are three types of variables:
+## Predefined variables
+## User-defined variables
+## Form variables related to names in an HTML form
+
+
+h3. Variables have a name, a type, and a value.
+
+<pre>$num = 5;           // name: "$num", value: 5, type: numeric
+$friend = "Peter";  // name: "$friend", value: "Peter", type: string
+$x = true;          // name: "$x", value: true, type: boolean
+</pre>
+
+* The values assigned to variables can change throughout the run of a program whereas constants, and literals, remain fixed.
+* PHP variables can be assigned different types of data, including:
+** Numeric
+** String
+** Boolean
+** Objects
+** Arrays
+
+
+* Computer programming languages like C++ and Java require that you specify the type of data you are going to store in a variable when you declare it. For example, if you are going to assign an integer to a variable, you would have to say something like:
+<br /><pre>
+int n = 5;
+</pre>
+* and if you were assigning a floating-point number:
+<br /><pre>
+float x = 44.5;
+</pre>
+* Languages that require that you specify a data type are called "strongly typed" languages. PHP, conversely, is a dynamically, or loosely typed, language, meaning that you do not have to specify the data type of a variable. In fact, doing so will produce an error.
+* With PHP you would simply say:
+<br /><pre>
+$n = 5;
+$x = 44.5;
+</pre>
+* and PHP will figure out what type of data is being stored in $n and $x .
+
+h3. Valid Variable Names
+
+* Variable names consist of any number of letters (an underscore counts as a letter) and digits.
+* The first character must be a letter or an underscore. Variable names are case sensitive, so $Name, $name, and $NAME are all different variables.
+* Table: Valid and Invalid Variable Name Examples
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Valid Variable Names*|{background:#ccc}.*Invalid Variable Names*|
+|@$name1@                  |@$10names@              |
+|@$price_tag@              |@box.front@             |
+|@$_abc@                   |@$name#last@            |
+|@$Abc_22@                 |@A-23@                  |
+|@$A23@                    |@$5@                    |
+
+h3. Declaring and Initializing Variables
+
+* Variables are normally declared before they are used. PHP variables can be declared in a script, come from an HTML form, from the query string attached to the script's URL, from cookies, from the server, or from the server's environment.
+* Variable names are explicitly preceded by a "$". You can assign a value to the variable (or initialize a variable) when you declare it, but that is not mandatory.
+<br /><pre>
+$variable_name = value; // initialized
+$variable_name;         // uninitialized, value is null
+</pre>
+* To declare a variable called firstname, do:
+<br /><pre>
+$first_name="Ellie";
+</pre>
+* You can declare multiple variables on the same line by separating each declaration with a semicolon.
+<pre>
+$ first_name; $middle_name; $last_name;
+</pre>
+
+h3. Double, Single, and Backquotes in Assignment Statements
+
+* When assigning a value to a variable, if the value is a string, then the string can be enclosed in either single or double quotes.
+* If the value is returned from a function, then the function is not enclosed in quotes. If the value is returned from a system command then the command is enclosed in backquotes:
+<br /><pre>
+$name = "Marko";  // Assign a string
+$city = 'San Francisco';  // Assign a string
+$now = date("m/d/Y");  // Assign output of a function
+$dirlist = `ls -l`;  // Assign output of a UNIX system command
+$dirlist = `dir /D/L`;  // Assign a Windows system command
+</pre>
+* Let's run a script that demonstrates variable assignment.
+* Filename: *assign.php*
+<br /><PRE><SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Variables<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">lightblue</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">face</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">arial</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax13">+</SPAN><SPAN CLASS="syntax13">1</SPAN><SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN>  <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">name</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">Joe</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">Shmoe</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">age</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax5">25</SPAN><SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax5">4</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">now</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax9">date</SPAN>(<SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">m</SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">d</SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">Y</SPAN><SPAN CLASS="syntax13">&quot;</SPAN>)<SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">nothing</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN>    <SPAN CLASS="syntax8">echo</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">name</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">is</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">age</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">years</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">old</SPAN><SPAN CLASS="syntax13">.</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN>    <SPAN CLASS="syntax8">echo</SPAN> <SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax13">$nothing</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">contains</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">the</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">value</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">of</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax18">,</SPAN> <SPAN CLASS="syntax9">gettype</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">nothing</SPAN>)<SPAN CLASS="syntax18">,</SPAN>
+<SPAN CLASS="gutter">  12:</SPAN>         <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">.</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  13:</SPAN>    <SPAN CLASS="syntax8">echo</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">Today</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">is</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">now</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  14:</SPAN>  <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutterH">  15:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  16:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  17:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+* Note that the variable $nothing is not assigned an initial value. It will have the value NULL (and be considered data type NULL by PHP).
+* The gettype() function tells us that the type of $nothing is NULL.
+* Here is another example featuring the use of back ticks with Linux or UNIX.
+* Filename: *ticks.php*
+<br /><PRE><SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Backticks<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">lightgreen</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">b</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">pre</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>  <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">month</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">`</SPAN><SPAN CLASS="syntax13">cal</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">7</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">2005</SPAN><SPAN CLASS="syntax13">`</SPAN><SPAN CLASS="syntax18">;</SPAN> <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">UNIX</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">command</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>    <SPAN CLASS="syntax8">echo</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">month</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>  <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">b</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">pre</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  12:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  13:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+* The PHP code is embedded in HTML &lt;pre&gt; tags to allow the calendar, $month , to be displayed in its natural format.
+* Below is a similar script you can run on Windows, since it features the DOS date command.
+* Filename: *wintick.php*
+<br /><PRE><SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Backticks for Windows Command<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">66cccc</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">b</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">pre</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>  <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">today</SPAN> <SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">`</SPAN><SPAN CLASS="syntax13">date</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">T</SPAN><SPAN CLASS="syntax13">`</SPAN><SPAN CLASS="syntax18">;</SPAN> <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">Windows</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">command</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN>    <SPAN CLASS="syntax8">echo</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">Today</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">is</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">today</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN>  <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutter">  12:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">b</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  13:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">pre</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  14:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">  15:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+
+h3. Displaying Variables: The print and echo Constructs
+
+* So far, we have seen examples using both print and echo to display data. These language constructs can be used interchangeably.
+* The only essential difference between echo() and print() is that echo allows multiple, comma-separated arguments, and print doesn't.
+* Neither require parentheses around their arguments because technically they are not functions, but special built-in constructs. In fact, arguments given to echo must not be enclosed within parentheses.
+* Consider the following. Three variables are declared:
+<br /><pre>
+$name = "Tom";
+$state = "New York";
+$salary = 80000;
+
+echo() can take a comma-separated list of string arguments:
+
+echo $name, $state, $salary;
+
+print() takes one string argument:
+
+print $name;
+</pre>
+* However, the concatenation operator can be used to print mutliple strings or strings containing multiple variables:
+<br /><pre>
+print $name . $state . $salary;
+echo $name . $state . $salary;
+</pre>
+* or all of the variables can be enclosed in double quotes:
+<br /><pre>
+print "$name $state $salary<br />";
+echo "$name $state $salary<br />";
+</pre>
+* If a variable is enclosed in double quotes, it will be evaluated and its value displayed.
+* If enclosed in single quotes, variables will not be evaluated. With single quotes, what you see is what you get.
+* Like all other characters enclosed within single quotes, the "$" is treated as a literal character.
+* The following strings are enclosed in single quotes:
+<br /><pre>
+echo '$name lives in $state and earns $salary.';
+ $name lives in $state and earns $salary.
+
+print '$name lives in $state and earns $salary.';
+  $name lives in $state and earns $salary.
+
+The same strings are enclosed in double quotes:
+
+echo "$name lives in $state and earns \$salary.";
+ Tom lives in New York and earns $80000.
+
+print "$name lives in $state and earns \$salary.";
+  Tom lives in New York and earns $80000.
+</pre>
+
+h3. Shortcut Tags
+
+* There are several shortcuts you can use to embed PHP within the HTML portion of your file, but to use these shortcuts, you must make a change in the php.ini file.
+* Use caution: The PHP developers set this directive to "off" for security reasons.
+* From the php.ini file:
+<br /><pre>; Allow the <? tag. Otherwise, only <?php and <script> tags are recognized.
+; NOTE: Using short tags should be avoided when developing applications or
+; libraries that are meant for redistribution, or deployment on PHP
+; servers which are not under your control, because short tags may not
+; be supported on the target server. For portable, redistributable code,
+; be sure not to use short tags.
+short_open_tag = Off                <--Turn this "On" to make short tags work
+</pre>
+* Instead of using the print() or echo() functions to ouput the value of variables, they can be nested within HTML code by using <?= and ?> shortcut tags where they will automatically be evaluated and printed.
+* Note: There can be no space between the question mark and the equal sign.
+* All of the following formats are acceptable:
+<br /><pre>
+<?= expression ?>
+<?= $color ?>
+
+<? echo statement; ?>
+<? echo $color; ?>
+</pre>
+* In the example below, we have chosen a <?= $color ?> paint for our canvas.
+* Filename: *vars.php*
+<br /><PRE><SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Variables<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">lightblue</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN>  <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">name</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">Marko</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">city</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">San</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">Francisco</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>  <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">face</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">verdana</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax13">+</SPAN><SPAN CLASS="syntax13">1</SPAN><SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">p</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN>  Today is <SPAN CLASS="syntax17">&lt;?</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax9">date</SPAN>(<SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">l</SPAN><SPAN CLASS="syntax13">&quot;</SPAN>)<SPAN CLASS="syntax17">?&gt;</SPAN>. // same as <SPAN CLASS="syntax17">&lt;?php</SPAN> <SPAN CLASS="syntax8">echo</SPAN> <SPAN CLASS="syntax9">date</SPAN>(<SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">l</SPAN><SPAN CLASS="syntax13">&quot;</SPAN>)<SPAN CLASS="syntax18">;</SPAN> <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">br</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  12:</SPAN>  His name is <SPAN CLASS="syntax17">&lt;?</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">name</SPAN><SPAN CLASS="syntax17">?&gt;</SPAN> and he works in <SPAN CLASS="syntax17">&lt;?</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">city</SPAN><SPAN CLASS="syntax17">?&gt;</SPAN>.
+<SPAN CLASS="gutter">  13:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  14:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">  15:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+* In the example above the PHP shortcut tag is embedded in the HTML tags. PHP will evaluate the expression contained in the shortcut tags and print their values.
+* The resulting HTML code contains the result of the evaluation as shown when viewing the browser's source.
+* In this example, the built-in date() function with an "l" option will return the day of the week.
+
+h3. Variables and Mixed Data Types
+
+* Remember, strongly typed languages like C++ and Java require that you specify the type of data you are going to store in a variable when you declare it, but PHP is loosely typed.
+* It doesn't expect or allow you to specify the data type when declaring a variable. You can assign a string to a variable and later assign a numeric value. PHP doesn't care and at runtime, the PHP interpreter will convert the data to the correct type.
+* In the example below, consider the following variable, initialized to the floating-point value of 5.5. In each successive statement, PHP will convert the type to the proper data type.
+* Table: How PHP Converts Data Types
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Assignment*|{background:#ccc}.*Type Conversion*|
+|@$item = 5.5;@                 |Assigned a float           |
+|@$item = 44;@                  |Converted to integer       |
+|@$item = "Today was bummer";@  |Converted to string        |
+|@$item = true;@                |Converted to boolean       |
+|@$item = NULL;@                |Converted to the null value|
+
+<br />
+* This example demonstrates data type conversion. The gettype built-in function is used to display the data types after PHP has converted the data to the correct type.
+* Filename: *typeconvert.php*
+<br /><PRE><SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Type Conversion<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">pink</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">+</SPAN><SPAN CLASS="syntax13">1</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN>  <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">item</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax5">5</SPAN><SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax5">5</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">item</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">is</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">type</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">.</SPAN> <SPAN CLASS="syntax9">gettype</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">item</SPAN>) <SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">item</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax5">44</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">item</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">is</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">type</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">.</SPAN> <SPAN CLASS="syntax9">gettype</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">item</SPAN>) <SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">item</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">Today</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">was</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">a</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">bummer</SPAN><SPAN CLASS="syntax13">!</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">\</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">item</SPAN><SPAN CLASS="syntax13">\</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">is</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">type</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">.</SPAN> <SPAN CLASS="syntax9">gettype</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">item</SPAN>) <SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">item</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax10">true</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  12:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">item</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">is</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">type</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">.</SPAN> <SPAN CLASS="syntax9">gettype</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">item</SPAN>) <SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  13:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">item</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax10">NULL</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  14:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">item</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">is</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">type</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">.</SPAN> <SPAN CLASS="syntax9">gettype</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">item</SPAN>) <SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  15:</SPAN>  <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutter">  16:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  17:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+* Your instructor will show you the output of this script.
+
+h3. Type Casting
+
+* Like C and Java, PHP provides a method to force the conversion of one type of value to another using the cast operator. More on this when we discuss PHP operators later!
+
+h3. Concatenation and Variables
+
+* To concatenate variables and strings together on the same line, the dot (.) is used. The dot is an operator because it operates on the expression on either side of it (each called an operand).
+* In expressions involving numeric and string values with the dot operator, PHP converts numeric values to strings. For example, consider the following statements:
+<br /><pre>
+// returns "The temperature is 87"
+$temp = "The temperature is ". 87;
+// returns "25 days till Christmas"
+$message = 25 ." days till Christmas";
+</pre>
+* The following script demonstrates the use of concatenation. Your instructor will run it for you.
+* Filename: *concat.php*
+<br /><PRE><SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Concatenation<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">ccff66</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">b</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN>  <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">n</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax5">5</SPAN> <SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">cats</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">years</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax5">9</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">The</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">n</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">lived</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">.</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">years</SPAN> <SPAN CLASS="syntax18">&#42;</SPAN> <SPAN CLASS="syntax5">5</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>         <SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">years</SPAN><SPAN CLASS="syntax13">.</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN>    <SPAN CLASS="syntax8">echo</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">He</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">owns</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">,</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">years</SPAN> <SPAN CLASS="syntax18">.</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">n</SPAN><SPAN CLASS="syntax18">,</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">.</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN>  <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutter">  12:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">b</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  13:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  14:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+* Notice that the concatenation operator joins all the expressions into one string to be displayed. The print() function can only take one argument.
+* But the echo statement takes a list of comma-separated arguments, which causes the values of @$years@ and @$n@ to be displayed just as with the concatenation operator.
+
+h3. References
+
+
+* Another way to assign a value to a variable is to create a reference @(PHP 4)@. A reference is when one variable is an alias or pointer to another variable; that is, they point to the same underlying data.
+* Changing one variable automatically changes the other. This might be useful in speeding things up when using large arrays and objects, but for now, we will not need to use references.
+* To assign by reference, prepend an ampersand @(&)@ to the beginning of the old variable that will be assigned to the new variable.
+* For example: @$ref = & $old;@ See the example script below and it's output.
+* Filename: *ref.php*
+<br /><PRE><SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>References<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">yellow</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">+</SPAN><SPAN CLASS="syntax13">1</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN>  <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">husband</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">Honey</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN> <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">Assign</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">the</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">value</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">&quot;Honey&quot;</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">to</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">$husband</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">son</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax18">&amp;</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">husband</SPAN><SPAN CLASS="syntax18">;</SPAN>  <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">Assign</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">a</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">reference</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">to</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">$son.</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>                        <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">Now</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">$husband</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">is</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">a</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">reference</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">or</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">alias</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>                        <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">for</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">$husband.</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">They</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">reference</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">the</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">same</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">data.</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">His</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">wife</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">calls</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">him</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">husband</SPAN><SPAN CLASS="syntax13">,</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">and</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">his</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">Mom</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">calls</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">him</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">son</SPAN><SPAN CLASS="syntax13">.</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">son</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">Lazy</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>     <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">Assign</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">a</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">new</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">value</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">to</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">$son;</SPAN>
+<SPAN CLASS="gutter">  12:</SPAN>                       <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">$husband</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">gets</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">the</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">same</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">value</SPAN>
+<SPAN CLASS="gutter">  13:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">Now</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">his</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">wife</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">and</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">mother</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">call</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">him</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">son</SPAN><SPAN CLASS="syntax13">,</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">husband</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">man</SPAN><SPAN CLASS="syntax13">.</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  14:</SPAN>  <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutterH">  15:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  16:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+
+
+h3. Variable Variables (Dynamic Variables)
+
+* A variable variable is also called a dynamic variable. It is a variable whose name is stored in another variable.
+* By using two dollar signs, the variable variable can access the value of the original variable. Consider the following example:
+<br /><pre>$pet ="Bozo";
+$clown = "pet";  // A variable is assigned the name of another variable
+echo $clown;  // prints "pet"
+echo ${$clown};  // prints Bozo
+</pre>
+* Dynamic variables are useful when you are dealing with variables that all contain a similar name such as form variables.
+* Curly braces can be used to ensure that the PHP parser will evaluate the dollar signs properly. That is, $clown will be evaluated first, and the first dollar sign removed, resulting in @${pet}@ , and finally $pet will be evaulated to "Bozo".
+* The following example demonstrates how variable variables can be used dynamically to change the color of a font. Output will be shown by the instructor.
+* Filename: *varvars.php*
+<br /><PRE><SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Variable Variables<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">669966</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">face</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">arial</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">+</SPAN><SPAN CLASS="syntax13">1</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN>  <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">color1</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">red</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">color2</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">blue</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">color3</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">yellow</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>    <SPAN CLASS="syntax8">for</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">count</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax5">1</SPAN><SPAN CLASS="syntax18">;</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">count</SPAN> <SPAN CLASS="syntax18">&lt;=</SPAN> <SPAN CLASS="syntax5">3</SPAN><SPAN CLASS="syntax18">;</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">count</SPAN><SPAN CLASS="syntax18">+</SPAN><SPAN CLASS="syntax18">+</SPAN>)<SPAN CLASS="syntax18">{</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN>      <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">primary</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">color</SPAN><SPAN CLASS="syntax13">&quot;</SPAN> <SPAN CLASS="syntax18">.</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">count</SPAN><SPAN CLASS="syntax18">;</SPAN>   <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">Variable</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">variable</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN>      print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">font</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">color</SPAN><SPAN CLASS="syntax13">=</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax13">{</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">primary</SPAN><SPAN CLASS="syntax13">}</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  12:</SPAN>      <SPAN CLASS="syntax8">echo</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">The</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">value</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">stored</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">in</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">primary</SPAN><SPAN CLASS="syntax13">:</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax13">{</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">primary</SPAN><SPAN CLASS="syntax13">}</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  13:</SPAN>    <SPAN CLASS="syntax18">}</SPAN>
+<SPAN CLASS="gutter">  14:</SPAN>  <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutterH">  15:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  16:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  17:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+* Three variables are defined and assigned colors. Notice the variable names only differ by the number appended to the name, 1, 2, and 3.
+* Although we haven't discussed loops yet, this is the best way to illustrate the use of variable variables (or dynamic variables).
+* The initial value in the loop, $count , is set to 1. If the value of $count is less than 3 ($count < 3), then control goes to line 10.
+* After the closing curly brace is reached on line 13, control will go back to the top of the loop and the value of $count will be incremented by 1.
+* If $count is less than 3, the process repeats, and when $count reaches 3, the loop terminates.
+* The first time through the loop, the value of $count is appended to the string "color" resulting in color1 . The value, "color1", is then assigned to the variable, $primary, so that: $primary = color1;
+* PHP expands @${$primary}@ as follows:
+** @${color1}@ - First evaluate $primary within the curly braces.
+** @$color1@ - Remove the braces and now evaluate $color1 resulting in "red".
+** The color of the font and the text will be red. Next time through the loop, the count will go up by one ($count = 2) and the $color2 will be "blue", and finally $color3 will be "yellow".
+* Note that the curly braces in @${$primary}@ are required. If you omit them, the variable $$primary will be evaluated as $color1 but not "red".
+
+h3. Scope of Variables
+
+* Scope refers to where a variable is available within a script. Scope is important because it prevents important variables from being accidentally modified in some other part of the program and thus changing the way the program behaves.
+* PHP has specific rules to control the visibility of variables. A local variable is one that exists only within a function.
+* In PHP, a variable defined at the script level (outside of any functions) is a global variable, and is available anywhere in the script other than from within functions.
+
+h3. Local Variables
+
+* Variables created inside a function are only available inside that function and not to the rest of the script. They are local to the function and disappear (go out of scope) when the function exits.
+* If you have the same name for a variable inside a function as in the main program, modifying the variable in the function will not affect the one outside the function.
+* Likewise, the function does not have access to variables created outside of the function.
+* Most of the variables we create will be visible in the script or function in which they are declared.
+
+h3. Global and Environment Variables
+
+* Superglobal variables are accessible everywhere in a script and within functions. They are special variables provided by PHP to help you manage HTML forms, cookies, sessions, and files, and to get information about your environment and server.
+* Table: Some Superglobal Variables
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Name*|{background:#ccc}.*Meaning*|
+|@$GLOBALS@    |An array of all global variables                                    |
+|@$_SERVER@    |Contains server variables (e.g., REMOTE_ADDR)                       |
+|@$_GET@       |Contains form variables sent through GET method                     |
+|@$_POST@      |Contains form variables sent through POST method                    |
+|@$_COOKIE@    |Contains HTTP cookie variables                                      |
+|@$_FILES@     |Contains variables provided to the script via HTTP post file uploads|
+|@$_ENV@       |Contains the environment variables                                  |
+|@$_REQUEST@   |A merge of the GET variables, POST variables, and cookie variables  |
+|@$_SESSION@   |Contains HTTP variables registered by the session module            |
+
+h3. Managing Variables
+
+* You might want to find out if a variable has been declared, you might want to delete one that has been set, or check to see if one that is set is not empty or is a string, number, scalar, and so on.
+* PHP provides a number of functions to help you manage variables.
+* Table: Functions for Managing Variables
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Function*|{background:#ccc}.*What It Returns*|
+|@isset()@         |True if variable has been set.                                               |
+|@empty()@         |True if variable is empty: "" (an empty string) "0" (a string) 0 (an integer)|
+|@is_bool()@       |True if variable is boolean; that is, contains TRUE or FALSE.                |
+|@is_callable()@   |True if variable is assigned the name of a function or an object.            |
+|@is_double(),@    |True if variable is a floating-point number.                                 |
+|@is_float(),@     |&nbsp;                                                                       |
+|@is_real()@       |&nbsp;                                                                       |
+|@is_int(),@       |True if a variable is assigned a whole number.                               |
+|@is_integer(),@   |&nbsp;                                                                       |
+|@is_long()@       |&nbsp;                                                                       |
+|@is_null()@       |True if a variable was assigned the NULL value.                              |
+|@is_numeric()@    |True if the variable was assigned a numeric string value or a number.        |
+|@is_object()@     |True if the variable is an object.                                           |
+|@is_resource()@   |True if the variable is a resource.                                          |
+|@is_scalar()@     |True if the value was assigned a single value, such as a number.             |
+|@is_string()@     |True if a variable is a string of text.                                      |
+|@unset()@         |Unsets or destroys a list of values.                                         |
+
+h3. The isset() Function
+
+* The *isset()* function returns true if a variable has been set and false if it hasn't.
+* If the variable has been set to NULL or has no value, it returns false. If you want to see if a variable has been set to NULL, use the is_null() function.
+* To ensure that a variable has an initial value, the isset() function can be used to set a default value. See the examples below.
+* Format: @bool isset ( variable, variable, variable .... );@
+* The following examples illustrate the use of isset():
+<br /><pre>$set = isset( $name );  // returns true or false
+print isset($a, $b, $c);  // prints 1 or nothing
+</pre>
+* Filename: *isset.php*
+<br /><PRE><SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Testing Variables<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">#</SPAN><SPAN CLASS="syntax13">66CC66</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN>  The <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">b</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>isset()<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">b</SPAN><SPAN CLASS="syntax17">&gt;</SPAN> function returns a boolean value. <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">br</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN>  If one or more variables exist and have a value, true is returned;
+<SPAN CLASS="gutter">   6:</SPAN>  otherwise false.
+<SPAN CLASS="gutter">   7:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">face</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">verdana</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">+</SPAN><SPAN CLASS="syntax13">1</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">p</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>  <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">first_name</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">John</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">middle_name</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">last_name</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">Doe</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">age</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  12:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">state</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax10">NULL</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  13:</SPAN>     print <SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax13">isset($first_name,$middle_name,$last_name)</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">:</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">'</SPAN>
+<SPAN CLASS="gutter">  14:</SPAN>          <SPAN CLASS="syntax18">.</SPAN> <SPAN CLASS="syntax8">isset</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">first_name</SPAN><SPAN CLASS="syntax18">,</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">last_name</SPAN>) <SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  15:</SPAN>     print <SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax13">isset($age)</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">:</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax18">.</SPAN> <SPAN CLASS="syntax8">isset</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">age</SPAN>) <SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  16:</SPAN>     print <SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax13">isset($city</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">)</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">:</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax18">.</SPAN> <SPAN CLASS="syntax8">isset</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">city</SPAN>) <SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  17:</SPAN>     print <SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax13">isset($state</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">)</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">:</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax18">.</SPAN> <SPAN CLASS="syntax8">isset</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">state</SPAN>) <SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  18:</SPAN>  <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutter">  19:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">  20:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+* The isset() function returns true if a variable has been set and given a non-null value.
+* In this case, all three variables have a value, even the variable assigned an empty string. If true, 1 is displayed; if false, 0 or nothing is displayed.
+* Because $age was not given any value, it is implied to be null, and isset() returns false. $city was never even declared, and $state was assigned NULL; isset() returns false.
+* If you want to check explicitly for the NULL value (case insensitive), use the built-in is_null() function.
+* The example below illustrates the use of isset() to assign a default value to a variable.
+* Filename: *default.php*
+<br /><PRE><SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Give Variable a Default Value<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">66C68</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">face</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">verdana</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">+</SPAN><SPAN CLASS="syntax13">1</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">p</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>   <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>     <SPAN CLASS="syntax8">if</SPAN> (<SPAN CLASS="syntax18">!</SPAN> <SPAN CLASS="syntax8">isset</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">temp</SPAN>)) <SPAN CLASS="syntax18">{</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">temp</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax5">68</SPAN> <SPAN CLASS="syntax18">;</SPAN> <SPAN CLASS="syntax18">}</SPAN> <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">Sets</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">a</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">default</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">value</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN>       <SPAN CLASS="syntax8">echo</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">The</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">default</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">temperature</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">is</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">temp</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">degrees</SPAN><SPAN CLASS="syntax13">.</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN>   <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutter">  12:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">p</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  13:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  14:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+* The isset() function returns true if $temp has been set. The "!" operator, the unary "not" operator, reverses the boolean result. The expression reads, "if $temp is not set, define it with a value of 68."
+
+h3. The empty() Function
+
+* The *empty()* function returns true if a variable does not exist, or exists and has been assigned one of the following: an empty string " ", 0 as a number, "0" as a string, NULL, or no value at all.
+* The examples below show the format and demonstrate the use of the empty() function.
+* Format: @boolean empty ( variable );@
+<br /><pre>if (empty($result)) {
+    print "\$result either doesn't exist or is empty";
+}
+</pre>
+* Filename: *empty.php*
+<br /><PRE><SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Testing Variables<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">66C66</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN>  The <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">b</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>empty()<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">b</SPAN><SPAN CLASS="syntax17">&gt;</SPAN> function returns a boolean value. <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">br</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN>  If a variable doesn't exist or is assigned the empty string,
+<SPAN CLASS="gutter">   6:</SPAN>  0, <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">br</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>or &quot;0&quot;, NULL, or hasn't been assigned any value;
+<SPAN CLASS="gutter">   7:</SPAN>  returns true, otherwise false.
+<SPAN CLASS="gutter">   8:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">face</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">verdana</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">+</SPAN><SPAN CLASS="syntax13">1</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">p</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN>   <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN>     <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">first_name</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">last_name</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  12:</SPAN>     <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">age</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax5">0</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  13:</SPAN>     <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">salary</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">0</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  14:</SPAN>     <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">state</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax10">NULL</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  15:</SPAN>     print <SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax13">empty($first_name)</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">:</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax18">.</SPAN> <SPAN CLASS="syntax8">empty</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">first_name</SPAN>) <SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  16:</SPAN>     print <SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax13">empty($last_name)</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">:</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax18">.</SPAN> <SPAN CLASS="syntax8">empty</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">last_name</SPAN>) <SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  17:</SPAN>     print <SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax13">empty($age)</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">:</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax18">.</SPAN> <SPAN CLASS="syntax8">empty</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">age</SPAN>) <SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  18:</SPAN>     print <SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax13">empty($salary)</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">:</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax18">.</SPAN> <SPAN CLASS="syntax8">empty</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">salary</SPAN>) <SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  19:</SPAN>     print <SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax13">empty($state</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">)</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">:</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax18">.</SPAN> <SPAN CLASS="syntax8">empty</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">state</SPAN>) <SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  20:</SPAN>   <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutter">  21:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">p</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  22:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  23:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+
+h3. The unset() Function
+
+* The *unset()* function (technically a language construct) unsets or destroys a given variable.
+* It can take a varied number of arguments and behaves a little differently within functions. As of PHP 4, it has no return value and is considered a statement.
+* Format: @void unset ( mixed var [, mixed var [, mixed ...]] )@
+* Examples of the use of unset() are below:
+<br /><pre>
+unset($a, $b); // unsets the variables
+</pre>
+* Filename: *unset.php*
+<br /><PRE><SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Testing Variables<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">66C66</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN>  The <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">b</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>unset()<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">b</SPAN><SPAN CLASS="syntax17">&gt;</SPAN> function destroys a variable. <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">br</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">face</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">verdana</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">+</SPAN><SPAN CLASS="syntax13">1</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">p</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>   <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>     <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">first_name</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">John</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>     <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">last_name</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">Doe</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN>     <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">age</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax5">35</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN>     <SPAN CLASS="syntax9">unset</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">first_name</SPAN><SPAN CLASS="syntax18">,</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">last_name</SPAN>)<SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  12:</SPAN>     print <SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax13">After</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">unset()</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">was</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">used,</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">isset($first_name,$last_name)</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">'</SPAN>
+<SPAN CLASS="gutter">  13:</SPAN>          <SPAN CLASS="syntax18">.</SPAN> <SPAN CLASS="syntax8">isset</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">first_name</SPAN><SPAN CLASS="syntax18">,</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">last_name</SPAN>) <SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">returns</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">false</SPAN><SPAN CLASS="syntax13">.</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  14:</SPAN>   <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutterH">  15:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">p</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  16:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  17:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+* The built-in unset() function will destroy the variables listed as arguments.
+
+h3. Predefined Variables
+
+* PHP provides a number of predefined variables, some that are not fully documented because they depend on which server is running, its configuration, and so on.
+* Some are defined in the php.ini file. These variables describe the environment, server, browser, version number, configuration file, and so on.
+* Table: Predefined Variables
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Variable*|{background:#ccc}.*What It Does*|
+|@AUTH_TYPE@       |If running the Apache server as a module, this is set to the authentication type.                                                       |
+|@DOCUMENT_ROOT@   |The full path of the Web's document root, normally where HTML pages are stored and defined in the server's configuration file.          |
+|@HTTP_USER_AGENT@ |Identifies the type of Web browser to the server when it requests a file.                                                               |
+|@HTTP_REFERER@    |The full URL of the page that contained the link to this page. Of course if there isn't a referring page, this variable would not exist.|
+|@REMOTE_ADDRESS@  |The remote IP address of the client machine that requested the page.                                                                    |
+
+
+* See the full list of predefined variables at: http://www.phpfreaks.com/PHP_Reference/Predefined-Variables/8.php
+* There many more predefined variables; which ones are set depends on your PHP configuration. The function phpinfo() can be used to retrieve built-in variables that have been set.
+<br /><pre>
+<?php
+  phpinfo(INFO_VARIABLES);
+?>
+</pre>
+
+h3. Constants
+
+* Some real-world constants, such as pi, the speed of light, the number of inches in a foot, and the value of midnight, are values that don't change.
+* PHP not only provides its own predefined constants but lets you create your own. Using constants makes it easy to write and maintain your programs.
+
+
+h3. What Is a Constant?
+
+* Unlike variables, a constant is a value that, once set, cannot be changed or unset during the execution of your script.
+* An example of a constant is the value of pi or the version of PHP you are using. Constants are very useful because they are visible throughout a program (global in scope) and their values don't change.
+* For example, a constant might be defined for the document root of your server, the name of your site, or the title, author, and copyright year of this book.
+* Once defined, those values are fixed.
+* You can define constants at the top of your program or in another file that can be included in your script.
+* Later if a constant value needs to be modified, once you change its value in the program, then when the program is executed, the new value will be reflected wherever the constant is used throughout the program, thus facilitating program maintenance.
+
+h3. Creating Constants with the define() Function
+
+* PHP constants are defined as words, and by convention, capitalized.
+* Like variables, they are case sensitive and consist of uppercase and lowercase letters, numbers, and the underscore. Like variables, they cannot start with a number.
+* Unlike variables, constants are not preceded by a dollar sign and are not interpolated when placed within quotes.
+* Constants are global in scope, meaning they are available for use anywhere in a PHP script.
+* The only way that you can create a constant is with he PHP built-in *define()* function. Only a single, scalar value can be assigned to a constant, including strings, integers, floats, and booleans.
+* The *define()* function creates a named constant. The first argument is the name of the constant and the second argument is the value that will be assigned to it.
+* Constants are normally case sensitive, but you can use an optional third argument of TRUE to turn off case sensitivity.
+* Format: @bool define ( string name, mixed value [, bool case_insensitive] )@
+* Here are examples:
+<br /><pre>
+// defines document root
+define( 'DOC_ROOT', '/http://artemis/~ellie/public_html' );
+// defines the include folder
+define( 'INCLUDES', DOC_ROOT.'/../includes' );
+</pre>
+* Filename: *define.php*
+<br /><PRE><SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN>  <SPAN CLASS="syntax9">define</SPAN>(<SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax13">ISBN</SPAN><SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax18">,</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">0</SPAN><SPAN CLASS="syntax13">-</SPAN><SPAN CLASS="syntax13">13</SPAN><SPAN CLASS="syntax13">-</SPAN><SPAN CLASS="syntax13">140162</SPAN><SPAN CLASS="syntax13">-</SPAN><SPAN CLASS="syntax13">9</SPAN><SPAN CLASS="syntax13">&quot;</SPAN>)<SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN>  <SPAN CLASS="syntax9">define</SPAN>(<SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax13">TITLE</SPAN><SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax18">,</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">JavaScript</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">by</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">Example</SPAN><SPAN CLASS="syntax13">&quot;</SPAN> )<SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN>  <SPAN CLASS="syntax8">if</SPAN> (<SPAN CLASS="syntax9">defined</SPAN>(<SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax13">ISBN</SPAN><SPAN CLASS="syntax13">'</SPAN>) <SPAN CLASS="syntax18">and</SPAN> <SPAN CLASS="syntax9">defined</SPAN>(<SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax13">TITLE</SPAN><SPAN CLASS="syntax13">'</SPAN>))<SPAN CLASS="syntax18">{</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN>    print ISBN <SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>    print TITLE <SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>  <SPAN CLASS="syntax18">}</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>  <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">Can't</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">change</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">TITLE,</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">and</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">can't</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">redefine</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">it.</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>  <SPAN CLASS="syntax9">define</SPAN>(<SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax13">TITLE</SPAN><SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax18">,</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">PHP</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">by</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">Example</SPAN><SPAN CLASS="syntax13">&quot;</SPAN>)<SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN>  print TITLE<SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN><SPAN CLASS="syntax17">?&gt;</SPAN>
+</PRE>
+* Two constants are defined, ISBN and TITLE, the first argument to the function. The second argument is the value being assigned to each of the constants.
+* Once set, the only way to change a constant is to redefine it with the define() function.
+* The *defined()* function checks whether a constant has been set. It returns TRUE if the constant has been defined; otherwise, FALSE.
+
+h3. The constant() Function
+
+* The constant() function returns that value of a constant. This function can be helpful if you don't know the name of the constant because its name was stored in a variable or was returned from a function.
+* Format: mixed constant ( string name )
+* Below is an example:
+<br /><pre>
+define (ISBN, "0-13-140162-9");
+$value=constant(ISBN);  // Returns 0-13-140162-9
+</pre>
+
+h3. Predefined and "Magic" Constants
+
+* PHP comes with a number of predefined constants as shown in the second Table below. They provide information that doesn't change such as the name of the script file, the version of PHP and the operating system, and so on.
+* There are five predefined constants called magic constants. These are constants that change depending on how they are used in a program.
+* They cannot be enclosed in quotes and are not case sensitive. The name of the contant is enclosed in two underscores on both sides.
+* Table: Magic Constants
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Name*|{background:#ccc}.*Description*|
+|@__LINE__@     |The current line number of the file.                                                                                                                                     |
+|@__FILE__@     |The full path and filename of the file. If used inside an include, the name of the included file is returned.                                                            |
+|@__FUNCTION__@ |The function name (added in PHP 4.3.0). As of PHP 5 this constant returns the function name as it was declared (case sensitive). In PHP 4 its value is always lowercased.|
+|@__CLASS__@    |The class name (added in PHP 4.3.0). As of PHP 5 this constant returns the class name as it was declared (case sensitive). In PHP 4 its value is always lowercased.      |
+|@__METHOD__@   |The class method name (added in PHP 5.0.0). The method name is returned as it was declared (case sensitive).                                                             |
+
+* PHP has several special built-in constants described in Table 4.8.
+* Table: Built-In Constants
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Name*|{background:#ccc}.*Description*|
+|@PHP_VERSION@   |The version of the PHP parser currently running                                   |
+|@PHP_OS@        |The operating system of the server on which the PHP parser is running             |
+|@PHP_OS@        |The name of the operating system on which the PHP parser is executing; e.g., Linux|
+|@TRUE@          |A true value.                                                                     |
+|@FALSE@         |A false value.                                                                    |
+
+* The script below shows how the predefined constants can be used to give information to the browser. It's output will be displayed by your instructor.
+* Filename: *constants.php*
+<br /><PRE><SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN>  <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">Using</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">PHP</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">built-in</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">constants</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN>  <SPAN CLASS="syntax8">echo</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">PHP</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">version</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">=</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">.</SPAN> PHP_VERSION <SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN>  <SPAN CLASS="syntax8">echo</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">Server</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">operating</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">system</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">=</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">.</SPAN> PHP_OS <SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN>  <SPAN CLASS="syntax8">echo</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">Current</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">file</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">name</SPAN><SPAN CLASS="syntax13">=</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">.</SPAN> <SPAN CLASS="syntax10">&#95;&#95;FILE&#95;&#95;</SPAN> <SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>  <SPAN CLASS="syntax8">echo</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">Current</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">line</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">number</SPAN><SPAN CLASS="syntax13">=</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">.</SPAN> <SPAN CLASS="syntax10">&#95;&#95;LINE&#95;&#95;</SPAN> <SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>  <SPAN CLASS="syntax8">echo</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">TRUE</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">=</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">.</SPAN> <SPAN CLASS="syntax10">TRUE</SPAN> <SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>  <SPAN CLASS="syntax8">echo</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">false</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">=</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">.</SPAN> <SPAN CLASS="syntax10">FALSE</SPAN> <SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN><SPAN CLASS="syntax17">?&gt;</SPAN>
+</PRE>
+* Your instructor will show you the output of the predefined constants script.
+
+<br />
+
+---
+
+[[Unit Two => 152-166 Unit Two Index]]

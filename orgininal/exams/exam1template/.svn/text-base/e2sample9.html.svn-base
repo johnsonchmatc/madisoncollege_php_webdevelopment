@@ -1,0 +1,16 @@
+<html>
+ <head>
+  <title>Sample9 Form</title>
+ </head>
+ <body bgcolor="lavender">
+  <form
+       enctype="multipart/form-data"
+       action="e2sample9.php"
+       method="POST">
+   Browse and select the file you want to upload: <br />
+   <input name="my_file" type="file" />
+   <br />
+   <input type=submit value="Get File"/>
+  </form>
+ </body>
+</html>

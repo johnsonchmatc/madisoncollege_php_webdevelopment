@@ -1,0 +1,296 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta name="generator" content="HTML Tidy, see www.w3.org" />
+  <title>Project Two</title>
+  <link href="../../../css/basic.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" language="JavaScript">
+
+<!--
+
+function putSemester() {
+
+    var today=new Date();
+
+    var thisMonth=today.getMonth()+1;
+
+    var thisYear=today.getFullYear();
+
+    if(thisMonth <=6) {
+
+        return "Spring, " + thisYear;
+
+    }
+
+    else {
+
+       return "Fall, " + thisYear;
+
+    }
+
+}//-->
+
+  
+
+  </script>
+  <style type="text/css">
+
+<!--
+
+    .bgStripes {
+
+        background-image:url(../../../images/Xstripes.gif);
+
+        background-attachment: fixed;
+
+    }
+
+    
+
+    body {
+
+        background-color:white;
+
+    }
+
+    
+
+    strong {
+
+        font-family: Arial, Helvetica, sans-serif;
+
+    }
+
+    
+
+ 
+
+-->
+
+  
+
+  </style>
+</head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
+<table class="bgStripes" border="0" width="100%">
+  <tbody>
+    <tr name="firstRow">
+      <td valign="top" width="80"><span
+ style="font-size: x-small; font-weight: bold;">
+      <script type="text/javascript">
+
+          <!--
+
+            document.write(putSemester());
+
+            -->
+
+      
+
+      </script>
+      </span> <br />
+      </td>
+<td style="text-align: center;"><span
+ style="font-weight: bold; font-size: medium; color: darkblue;">
+PHP Web Development with MySQL</span> </td>
+      <td align="right" valign="top" width="80"><span
+ style="font-size: x-small; font-weight: bold;">
+3 Credits</span> </td>
+    </tr>
+    <tr>
+      <td colspan="3" style="text-align: center;"><span
+ style="font-size: xx-small; font-weight: bold;">152-166</span> </td>
+    </tr>
+  </tbody>
+</table>
+<h2>Project Two</h2>
+<blockquote>
+  <h4>Canvas Gallery Contact Form<br />
+  </h4>
+</blockquote>
+<h3>Table of Contents</h3>
+<ul>
+  <li><a href="#concepts">1. Concepts</a></li>
+  <li><a href="#readings">2. Readings</a></li>
+  <li><a href="#overview">3. Project Overview</a></li>
+  <li><a href="#execs">4. Exercises</a></li>
+  <li><a href="#submit">5. Submitting the project.</a></li>
+</ul>
+<h3><a id="concepts" name="concepts" />1. Concepts</h3>
+<blockquote>
+<p>
+This project is designed tofurther develop your PHP programming skills.
+You will learn these concepts:</p>
+<ul>
+<li>Creating an HTML form</li>
+<li>Using a PHP script to process an HTML form</li>
+<li>Strings and String Manipulation</li>
+<li>Arrays and Associative Arrays</li>
+<li>PHP Functions and Writing Your Own Functions</li>
+<li>Using Object-Oriented PHP Features</li>
+</ul>
+</blockquote>
+<h3><a id="readings" name="readings" />2. Readings</h3>
+<blockquote>
+<p>To prepare for this project you should study or review the following:</p>
+<ul>
+<li>
+<p><strong>PHP and MySQL by Example</strong>
+Ellie Quigley with Marko Gargenta, Prentice Hall</p>
+<ul>
+<li>Chapter 6, Strings</li>
+<li>Chapter 8, Arrays</li>
+<li>Chapter 9, User-Defined Functions</li>
+<li>Chapter 17, Objects</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3><a id="overview" name="overview" />3.
+Project Overview</h3>
+<blockquote>
+<p>
+This project will utilize more features of
+the PHP programming language and its environment.</p>
+</blockquote>
+<h3><a id="execs" name="execs" />4.
+Exercises</h3>
+<blockquote> <a id="ex1" name="ex1" /><p>
+Create a directory named "<b>project2</b>"
+under your web server's document root directory on your hard drive.
+Place all HTML files and PHP scripts for this project in this new
+directory.
+</p><p>
+<b>Note:</b> If you are working on an MATC lab computer, always save a copy of
+this directory and all the files in it to either the class server, a USB
+thumb drive, a floppy disk or similar media, at the end of each work
+session. Otherwise your work will be lost!
+</p>
+<h4>Exercise 1</h4>
+<blockquote>
+<p>
+Create an HTML form to serve as the "Contact Us" form for the fictional
+restaurant Canvas Gallery. Place it in your project2 directory and name it
+<b>contactForm.html</b>
+</p>
+<ul>
+<li><p>
+The form should include these fields:</p>
+<blockquote><code>
+name - Form user's full name<br>
+email - Form user's email address<br>
+phone - Form user's phone number<br>
+message - Message user is sending to Canvas Gallery<br>
+</code></blockquote>
+</li>
+<li><p>
+Use the <b>include()</b> directive to add the restaurant's standard HTML page
+header and footer to your HTML form. <b>Note:</b> Download <a href="files.zip">files.zip</a>
+to obtain the <b>header.php</b> and <b>footer.php</b> files. This file also
+contains the <b>header.jpg</b> and <b>style.css</b> files used by <b>header.php</b> .
+</p></li>
+<li><p>
+Your form should use the POST method, and it's action should be to load the PHP
+script <b>contactUs.php</b> that you will create in Exercise 2.
+</p></li>
+</ul>
+<p>
+Here is an example of what your Contact form might look like:
+</p><p>
+<img src="contactForm.png" alt="Contact Form" />
+</p
+</blockquote>
+<h4>Exercise 2</h4>
+<ul>
+<li><p>
+Write a PHP script named <b>contactUs.php</b> to process the data collected by
+the <b>contactForm.html</b> form page and display it on a web page:
+</p>
+<ul>
+
+<li><p>
+Use the Canvas Gallary restaurant's standard header and footer on your web
+page, so it will match the style of the HTML form you created in Exercise 1.
+</p></li>
+<li><p>
+Create a PHP associative array with keys of: 'Name', 'Email', 'Phone' and 'Message'
+to store the data from the form's fields, and transfer the data from the $_POST
+superglobal array to your array.
+</p></li>
+<li><p>
+Display the date and time the form data was processed by your script.
+</p></li>
+<li><p>
+Test whether the directive <b>magic_quotes_gpc</b> is on and if not, use a
+built-in function to escape the form data as you would before writing it to a
+file or database.
+</p></li>
+<li><p>
+Use a loop to display the key-value pairs of your array. The values will be
+displayed with appropriate characters escaped as if writing them to a database.
+</p></li>
+<li><p>
+Then use another PHP function to remove any escape characters from the values
+in your array and display the key-value pairs in a loop as you would normally
+present entered data for review by the user.
+</p></li>
+<li><p>
+Create an include file named <b>contact.inc.php</b> and in it define a class
+named Contact with the following member variables:
+</p>
+<blockquote><code>
+protected $name<br>
+protected $phone<br>
+protected $email_user<br>
+protected $email_domain<br>
+protected $message<br>
+</code></blockquote>
+<p>
+<b>Note:</b> See the Guest Book example on page 776 of the text for a sample
+class definition.Your member variables should be "protected" as in the example.
+You will need to create getter and setter functions for each member variable.
+</p>
+</li>
+<li><p>
+Create a <b>showContact</b> member function for your Contact class that will
+print out the names and values of all the member variables.
+</p></li>
+<li><p>
+Use the <b>require()</b> directive to include your Contact class definition in
+the <b>contactUs.php</b> script, so the script will fail if the <b>contact.inc.php</b>
+file is not available. <b>Note:</b> You should place the contact.inc.php file in
+the include subdirectory along with header.php and footer.php .
+</p></li>
+<li><p>
+In <b>contactUs.php</b> create an object of class Contact and assign the
+corresponding values from the HTML form to its member variables. Use an
+appropriate string function to extract the user's email username and domain from
+the email address field.
+</p></li>
+<li><p>
+Use the <b>showContact</b> member function to display the contents of the object
+you created.
+</p></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3><a id="submit" name="submit" />5.
+Submitting the project</h3>
+<blockquote>
+<p>All of your PHP scripts and HTML files for
+this project should be in one directory. Using a compression program
+like WinZip, zip this directory and its contents into a single file
+named: <strong>project2.zip</strong>
+If you are using Linux or Macintosh OSX then you should tar and gzip your
+directory into a file named: <strong>project2.tar.gz</strong>
+Submit the <strong>project2.tar.gz</strong> or <strong>project2.zip</strong>
+file to your instructor via Blackboard, using
+the <span style="text-decoration: underline; font-style: italic;">Blackboard
+Assignment Submission Procedures</span> .
+In <strong>addition</strong> to this your instructor might grade your projects
+with you in the lab.</p>
+</blockquote>
+<hr width="90%" />
+</body>
+</html>

@@ -1,0 +1,50 @@
+h3. From Static to Dynamic Websites
+
+---
+
+h3. Static Web Sites
+
+bq. "The dream behind the Web is a common information space in which we communicate by sharing information. . . ." - Tim Berners-Lee
+
+When Tim Berners-Lee invented the World Wide Web in 1989, he unleashed an information revolution unparalleled since Gutenberg invented the printing press in the fifteenth century. Within less than 10 years the world as we knew it would be forever changed by his creation.
+
+A 25-year-old computer consultant, Tim Berners-Lee developed a simple protocol, HTTP (the Hypertext Transfer Protocol), and created HTML (the Hypertext Markup Language) to describe the layout for the text in the documents.
+
+The early Web was like an online library, documents connected by links, where the high-energy scientific community could freely read and access information throughout their company and eventually around the world. The original Web was funded by the government, limited to research and education. The Web sites were made up of a collection of documents written in the HTML language. The pages were text based, simple, and static. Every time the user reloaded a page in his or her browser, it looked exactly the same. It consisted of HTML text, images, and links. As the Web grew and became a virtual shopping mall, competitors needed Web sites that would lure in potential buyers and traders with an interactive and exciting experience, quick response time, and on-the-fly feedback. They needed dynamic Web sites.
+
+h3. Dynamic Web Sites
+
+A dynamic Web site is one with content that is regenerated every time a user visits or reloads the site. Although it can be as simple as displaying the current date and time, in most cases it requires the use of a database, which contains the site's information, and a scripting language that can retrieve the information from the database.
+
+Google and Yahoo! are examples of dynamic sites, search engines that create customized pages based on a key word or phrase you type. The resulting page is created on the fly, customized just for you, based on your request. Farms of powerful computers all over the world are constantly taking such requests and processing them.
+
+In the early days of the Web, processing was done through the Common Gateway Interface, called CGI, a server-side technology that allowed Web developers to create dynamic sites.
+
+A browser would send information from an HTML Web page, such as information from a fillout form, to the server for processing. The server then would create a gateway to an external program called a CGI script or helper program.
+
+Although any programming language could be used, the most popular language for CGI was Perl. The Perl script would then parse the data, generate HTML based on certain conditions, send an e-mail, open a file or database, and send information through the gateway back to the server, where it then was relayed onto the browser.
+
+Although the basic underlying process of creating dynamic Web sites hasn't changed, new languages have evolved, making the process much simpler by allowing the processing to be embedded right in the server. PHP is such a language. A PHP script can be embedded right in the Web page. It can generate HTML and images on the fly, retrieve up-to-date information from a file or database, encrypt data, remember user preferences, and so on. It executes PHP instructions and inserts the results right back into the Web page before the server sends the page back to the browser, thus making the page truly dynamic.
+
+To imply that Perl is outdated is not the intention here. Perl has Mason and mod_perl to allow Perl and HTML to be embedded in the Apache server. Web sites often handle huge amounts of information. A database management system is essential for storing, retrieving, and updating that information. MySQL, the world's most popular open source database, has become the choice for applications that interact with database-enabled Web sites. PHP and MySQL, working together, form a marriage of two powerful technologies used to produce dynamic Web pages. This course will show you how that marriage works.
+
+h3. What Is Open Source?
+
+bq. "Free software" is a matter of liberty, not price. To understand the concept, you should think of "free" as in "free speech," not as in "free beer." - The Free Software Foundation, http://www.gnu.org/philosophy/free-sw.html
+
+PHP and MySQL represent the latest generation of open source applications. What does that mean? In the beginning Berners-Lee envisioned making information freely accessible to everyone.
+
+As the Web evolved, this idea of "free" took on different meanings for different groups. But however "free" is defined, it is safe to say that proprietary (privately owned and controlled) software is not free. The Open Source movement is designed to make software source code freely available with limited restrictions. According to the Open Source Initiative, Microsoft Windows, Adobe Photoshop, and WinZip are examples of proprietary software.
+
+The basic idea behind open source is very simple: When programmers can read, redistribute, and modify the source code for a piece of software, the software evolves.
+
+People improve it, people adapt it, people fix bugs. And this can happen at a speed that, if one is used to the slow pace of conventional software development, seems astonishing.
+
+PHP and MySQL are both open source. Simply stated, you can download and use these applications without a credit card or a free trial period.
+
+<br />
+
+---
+
+[[Unit One => 152-166 Unit One Index]]
+

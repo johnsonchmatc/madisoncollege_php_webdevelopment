@@ -1,0 +1,129 @@
+TD {
+	FONT-SIZE: 14px;
+	FONT-FAMILY: Verdana;
+	COLOR: #666666;
+	text-align: left;
+	vertical-align: top;
+}
+TH {
+	FONT-SIZE: 16px;
+	FONT-FAMILY: Verdana;
+	COLOR: #666666;
+	text-align: center;
+	vertical-align: top;
+}
+.white {
+	font-size: 11px;
+	font-weight: 600;
+	font-family: Verdana;
+	color: #ffffff;
+	text-align: left;
+	vertical-align: middle;
+}
+.orange {
+	font-weight: bold;
+	font-size: 10px;
+	font-family: Verdana;
+	color: #cc6600;
+	text-align: left;
+	vertical-align: middle;
+}
+.green {
+	font-size: 11px;
+	font-family: Verdana;
+	color: #336600;
+}
+.skyblue {
+	font-size: 12px;
+	font-family: Verdana;
+	color: #0066FF;
+	vertical-align: middle;
+}
+.dkbrown {
+	font-size: 12px;
+	font-family: Verdana;
+	color: #330000;
+	vertical-align: middle;
+}
+A {
+	FONT-SIZE: 14px;
+	FONT-FAMILY: Verdana;
+	COLOR: #336600}
+HR {
+	COLOR: #FF9966
+}
+H1 {
+	text-align: center; FONT-WEIGHT: bold; FONT-SIZE: 18px; COLOR: #330000; TEXT-TRANSFORM: uppercase
+}
+H2 {
+	FONT-WEIGHT: bold; FONT-SIZE: 16px; COLOR: #330000;
+}
+SELECT {
+	FONT-SIZE: 10px; FONT-FAMILY: Verdana
+}
+OPTION {
+	COLOR: #4f5d7a
+}
+INPUT {
+	FONT-SIZE: 10px; COLOR: #330000; FONT-FAMILY: Verdana
+}
+.what {
+	FONT-WEIGHT: bold; FONT-SIZE: 10px; COLOR: #330000; FONT-FAMILY: Verdana
+}
+.border {
+	BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; BORDER-LEFT: #000000 1px solid; BORDER-BOTTOM: #000000 1px solid
+}
+.genre {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; PADDING-BOTTOM: 4px; TEXT-TRANSFORM: uppercase
+}
+.div_detail {
+	FONT-WEIGHT: bold; FONT-SIZE: 16px; COLOR: #ffffff
+}
+.info {
+	FONT-WEIGHT: bold; FONT-SIZE: 9px; PADDING-BOTTOM: 4px
+}
+.div {
+	COLOR: #ffffff; BACKGROUND-COLOR: #fda835
+}
+.top_gray_row {
+	WIDTH: 589px; COLOR: #ffffff; HEIGHT: 15px; BACKGROUND-COLOR: gray
+}
+.bottom_gray_row {
+	WIDTH: 589px; HEIGHT: 10px; BACKGROUND-COLOR: gray; align: right
+}
+.navigation_row {
+	PADDING-LEFT: 10px; WIDTH: 589px; HEIGHT: 28px; BACKGROUND-COLOR: #cecece
+}
+.navigation_row_padding {
+	PADDING-LEFT: 30px; WIDTH: 589px; HEIGHT: 28px; BACKGROUND-COLOR: #cecece
+}
+.below_header_productions {
+	PADDING-LEFT: 10px; WIDTH: 589px; HEIGHT: 26px; BACKGROUND-COLOR: #cecece
+}
+.seperation {
+	PADDING-LEFT: 30px; PADDING-BOTTOM: 44px; PADDING-TOP: 44px
+}
+.input_button {
+	FONT-SIZE: 10px; WIDTH: 25px; COLOR: #000000; FONT-FAMILY: verdana; HEIGHT: 20px; BACKGROUND-COLOR: #e69542
+}
+.scroll_body {
+	OVERFLOW: auto; WIDTH: 370px; COLOR: #000000; FONT-FAMILY: verdana; HEIGHT: 260px
+}
+.scroll_body_all {
+	OVERFLOW-Y: auto; WIDTH: 579px; COLOR: #000000; FONT-FAMILY: verdana; HEIGHT: 330px
+}
+.header {
+	FONT-WEIGHT: bold; FONT-SIZE: 10px; FONT-FAMILY: verdana
+}
+.sponsorship {
+	PADDING-LEFT: 10px
+}
+.establishing_table {
+	BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; BORDER-LEFT: #000000 1px solid; WIDTH: 589px; BORDER-BOTTOM: #000000 1px solid; HEIGHT: 516px
+}
+h3 {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #336600;
+}
+.bigbold {
+	FONT-SIZE: 12; FONT-WEIGHT: bold;
+}

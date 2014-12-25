@@ -1,0 +1,892 @@
+h2. Object-Oriented PHP Concepts
+
+h3.  What Are Objects?
+
+* Objects are things we deal with every day. PHP deals with objects, as do most modern programming languages. These languages are called object-oriented or "OO" programming languages.
+* OO is a way of trying to solve a problem in terms of real-world objects. Some people are apprehensive at the thought of tackling this kind of programming, and are perfectly happy to stick with top-down, procedural programs.
+* Just as the everyday objects we use are not switchblades and hacksaws, neither are programming objects. They are just a way of representing data.
+* As PHP has evolved from a tool for building simple home pages to a language for serious Web development, so has its support for OO. Once programs start to get larger and more complex, planning and design become more important.
+* Think of a simple home page put together with some family photos, links, and blogs. Then think of a Web site like Amazon or eBay where there are thousands of forms, links, and transactions taking place all the time, all over the world.
+* The thought of putting something like that together is staggering. OO is best suited to manage the complexity of such large Web sites. Even if you do not program using objects, if you are reading and using PHP programs written by other programmers, you are bound to run into this style of programming.
+* This unit gently introduces you to PHP objects and some of the features that have been added to the language in PHP 5.
+* When talking about PHP data types, we discussed two types: primitive types and composite types.
+* Like arrays, objects are composite types. They provide a way to organize a collection of data into a single unit. Object-oriented languages, such as C++ and Java, bundle up data into a variable and call it an object. So does PHP.
+* Each object-oriented language you encounter is based on the same principles, but often the terminology is not exactly the same when describing the concepts. You could say that PHP is like Java and C++, but has its own way of dealing with objects.
+* When you learn about objects, they are usually compared to real-world things, like a black cat, a modern painting, or a green pillow. Using the English language to describe an object, the object itself would be like a noun: a person, place, or thing.
+* Nouns are described with adjectives. For the cat it might be described as fat and furry with green eyes, four legs, and a tail; the painting is a British frigate, oil on canvas, and sells for $52,000; and the pillow is green silk, square, with dimensions of 18" x 18".
+* The adjectives that collectively describe these objects are called the properties (or attributes) of the object. The object is made up of a collection of these properties.
+* In English, verbs are used to describe what the object can do or what can be done to it. The cat eats and sleeps, and its tail twitches; the painting can be framed, sold, or purchased; the pillow's dimensions can be increased or decreased, its fabric and color changed, and so on.
+* These verbs are functions called methods in object-oriented languages.
+
+h3. Objects and Classes
+
+* Objects are defined in a class. A class is a template or a blueprint that defines what an object should look like and what it can do.
+* A class represents a group of similar objects, such as a class of employees, a class of hotels, or a class of cars.
+* The object in a class is a concrete person, place, or thing. Like a cookie cutter, a class gives an object its form, and as with a cookie cutter, you can build many objects of the same class.
+* The employee object might be described as having a name, address, and phone number. Although the object can later change its values, it still belongs to the same class.
+* You can change Bob's phone number, but he is still in the employee class. You can change the color of the car, but it is still in the car class.
+* A class contains a collection of variables (properties) and functions (methods).
+* Like a blueprint, by itself the class does nothing. It defines an object and its properties and methods. Properties describe the object. Methods are functions that determine the behavior of the object; that is, what kind of actions can be performed on or by the object.
+* As you can see below, a class is a unit consisting of a name for the class, in this case House, the variables that describe the house, and the methods that describe the behaviors of the object, or what it can do.
+* A class is an aggregate or composite data type. Like an array that contains a collection of key–value pairs, the class represents a collection of properties and methods.
+* Example: A House class
+
+<div style="text-align: center;">
+  !/attachment/unit07/class_house.png!
+</div>
+
+
+h3. Working with Classes - Defining the Class
+
+* To create a class you use the class keyword followed by the name of the class.
+* The class definition, like a function definition, is enclosed in a set of curly braces. The name of a class follows the same naming conventions as normal variables (minus the dollar sign) and the class name, by convention, starts with a capital letter.
+* For example:
+<br /><pre>
+ <?php
+   class House
+   {
+     (definition goes here)
+   }
+ ?>
+</pre>
+* The class House might have properties (variables) such as: *@$owner@*, *@$address@*, *@$color@*, or *@$number_of_rooms@*, as well as functions (also called methods), such as *@showHouse()@*, *@cleanHouse()@*, or *@paintHouse()@*, for example.
+* Once the class is defined, it is used to create specific objects. Just as when you design a blueprint for a house, the real house does not yet exist. You must build it from the blueprint.
+* The class is analogous to the blueprint and the object to the actual house. We could build many houses from the same blueprint and we can build many objects from a class.
+* Just as a house is located at an address, each object has its own memory address. PHP provides the address and cleans up the memory when the object is no longer needed, when the program ends.
+* Once we have the basic stuff of which houses are made, we can extend the blueprint to add new features to the house, such as a new family room or a fireplace.
+* Classes can also be extended to create more refined objects. Extending a class is called inheritance.
+* Inheritance allows the programmer to create a new class without writing a brand new one. He or she can reuse an existing class and add some new features and functionality. Inheritance is one of the benefits of OO that we discuss later.
+
+h3. Instantiating the Class
+
+* Once the class is declared, the object needs to be created.
+* In the real world you would build a new house; in the object-oriented world, you would instantiate a new House class or create a new instance of the House class.
+* To make a new object, we use the reserved keyword "new". To reference the object, we use the special variable *@$this@* .
+* Each instance of a class has the same properties (variables), but different copies of them, so the values can be different.
+* For example, if you have two house objects of the same class, and each house object has a property called *@$owner@*, the values assigned to *@$owner@* can differ from house object to house object, just like in the real world.
+
+h3. What is "new"?
+
+* The difference between an object and a class is that a class is conceptual and an object is real. The object is the actual variable that you manipulate.
+* You can assign and retrieve its values, pass it to functions, delete it, copy it, and so forth. It holds a specific set of data.
+* The "new" keyword is used to create a PHP object that is an "instance" of a class.
+<br /><pre>
+$myhouse = new House;
+</pre>
+* The "new" keyword causes PHP to look for a class named House, create a new copy, and assign it to the variable *@$myhouse@*.
+* A new House object has been instantiated, which is like saying "We just built a new house and called it *@$myhouse@*," and to make another object from the House blueprint, you could say:
+<br /><pre>
+$yourhouse = new House;
+</pre>
+* Now we have two instances of the House class, two house objects: *@$myhouse@* and *@$yourhouse@*
+
+<div style="text-align: center;">
+  !/attachment/unit07/usesHouse.png!
+</div>
+
+h3. The Properties and Methods
+
+* Properties (variables) and methods (functions) together are called class "members".
+* The properties of a class are defined as variables. Before PHP 5, the keyword "var" was used to define a public property of the class; that is, a property variable that is visible throughout the current PHP script.
+* The "var" keyword has been deprecated as of PHP 5; you now declare public properties with the "public" keyword.
+* Methods (class functions) default to public so you do not need to specify them as public:
+* PHP 4 example:
+<br /><pre>
+var $owner = "John Doe";
+var $address;
+</pre>
+* PHP 5 example:
+<pre>
+$owner = "John Doe"; // Default is public
+public $address;
+</pre>
+* New properties (variables) can be added at any time. You can assign initial values to the variables, but they must be string or numeric constants, not expressions such as: @5 * 6@
+* A method is a function defined within the class. It describes the behaviors of the class. It looks like any other PHP function in structure:
+<br /><pre>
+function showHouse() {
+  (statements go here)
+}
+</pre>
+* The one major difference between methods and ordinary PHP functions is the *@$this@* keyword used to reference the current object, and in the way the methods are invoked.
+
+h3. What is *@$this@*?
+
+* When a class is defined, the object is created later, making it impossible for the class writer to know what the user of the class will name his or her objects.
+* To reference an object, PHP provides a pseudo-variable, named *@$this@*, which references the current object.
+* If the class itself had built the two house objects shown in the last section, then it would be able to keep track of which house was being used.
+* But, of course we build the class first and later build objects of that class, so *@$this@* is used to reference the current object of that class. For example, if *@$myhouse@* is the current object of class House, then all the properties and methods of the class apply to *@$myhouse@*.
+* If the class has defined a *@cleanHouse()@* method for each house object, *@$this@* references the house object currently being used and *@$this->cleanHouse()@* applies to that object.
+* In real-world terms, when I am in my house, I am not going to be cleaning your house. Notice that each property is preceded with the *@$this@* variable and an arrow operator.
+* If you have many house objects, then *@$this@* will keep track of which house you are currently using, both its properties and methods.
+<br /><pre>
+function cleanHouse() {
+  echo $this->owner;
+  echo $this->address;
+}
+</pre>
+* As we go further on, you will see how useful the *@$this@* pseudo-variable is.
+
+h3. The "->" Operator
+
+* After a class has been defined, it can be instantiated; that is, we create objects of that class.
+* To assign properties and call methods, an arrow operator is used to get or set the value of the property. For example, if an object called *@$myhouse@* is created, to assign a value for the address property, the statement might look like this:
+<br /><pre>
+$myhouse->address = "14 Main St.";
+</pre>
+* To call the method showHouse() , it might look like this:
+<br /><pre>
+$myhouse->showHouse();
+</pre>
+* The name of the object precedes the arrow and the property or method so that PHP knows to which object the property and method apply.
+* Example of a House class and creating and modifying objects of class House.
+
+<div style="text-align: center;">
+  !/attachment/unit07/arrow_operator.png!
+</div>
+
+h3. The *@gettype()@* and *@get_class()@* Functions
+
+* PHP provides a number of built-in functions that return information about classes and objects. A table presented later in this unit gives you a complete list.
+* Two functions that will be helpful as you start learning about objects are the *@gettype()@* and the *@get_class()@* functions.
+* As you might remember from when we discussed data types, the *@gettype()@* function takes a variable as its argument and returns its data type, such as string, boolean, array, and so on.
+* It will return "object" if the argument represents an object that was created using the "new" keyword.
+* The *@get_class()@* function will tell you the name of the class from which the object was created.
+* Here is an example of usage of the *@gettype()@* and *@get_class()@* functions with objects.
+* Filename: *house.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax4">#</span><span class="syntax4"> </span><span class="syntax4">PHP5</span><span class="syntax4"> </span><span class="syntax4">Simple</span><span class="syntax4"> </span><span class="syntax4">class</span>
+<span class="gutter">   3:</span>  <span class="syntax8">class</span><span class="syntax8"> </span><span class="syntax11">House</span><span class="syntax11"> </span><span class="syntax18">{</span> <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Declare</span><span class="syntax2"> </span><span class="syntax2">a</span><span class="syntax2"> </span><span class="syntax2">class</span>
+<span class="gutter">   4:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Create</span><span class="syntax2"> </span><span class="syntax2">class</span><span class="syntax2"> </span><span class="syntax2">variables/properties</span>
+<span class="gutterH">   5:</span>    <span class="syntax8">public</span> <span class="syntax10">$</span><span class="syntax10">owner</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">John</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>  
+<span class="gutter">   6:</span>    <span class="syntax8">public</span> <span class="syntax10">$</span><span class="syntax10">address</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">Anywhere</span><span class="syntax14">,</span><span class="syntax14"> </span><span class="syntax14">USA</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">   7:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Create</span><span class="syntax2"> </span><span class="syntax2">a</span><span class="syntax2"> </span><span class="syntax2">class</span><span class="syntax2"> </span><span class="syntax2">method</span>
+<span class="gutter">   8:</span>    <span class="syntax8">function</span> <span class="syntax6">displayHouse</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   9:</span>      <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">This</span><span class="syntax14"> </span><span class="syntax14">house</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax14">of</span><span class="syntax14"> </span><span class="syntax14">type</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">,</span> <span class="syntax9">gettype</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">this</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax14">&quot;</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>      <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">It</span><span class="syntax14"> </span><span class="syntax14">belongs</span><span class="syntax14"> </span><span class="syntax14">to</span><span class="syntax14"> </span><span class="syntax14">the</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">,</span> <span class="syntax9">get_class</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">this</span><span class="syntax18">)</span><span class="syntax18">,</span>
+<span class="gutter">  11:</span>           <span class="syntax14">&quot;</span><span class="syntax14"> </span><span class="syntax14">class</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>      <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">This</span><span class="syntax14"> </span><span class="syntax14">house</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax14">owned</span><span class="syntax14"> </span><span class="syntax14">by</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">this</span><span class="syntax14">&#45;</span><span class="syntax14">&gt;</span><span class="syntax14">owner</span><span class="syntax14">.</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>      <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">It</span><span class="syntax14">'</span><span class="syntax14">s</span><span class="syntax14"> </span><span class="syntax14">address</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">this</span><span class="syntax14">&#45;</span><span class="syntax14">&gt;</span><span class="syntax14">address</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>    <span class="syntax18">}</span>
+<span class="gutterH">  15:</span>  <span class="syntax18">}</span>
+<span class="gutter">  16:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Using</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">class</span><span class="syntax2"> </span><span class="syntax2">&#45;</span><span class="syntax2"> </span><span class="syntax2">Create</span><span class="syntax2"> </span><span class="syntax2">an</span><span class="syntax2"> </span><span class="syntax2">ojbect</span>
+<span class="gutter">  17:</span>  <span class="syntax11">$myHouse</span> <span class="syntax18">=</span> <span class="syntax8">new</span> <span class="syntax6">House</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  18:</span>  <span class="syntax11">$myHouse</span><span class="syntax6">&#45;&gt;displayHouse</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  19:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+* The properties or variables for the House class are *@$owner@* and *@$address@*. Both properties have been assigned initial string values.
+* A method or function for the House class is also declared.
+* The *@gettype()@* built-in function returns the data type of *@$this@*. Because *@$this@* represents the current object, the type returned is "object".
+* The *@get_class()@* function returns the name of the class to which the object represented by *@$this@* belongs.
+
+h3. Creating a Complete Class
+
+* Now that we have defined some of the pieces involved in creating a class, we will build one from scratch.
+* The following example defines an Employee class and then creates some objects of that class. First, here is a diagram of the class.
+
+<div style="text-align: center;">
+  !/attachment/unit07/class_Employee.png!
+</div>
+
+* Filename: employee.php
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Defining</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">Class</span>
+<span class="gutter">   3:</span>  <span class="syntax8">class</span><span class="syntax8"> </span><span class="syntax11">Employee</span><span class="syntax11"> </span><span class="syntax18">{</span> <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Define</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">class</span>
+<span class="gutter">   4:</span>    <span class="syntax8">public</span> <span class="syntax10">$</span><span class="syntax10">name</span><span class="syntax18">;</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">The</span><span class="syntax2"> </span><span class="syntax2">properties/variables</span>
+<span class="gutterH">   5:</span>    <span class="syntax8">public</span> <span class="syntax10">$</span><span class="syntax10">address</span><span class="syntax18">;</span>
+<span class="gutter">   6:</span>    <span class="syntax8">public</span> <span class="syntax10">$</span><span class="syntax10">phone</span><span class="syntax18">;</span>
+<span class="gutter">   7:</span>
+<span class="gutter">   8:</span>    <span class="syntax8">function</span> <span class="syntax6">printPersonInfo</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">The</span><span class="syntax2"> </span><span class="syntax2">methods</span>
+<span class="gutter">   9:</span>    <span class="syntax18">{</span>
+<span class="gutterH">  10:</span>      <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">hr</span><span class="syntax14">&gt;</span><span class="syntax14">&lt;</span><span class="syntax14">b</span><span class="syntax14">&gt;</span><span class="syntax14">Employee</span><span class="syntax14"> </span><span class="syntax14">Info</span><span class="syntax14">&lt;</span><span class="syntax14">/</span><span class="syntax14">b</span><span class="syntax14">&gt;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span>      <span class="syntax8">echo</span> <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;name</span> <span class="syntax18">.</span><span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>      <span class="syntax8">echo</span> <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;address</span> <span class="syntax18">.</span><span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>      <span class="syntax8">echo</span> <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;phone</span> <span class="syntax18">.</span><span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>    <span class="syntax18">}</span>
+<span class="gutterH">  15:</span>  <span class="syntax18">}</span>
+<span class="gutter">  16:</span>    
+<span class="gutter">  17:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Create</span><span class="syntax2"> </span><span class="syntax2">a</span><span class="syntax2"> </span><span class="syntax2">new</span><span class="syntax2"> </span><span class="syntax2">object</span><span class="syntax2"> </span><span class="syntax2">&amp;</span><span class="syntax2"> </span><span class="syntax2">assign</span><span class="syntax2"> </span><span class="syntax2">properties</span>
+<span class="gutter">  18:</span>  <span class="syntax11">$Heidi</span> <span class="syntax18">=</span> <span class="syntax8">new</span> <span class="syntax6">Employee</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  19:</span>  <span class="syntax11">$Heidi</span><span class="syntax11">&#45;&gt;name</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">Heidi</span><span class="syntax14"> </span><span class="syntax14">Clum</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  20:</span>  <span class="syntax11">$Heidi</span><span class="syntax11">&#45;&gt;address</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">1234</span><span class="syntax14"> </span><span class="syntax14">Somewhere</span><span class="syntax14"> </span><span class="syntax14">Blvd</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  21:</span>  <span class="syntax11">$Heidi</span><span class="syntax11">&#45;&gt;phone</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">123</span><span class="syntax14">&#45;</span><span class="syntax14">456</span><span class="syntax14">&#45;</span><span class="syntax14">7890</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  22:</span>
+<span class="gutter">  23:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Create</span><span class="syntax2"> </span><span class="syntax2">another</span><span class="syntax2"> </span><span class="syntax2">object</span>
+<span class="gutter">  24:</span>  <span class="syntax11">$Brad</span> <span class="syntax18">=</span> <span class="syntax8">new</span> <span class="syntax6">Employee</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>     
+<span class="gutterH">  25:</span>  <span class="syntax11">$Brad</span><span class="syntax11">&#45;&gt;name</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">Brad</span><span class="syntax14"> </span><span class="syntax14">Bit</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  26:</span>  <span class="syntax11">$Brad</span><span class="syntax11">&#45;&gt;address</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">4321</span><span class="syntax14"> </span><span class="syntax14">Sunset</span><span class="syntax14"> </span><span class="syntax14">Blvd</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  27:</span>  <span class="syntax11">$Brad</span><span class="syntax11">&#45;&gt;phone</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">987</span><span class="syntax14">&#45;</span><span class="syntax14">654</span><span class="syntax14">&#45;</span><span class="syntax14">3210</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  28:</span>  
+<span class="gutter">  29:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Access</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">objects</span><span class="syntax2"> </span><span class="syntax2">with</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">method</span>
+<span class="gutterH">  30:</span>  <span class="syntax11">$Heidi</span><span class="syntax6">&#45;&gt;printPersonInfo</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  31:</span>  <span class="syntax11">$Brad</span><span class="syntax6">&#45;&gt;printPersonInfo</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  32:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+* A class named Employee is defined with properties that are declared public, meaning they are visible throughout your script.
+* *@printPersonInfo()@* is a function or method, defined for the class.
+* Two objects of class Employee are created, and assigned to variables *@$Heidi@* and *@$Brad@*.
+* We use the method *@printPersonInfo()@* to display the values of the properties of each object of class Employee.
+
+h3. Displaying an Object
+
+Previously, we used the PHP built-in function *@print_r()@* to view the contents of an array. Now we use it to view the contents of an object.
+In the previous example the output of *@print_r()@* would be:
+<br /><pre>
+Employee Object
+(
+  [name] => Heidi Clum
+  [address] => 1234 Somewhere Blvd
+  [phone] => 123-456-7890
+)
+Employee Object
+(
+  [name] => Brad Bit
+  [address] => 4321 Sunset Blvd
+  [phone] => 987-654-3210
+)
+</pre>
+
+h3. Functions for Getting Class Information
+
+* PHP provides a set of built-in functions that will return information about your class and its objects. The table below provides a list of these functions.
+* For a complete list and examples of how these methods are used, see: http://us3.php.net/manual/en/ref.classobj.php
+* Table: PHP Built-In Class Functions
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Function*|{background:#ccc}.*What_It_Does*|{background:#ccc}.*Example*|
+|*@get_class()@*             |Returns the name of the class<br />of an object.|string get_class([object obj])                                  |
+|*@get_class_vars()@*        |Returns an associative array<br />of public properties.|array get_class_vars(string class_name)                         |
+|*@get_declared_classes()@*  |Returns an array of classes defined<br />in the current script.|array get_declared_classes(void)                                |
+|*@get_object_vars()@*       |Returns an array of properties<br />for an object.|array get_object_vars(object obj)                               |
+|*@get_parent_class()@*      |Returns the name of the parent<br />class for the class or object.|string get_parent_class([mixed obj])                            |
+|*@gettype()@*               |Returns the data type of a variable;<br />if an object is given, returns "object."|string gettype(mixed var)                                       |
+|*@instanceof@* (PHP 5)      |A type operator that has<br />replaced *@is_a()@*.|instanceof classname                                            |
+|*@interface_exists()@*      |Returns true if an interface<br />has been defined.|bool interface_exists(string interface_name [, bool autoload])  |
+|*@is_a()@*                  |Returns true if the object is of this<br />class or this class is its parent.|bool is_a(object object, string class_name)                     |
+|*@is_subclass_of()@*        |Returns true if object has this<br />class as one of its parents.|bool is_subclass_of(mixed object, string class_name)            |
+|*@method_exists()@*         |Returns true if this method exists.       |bool method_exists(object object, string method_name)           |
+|*@property_exists()@*       |Returns true if property exists<br />in the class and is accessible.           |bool property_exists(mixed class, string property)              |
+
+h3. Encapsulation and Information Hiding
+
+* Encapsulation and information hiding are closely related terms you will hear often in the object-oriented world.
+* We use encapsulation when combining the properties and methods to make a class. By encapsulating the data in the class, the details of the class can be hidden from the user.
+* When we created ordinary functions, the instructions were encapsulated within the function definition. When you call a function, you do not know all the details of how it works, you just need to know how to call it, what arguments to pass, and what it returns.
+* When you create an object, you must know how to use its methods to access it. The details of the object are encapsulated within the class.
+* Information hiding is obscuring the details of the class from the user.
+* In the previous example, the Employee class gave Heidi her own name, phone, and address. However, Heidi's information was "public" in scope. It could be directly accessed from outside the class.
+* The user of the class could change Heidi's address and phone number. What if you do not want anyone to change Heidi's address or phone number?
+* Often we have objects in which we do not want to allow direct access to the object's variables. For example, a bank account object might have a variable representing the account balance.
+* This data should not be available to anyone outside the class, and to access it, the user should use methods provided specifically for that purpose. Methods such as *@makeDeposit()@*, *@makeWithdrawal()@*, and *@getBalance()@* should be the only way to manipulate the account balance, similar in the real world to using an ATM machine.
+* In the object-oriented world, you will often hear the phrase, "Access private data with public functions".
+* Key principles of OO are encapsulation and information hiding; that is, combining methods and properties into a class and keeping the class variables hidden from direct access by the class user.
+* Data hiding helps to protect the object's data from being corrupted, and if the class implementation is modified, this should not affect the way the class is used; just as when you have the oil changed in your car, you do not change the way you see the car or how you drive it.
+
+h3. Class Members and Scope
+
+* The term members refers to the properties and methods of a class, and the term scope refers to where the members can be accessed within the program.
+* Properties and methods are prefaced with a scope descriptor, such as public , private , or protected .
+* If a member is not prefaced by a scope descriptor, it is considered to be public. You should always specify a scope descriptor for properties.
+
+h3. Public Scope
+
+* Public scope is the default scope for all properties and methods of an object. Public means that class members can be accessed from everywhere in the script and are not restricted to the class.
+* In the previous example the name, address, and phone properties were public. From anywhere within the script, the value of those properties could be changed.
+* Prior to PHP 5, the "public" scope descriptor was var; now you would use "public". Methods themselves do not require a descriptor and are public by default.
+
+h3. Private Scope
+
+* Private members are visible or accessible only in the class that defines them. They are not directly accessible outside the class or to subclasses.
+* If you create private variables, then public methods can be used to manipulate the data. In the following example, the three variables of the Employee class are declared private. It is not possible for some part of the program outside the class to change or manipulate the values of these variables -- a good thing.
+<br /><pre>
+class Employee {
+   private $name;
+   private $phone;
+   private $address;
+}
+</pre>
+* The methods used to manipulate this data would be publicly available.
+
+h3. Protected Scope
+
+* If you create a new class from an existing class, the private members will not be available to the new class.
+* Protected members are available to the class where they are created and to any subclasses.
+
+h3. Example Using Private Scope
+
+* The following example includes a BankAccount class. The only property is the balance that is marked private.
+* The only way this balance can be changed by a user from outside the class is through its public methods. This example hides the balance from the user. The properties and methods are encapsulated within the BankAccount class.
+* Filename: *account.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax8">class</span><span class="syntax8"> </span><span class="syntax11">BankAccount</span><span class="syntax11"> </span><span class="syntax18">{</span>
+<span class="gutter">   3:</span>
+<span class="gutter">   4:</span>    <span class="syntax8">private</span> <span class="syntax10">$</span><span class="syntax10">balance</span> <span class="syntax18">=</span> <span class="syntax5">0</span><span class="syntax18">;</span>
+<span class="gutterH">   5:</span>
+<span class="gutter">   6:</span>    <span class="syntax8">function</span> <span class="syntax6">makeDeposit</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">amount</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   7:</span>      <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Add</span><span class="syntax2"> </span><span class="syntax2">to</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">current</span><span class="syntax2"> </span><span class="syntax2">balance</span>
+<span class="gutter">   8:</span>      <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;balance</span> <span class="syntax18">+</span><span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">amount</span><span class="syntax18">;</span>   
+<span class="gutter">   9:</span>      <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;br&gt;Deposited:</span><span class="syntax13"> </span><span class="syntax13">$</span><span class="syntax13">'</span><span class="syntax18">.</span> <span class="syntax9">number_format</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">amount</span><span class="syntax18">,</span> <span class="syntax5">2</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>    <span class="syntax18">}</span>
+<span class="gutter">  11:</span>    <span class="syntax8">function</span> <span class="syntax6">makeWithdrawal</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">amount</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  12:</span>      <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Subtract</span><span class="syntax2"> </span><span class="syntax2">from</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">current</span><span class="syntax2"> </span><span class="syntax2">balance</span>
+<span class="gutter">  13:</span>      <span class="syntax11">$this</span><span class="syntax11">-&#45;</span><span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">amount</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>      <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;br&gt;Withdrew:</span><span class="syntax13"> </span><span class="syntax13">$</span><span class="syntax13">'</span><span class="syntax18">.</span> <span class="syntax9">number_format</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">amount</span><span class="syntax18">,</span> <span class="syntax5">2</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  15:</span>    <span class="syntax18">}</span>
+<span class="gutter">  16:</span>    <span class="syntax8">function</span> <span class="syntax6">getBalance</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  17:</span>      <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;br&gt;Current</span><span class="syntax13"> </span><span class="syntax13">Balance:</span><span class="syntax13"> </span><span class="syntax13">$</span><span class="syntax13">'</span><span class="syntax18">.</span> <span class="syntax9">number_format</span><span class="syntax18">(</span>
+<span class="gutter">  18:</span>           <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;balance</span><span class="syntax18">,</span> <span class="syntax5">2</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  19:</span>    <span class="syntax18">}</span>
+<span class="gutterH">  20:</span>  <span class="syntax18">}</span>
+<span class="gutter">  21:</span>
+<span class="gutter">  22:</span>  <span class="syntax11">$myAccount</span> <span class="syntax18">=</span> <span class="syntax8">new</span> <span class="syntax6">BankAccount</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  23:</span>  <span class="syntax11">$myAccount</span><span class="syntax6">&#45;&gt;makeDeposit</span><span class="syntax18">(</span><span class="syntax5">100</span><span class="syntax18">.</span><span class="syntax5">00</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  24:</span>  <span class="syntax11">$myAccount</span><span class="syntax6">&#45;&gt;makeWithdrawal</span><span class="syntax18">(</span><span class="syntax5">40</span><span class="syntax18">.</span><span class="syntax5">00</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  25:</span>  <span class="syntax11">$myAccount</span><span class="syntax6">&#45;&gt;getBalance</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  26:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+* The class BankAccount is defined with only one variable *@$balance@*, initially set to zero. The keyword private tells PHP that this variable can be accessed only from within the class and not from outside.
+* The only way to alter the balance is through the class methods. Method *@makeDeposit()@* will add the *@$amount@* to *@$this->balance@*.
+* Similarly, the function *@makeWithdrawal()@* will deduct *@$amount@* from *@$this->balance@*.
+* The *@getBalance()@* method returns the value of the current balance. Although the user can view the balance, he or she cannot change it directly.
+
+h3. Magic Methods
+
+* PHP provides special methods that are invoked automatically based on what the program is doing -- creating an object, setting a property value, retrieving a value, or destroying an object.
+* A constructor is a magic method that is invoked when you call "new" to create a new object.
+* A get or set method is invoked when you access the object to display it or modify its value.
+* A destructor method is invoked when your program ends and any existing objects must be destroyed.
+* These special methods have names starting with two underscores: *@__construct()@* , *@__destruct()@* , *@__set()@* , and *@__get()@* We discuss each of the "magic" methods in the following sections.
+
+h3. Constructors
+
+* A constructor, as the term implies, is a builder or creator. When you assign values to properties in a class, PHP will automatically build or construct a new object when "new" is called by the user of the class.
+* When we created a new house, new employee, and new bank account, we did not explicitly call a constructor. We let PHP create the object and assign the properties to it.
+* If you want to customize the initialization of an object, PHP lets you define a constructor method of your own.
+* Once the object has been created with new, PHP will check to see if you have defined a constructor, and if so, it will automatically be called.
+* This magic method is called right after new has created the object. For example, to set the initial bank account balance to zero for a new bank account, a constructor could be defined to perform this initial task.
+* Although functionally the same, PHP 4 and PHP 5 use a different syntax for creating constructor methods.
+* PHP 4 constructor methods are named with the same name as the class. So, if you have a class named MyClass, the constructor is a function named MyClass.
+* PHP 5 provides the constructor, a magic method called *@__construct()@* . This method is not normally called directly by the user, but is automatically invoked when the "new" keyword is used.
+* PHP 5 is backward compatible, so if a function named *@__construct()@* is missing in the class declaration, the old-style constructor will be used if there is one; if neither are declared, then PHP creates the object and assigns it values provided in the class, just as demonstrated in all of the examples thus far.
+* PHP 4 Format:
+<br /><pre>
+void class_name([mixed args[, ...])
+</pre>
+* Example:
+<br /><pre>
+function MyClass() {
+  $this->balance = 0;
+}
+</pre>
+* PHP 5 Format:
+<br /><pre>
+void __construct ( [mixed args [, ...]] )
+</pre>
+* Example:
+<br /><pre>
+function __construct() {
+  $this->balance = 0;
+}
+</pre>
+Filename: *construct5.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax4">#</span><span class="syntax4"> </span><span class="syntax4">PHP</span><span class="syntax4"> </span><span class="syntax4">5</span><span class="syntax4"> </span><span class="syntax4">Constructor</span>
+<span class="gutter">   3:</span>  <span class="syntax8">class</span><span class="syntax8"> </span><span class="syntax11">House</span><span class="syntax18">{</span>
+<span class="gutter">   4:</span>    <span class="syntax8">function</span> <span class="syntax9">&#95;&#95;construct</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutterH">   5:</span>      <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax14">Constructor</span><span class="syntax14"> </span><span class="syntax14">initializing</span><span class="syntax14"> </span><span class="syntax14">a</span><span class="syntax14"> </span><span class="syntax14">new</span><span class="syntax14"> </span><span class="syntax14">house</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">   6:</span>    <span class="syntax18">}</span>
+<span class="gutter">   7:</span>  <span class="syntax18">}</span> <span class="syntax1">/*</span><span class="syntax1"> </span><span class="syntax1">End</span><span class="syntax1"> </span><span class="syntax1">class</span><span class="syntax1"> </span><span class="syntax1">definition</span><span class="syntax1"> </span><span class="syntax1">*/</span>
+<span class="gutter">   8:</span>
+<span class="gutter">   9:</span>  <span class="syntax11">$my_house</span><span class="syntax18">=</span> <span class="syntax8">new</span> House<span class="syntax18">;</span>
+<span class="gutterH">  10:</span>  <span class="syntax11">$your_house</span> <span class="syntax18">=</span> <span class="syntax8">new</span> House<span class="syntax18">;</span>
+<span class="gutter">  11:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+* A House class is defined with a *@__construct@* method to act as a class constructor and be called when the object is being created (PHP 5).
+* Filename: *construct4.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax4">#</span><span class="syntax4"> </span><span class="syntax4">PHP</span><span class="syntax4"> </span><span class="syntax4">4</span><span class="syntax4"> </span><span class="syntax4">Constructor</span>
+<span class="gutter">   3:</span>  <span class="syntax8">class</span><span class="syntax8"> </span><span class="syntax11">House</span><span class="syntax18">{</span>
+<span class="gutter">   4:</span>    <span class="syntax8">function</span> <span class="syntax6">House</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutterH">   5:</span>      <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax14">Constructor</span><span class="syntax14"> </span><span class="syntax14">initializing</span><span class="syntax14"> </span><span class="syntax14">a</span><span class="syntax14"> </span><span class="syntax14">new</span><span class="syntax14"> </span><span class="syntax14">house</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">   6:</span>    <span class="syntax18">}</span>
+<span class="gutter">   7:</span>  <span class="syntax18">}</span> <span class="syntax1">/*</span><span class="syntax1"> </span><span class="syntax1">End</span><span class="syntax1"> </span><span class="syntax1">class</span><span class="syntax1"> </span><span class="syntax1">definition</span><span class="syntax1"> </span><span class="syntax1">*/</span>
+<span class="gutter">   8:</span>
+<span class="gutter">   9:</span>  <span class="syntax11">$my_house</span><span class="syntax18">=</span> <span class="syntax8">new</span> House<span class="syntax18">;</span>
+<span class="gutterH">  10:</span>  <span class="syntax11">$your_house</span><span class="syntax18">=</span><span class="syntax8">new</span> House<span class="syntax18">;</span>
+<span class="gutter">  11:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+* A House class is defined with a function that has the same name as the class. It will be treated as a constructor and will be invoked when a new House object is created. Prior to PHP 5, this was the only way to create a constructor method.
+* Filename: *house2.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">House</span><span class="syntax2"> </span><span class="syntax2">class</span><span class="syntax2"> </span><span class="syntax2">using</span><span class="syntax2"> </span><span class="syntax2">a</span><span class="syntax2"> </span><span class="syntax2">Constructor</span>
+<span class="gutter">   3:</span>  <span class="syntax8">class</span><span class="syntax8"> </span><span class="syntax11">House</span><span class="syntax18">{</span>
+<span class="gutter">   4:</span>
+<span class="gutterH">   5:</span>    <span class="syntax8">private</span> <span class="syntax10">$</span><span class="syntax10">owner</span><span class="syntax18">;</span>
+<span class="gutter">   6:</span>    <span class="syntax8">public</span> <span class="syntax10">$</span><span class="syntax10">address</span><span class="syntax18">;</span>
+<span class="gutter">   7:</span>
+<span class="gutter">   8:</span>    <span class="syntax8">function</span> <span class="syntax9">&#95;&#95;construct</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">owner</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">address</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   9:</span>      <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax18">!</span> <span class="syntax8">empty</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">owner</span><span class="syntax18">)</span><span class="syntax18">&amp;</span><span class="syntax18">&amp;</span> <span class="syntax18">!</span> <span class="syntax8">empty</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">address</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutterH">  10:</span>        <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;owner</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">owner</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span>        <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;address</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">address</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>        <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax14">Constructor</span><span class="syntax14"> </span><span class="syntax14">initializing</span><span class="syntax14"> </span><span class="syntax14">a</span><span class="syntax14"> </span><span class="syntax14">new</span><span class="syntax14"> </span><span class="syntax14">house</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>      <span class="syntax18">}</span>
+<span class="gutter">  14:</span>    <span class="syntax18">}</span>
+<span class="gutterH">  15:</span>    <span class="syntax8">function</span> <span class="syntax6">displayHouse</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  16:</span>      <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">This</span><span class="syntax14"> </span><span class="syntax14">house</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax14">owned</span><span class="syntax14"> </span><span class="syntax14">by</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">this</span><span class="syntax14">&#45;</span><span class="syntax14">&gt;</span><span class="syntax14">owner</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  17:</span>      <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">It</span><span class="syntax14">'</span><span class="syntax14">s</span><span class="syntax14"> </span><span class="syntax14">address</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">this</span><span class="syntax14">&#45;</span><span class="syntax14">&gt;</span><span class="syntax14">address</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  18:</span>    <span class="syntax18">}</span>
+<span class="gutter">  19:</span>  <span class="syntax18">}</span>
+<span class="gutterH">  20:</span>
+<span class="gutter">  21:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Using</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">class</span><span class="syntax2"> </span><span class="syntax2">to</span><span class="syntax2"> </span><span class="syntax2">create</span><span class="syntax2"> </span><span class="syntax2">objects</span>
+<span class="gutter">  22:</span>  <span class="syntax11">$myHouse</span> <span class="syntax18">=</span> <span class="syntax8">new</span> <span class="syntax6">House</span><span class="syntax18">(</span><span class="syntax14">&quot;</span><span class="syntax14">Joe</span><span class="syntax14">&quot;</span><span class="syntax18">,</span><span class="syntax14">&quot;</span><span class="syntax14">13</span><span class="syntax14"> </span><span class="syntax14">River</span><span class="syntax14"> </span><span class="syntax14">Road</span><span class="syntax14">&quot;</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  23:</span>  <span class="syntax11">$yourHouse</span> <span class="syntax18">=</span> <span class="syntax8">new</span> <span class="syntax6">House</span><span class="syntax18">(</span><span class="syntax14">&quot;</span><span class="syntax14">Brad</span><span class="syntax14">&quot;</span><span class="syntax18">,</span><span class="syntax14">&quot;</span><span class="syntax14">1</span><span class="syntax14"> </span><span class="syntax14">Roundabout</span><span class="syntax14"> </span><span class="syntax14">Drive</span><span class="syntax14">&quot;</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  24:</span>  <span class="syntax11">$myHouse</span><span class="syntax6">&#45;&gt;displayHouse</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  25:</span>  <span class="syntax11">$yourHouse</span><span class="syntax6">&#45;&gt;displayHouse</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  26:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+* The House class is declared with the *@$owner@* property private and the *@$address@* property public. The House class has a constructor. A class automatically calls this method for each new object that is created. The constructor method accepts arguments of varied types and number.
+* The class method *@displayHouse()@* is a getter method. It retrieves and displays the properties for the object that called it. p> When the first new House object is created with "new", two arguments are passed to the constructor of the class, the name "Joe", and the address "13 River Road".
+* The constructor is called automatically and will assign these values to the object's properties. This instance is called *@$myHouse@*.
+* Then another House object is created. The constructor is automatically called for this object and values are assigned to its properties.
+
+h3. Destructors
+
+* A destructor, as the name implies, is used to destroy an object.
+* A destructor method is called right before the object is released. Releasing an object means that all references to the object have been unset or the object has gone out of scope.
+* The destructor would be used to perform any final actions you want to perform such as deleting old files, releasing resources, and so on.
+* Typically, PHP releases the objects at the end of each script.
+* Being able to use a destructor is a PHP 5 feature. PHP 4 does not have destructors at all.
+* In PHP 4 you could create function (method) that simulated a destructor or you could use the PHP *@unset()@* function to force the removal of an object.
+* But PHP 5 provides a specific destructor function named *@__destruct()@* . This method takes no parameters, and it cannot be called directly. It will be called implicitly when you release your object.
+* Format:
+<br /><pre>
+void __destruct ( void )
+</pre>
+* Example:
+<br /><pre>
+function __destruct() {
+  print "Destroying object $this";
+}
+</pre>
+* Filename: *destruct.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax4">#</span><span class="syntax4"> </span><span class="syntax4">PHP</span><span class="syntax4"> </span><span class="syntax4">5</span><span class="syntax4"> </span><span class="syntax4">Destructor</span>
+<span class="gutter">   3:</span>  <span class="syntax8">class</span><span class="syntax8"> </span><span class="syntax11">House</span><span class="syntax11"> </span><span class="syntax18">{</span>
+<span class="gutter">   4:</span>
+<span class="gutterH">   5:</span>    <span class="syntax8">private</span> <span class="syntax10">$</span><span class="syntax10">owner</span><span class="syntax18">;</span>
+<span class="gutter">   6:</span>    <span class="syntax8">public</span> <span class="syntax10">$</span><span class="syntax10">address</span><span class="syntax18">;</span>
+<span class="gutter">   7:</span>
+<span class="gutter">   8:</span>    <span class="syntax8">function</span> <span class="syntax9">&#95;&#95;construct</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">owner</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">address</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   9:</span>      <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax18">!</span><span class="syntax8">empty</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">owner</span><span class="syntax18">)</span> <span class="syntax18">&amp;</span><span class="syntax18">&amp;</span> <span class="syntax18">!</span><span class="syntax8">empty</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">address</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutterH">  10:</span>        <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;owner</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">owner</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span>        <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;address</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">address</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>        <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">Constructor</span><span class="syntax14"> </span><span class="syntax14">initializing</span><span class="syntax14"> </span><span class="syntax14">a</span><span class="syntax14"> </span><span class="syntax14">new</span><span class="syntax14"> </span><span class="syntax14">house</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>        <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">in</span><span class="syntax14"> </span><span class="syntax14">the</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">,</span> <span class="syntax9">get_class</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">this</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax14">&quot;</span><span class="syntax14"> </span><span class="syntax14">class</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>      <span class="syntax18">}</span>
+<span class="gutterH">  15:</span>    <span class="syntax18">}</span>
+<span class="gutter">  16:</span>    <span class="syntax8">function</span> <span class="syntax6">displayHouse</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  17:</span>      <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">This</span><span class="syntax14"> </span><span class="syntax14">house</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax14">owned</span><span class="syntax14"> </span><span class="syntax14">by</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">this</span><span class="syntax14">&#45;</span><span class="syntax14">&gt;</span><span class="syntax14">owner</span><span class="syntax14"> </span><span class="syntax14">and</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  18:</span>      <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">its</span><span class="syntax14"> </span><span class="syntax14">address</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">this</span><span class="syntax14">&#45;</span><span class="syntax14">&gt;</span><span class="syntax14">address</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  19:</span>    <span class="syntax18">}</span>
+<span class="gutterH">  20:</span>    <span class="syntax8">function</span> <span class="syntax9">&#95;&#95;destruct</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  21:</span>      <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">Evacuate</span><span class="syntax13"> </span><span class="syntax13">now!</span><span class="syntax13"> </span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;owner</span><span class="syntax18">,</span><span class="syntax14">&quot;</span><span class="syntax14">'</span><span class="syntax14">s</span><span class="syntax14"> </span><span class="syntax14">house</span><span class="syntax14"> </span><span class="syntax14">being</span><span class="syntax14"> </span><span class="syntax14">destroyed</span><span class="syntax14">!</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  22:</span>    <span class="syntax18">}</span>
+<span class="gutter">  23:</span>  <span class="syntax18">}</span>
+<span class="gutter">  24:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Using</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">class</span><span class="syntax2"> </span><span class="syntax2">to</span><span class="syntax2"> </span><span class="syntax2">create</span><span class="syntax2"> </span><span class="syntax2">objects</span>
+<span class="gutterH">  25:</span>  <span class="syntax11">$myHouse</span><span class="syntax18">=</span> <span class="syntax8">new</span> <span class="syntax6">House</span><span class="syntax18">(</span><span class="syntax14">&quot;</span><span class="syntax14">Joe</span><span class="syntax14">&quot;</span><span class="syntax18">,</span><span class="syntax14">&quot;</span><span class="syntax14">13</span><span class="syntax14"> </span><span class="syntax14">River</span><span class="syntax14"> </span><span class="syntax14">Road</span><span class="syntax14">&quot;</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  26:</span>  <span class="syntax11">$yourHouse</span> <span class="syntax18">=</span> <span class="syntax8">new</span> <span class="syntax6">House</span><span class="syntax18">(</span><span class="syntax14">&quot;</span><span class="syntax14">Brad</span><span class="syntax14">&quot;</span><span class="syntax18">,</span><span class="syntax14">&quot;</span><span class="syntax14">1</span><span class="syntax14"> </span><span class="syntax14">Roundabout</span><span class="syntax14"> </span><span class="syntax14">Drive</span><span class="syntax14">&quot;</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  27:</span>  <span class="syntax11">$myHouse</span><span class="syntax6">&#45;&gt;displayHouse</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  28:</span>  <span class="syntax11">$yourHouse</span><span class="syntax6">&#45;&gt;displayHouse</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  29:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+* This is the same House class defined in the previous example. The magic *@__destruct()@* method will be invoked just before the object is about to be destroyed; that is, if it is unset or the program is finished.
+
+h3. Accessor Methods -- Setters and Getters
+
+* You do not have access to a real house or bank account until it has been created. Likewise you cannot access an object until you have created it, and then you can manipulate it, give it values, extract values, and so on.
+* Functions that give you access to an object are called accessor or instance methods, often termed "setters" and "getters".
+* A setter is a method used to assign a value to a class variable, and a getter is a method used to retrieve the value of a class variable. Simply said, "Put something in, set it; take something out, get it."
+
+h3. PHP's Setter and Getter Access Methods
+
+* PHP provides two magic methods, *@__set@* and *@__get@* , to protect public variables from direct access outside a class.
+* These special functions are called automatically whenever the user tries to access an object's property either by assigning (setting) a value to it or by retrieving (getting) a value.
+* The *@__set@* method takes exactly two arguments, the object's property variable and the value being assigned to it.
+* The *@__get@* method takes one argument, the property of the object.
+* These functions work with public, private, and protected variables. Each function can only be defined once within the class.
+* Let's look at an example to see how this works.
+* Filename: *setNget.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Using</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">set</span><span class="syntax2"> </span><span class="syntax2">and</span><span class="syntax2"> </span><span class="syntax2">get</span><span class="syntax2"> </span><span class="syntax2">methods</span>
+<span class="gutter">   3:</span>  <span class="syntax8">class</span><span class="syntax8"> </span><span class="syntax11">Employee</span><span class="syntax11"> </span><span class="syntax18">{</span>
+<span class="gutter">   4:</span>    <span class="syntax8">private</span> <span class="syntax10">$</span><span class="syntax10">name</span><span class="syntax18">;</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Properties</span>
+<span class="gutterH">   5:</span>    <span class="syntax8">protected</span> <span class="syntax10">$</span><span class="syntax10">address</span><span class="syntax18">;</span>
+<span class="gutter">   6:</span>    <span class="syntax8">public</span> <span class="syntax10">$</span><span class="syntax10">phone</span><span class="syntax18">;</span>
+<span class="gutter">   7:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">public</span><span class="syntax2"> </span><span class="syntax2">magic</span><span class="syntax2"> </span><span class="syntax2">methods</span>
+<span class="gutter">   8:</span>    <span class="syntax8">function</span> <span class="syntax9">&#95;&#95;set</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">property</span><span class="syntax18">,</span><span class="syntax10">$</span><span class="syntax10">value</span><span class="syntax18">)</span> <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">setter</span>
+<span class="gutter">   9:</span>    <span class="syntax18">{</span>
+<span class="gutterH">  10:</span>      <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;property</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">value</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span>    <span class="syntax18">}</span>
+<span class="gutter">  12:</span>    <span class="syntax8">function</span> <span class="syntax9">&#95;&#95;get</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">property</span><span class="syntax18">)</span> <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">getter</span>
+<span class="gutter">  13:</span>    <span class="syntax18">{</span>
+<span class="gutter">  14:</span>      <span class="syntax8">return</span> <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;property</span><span class="syntax18">;</span>
+<span class="gutterH">  15:</span>    <span class="syntax18">}</span>
+<span class="gutter">  16:</span>  <span class="syntax18">}</span><span class="syntax18">;</span>
+<span class="gutter">  17:</span>
+<span class="gutter">  18:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Create</span><span class="syntax2"> </span><span class="syntax2">objects</span><span class="syntax2"> </span><span class="syntax2">of</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">class</span>
+<span class="gutter">  19:</span>  <span class="syntax11">$Heidi</span> <span class="syntax18">=</span> <span class="syntax8">new</span> <span class="syntax6">Employee</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  20:</span>  <span class="syntax11">$Heidi</span><span class="syntax11">&#45;&gt;name</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">Heidi</span><span class="syntax14"> </span><span class="syntax14">Clum</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  21:</span>  <span class="syntax8">echo</span> <span class="syntax11">$Heidi</span><span class="syntax11">&#45;&gt;name</span><span class="syntax18">,</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  22:</span>  <span class="syntax11">$Heidi</span><span class="syntax11">&#45;&gt;address</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">1234</span><span class="syntax14"> </span><span class="syntax14">Somewhere</span><span class="syntax14"> </span><span class="syntax14">Blvd</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  23:</span>  <span class="syntax8">echo</span> <span class="syntax11">$Heidi</span><span class="syntax11">&#45;&gt;address</span><span class="syntax18">,</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  24:</span>  <span class="syntax11">$Heidi</span><span class="syntax11">&#45;&gt;phone</span> <span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">123</span><span class="syntax14">&#45;</span><span class="syntax14">456</span><span class="syntax14">&#45;</span><span class="syntax14">7890</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  25:</span>  <span class="syntax8">echo</span> <span class="syntax11">$Heidi</span><span class="syntax11">&#45;&gt;phone</span><span class="syntax18">,</span><span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  26:</span>  <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">hr</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  27:</span>  
+<span class="gutter">  28:</span>  <span class="syntax11">$Brad</span> <span class="syntax18">=</span> <span class="syntax8">new</span> <span class="syntax6">Employee</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  29:</span>  <span class="syntax11">$Brad</span><span class="syntax11">&#45;&gt;name</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">Brad</span><span class="syntax14"> </span><span class="syntax14">Bit</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  30:</span>  <span class="syntax8">echo</span> <span class="syntax11">$Brad</span><span class="syntax11">&#45;&gt;name</span><span class="syntax18">,</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  31:</span>  <span class="syntax11">$Brad</span><span class="syntax11">&#45;&gt;address</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">4321</span><span class="syntax14"> </span><span class="syntax14">Sunset</span><span class="syntax14"> </span><span class="syntax14">Blvd</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  32:</span>  <span class="syntax8">echo</span> <span class="syntax11">$Brad</span><span class="syntax11">&#45;&gt;address</span><span class="syntax18">,</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  33:</span>  <span class="syntax11">$Brad</span><span class="syntax11">&#45;&gt;phone</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">987</span><span class="syntax14">&#45;</span><span class="syntax14">654</span><span class="syntax14">&#45;</span><span class="syntax14">3210</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  34:</span>  <span class="syntax8">echo</span> <span class="syntax11">$Brad</span><span class="syntax11">&#45;&gt;phone</span><span class="syntax18">,</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  35:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+* The Employee class is defined with of three properties, one of which is private, one public and one protected.
+* The magic method *@__set@* takes two parameters: one to represent the incoming class property for the object, and the second to represent the value that will be assigned to that property.
+* When the user of the class makes a statement such as *@$Heidi->phone@* = "123-456-7890", PHP automatically invokes this *@__set@* method and assigns properties to the current object, referenced by the pseudo variable *@$this@*.
+* The magic method *@__get@* takes one parameter to represent the incoming class property. Its purpose is to automatically retrieve the value of the object's property when the user of the class makes a statement such as: echo *@$Heidi->phone@*;
+
+h3. User-Defined Setters and Getters
+
+* When you design a class, you are not required to use PHP's built-in methods; you can write your own customized getters and setters.
+* The properties can be declared as private and the only way they can be accessed is through the public setter and getter methods provided by the class, just another way to implement data hiding.
+* The disadvantage of having a setter and getter for every property is that the program grows larger very quickly and thus more unwieldy and harder to maintain.
+* Filename: *setNget2.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Using</span><span class="syntax2"> </span><span class="syntax2">property-specific</span><span class="syntax2"> </span><span class="syntax2">set</span><span class="syntax2"> </span><span class="syntax2">and</span><span class="syntax2"> </span><span class="syntax2">get</span><span class="syntax2"> </span><span class="syntax2">methods</span>
+<span class="gutter">   3:</span>  <span class="syntax8">class</span><span class="syntax8"> </span><span class="syntax11">Employee</span><span class="syntax11"> </span><span class="syntax18">{</span>
+<span class="gutter">   4:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">private</span><span class="syntax2"> </span><span class="syntax2">and</span><span class="syntax2"> </span><span class="syntax2">protected</span><span class="syntax2"> </span><span class="syntax2">variables</span>
+<span class="gutterH">   5:</span>    <span class="syntax8">private</span> <span class="syntax10">$</span><span class="syntax10">name</span><span class="syntax18">;</span>
+<span class="gutter">   6:</span>    <span class="syntax8">private</span> <span class="syntax10">$</span><span class="syntax10">address</span><span class="syntax18">;</span>
+<span class="gutter">   7:</span>    <span class="syntax8">protected</span> <span class="syntax10">$</span><span class="syntax10">phone</span><span class="syntax18">;</span>
+<span class="gutter">   8:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">public</span><span class="syntax2"> </span><span class="syntax2">methods</span>
+<span class="gutter">   9:</span>    <span class="syntax8">function</span> <span class="syntax9">setName</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">name</span><span class="syntax18">)</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">setter</span>
+<span class="gutterH">  10:</span>    <span class="syntax18">{</span>
+<span class="gutter">  11:</span>      <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;name</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">name</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>    <span class="syntax18">}</span>
+<span class="gutter">  13:</span>    <span class="syntax8">function</span> <span class="syntax9">getName</span><span class="syntax18">(</span><span class="syntax18">)</span>   <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">getter</span>
+<span class="gutter">  14:</span>    <span class="syntax18">{</span>
+<span class="gutterH">  15:</span>      <span class="syntax8">return</span> <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;name</span><span class="syntax18">;</span>
+<span class="gutter">  16:</span>    <span class="syntax18">}</span>
+<span class="gutter">  17:</span>    <span class="syntax8">function</span> <span class="syntax6">setAddress</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">address</span><span class="syntax18">)</span>
+<span class="gutter">  18:</span>    <span class="syntax18">{</span>
+<span class="gutter">  19:</span>      <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;address</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">address</span><span class="syntax18">;</span>
+<span class="gutterH">  20:</span>    <span class="syntax18">}</span>
+<span class="gutter">  21:</span>    <span class="syntax8">function</span> <span class="syntax6">getAddress</span><span class="syntax18">(</span><span class="syntax18">)</span>
+<span class="gutter">  22:</span>    <span class="syntax18">{</span>
+<span class="gutter">  23:</span>      <span class="syntax8">return</span> <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;address</span><span class="syntax18">;</span>
+<span class="gutter">  24:</span>    <span class="syntax18">}</span>
+<span class="gutterH">  25:</span>    <span class="syntax8">function</span> <span class="syntax6">setPhone</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">phone</span><span class="syntax18">)</span>
+<span class="gutter">  26:</span>    <span class="syntax18">{</span>
+<span class="gutter">  27:</span>      <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;phone</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">phone</span><span class="syntax18">;</span>
+<span class="gutter">  28:</span>    <span class="syntax18">}</span>
+<span class="gutter">  29:</span>    <span class="syntax8">function</span> <span class="syntax6">getPhone</span><span class="syntax18">(</span><span class="syntax18">)</span>
+<span class="gutterH">  30:</span>    <span class="syntax18">{</span>
+<span class="gutter">  31:</span>      <span class="syntax8">return</span> <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;phone</span><span class="syntax18">;</span>
+<span class="gutter">  32:</span>    <span class="syntax18">}</span>
+<span class="gutter">  33:</span>
+<span class="gutter">  34:</span>    <span class="syntax8">function</span> <span class="syntax6">printPersonInfo</span><span class="syntax18">(</span><span class="syntax18">)</span>
+<span class="gutterH">  35:</span>    <span class="syntax18">{</span>
+<span class="gutter">  36:</span>      <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">hr</span><span class="syntax14">&gt;</span><span class="syntax14">&lt;</span><span class="syntax14">b</span><span class="syntax14">&gt;</span><span class="syntax14">Employee</span><span class="syntax14"> </span><span class="syntax14">Info</span><span class="syntax14">&lt;</span><span class="syntax14">/</span><span class="syntax14">b</span><span class="syntax14">&gt;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  37:</span>      <span class="syntax8">echo</span> <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;name</span> <span class="syntax18">.</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  38:</span>      <span class="syntax8">echo</span> <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;address</span> <span class="syntax18">.</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  39:</span>      <span class="syntax8">echo</span> <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;phone</span> <span class="syntax18">.</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  40:</span>    <span class="syntax18">}</span>
+<span class="gutter">  41:</span>  <span class="syntax18">}</span><span class="syntax18">;</span>
+<span class="gutter">  42:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Create</span><span class="syntax2"> </span><span class="syntax2">objects</span><span class="syntax2"> </span><span class="syntax2">of</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">class</span>
+<span class="gutter">  43:</span>  <span class="syntax11">$Heidi</span> <span class="syntax18">=</span> <span class="syntax8">new</span> <span class="syntax6">Employee</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  44:</span>  <span class="syntax11">$Heidi</span><span class="syntax6">&#45;&gt;setName</span><span class="syntax18">(</span><span class="syntax14">&quot;</span><span class="syntax14">Heidi</span><span class="syntax14"> </span><span class="syntax14">Clum</span><span class="syntax14">&quot;</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  45:</span>  <span class="syntax11">$Heidi</span><span class="syntax6">&#45;&gt;setAddress</span><span class="syntax18">(</span><span class="syntax14">&quot;</span><span class="syntax14">1234</span><span class="syntax14"> </span><span class="syntax14">Somewhere</span><span class="syntax14"> </span><span class="syntax14">Blvd</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  46:</span>  <span class="syntax11">$Heidi</span><span class="syntax6">&#45;&gt;setPhone</span><span class="syntax18">(</span><span class="syntax14">&quot;</span><span class="syntax14">123</span><span class="syntax14">&#45;</span><span class="syntax14">456</span><span class="syntax14">&#45;</span><span class="syntax14">7890</span><span class="syntax14">&quot;</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  47:</span>  
+<span class="gutter">  48:</span>  <span class="syntax11">$Brad</span> <span class="syntax18">=</span> <span class="syntax8">new</span> <span class="syntax6">Employee</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  49:</span>  <span class="syntax11">$Brad</span><span class="syntax6">&#45;&gt;setName</span><span class="syntax18">(</span><span class="syntax14">&quot;</span><span class="syntax14">Brad</span><span class="syntax14"> </span><span class="syntax14">Bit</span><span class="syntax14">&quot;</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  50:</span>  <span class="syntax11">$Brad</span><span class="syntax6">&#45;&gt;setAddress</span><span class="syntax18">(</span><span class="syntax14">&quot;</span><span class="syntax14">4321</span><span class="syntax14"> </span><span class="syntax14">Sunset</span><span class="syntax14"> </span><span class="syntax14">Blvd</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  51:</span>  <span class="syntax11">$Brad</span><span class="syntax6">&#45;&gt;setPhone</span><span class="syntax18">(</span><span class="syntax14">&quot;</span><span class="syntax14">987</span><span class="syntax14">&#45;</span><span class="syntax14">654</span><span class="syntax14">&#45;</span><span class="syntax14">3210</span><span class="syntax14">&quot;</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  52:</span>
+<span class="gutter">  53:</span>  <span class="syntax11">$Heidi</span><span class="syntax6">&#45;&gt;printPersonInfo</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  54:</span>  <span class="syntax11">$Brad</span><span class="syntax6">&#45;&gt;printPersonInfo</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  55:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+* The class properties for the Employee class are declared as private or protected.
+* A setter method specific to the *@$name@* property of the class is defined. This method is the only way the name can be updated from outside the class. In this implementation, the method simply assigns a new value to class property *@$name@*.
+* Then a getter method for the *@$name@* property is defined. It simply returns its value.
+* Property-specific setter and getter methods are also defined for the *@$address@* and *@$phone@* properties.
+* The method *@getPersonInfo()@* displays all of the properties for the two objects. Because the method is part of the class, it has access to the private and protected properties. This method does not attempt to change the object's properties; it simply displays them.
+
+h3. Inheritance
+
+* The son inherited his father's title and estate. PHP classes can also inherit from a parent class.
+* Inheritance is a mechanism of extending an existing class. By inheriting a class, we create a new class with all the functionality of an existing class, plus we can add new properties and methods to the new class.
+* In this way, the existing class can be extended without modifying its code.
+* When one class inherits from another, the inherited class is called a subclass or a child. The class from which the subclass inherits is called the parent class, the super class, or the base class.
+* A subclass is said to be derived from a parent class. In our examples we use the terms subclass or child , and parent class .
+* Inheritance requires that at least one class already exists. This class will be the parent class. A new subclass is declared by using the keyword "extends".
+* In the following example, the Person class contains properties for a generic person: a name, an address, and a phone number.
+* Later we design a more specific type of person, a person who is employed. However, because employed people are still "persons" we can create another class called EmployedPerson that will inherit all the functionality of the Person class and then extend that functionality by adding new members.
+* New members will be added, specific to employed persons. The body of the printPersonInfo method must be changed because now there is more information to display.
+
+h3. Constructors and Inheritance
+
+* When you create an inherited class, its constructor will be automatically executed, but its parent's constructor does not get called.
+* To execute the parent constructor, you have to call it explicitly within a subclass constructor with:
+<br /><pre>
+parent::ClassName()
+</pre>
+* or:
+<br /><pre>
+parent::__construct()
+</pre>
+* Filename: *parent.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Parent/base/super</span><span class="syntax2"> </span><span class="syntax2">class</span>
+<span class="gutter">   3:</span>  <span class="syntax8">class</span><span class="syntax8"> </span><span class="syntax11">Computer</span><span class="syntax11"> </span><span class="syntax18">{</span> 
+<span class="gutter">   4:</span>    <span class="syntax8">private</span> <span class="syntax10">$</span><span class="syntax10">password</span><span class="syntax18">;</span> <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Is</span><span class="syntax2"> </span><span class="syntax2">visible</span><span class="syntax2"> </span><span class="syntax2">in</span><span class="syntax2"> </span><span class="syntax2">this</span><span class="syntax2"> </span><span class="syntax2">class</span>
+<span class="gutterH">   5:</span>    <span class="syntax8">protected</span> <span class="syntax10">$</span><span class="syntax10">userId</span><span class="syntax18">;</span> <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Is</span><span class="syntax2"> </span><span class="syntax2">visible</span><span class="syntax2"> </span><span class="syntax2">in</span><span class="syntax2"> </span><span class="syntax2">this</span><span class="syntax2"> </span><span class="syntax2">class</span><span class="syntax2"> </span><span class="syntax2">and</span><span class="syntax2"> </span><span class="syntax2">subclass</span>
+<span class="gutter">   6:</span>    <span class="syntax8">public</span> <span class="syntax10">$</span><span class="syntax10">printer</span><span class="syntax18">;</span> <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Is</span><span class="syntax2"> </span><span class="syntax2">visible</span><span class="syntax2"> </span><span class="syntax2">everywhere</span><span class="syntax2"> </span><span class="syntax2">in</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">script</span>
+<span class="gutter">   7:</span>
+<span class="gutter">   8:</span>    <span class="syntax8">function</span> <span class="syntax9">&#95;&#95;construct</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   9:</span>      <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">Parent</span><span class="syntax14"> </span><span class="syntax14">constructor</span><span class="syntax14"> </span><span class="syntax14">just</span><span class="syntax14"> </span><span class="syntax14">called</span><span class="syntax14">.</span><span class="syntax14">\n</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>      <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;userId</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">willie</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span>      <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;password</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">UrOKhi5</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>    <span class="syntax18">}</span>
+<span class="gutter">  13:</span>  <span class="syntax18">}</span>
+<span class="gutter">  14:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Subclass</span><span class="syntax2"> </span><span class="syntax2">extends</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">Computer</span><span class="syntax2"> </span><span class="syntax2">class</span>
+<span class="gutterH">  15:</span>  <span class="syntax8">class</span><span class="syntax8"> </span><span class="syntax11">Laptop</span><span class="syntax11"> </span><span class="syntax8">extends</span><span class="syntax11"> </span><span class="syntax11">Computer</span><span class="syntax11"> </span><span class="syntax18">{</span>
+<span class="gutter">  16:</span>    <span class="syntax8">public</span> <span class="syntax10">$</span><span class="syntax10">brand</span><span class="syntax18">;</span>
+<span class="gutter">  17:</span>    <span class="syntax8">public</span> <span class="syntax10">$</span><span class="syntax10">weight</span><span class="syntax18">;</span>
+<span class="gutter">  18:</span>    <span class="syntax8">private</span> <span class="syntax10">$</span><span class="syntax10">password</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">LetMeIn2</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  19:</span>
+<span class="gutterH">  20:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Subclass</span><span class="syntax2"> </span><span class="syntax2">constructor</span><span class="syntax2"> </span><span class="syntax2">calls</span><span class="syntax2"> </span><span class="syntax2">parent</span><span class="syntax2"> </span><span class="syntax2">constructor</span>
+<span class="gutter">  21:</span>    <span class="syntax8">function</span> <span class="syntax9">&#95;&#95;construct</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">brand</span><span class="syntax18">,</span><span class="syntax10">$</span><span class="syntax10">weight</span><span class="syntax18">)</span> <span class="syntax18">{</span> 
+<span class="gutter">  22:</span>      <span class="syntax11">parent</span><span class="syntax11">::</span><span class="syntax9">&#95;&#95;construct</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  23:</span>      <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">Child</span><span class="syntax14"> </span><span class="syntax14">constructor</span><span class="syntax14"> </span><span class="syntax14">just</span><span class="syntax14"> </span><span class="syntax14">called</span><span class="syntax14">.</span><span class="syntax14">\n</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  24:</span>      <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;brand</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">brand</span><span class="syntax18">;</span> <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">New</span><span class="syntax2"> </span><span class="syntax2">properties</span><span class="syntax2"> </span><span class="syntax2">for</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">child</span>
+<span class="gutterH">  25:</span>      <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;weight</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">weight</span><span class="syntax18">;</span>
+<span class="gutter">  26:</span>    <span class="syntax18">}</span>
+<span class="gutter">  27:</span>  <span class="syntax18">}</span>
+<span class="gutter">  28:</span>  
+<span class="gutter">  29:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Create</span><span class="syntax2"> </span><span class="syntax2">objects</span><span class="syntax2"> </span><span class="syntax2">of</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">classes</span>
+<span class="gutterH">  30:</span>  <span class="syntax11">$pc</span> <span class="syntax18">=</span> <span class="syntax8">new</span> <span class="syntax6">Computer</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  31:</span>  <span class="syntax11">$portable</span> <span class="syntax18">=</span> <span class="syntax8">new</span> <span class="syntax6">Laptop</span><span class="syntax18">(</span><span class="syntax14">&quot;</span><span class="syntax14">Sonie</span><span class="syntax14">&quot;</span><span class="syntax18">,</span><span class="syntax14">&quot;</span><span class="syntax14">3</span><span class="syntax14">.</span><span class="syntax14">5</span><span class="syntax14">&quot;</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  32:</span>  
+<span class="gutter">  33:</span>  <span class="syntax11">$pc</span><span class="syntax11">&#45;&gt;printer</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">LazerBeam</span><span class="syntax14">&quot;</span><span class="syntax18">;</span> <span class="syntax2">//</span><span class="syntax2">direct</span><span class="syntax2"> </span><span class="syntax2">access</span><span class="syntax2"> </span><span class="syntax2">ok</span>
+<span class="gutter">  34:</span>  <span class="syntax11">$portable</span><span class="syntax11">&#45;&gt;printer</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">Daisy</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  35:</span>  
+<span class="gutter">  36:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">echo</span><span class="syntax2"> </span><span class="syntax2">$portable&#45;&gt;password,</span><span class="syntax2"> </span><span class="syntax2">&quot;&lt;br&gt;&quot;;</span><span class="syntax2"> </span><span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Fatal</span><span class="syntax2"> </span><span class="syntax2">error</span>
+<span class="gutter">  37:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">echo</span><span class="syntax2"> </span><span class="syntax2">$pc&#45;&gt;password,</span><span class="syntax2"> </span><span class="syntax2">&quot;&lt;br&gt;&quot;;</span><span class="syntax2"> </span><span class="syntax2"> </span><span class="syntax2"> </span><span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Fatal</span><span class="syntax2"> </span><span class="syntax2">error</span>
+<span class="gutter">  38:</span>  
+<span class="gutter">  39:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Get</span><span class="syntax2"> </span><span class="syntax2">publicly</span><span class="syntax2"> </span><span class="syntax2">available</span><span class="syntax2"> </span><span class="syntax2">properties</span>
+<span class="gutterH">  40:</span>  <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;br&gt;Public</span><span class="syntax13"> </span><span class="syntax13">properties</span><span class="syntax13"> </span><span class="syntax13">for</span><span class="syntax13"> </span><span class="syntax13">object</span><span class="syntax13"> </span><span class="syntax13">$pc:&lt;br&gt;&lt;pre&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span> 
+<span class="gutter">  41:</span>  <span class="syntax9">print_r</span><span class="syntax18">(</span><span class="syntax9">get_object_vars</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">pc</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  42:</span>  
+<span class="gutter">  43:</span>  <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;/pre&gt;&lt;br&gt;Public</span><span class="syntax13"> </span><span class="syntax13">properties</span><span class="syntax13"> </span><span class="syntax13">for</span><span class="syntax13"> </span><span class="syntax13">object</span><span class="syntax13"> </span><span class="syntax13">$portable:&lt;br&gt;&lt;pre&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  44:</span>  <span class="syntax9">print_r</span><span class="syntax18">(</span><span class="syntax9">get_object_vars</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">portable</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  45:</span>  <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;/pre&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  46:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+* The Computer class is defined first. It will be the parent class for Laptop.
+* The *@$password@* property in the Computer class is marked private, so it will not be available outside the class. A new computer object will have its own private password.
+* The *@$userId@* property is declared protected. It is visible and accessible within this class and any subclasses of this class.
+* The public property *@$printer@* of class Computer is available anywhere within the script.
+* A constructor is defined for the Computer class in which the user ID and password are initialized.
+* The new class Laptop is an extension of its parent, Computer. It adds more features to the parent. For example, a laptop might be more concerned with weight and portability issues, it is priced differently, it needs a carrying case, and so on.
+* The *@$password@* variable is created for class Laptop and marked private. It is not the same *@$password@* as in the parent, but a separate and private property of the Laptop class.
+* The Laptop class's constructor calls its parent's constructor. Otherwise, any variables set in the parent's constructor will not be made part of this class.
+* An object *@$pc@* of the Computer class is created, then an object *@$portable@* of the Laptop class (that inherits from the Computer class) is created.
+* The user does not have to know this. He or she creates the objects of the Laptop class the same way he or she creates them from the Computer class.
+* A printer name (value) can be directly assigned to the *@$pc@* object's printer property, because the property was declared public.
+* There are two lines commented out because they would produce fatal errors. You cannot access private variables from outside either parent or child class.
+* Your instructor will demonstrate what happens when each of the lines is not commented out.
+* The *@get_object_vars()@* function returns a list of public properties for each class. The print_r function displays these properties.
+
+h3. Overriding Methods
+
+* Overriding is when you give the a member of a subclass the same name as its corresponding property or method in the parent class.
+* If, for example, you have a value for a serial number property in the parent class, in the subclass, you might want a different serial number for the new product that was derived from its parent.
+* You might also want to create your own "display" method in the child rather than use the one in the parent class providing a different functionality.
+* By using the same name for the members of the inherited class that you used in the parent class, you are overriding the operations in the parent class.
+* Filename: *override.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Define</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">parent</span><span class="syntax2"> </span><span class="syntax2">or</span><span class="syntax2"> </span><span class="syntax2">super</span><span class="syntax2"> </span><span class="syntax2">class</span>
+<span class="gutter">   3:</span>  <span class="syntax8">class</span><span class="syntax8"> </span><span class="syntax11">Person</span><span class="syntax11"> </span><span class="syntax18">{</span>
+<span class="gutter">   4:</span>    <span class="syntax8">public</span> <span class="syntax10">$</span><span class="syntax10">name</span><span class="syntax18">;</span>
+<span class="gutterH">   5:</span>    <span class="syntax8">public</span> <span class="syntax10">$</span><span class="syntax10">address</span><span class="syntax18">;</span>
+<span class="gutter">   6:</span>    <span class="syntax8">public</span> <span class="syntax10">$</span><span class="syntax10">phone</span><span class="syntax18">;</span>
+<span class="gutter">   7:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Define</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">methods</span>
+<span class="gutter">   8:</span>    <span class="syntax8">function</span> <span class="syntax6">printPersonInfo</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   9:</span>      <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">hr</span><span class="syntax14">&gt;</span><span class="syntax14">&lt;</span><span class="syntax14">b</span><span class="syntax14">&gt;</span><span class="syntax14">Person</span><span class="syntax14"> </span><span class="syntax14">Info</span><span class="syntax14">&lt;</span><span class="syntax14">/</span><span class="syntax14">b</span><span class="syntax14">&gt;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>      <span class="syntax8">echo</span> <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;name</span> <span class="syntax18">.</span><span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span>      <span class="syntax8">echo</span> <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;address</span> <span class="syntax18">.</span><span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>      <span class="syntax8">echo</span> <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;phone</span> <span class="syntax18">.</span><span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>    <span class="syntax18">}</span>
+<span class="gutter">  14:</span>  <span class="syntax18">}</span>
+<span class="gutterH">  15:</span>  
+<span class="gutter">  16:</span>  <span class="syntax8">class</span><span class="syntax8"> </span><span class="syntax11">EmployedPerson</span><span class="syntax11"> </span><span class="syntax8">extends</span><span class="syntax11"> </span><span class="syntax11">Person</span><span class="syntax11"> </span><span class="syntax18">{</span>
+<span class="gutter">  17:</span>    <span class="syntax8">public</span> <span class="syntax10">$</span><span class="syntax10">occupation</span><span class="syntax18">;</span>
+<span class="gutter">  18:</span>    <span class="syntax8">public</span> <span class="syntax10">$</span><span class="syntax10">company_name</span><span class="syntax18">;</span>
+<span class="gutter">  19:</span>    <span class="syntax8">public</span> <span class="syntax10">$</span><span class="syntax10">business_phone</span><span class="syntax18">;</span>
+<span class="gutterH">  20:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Method</span><span class="syntax2"> </span><span class="syntax2">definition</span><span class="syntax2"> </span><span class="syntax2">overrides</span><span class="syntax2"> </span><span class="syntax2">parent</span>
+<span class="gutter">  21:</span>    <span class="syntax8">function</span> <span class="syntax6">printPersonInfo</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  22:</span>      <span class="syntax11">parent</span><span class="syntax11">::</span><span class="syntax6">printPersonInfo</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  23:</span>      <span class="syntax8">echo</span> <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;occupation</span> <span class="syntax18">.</span><span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  24:</span>      <span class="syntax8">echo</span> <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;company_name</span> <span class="syntax18">.</span><span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  25:</span>      <span class="syntax8">echo</span> <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;business_phone</span> <span class="syntax18">.</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  26:</span>    <span class="syntax18">}</span>
+<span class="gutter">  27:</span>  <span class="syntax18">}</span>
+<span class="gutter">  28:</span>
+<span class="gutter">  29:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Create</span><span class="syntax2"> </span><span class="syntax2">objects</span><span class="syntax2"> </span><span class="syntax2">using</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">classes</span>
+<span class="gutterH">  30:</span>  <span class="syntax11">$kid</span> <span class="syntax18">=</span> <span class="syntax8">new</span> <span class="syntax6">Person</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  31:</span>  <span class="syntax11">$kid</span><span class="syntax11">&#45;&gt;name</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">Jimmy</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  32:</span>  <span class="syntax11">$kid</span><span class="syntax11">&#45;&gt;address</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">12</span><span class="syntax14"> </span><span class="syntax14">Elm</span><span class="syntax14"> </span><span class="syntax14">Street</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  33:</span>  <span class="syntax11">$kid</span><span class="syntax11">&#45;&gt;phone</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">555</span><span class="syntax14">&#45;</span><span class="syntax14">5555</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  34:</span>  
+<span class="gutterH">  35:</span>  <span class="syntax11">$adult</span> <span class="syntax18">=</span> <span class="syntax8">new</span> <span class="syntax6">EmployedPerson</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  36:</span>  <span class="syntax11">$adult</span><span class="syntax11">&#45;&gt;name</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">Jimmy</span><span class="syntax14">'</span><span class="syntax14">s</span><span class="syntax14"> </span><span class="syntax14">Father</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  37:</span>  <span class="syntax11">$adult</span><span class="syntax11">&#45;&gt;address</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">12</span><span class="syntax14"> </span><span class="syntax14">Elm</span><span class="syntax14"> </span><span class="syntax14">Street</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  38:</span>  <span class="syntax11">$adult</span><span class="syntax11">&#45;&gt;phone</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">555</span><span class="syntax14">&#45;</span><span class="syntax14">5555</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  39:</span>  <span class="syntax11">$adult</span><span class="syntax11">&#45;&gt;occupation</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">Programmer</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  40:</span>  <span class="syntax11">$adult</span><span class="syntax11">&#45;&gt;company_name</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">Software</span><span class="syntax14"> </span><span class="syntax14">Developers</span><span class="syntax14">,</span><span class="syntax14"> </span><span class="syntax14">Ltd</span><span class="syntax14">.</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  41:</span>  <span class="syntax11">$adult</span><span class="syntax11">&#45;&gt;business_phone</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">444</span><span class="syntax14">&#45;</span><span class="syntax14">4444</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  42:</span>
+<span class="gutter">  43:</span>  <span class="syntax11">$kid</span><span class="syntax6">&#45;&gt;printPersonInfo</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  44:</span>  <span class="syntax11">$adult</span><span class="syntax6">&#45;&gt;printPersonInfo</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  45:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+* First we declare the class Person. In this example, we extend the class. By doing so, Person will become the parent or super class.
+* Class EmployedPerson will contain all the members of the class Person. EmployedPerson is the child or subclass of the Person class. The PHP keyword extends defines this relationship.
+* On lines 17-19 are the new variables specific to EmployedPerson. Note the name, phone, and address properties are available to the class EmployedPerson. They were inherited from the Person class.
+* The EmployedPerson class also inherits the function *@printPersonInfo()@* from the Person class. However, we want to redefine the behavior of this child class to include added functionality. This process is called overriding the method.
+* The child class's function *@printPersonInfo()@* calls the parent's function *@printPersonInfo()@*. The keyword parent in PHP refers to the class that is the parent to the current class, in this case Person.
+* In other words, we are overriding the original implementation of the parent's method by first calling it and then adding some new statements.
+
+h3. Protected Access
+
+* When a class member is preceded with the private access modifier, it is visible only within the class where it was created. If you try to access it directly from outside the class, you will receive an error message such as:
+* Fatal error: Cannot access private property *@computer::$password@* in ...
+* If you call a class method from a class with private data, its private data will be visible, but if you call a method defined in a child class, the private data of the parent class is not visible.
+* If a private property is declared in a child class with the same name as a private property in its parent, it is unrelated to the parent's property. It is a separate variable in its own right.
+* If a class member is protected, then it is visible within a subclass. It is inherited by the subclass and treated in the subclass like a private member but cannot be accessed outside the subclass.
+* It can be accessed in the child class through the public methods defined in the parent and for methods defined within the child.
+* If the class member is public, it is visible throughout the entire script and can be accessed directly from anywhere.
+* In the object-oriented world you normally access private and protected data through public methods. It is, however, also possible to create private and protected methods.
+* Note that when you try to get or set the value of the private property of a parent class from within the subclass, instead of getting an error message, you get nothing. You are simply ignored.
+* Filename: *protected.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Private, Protected, Public<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">lavender</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;font</span><span class="syntax17"> </span><span class="syntax17">face</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">ariel</span><span class="syntax14">&quot;</span><span class="syntax17"> </span><span class="syntax17">size</span><span class="syntax18">=</span><span class="syntax17">+</span><span class="syntax17">1</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  <span class="syntax17">&lt;h1</span><span class="syntax17">&gt;</span>Private, Protected, Public<span class="syntax17">&lt;/h1</span><span class="syntax17">&gt;</span>
+<span class="gutter">   8:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">   9:</span>    <span class="syntax8">class</span><span class="syntax8"> </span><span class="syntax11">computer</span><span class="syntax11"> </span><span class="syntax18">{</span>
+<span class="gutterH">  10:</span>      <span class="syntax8">private</span> <span class="syntax10">$</span><span class="syntax10">password</span><span class="syntax18">;</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Visible</span><span class="syntax2"> </span><span class="syntax2">only</span><span class="syntax2"> </span><span class="syntax2">within</span><span class="syntax2"> </span><span class="syntax2">this</span><span class="syntax2"> </span><span class="syntax2">class</span>
+<span class="gutter">  11:</span>      <span class="syntax8">protected</span> <span class="syntax10">$</span><span class="syntax10">userId</span><span class="syntax18">;</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Visible</span><span class="syntax2"> </span><span class="syntax2">within</span><span class="syntax2"> </span><span class="syntax2">this</span><span class="syntax2"> </span><span class="syntax2">class</span><span class="syntax2"> </span><span class="syntax2">and</span><span class="syntax2"> </span><span class="syntax2">subclass</span>
+<span class="gutter">  12:</span>      <span class="syntax8">public</span> <span class="syntax10">$</span><span class="syntax10">printer</span><span class="syntax18">;</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Visible</span><span class="syntax2"> </span><span class="syntax2">anywhere</span><span class="syntax2"> </span><span class="syntax2">in</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">script</span>
+<span class="gutter">  13:</span>      <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Parent's</span><span class="syntax2"> </span><span class="syntax2">constructor</span>
+<span class="gutter">  14:</span>      <span class="syntax8">function</span> <span class="syntax9">&#95;&#95;construct</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">{</span>  
+<span class="gutterH">  15:</span>        <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax14">In</span><span class="syntax14"> </span><span class="syntax14">the</span><span class="syntax14"> </span><span class="syntax14">parent</span><span class="syntax14"> </span><span class="syntax14">constructor</span><span class="syntax14">.</span><span class="syntax14">\n</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  16:</span>        <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;userId</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">willie</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>     <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">protected</span>
+<span class="gutter">  17:</span>        <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;password</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">urAok5</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>   <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">private</span>
+<span class="gutter">  18:</span>      <span class="syntax18">}</span>
+<span class="gutter">  19:</span>      <span class="syntax8">function</span> <span class="syntax6">setUserId</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">userId</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutterH">  20:</span>        <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;userId</span><span class="syntax18">=</span><span class="syntax10">$</span><span class="syntax10">userId</span><span class="syntax18">;</span>
+<span class="gutter">  21:</span>      <span class="syntax18">}</span>
+<span class="gutter">  22:</span>      <span class="syntax8">function</span> <span class="syntax6">getUserId</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  23:</span>        <span class="syntax8">return</span> <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;userId</span><span class="syntax18">;</span>
+<span class="gutter">  24:</span>      <span class="syntax18">}</span>
+<span class="gutterH">  25:</span>      <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">private</span><span class="syntax2"> </span><span class="syntax2">methods</span>
+<span class="gutter">  26:</span>      <span class="syntax8">private</span> <span class="syntax8">function</span> <span class="syntax6">setPassword</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">password</span><span class="syntax18">)</span><span class="syntax18">{</span>  
+<span class="gutter">  27:</span>        <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;password</span><span class="syntax18">=</span><span class="syntax10">$</span><span class="syntax10">password</span><span class="syntax18">;</span>
+<span class="gutter">  28:</span>      <span class="syntax18">}</span>
+<span class="gutter">  29:</span>      <span class="syntax8">private</span> <span class="syntax8">function</span> <span class="syntax6">getPassword</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">{</span>
+<span class="gutterH">  30:</span>        <span class="syntax8">return</span> <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;password</span><span class="syntax18">;</span>
+<span class="gutter">  31:</span>      <span class="syntax18">}</span>
+<span class="gutter">  32:</span>    <span class="syntax18">}</span>
+<span class="gutter">  33:</span>
+<span class="gutter">  34:</span>    <span class="syntax8">class</span><span class="syntax8"> </span><span class="syntax11">Laptop</span><span class="syntax11"> </span><span class="syntax8">extends</span><span class="syntax11"> </span><span class="syntax11">Computer</span><span class="syntax11"> </span><span class="syntax18">{</span>
+<span class="gutterH">  35:</span>      <span class="syntax8">public</span> <span class="syntax10">$</span><span class="syntax10">model</span><span class="syntax18">;</span>
+<span class="gutter">  36:</span>      <span class="syntax8">public</span> <span class="syntax10">$</span><span class="syntax10">weight</span><span class="syntax18">;</span>
+<span class="gutter">  37:</span>      <span class="syntax8">private</span> <span class="syntax10">$</span><span class="syntax10">password</span><span class="syntax18">;</span>
+<span class="gutter">  38:</span>      <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Laptop's</span><span class="syntax2"> </span><span class="syntax2">constructor</span>
+<span class="gutter">  39:</span>      <span class="syntax8">function</span> <span class="syntax9">&#95;&#95;construct</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">{</span> 
+<span class="gutterH">  40:</span>        <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">In</span><span class="syntax14"> </span><span class="syntax14">the</span><span class="syntax14"> </span><span class="syntax14">child</span><span class="syntax14">'</span><span class="syntax14">s</span><span class="syntax14"> </span><span class="syntax14">constructor\n</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  41:</span>        <span class="syntax11">parent</span><span class="syntax11">::</span><span class="syntax9">&#95;&#95;construct</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  42:</span>        <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Inherited</span>
+<span class="gutter">  43:</span>        <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">Inherited</span><span class="syntax14"> </span><span class="syntax14">user</span><span class="syntax14"> </span><span class="syntax14">name</span><span class="syntax14">?</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">.</span> <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;userId</span><span class="syntax18">,</span> <span class="syntax14">&quot;</span><span class="syntax14">\n</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  44:</span>        <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Not</span><span class="syntax2"> </span><span class="syntax2">inherited</span>
+<span class="gutterH">  45:</span>        <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">Inherited</span><span class="syntax14"> </span><span class="syntax14">password</span><span class="syntax14">?</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">.</span> <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;password</span><span class="syntax18">,</span> <span class="syntax14">&quot;</span><span class="syntax14">\n</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  46:</span>        <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;model</span> <span class="syntax18">=</span> <span class="syntax13">'</span><span class="syntax13">MacBook</span><span class="syntax13"> </span><span class="syntax13">Pro</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  47:</span>        <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;weight</span> <span class="syntax18">=</span> <span class="syntax13">'</span><span class="syntax13">3</span><span class="syntax13"> </span><span class="syntax13">lbs.</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  48:</span>      <span class="syntax18">}</span>
+<span class="gutter">  49:</span>      <span class="syntax8">function</span> <span class="syntax6">setPassword</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">password</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutterH">  50:</span>        <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;password</span><span class="syntax18">=</span><span class="syntax10">$</span><span class="syntax10">password</span><span class="syntax18">;</span>
+<span class="gutter">  51:</span>      <span class="syntax18">}</span>
+<span class="gutter">  52:</span>      <span class="syntax8">function</span> <span class="syntax6">getPassword</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  53:</span>        <span class="syntax8">return</span> <span class="syntax11">$this</span><span class="syntax11">&#45;&gt;password</span><span class="syntax18">;</span>
+<span class="gutter">  54:</span>      <span class="syntax18">}</span>
+<span class="gutterH">  55:</span>    <span class="syntax18">}</span>
+<span class="gutter">  56:</span>
+<span class="gutter">  57:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Create</span><span class="syntax2"> </span><span class="syntax2">objects</span><span class="syntax2"> </span><span class="syntax2">from</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">Classes</span>
+<span class="gutter">  58:</span>    <span class="syntax11">$pc</span> <span class="syntax18">=</span> <span class="syntax8">new</span> <span class="syntax6">Computer</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span> 
+<span class="gutter">  59:</span>    <span class="syntax11">$portable</span> <span class="syntax18">=</span> <span class="syntax8">new</span> <span class="syntax6">Laptop</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  60:</span>
+<span class="gutter">  61:</span>    <span class="syntax11">$portable</span><span class="syntax6">&#45;&gt;setPassword</span><span class="syntax18">(</span><span class="syntax14">&quot;</span><span class="syntax14">letmein2</span><span class="syntax14">&quot;</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  62:</span>    <span class="syntax11">$pc</span><span class="syntax11">&#45;&gt;printer</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">Lazerboy</span><span class="syntax14">&quot;</span><span class="syntax18">;</span> <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Direct</span><span class="syntax2"> </span><span class="syntax2">access</span><span class="syntax2"> </span><span class="syntax2">okay</span>
+<span class="gutter">  63:</span>    <span class="syntax11">$portable</span><span class="syntax11">&#45;&gt;printer</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">Daisy</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  64:</span>    
+<span class="gutterH">  65:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">echo</span><span class="syntax2"> </span><span class="syntax2">$pc&#45;&gt;userId;</span><span class="syntax2"> </span><span class="syntax2"> </span><span class="syntax2"> </span><span class="syntax2"> </span><span class="syntax2"> </span><span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Error:</span><span class="syntax2"> </span><span class="syntax2">Can't</span><span class="syntax2"> </span><span class="syntax2">access</span><span class="syntax2"> </span><span class="syntax2">directly</span>
+<span class="gutter">  66:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">My</span><span class="syntax14"> </span><span class="syntax14">Laptop</span><span class="syntax14"> </span><span class="syntax14">username</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">,</span> <span class="syntax11">$portable</span><span class="syntax6">&#45;&gt;getUserId</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">,</span>
+<span class="gutter">  67:</span>         <span class="syntax14">&quot;</span><span class="syntax14">\n</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  68:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">My</span><span class="syntax14"> </span><span class="syntax14">pc</span><span class="syntax14"> </span><span class="syntax14">username</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">,</span> <span class="syntax11">$pc</span><span class="syntax6">&#45;&gt;getUserId</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">,</span> <span class="syntax14">&quot;</span><span class="syntax14">\n</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  69:</span>    
+<span class="gutterH">  70:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">echo</span><span class="syntax2"> </span><span class="syntax2">&quot;My</span><span class="syntax2"> </span><span class="syntax2">pc</span><span class="syntax2"> </span><span class="syntax2">password</span><span class="syntax2"> </span><span class="syntax2">is</span><span class="syntax2"> </span><span class="syntax2">&quot;,</span><span class="syntax2"> </span><span class="syntax2">$pc&#45;&gt;getPassword(),</span><span class="syntax2"> </span><span class="syntax2">&quot;\n&lt;br&gt;&quot;;</span>
+<span class="gutter">  71:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">My</span><span class="syntax14"> </span><span class="syntax14">Laptop</span><span class="syntax14"> </span><span class="syntax14">password</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">,</span> <span class="syntax11">$portable</span><span class="syntax6">&#45;&gt;getPassword</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">,</span>
+<span class="gutter">  72:</span>         <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  73:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">My</span><span class="syntax14"> </span><span class="syntax14">pc</span><span class="syntax14"> </span><span class="syntax14">printer</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">,</span> <span class="syntax11">$pc</span><span class="syntax11">&#45;&gt;printer</span><span class="syntax18">,</span> <span class="syntax14">&quot;</span><span class="syntax14">\n</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  74:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">My</span><span class="syntax14"> </span><span class="syntax14">Laptop</span><span class="syntax14"> </span><span class="syntax14">printer</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">,</span> <span class="syntax11">$portable</span><span class="syntax11">&#45;&gt;printer</span><span class="syntax18">,</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  75:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  76:</span>  <span class="syntax17">&lt;/font</span><span class="syntax17">&gt;</span>
+<span class="gutter">  77:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  78:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* The class Computer is declared with a private *@$password@* property visible only within this class.
+* The protected access designator makes the *@$userId@* property available in this class and any subclasses; that is, it is inherited.
+* Public scope makes the *@$printer@* property available anywhere in the script. This is the default scope.
+* We define setter and getter functions to provide access to class members of the Computer class.
+* The Laptop class is defined as a subclass of the Computer class.
+* The constructor method for the Laptop class calls the parent class's constructor. The keyword parent is followed by the scope resolution operator "*@::@*" and the method that will be called *@__construct()@*.
+* The variable *@$userId@* was designated protected in the parent class. It is visible within the child class. The password property was designated as private in the parent class and is not visible in the child class. You can only access this variable through public methods provided in the parent.
+* Public properties are directly accessible throughout the script.
+* The userId, a protected property, is visible in both the parent and the subclass.
+* The object *@$pc@* of the parent class Computer can get its private property as long as it accesses it through its public method.
+* The object *@$portable@* of the child class Laptop cannot get the private property of its parent even with the getter method.
+
+<br />
+
+---
+
+[[Unit Seven => 152-166 Unit Seven Index]]

@@ -1,0 +1,1055 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>More Sessions</title>
+<link href="../../../css/basic.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" language="JavaScript">
+<!--
+function putSemester() {
+    var today=new Date();
+    var thisMonth=today.getMonth()+1;
+    var thisYear=today.getFullYear();
+    if(thisMonth <=6) {
+        return "Spring, " + thisYear;
+    }
+    else {
+       return "Fall, " + thisYear;
+    }
+}//-->
+</script>
+<style type="text/css">
+<!--
+    .bgStripes {
+        background-image:url(../../../images/Xstripes.gif);
+        background-attachment: fixed;
+    }
+    body {
+        background-color:white;
+    }
+    strong {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+-->
+</style>
+</head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
+<table class="bgStripes" border="0" width="100%">
+<tbody>
+<tr name="firstRow">
+<td valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+<script type="text/javascript">
+<!--
+    document.write(putSemester());
+-->
+</script>
+</span> <br>
+</td>
+<td style="text-align: center;"><span style="font-weight: bold; font-size: medium; color: darkblue;">
+PHP Web Development with MySQL
+</span> </td>
+<td align="right" valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+3 Credits</span> </td>
+</tr>
+<tr>
+<td colspan="3" style="text-align: center;"><span style="font-size: xx-small; font-weight: bold;">
+152-166</span> </td>
+</tr>
+</tbody>
+</table>
+<!--The heading for the slides --> <br>
+<table class="headTable1" border="0">
+<tbody>
+<tr>
+<td width="100"><a href="sessions1.html"><img alt="" src="../../../images/btn_lArrow.gif" border="0"></a><a href="index.html"><img alt="" src="../../../images/btn_upArrow.gif" border="0"></a><a href="index.html"><img alt="" src="../../../images/btn_rArrow.gif" border="0"></a></td>
+<td>More About Sessions</td>
+</tr>
+</tbody>
+</table>
+<br>
+<div class="disp1">
+<ul class="slidesUl1">
+<li><p>
+Sessions Without Cookies
+</p><p>
+As we have seen in the previous examples, a cookie is used to hold the session ID.
+This is the default and considered the most secure way to handle session data.
+</p><p>
+The problem with cookies, however, is that the user can disable them for his or
+her browser or refuse to accept them.
+</p><p>
+To overcome the obstacle of a cookieless client, the other way to send the
+session ID is in the URL or by using hidden fields with GET/POST.
+</p><p>
+When propagating the session ID with GET/POST, it must be done only when the
+URL resides on your local Web server and is not passed to an external URL.
+</p></li>
+<li><p>
+Using a Hidden Form Element
+</p><p>
+When working with HTML the session ID can be propagated through the use of a
+hidden form element.
+</p><p>
+When assigning the name and value to the hidden input field, the name will be
+the name of the current session and the value, the session ID.
+</p><p>
+You can use the <b>session_name()</b> and <b>session_id()</b> functions to get
+those values.
+</p><p>
+The <b>SID</b> constant can also be used to get the current session ID.
+For example:
+</p>
+<code><small><pre>
+&lt;FORM ACTION="order.php" METHOD=GET&gt;
+&lt;INPUT TYPE="hidden" NAME="&lt;?php echo session_name(); ?&gt;"
+                     VALUE="&lt;?php echo session_id(); ?&gt;"&gt;
+&lt;!-- The remainder of the form HTML code //--&gt;
+&lt;/FORM&gt;
+</pre></small></code>
+<h4>
+Filename: noCookies.php - Page 1
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Disable</span><span class="syntax2"> </span><span class="syntax2">cookies</span><span class="syntax2"> </span><span class="syntax2">for</span><span class="syntax2"> </span><span class="syntax2">this</span><span class="syntax2"> </span><span class="syntax2">session</span>
+<span class="gutter">   3:</span>  <span class="syntax9">ini_set</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">session.use_cookies</span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax5">0</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   4:</span>  <span class="syntax9">ob_start</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">   5:</span>
+<span class="gutter">   6:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">start</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">session</span>
+<span class="gutter">   7:</span>  <span class="syntax9">session_start</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   8:</span>
+<span class="gutter">   9:</span>  <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax8">isset</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_GET</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">mycolor</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutterH">  10:</span>    <span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">favorite_color</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">_GET</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">mycolor</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span>    <span class="syntax10">$</span><span class="syntax10">sess_name</span> <span class="syntax18">=</span> <span class="syntax9">session_name</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>    <span class="syntax10">$</span><span class="syntax10">sess_id</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">_GET</span><span class="syntax18">[</span><span class="syntax10">$</span><span class="syntax10">sess_name</span><span class="syntax18">]</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>    <span class="syntax9">header</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">Location:noCookies2.php?</span><span class="syntax13">'</span><span class="syntax18">.</span> <span class="syntax10">$</span><span class="syntax10">sess_name</span> <span class="syntax18">.</span><span class="syntax13">'</span><span class="syntax13">=</span><span class="syntax13">'</span><span class="syntax18">.</span> <span class="syntax10">$</span><span class="syntax10">sess_id</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>  <span class="syntax18">}</span>
+<span class="gutterH">  15:</span><span class="syntax17">?&gt;</span>
+<span class="gutter">  16:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">  17:</span> <span class="syntax17">&lt;body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  18:</span>  <span class="syntax17">&lt;h1</span><span class="syntax17">&gt;</span> Select Favorite Color<span class="syntax17">&lt;/h1</span><span class="syntax17">&gt;</span>
+<span class="gutter">  19:</span>  <span class="syntax17">&lt;form</span><span class="syntax17"> </span><span class="syntax17">action</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax17">&lt;?php</span> <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax18">{</span>_SERVER<span class="syntax18">}</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">PHP_SELF</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">;</span> <span class="syntax17">?&gt;</span><span class="syntax14">&quot;</span><span class="syntax17"> </span><span class="syntax17">method</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">GET</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  20:</span>   <span class="syntax17">&lt;select</span><span class="syntax17"> </span><span class="syntax17">name</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">mycolor</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">  21:</span>   Please select<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  22:</span>    <span class="syntax17">&lt;option</span><span class="syntax17"> </span><span class="syntax17">selected</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">green</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>Green<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  23:</span>    <span class="syntax17">&lt;option</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">white</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>White<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  24:</span>    <span class="syntax17">&lt;option</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">blue</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>Blue<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  25:</span>    <span class="syntax17">&lt;option</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">red</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>Red<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  26:</span>    <span class="syntax17">&lt;option</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">yellow</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>Yellow<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  27:</span>    <span class="syntax17">&lt;option</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">gray</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>Gray<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  28:</span>   <span class="syntax17">&lt;/select</span><span class="syntax17">&gt;</span>
+<span class="gutter">  29:</span>   <span class="syntax17">&lt;input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">hidden</span><span class="syntax14">&quot;</span><span class="syntax17"> </span><span class="syntax17">name</span><span class="syntax18">=</span><span class="syntax13">'</span><span class="syntax13">PHPSESSID</span><span class="syntax13">'</span>
+<span class="gutterH">  30:</span><span class="syntax17"> </span><span class="syntax17"> </span><span class="syntax17"> </span><span class="syntax17"> </span><span class="syntax17"> </span><span class="syntax17"> </span><span class="syntax17"> </span><span class="syntax17"> </span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax17">&lt;?php</span> <span class="syntax8">echo</span> <span class="syntax9">session_id</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span> <span class="syntax17">?&gt;</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">  31:</span>   <span class="syntax17">&lt;input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">submit</span><span class="syntax14">&quot;</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">Set</span><span class="syntax14"> </span><span class="syntax14">color</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">  32:</span>  <span class="syntax17">&lt;/form</span><span class="syntax17">&gt;</span>
+<span class="gutter">  33:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  34:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  35:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">  36:</span>  <span class="syntax9">ob_end_flush</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  37:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+The <b>ini_set()</b> function is used to change the configuration value for the
+duration of this script, in this case to temporarily disable the use cookies.
+The session will try to use them if they are not disabled.
+</p><p>
+<b>Note:</b> Make sure that your browser also has cookies disabled when you run
+this script. Otherwise it will not work correctly!
+</p><p>
+The ob_start() function turns on output buffering.
+</p><p>
+The session_start() function creates a session or resumes the current one based
+on the current session ID that is being passed via a request, such as GET,
+POST, or a cookie.
+</p><p>
+If the HTML form has been submitted, the variable $_GET['mycolor'] has been set
+and the if block is executed.
+</p><p>
+A session variable called $_SESSION['favorite_color'] is assigned the value
+of $_GET['mycolor'].
+</p><p>
+The session_name() function returns the name of this session.
+</p><p>
+The value of the session ID is stored in the hidden field in the form.
+$_GET[$sess_name] is an associative array where the key is the session name,
+PHPSESSID, and the value is the session ID number, the number visible in the
+URL when this file is viewed in the browser.
+</p><p>
+The header() function sends an HTTP header — in this example, a redirection
+header to send the user to the location <b>noCookies2.php</b> —
+and passes, as part of the URL, the session ID listed after the "?".
+</p><p>
+The self-processing form starts on line 16; the method is GET.
+</p><p>
+The name and value of the session ID are assigned to a hidden field in the form
+on lines 29-30.
+</p>
+<h4>
+Filename: noCookies2.php - Page 2
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax9">session_start</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   3:</span>  <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax8">isset</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">favorite_color</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   4:</span>    <span class="syntax8">print</span> <span class="syntax13">'</span><span class="syntax13">favorite_color</span><span class="syntax13"> </span><span class="syntax13">is</span><span class="syntax13"> </span><span class="syntax13">registered&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutterH">   5:</span>    <span class="syntax10">$</span><span class="syntax10">color</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">favorite_color</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">;</span>
+<span class="gutter">   6:</span>  <span class="syntax18">}</span>
+<span class="gutter">   7:</span><span class="syntax17">?&gt;</span>
+<span class="gutter">   8:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   9:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax17">&lt;?php</span> <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax10">color</span><span class="syntax18">;</span> <span class="syntax17">?&gt;</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  10:</span>  <span class="syntax17">&lt;h1</span><span class="syntax17">&gt;</span>Your Favorite Color<span class="syntax17">&lt;/h1</span><span class="syntax17">&gt;</span>
+<span class="gutter">  11:</span>  Your favorite color is: <span class="syntax17">&lt;b</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;?php</span> <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax10">color</span><span class="syntax18">;</span> <span class="syntax17">?&gt;</span><span class="syntax17">&lt;/b</span><span class="syntax17">&gt;</span>
+<span class="gutter">  12:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">  13:</span>    <span class="syntax8">unset</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">favorite_color</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>    <span class="syntax9">session_destroy</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  15:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  16:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  17:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+The session is started for this redirection page. It gets the session ID from
+the URL that pointed to this page.
+</p><p>
+The favorite color of the user is passed in the session variable, and
+assigned as the background color of the page.
+</p><p>
+The <b>unset()</b> function is used to destroy a single session variable.
+</p><p>
+The <b>session_destroy()</b> function removes the entire session.
+</p></li>
+<li><p>
+Passing Session IDs with a Link
+</p><p>
+If cookies are not available because the user has disabled them, another
+alternative is to pass session IDs via a link.
+There are two ways to do this: manually or automatically.
+</p><p>
+The manual way requires that for every relevant page in your site, you attach
+the session ID to the link and PHP will send it to the linked page.
+</p><p>
+The automatic method requires changing the <b>session.use_trans_sid</b> setting
+in the php.ini file.
+</p></li>
+<li><p>
+The SID Constant
+</p><p>
+If you have disabled cookies, the <b>SID</b> constant holds the value of the
+session ID. If cookies are enabled, this constant is empty.
+</p><p>
+The SID constant can be concatenated to the URL in a hyperlink to pass it to
+another page as shown here:
+</p>
+<code><small>
+&nbsp;&nbsp;$sid = SID;<br>
+?&gt;<br>
+&lt;a href="phpscript.php?&lt;?=echo $sid"&gt; Order now!&lt;/a&gt;<br>
+</small></code>
+<p>or</p>
+<code><small>
+echo '&lt;a href="checkout.php?'. SID .'"&gt;Checkout&lt;a/&gt;';<br>
+</small></code>
+<p>
+If there are a lot of links on your Web site, automatic URL rewriting is a PHP
+feature that adds the session ID automatically to all the links within the linked
+pages.
+</p><p>
+To enable this feature, you need to edit the php.ini configuration file. Look
+for the line:
+</p>
+<blockquote><code>
+session.use_trans_sid<br>
+</code></blockquote>
+<p>
+and set it to 1, save the changes, and restart your Web server.
+</p><p>
+Then the session ID will be added to all relative links within your PHP pages.
+</p><p>
+Notice that by default this feature is turned off for security reasons,
+so proceed with caution. There is also a performance cost because PHP has
+to add the session ID to every page where the link is relative, whereas a
+cookie is only set once.
+</p><p>
+From the php.ini file:
+</p>
+<code><small><pre>
+; trans sid support is disabled by default.
+; Use of trans sid may risk your users security.
+; Use this option with caution.
+; - User may send URL contains active session ID
+;   to other person via. email/irc/etc.
+; - URL that contains active session ID may be stored
+;   in publically accessible computer.
+; - User may access your site with the same session ID
+;   always using URL stored in browser's history or bookmarks.
+session.use_trans_sid = 1
+</pre></small></code>
+<p>
+To summarize, when automatically passing a session ID via a URL, the following
+should be considered:
+</p>
+</li>
+</ul>
+<blockquote>
+<ol type="1">
+<li class="row1">
+<p>
+The browser does not accept cookies.
+</p></li>
+<li class="row0">
+<p>
+The <b>session.use_trans_sid</b> directive in the php.ini file is set to 1.
+You will need to restart your Web server for this directive to take effect.
+</p></li>
+<li class="row1">
+<p>
+The URL in the PHP script must be a relative path name.
+</p></li>
+<li class="row0">
+<p>
+If using the constant <b>SID</b> use <b>striptags()</b> . Remember the <b>SID</b>
+is not available unless cookies are disabled.
+</p></li>
+</ol>
+</blockquote>
+<ul class="slidesUl1">
+<li>
+<h4>
+Filename: usingSID1.php - Page 1
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Turn</span><span class="syntax2"> </span><span class="syntax2">on</span><span class="syntax2"> </span><span class="syntax2">output</span><span class="syntax2"> </span><span class="syntax2">buffering</span>
+<span class="gutter">   3:</span>  <span class="syntax9">ob_start</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   4:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Don't</span><span class="syntax2"> </span><span class="syntax2">accept</span><span class="syntax2"> </span><span class="syntax2">cookies</span>
+<span class="gutterH">   5:</span>  <span class="syntax9">ini_set</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">session.use_cookies</span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax5">0</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   6:</span><span class="syntax17">?&gt;</span>
+<span class="gutter">   7:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   8:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   9:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Sessions and Links<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  10:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutter">  11:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">lavender</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">  12:</span>  <span class="syntax17">&lt;font</span><span class="syntax17"> </span><span class="syntax17">face</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">verdana</span><span class="syntax14">&quot;</span><span class="syntax17"> </span><span class="syntax17">size</span><span class="syntax18">=</span><span class="syntax13">'</span><span class="syntax13">+</span><span class="syntax13">1</span><span class="syntax13">'</span><span class="syntax17">&gt;</span>
+<span class="gutter">  13:</span>  <span class="syntax17">&lt;h2</span><span class="syntax17">&gt;</span>Sessions and Links<span class="syntax17">&lt;/h2</span><span class="syntax17">&gt;</span>
+<span class="gutter">  14:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutterH">  15:</span>    <span class="syntax9">session_start</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  16:</span>    <span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">user</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">=</span> <span class="syntax13">'</span><span class="syntax13">John</span><span class="syntax13"> </span><span class="syntax13">Doe</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  17:</span>    <span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">color</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">=</span> <span class="syntax13">'</span><span class="syntax13">aqua</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  18:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  19:</span>
+<span class="gutterH">  20:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">  21:</span>    <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax18">!</span> <span class="syntax8">empty</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">color</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  22:</span>      <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;pre&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  23:</span>      <span class="syntax9">print_r</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  24:</span>      <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;/pre&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutterH">  25:</span>      <span class="syntax10">$</span><span class="syntax10">sid</span> <span class="syntax18">=</span> <span class="syntax9">session_id</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  26:</span>      <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">SessionID</span><span class="syntax13"> </span><span class="syntax13">is:</span><span class="syntax13"> </span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">sid</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  27:</span>    <span class="syntax18">}</span>
+<span class="gutter">  28:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  29:</span>  <span class="syntax17">&lt;a</span><span class="syntax17"> </span><span class="syntax17">href</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">usingSID2</span><span class="syntax14">.</span><span class="syntax14">php</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span> Click here<span class="syntax17">&lt;/a</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  30:</span>  <span class="syntax17">&lt;/font</span><span class="syntax17">&gt;</span>
+<span class="gutter">  31:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  32:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+The ob_start() function turns on output buffering, so that any PHP headers will
+be sent before the rest of the program's output is sent.
+</p><p>
+Without this function, the program will produce a warning when the program tries
+to ouput header information.
+</p><p>
+The directive on line 5 states that cookies will not be turned on for this session.
+You can also turn off cookies in your browser, but then they will be turned off
+until you enable them again.
+</p><p>
+The session_start() function starts a new session on line 15 and generates a
+new session ID.
+</p><p>
+On lines 16-17 the session variables are registered and assigned to the global
+$_SESSION array.
+</p><p>
+Line 21 checks to see if a session variable has been set.
+Once the session is started, PHP generates a session ID.
+</p><p>
+The link on line 29 will take the user to the next page. Along with the link,
+PHP will automatically send the session ID to the file usingSID2.php.
+</p>
+<h4>
+Filename: usingSID2.php - Page 2
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Turn</span><span class="syntax2"> </span><span class="syntax2">cookies</span><span class="syntax2"> </span><span class="syntax2">off</span>
+<span class="gutter">   3:</span>  <span class="syntax9">ini_set</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">session.use_cookies</span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax5">0</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   4:</span>  <span class="syntax9">session_start</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Start</span><span class="syntax2"> </span><span class="syntax2">a</span><span class="syntax2"> </span><span class="syntax2">session</span>
+<span class="gutterH">   5:</span><span class="syntax17">?&gt;</span>
+<span class="gutter">   6:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax17">&lt;?php</span> <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax18">{</span>_SESSION<span class="syntax18">}</span><span class="syntax18">[</span>color<span class="syntax18">]</span><span class="syntax18">;</span> <span class="syntax17">?&gt;</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   8:</span>  <span class="syntax17">&lt;h3</span><span class="syntax17">&gt;</span>
+<span class="gutter">   9:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutterH">  10:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;pre&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span>    <span class="syntax9">print_r</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_GET</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;/pre&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;The</span><span class="syntax13"> </span><span class="syntax13">session</span><span class="syntax13"> </span><span class="syntax13">id</span><span class="syntax13"> </span><span class="syntax13">is:</span><span class="syntax13"> </span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax9">session_id</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">The</span><span class="syntax13"> </span><span class="syntax13">session</span><span class="syntax13"> </span><span class="syntax13">name</span><span class="syntax13"> </span><span class="syntax13">is:</span><span class="syntax13"> </span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax9">session_name</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutterH">  15:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">SID</span><span class="syntax13"> </span><span class="syntax13">is:</span><span class="syntax13"> </span><span class="syntax13">'</span><span class="syntax18">,</span> SID<span class="syntax18">;</span>
+<span class="gutter">  16:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  17:</span>  <span class="syntax17">&lt;/h3</span><span class="syntax17">&gt;</span>
+<span class="gutter">  18:</span>  <span class="syntax17">&lt;h2</span><span class="syntax17">&gt;</span>
+<span class="gutter">  19:</span>  Hi <span class="syntax17">&lt;?php</span> <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">user</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">;</span> <span class="syntax17">?&gt;</span>, you like
+<span class="gutterH">  20:</span>  <span class="syntax17">&lt;b</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;?php</span> <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">color</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">;</span> <span class="syntax17">?&gt;</span><span class="syntax17">&lt;/b</span><span class="syntax17">&gt;</span>!
+<span class="gutter">  21:</span>  <span class="syntax17">&lt;a</span><span class="syntax17"> </span><span class="syntax17">href</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">usingSID3</span><span class="syntax14">.</span><span class="syntax14">php</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">  22:</span>  Click here<span class="syntax17">&lt;/a</span><span class="syntax17">&gt;</span>
+<span class="gutter">  23:</span>  <span class="syntax17">&lt;/h2</span><span class="syntax17">&gt;</span>
+<span class="gutter">  24:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  25:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+The statement on line 3 turns off cookies for this session (script).
+</p><p>
+The session ID was passed in from the link on Page 1. The background color of
+the page is set to the value of $_SESSION['color'] assigned and registered on Page 1.
+</p><p>
+4The $_GET[ ] array contains information coming in from the link; that is,
+the session name and the session ID.
+</p><p>
+The <b>session_id()</b> function returns the value of the session ID that came
+in from the link on Page 1 and the <b>session_name()</b> function returns the
+name of the session.
+</p><p>
+The constant <b>SID</b> contains the name and ID of the session. This constant
+is not set if cookies are turned on.
+</p><p>
+On line 21 we link to yet another file. The session ID will be passed through
+this link.
+</p>
+<h4>
+Filename: usingSID3.php - Page 3
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax9">session_start</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   3:</span>  <span class="syntax9">extract</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   4:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Print</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">session</span><span class="syntax2"> </span><span class="syntax2">ID</span>
+<span class="gutterH">   5:</span>  <span class="syntax9">printf</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">%s&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">,</span>SID<span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   6:</span>  <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">The</span><span class="syntax13"> </span><span class="syntax13">session</span><span class="syntax13"> </span><span class="syntax13">id</span><span class="syntax13"> </span><span class="syntax13">is:</span><span class="syntax13"> </span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax9">session_id</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   7:</span><span class="syntax17">?&gt;</span>
+<span class="gutter">   8:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   9:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax17">&lt;?php</span> <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax10">color</span><span class="syntax18">;</span> <span class="syntax17">?&gt;</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  10:</span>  <span class="syntax17">&lt;h2</span><span class="syntax17">&gt;</span>
+<span class="gutter">  11:</span>  Hi again <span class="syntax17">&lt;?php</span> <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax10">user</span><span class="syntax18">;</span><span class="syntax17">?&gt;</span>, You still like
+<span class="gutter">  12:</span>  <span class="syntax17">&lt;b</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;?php</span> <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax10">color</span><span class="syntax18">;</span> <span class="syntax17">?&gt;</span><span class="syntax17">&lt;/b</span><span class="syntax17">&gt;</span>!
+<span class="gutter">  13:</span>  <span class="syntax17">&lt;/h2</span><span class="syntax17">&gt;</span>
+<span class="gutter">  14:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  15:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+We must call <b>session_start()</b> at the top of each page in which we want to
+use the session data.
+</p><p>
+The session data is extracted from the $_SESSION[ ] array and assigned to variables.
+</p><p>
+The value of the constant SID is printed, the same values as on the previous page.
+</p><p>
+The session values are still available, all passed through the link.
+Because the value of the session ID is visible in the URL, it can easily be
+hijacked by someone else, which is not a secure situation.
+</p><p>
+The session data values are displayed on lines 11-12.
+</p></li>
+<li><p>
+Changing the Session ID
+</p><p>
+Using the URL to pass session IDs can lead to security problems, as they are
+plainly visible in the URL, bookmarkable, and accessible in HTTP_REFERER entries.
+</p><p>
+To deal with the possibility of "leaking" the session ID, you should make sure
+that sessions are cleared frequently either by destroying them or by giving
+them a probable lifetime. See the <b>gc_probability</b> directive in the
+php.ini file.
+</p><p>
+Another technique is to change the session ID number with the
+<b>session_regenerate_id()</b> function.
+</p><p>
+This function will change the ID number and leave the data intact so that if a
+session ID has been "hijacked", the data will no longer be available to the
+hijacker, but you will still have access to to it through the new session ID.
+</p><p>
+The only argument to this function is a boolean value, which determines whether
+or not to delete the old session file associated with the session ID being changed.
+The default is false.
+</p><p>
+Format:
+</p>
+<code><small>
+bool session_regenerate_id ( [bool delete_old_session] )<br>
+</small></code>
+<p>
+Example:
+</p>
+<blockquote><code><small>
+session_regenerate_id();<br>
+session_regenerate_id(TRUE);<br>
+</small></code></blockquote>
+<h4>
+Filename: regenerate.php
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax9">session_start</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   3:</span>  <span class="syntax10">$</span><span class="syntax10">current_sessionid</span> <span class="syntax18">=</span> <span class="syntax9">session_id</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   4:</span>  <span class="syntax9">session_regenerate_id</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">   5:</span>  <span class="syntax10">$</span><span class="syntax10">new_session_id</span> <span class="syntax18">=</span> <span class="syntax9">session_id</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   6:</span>  <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">Session</span><span class="syntax14"> </span><span class="syntax14">id</span><span class="syntax14"> </span><span class="syntax14">was</span><span class="syntax14">:</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">current_sessionid</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">   7:</span>  <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">Regenerated</span><span class="syntax14"> </span><span class="syntax14">session</span><span class="syntax14"> </span><span class="syntax14">id</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14">:</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">new_session_id</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">   8:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+A session is started. A session ID will be generated for this session if this
+is a new session.
+</p><p>
+The session_id() function returns the session ID number on line 3.
+</p><p>
+The <b>session_regenerate_id()</b> function will change the session ID number
+and leave the data intact that was associated with the session ID number just
+changed.
+</p><p>
+The old and new session IDs are printed on lines 6-7.
+</p></li>
+<li><p>
+Ending a Session
+</p><p>
+PHP really has no way to know when the user has left a session, so it provides
+several functions to help you control when to end a session.
+</p><p>
+The following sections describe how to unset session variables and how to
+destroy the session files associated with them.
+</p></li>
+<li><p>
+Deleting Session Variables
+</p><p>
+If you are sending the session ID via cookies, the cookie by default is deleted
+when the user closes his or her browser, but the session data still remains in
+the session file on the server.
+</p><p>
+To destroy the session data, you can unset all the values in the $_SESSION array
+and then use the setcookie() function to remove the cookie by changing the
+expiration time of the cookie to an earlier date.
+</p><p>
+Finally, you can force the session to end with the <b>session_destroy()</b>
+function, which deletes the session and the session file.
+</p><p>
+The PHP manual suggests that the nice way check for the existence of cookies
+is by simply calling print_r($_COOKIE).
+</p><p>
+Here are some examples:
+</p>
+<code><small>
+// Unset a single session variable<br>
+unset($_SESSION['color']);<br><br>
+// Unset all of the session variables<br>
+$_SESSION = array();<br><br>
+// Delete the session cookie<br>
+if (isset($_COOKIE[session_name()])) {<br>
+&nbsp;&nbsp;setcookie(session_name(), '', time() - 32000, '/');<br>
+}<br>
+</small></code>
+</li>
+<li><p>
+The session_write_close() Function
+</p><p>
+If more than one script is using a session at any time, for example,
+two or three frames are loading one by one, PHP locks the session until
+each page has finished loading.
+</p><p>
+This feature prevents two pages from writing out session data concurrently
+to the $_SESSION array and thereby corrupting the data.
+</p><p>
+However, if the pages are primarily reading session data, then this locking
+feature can be worked around with the <b>session_write_close()</b> function.
+</p><p>
+After the session data has been written, this function ends the current
+session and makes sure the session data is stored as soon as all changes
+have been made.
+</p><p>
+Normally, you will not need to use this function, as PHP takes care of storing
+session data and ending the session.
+</p><p>
+Format:
+</p>
+<code><small>
+void session_write_close ( void )<br>
+</small></code>
+<p>
+Example:
+</p>
+<blockquote><code><small>
+session_write_close();<br>
+</small></code></blockquote>
+</li>
+<li><p>
+The session_destroy() Function
+</p><p>
+The <b>session_destroy()</b> function deletes the session file and all of its
+data for the current session, but it does not unset a cookie or any global
+variables such as the $_COOKIE or $_SESSION arrays currently cached for the
+current session.
+</p><p>
+Format:
+</p>
+<blockquote><code><small>
+bool session_destroy ( void )<br>
+</small></code></blockquote>
+<p>
+Example:
+</p>
+<blockquote><code><small>
+session_destroy();<br>
+</small></code></blockquote>
+<h4>
+Filename: destroy.php
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax9">session_start</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   3:</span>  <span class="syntax9">extract</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   4:</span>  <span class="syntax9">printf</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">%s&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">,</span> SID<span class="syntax18">)</span><span class="syntax18">;</span> <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Print</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">session</span><span class="syntax2"> </span><span class="syntax2">ID</span>
+<span class="gutterH">   5:</span>  <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">The</span><span class="syntax13"> </span><span class="syntax13">session</span><span class="syntax13"> </span><span class="syntax13">id</span><span class="syntax13"> </span><span class="syntax13">is:</span><span class="syntax13"> </span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax9">session_id</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   6:</span><span class="syntax17">?&gt;</span>
+<span class="gutter">   7:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   8:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax17">&lt;?</span><span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">color</span> <span class="syntax17">?&gt;</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   9:</span>  <span class="syntax17">&lt;h2</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  10:</span>  Hi again <span class="syntax17">&lt;?</span><span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">user</span> <span class="syntax17">?&gt;</span>, You still like <span class="syntax17">&lt;b</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;?</span><span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">color</span> <span class="syntax17">?&gt;</span><span class="syntax17">&lt;/b</span><span class="syntax17">&gt;</span>!
+<span class="gutter">  11:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">  12:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Individually</span><span class="syntax2"> </span><span class="syntax2">remove</span><span class="syntax2"> </span><span class="syntax2">session</span><span class="syntax2"> </span><span class="syntax2">variables</span>
+<span class="gutter">  13:</span>    <span class="syntax8">unset</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax14">&quot;</span><span class="syntax14">user</span><span class="syntax14">&quot;</span><span class="syntax18">]</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>    <span class="syntax8">unset</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax14">&quot;</span><span class="syntax14">color</span><span class="syntax14">&quot;</span><span class="syntax18">]</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  15:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">$_SESSION</span><span class="syntax2"> </span><span class="syntax2">=</span><span class="syntax2"> </span><span class="syntax2">array();</span><span class="syntax2"> </span><span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Remove</span><span class="syntax2"> </span><span class="syntax2">all</span><span class="syntax2"> </span><span class="syntax2">session</span><span class="syntax2"> </span><span class="syntax2">variables</span>
+<span class="gutter">  16:</span>    <span class="syntax9">session_destroy</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  17:</span>    <span class="syntax8">exit</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  18:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  19:</span>  <span class="syntax17">&lt;/h2</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  20:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  21:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+A session is started for this page that was called from another page where form
+information was gathered.
+</p><p>
+The session data is extracted, assigned to variables and displayed.
+</p><p>
+The unset() function removes individual session variables.
+</p><p>
+The array() function without arguments causes the $_SESSION array to be emptied.
+All session variables are removed.
+</p><p>
+The <b>session_destroy()</b> function removes the session and all its data.
+</p></li>
+<li><p>
+Cleaning up Session Files and Garbage Collection
+</p><p>
+If you look in the directory or folder where your sessions are stored, you will
+see that the number of session files builds up quickly.
+</p><p>
+Garbage collection is the process of cleaning up old sessions, a task left to
+PHP. If cookies are being used, the server does not know whether or not the
+cookie file still exists on the user's browser.
+</p><p>
+Also, session files have a default lifetime of 24 minutes and then they will be
+cleaned up by the PHP garbage collector unless you extend their lifetime.
+</p><p>
+The <b>gc_maxlifetime</b> configuration directive is used to determine how long
+PHP should wait (in seconds) before destroying a session based on how long the
+session has been idle since the last time was it was accessed.
+</p><p>
+For example:
+</p>
+<code><small>
+$garbage_timeout = 3600; // 3600 seconds = 60 minutes = 1 hour<br>
+ini_set('session.gc_maxlifetime', $garbage_timeout);<br>
+</small></code>
+<p>
+The garbage collector does not just jump up and start removing files every
+time a session is invoked. It collects garbage based on a probability factor
+set in the <b>session.gc_probability</b> directive in the php.ini file.
+</p><p>
+This directive specifies with what probability the files identified as garbage
+should be removed. If gc_probability is 100, the cleanup is performed on every
+request (i.e., with a probability of 100 percent); if it is 1, as it is by
+default, old sessions will be removed with a probability of 1 percent every
+time a session starts.
+</p><p>
+After setting these two configuration directives, the last bit of advice is to
+move the timed session files into their own directory.
+</p><p>
+Otherwise, the garbage collector will not be able to differentiate between
+timeouts on a per-file basis.
+</p><p>
+For a complete and very readable explanation on PHP garbage collection, see:
+<a href="http://www.captain.at/howto-php-sessions.php">http://www.captain.at/howto-php-sessions.php</a>
+</p></li>
+<li><p>
+Session Runtime Configuration
+</p><p>
+PHP session management has many configuration options for us to choose from.
+</p></li>
+<li><p>
+PHP Session Functions
+</p><p>
+PHP provides the functions shown in the following table to handle sessions,
+many of which we have covered in this unit.
+</p><p>
+Each of these functions is documented in the PHP manual at:
+<a href="http://us3.php.net/session/">http://us3.php.net/session/</a>
+</p><p>
+Table: PHP Session Functions
+</p>
+<table>
+<tr>
+<td><code><b><u>
+Function</u></b></code></td>
+<td><code><b><u>
+Definition</u></b></code></td>
+</tr><tr>
+<td><code>
+session_cache_expire()</code></td>
+<td><code>
+Returns the current setting of session.cache_expire, default 180 minutes.</code></td>
+</tr><tr>
+<td><code>
+session_cache_limiter()</code></td>
+<td><code>
+Returns the name of the current cache limiter that defines the cache control
+HTTP headers sent to the client and what rules determine how the page content
+can be cached.</code></td>
+</tr><tr>
+<td><code>
+session_commit()</code></td>
+<td><code>
+An alias for session_write_close().</code></td>
+</tr><tr>
+<td><code>
+session_decode()</code></td>
+<td><code>
+Decodes the session data.</code></td>
+</tr><tr>
+<td><code>
+session_destroy()</code></td>
+<td><code>
+Destroys all of the data associated with the current session, but does not
+unset any of the global variables associated with the session, or unset the
+session cookie.</code></td>
+</tr><tr>
+<td><code>
+session_encode()</code></td>
+<td><code>
+Encodes the current session data as a string.</code></td>
+</tr><tr>
+<td><code>
+session_get_cookie_params()&nbsp;</code></td>
+<td><code>
+Returns an array with the current session cookie information, including lifetime,
+path, domain, and secure.</code></td>
+</tr><tr>
+<td><code>
+session_id()</code></td>
+<td><code>
+Returns the session ID for the current session.</code></td>
+</tr><tr>
+<td><code>
+session_is_registered()</code></td>
+<td><code>
+Returns TRUE if there is a global variable if its name is registered in the
+current session.</code></td>
+</tr><tr>
+<td><code>
+session_module_name()</code></td>
+<td><code>
+Returns the name of the current session module. If module is specified, that
+module will be used instead.</code></td>
+</tr><tr>
+<td><code>
+session_name()</code></td>
+<td><code>
+Returns the name of the current session or if a name is specified, changes the
+name of the current session.</code></td>
+</tr><tr>
+<td><code>
+session_regenerate_id()</code></td>
+<td><code>
+Replaces the current session ID with a new one, and keeps the current session date.</code></td>
+</tr><tr>
+<td><code>
+session_register()</code></td>
+<td><code>
+Registers one or more global variables with the current session.</code></td>
+</tr><tr>
+<td><code>
+session_save_path()</code></td>
+<td><code>
+Returns the path of the current directory used to save session data or sets a
+new path.</code></td>
+</tr><tr>
+<td><code>
+session_set_cookie_params()</code></td>
+<td><code>
+Sets cookie parameters defined in the php.ini file. The effect of this function
+lasts only for the duration of the script.</code></td>
+</tr><tr>
+<td><code>
+session_set_save_handler()</code></td>
+<td><code>
+Sets the user-level session storage functions that are used for storing and
+retrieving data associated with a session; for example, for file and database
+storage.</code></td>
+</tr><tr>
+<td><code>
+session_start()</code></td>
+<td><code>
+Starts a session.</code></td>
+</tr><tr>
+<td><code>
+session_unregister()</code></td>
+<td><code>
+Unregistered a global session variable.</code></td>
+</tr><tr>
+<td><code>
+session_unset()</code></td>
+<td><code>
+Unsets all session data currently registered.</code></td>
+</tr><tr>
+<td><code>
+session_write_close()</code></td>
+<td><code>
+Stores the session data and closes the session.</code></td>
+</tr>
+</table>
+</li>
+<li><p>
+Implementing a Login System with Sessions
+</p><p>
+The following example consists of three separate files.
+</p>
+</li>
+</ul>
+<blockquote>
+<ol type="1">
+<li class="row1">
+<p>
+The first file is a simple HTML form, the login page, where the user enters a
+username and password.
+</p></li>
+<li class="row0">
+<p>
+The second file, the authentication page, is a PHP script that will verify
+the username and password, and establish a "logged in state" if the username
+and password are valid. This file will also be used for logging out the user.
+</p><p>
+The action to log in depends on the parameter (login) provided by the POST
+method from the HTML form (hidden input element).
+</p><p>
+The action to log out is performed after the user has logged on, been redirected
+to the third page with protected content, and clicks on the logout link.
+</p></li>
+<li class="row0">
+<p>
+The third file is a PHP script that will show protected content only if the
+user is logged in. This file also describes a simple way to conditionally
+display a whole HTML block.
+</p></li>
+</ol>
+</blockquote>
+<ul class="slidesUl1">
+<li>
+<p>
+Sessions are used to remember users who are logged in and their password.
+</p><p>
+In a real-world situation, you will probably use a database to store the
+username and password, and the protected content could be stored in a text
+file or database.
+</p>
+<h4>
+Filename: login.html - Page 1
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;</span><span class="syntax17">html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;</span><span class="syntax17">head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;</span><span class="syntax17">title</span><span class="syntax17">&gt;</span>Simple login page<span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;</span><span class="syntax17">body</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;</span><span class="syntax17">p</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  <span class="syntax17">&lt;</span><span class="syntax17">a</span><span class="syntax17"> </span><span class="syntax17">href</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">protected.php</span><span class="syntax13">&quot;</span><span class="syntax17">&gt;</span>Protected content<span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">a</span><span class="syntax17">&gt;</span>
+<span class="gutter">   8:</span>  <span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">p</span><span class="syntax17">&gt;</span>
+<span class="gutter">   9:</span>  <span class="syntax17">&lt;</span><span class="syntax17">p</span><span class="syntax17">&gt;</span>Type phpbee for both username and password <span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">p</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  10:</span>  <span class="syntax17">&lt;</span><span class="syntax17">form</span><span class="syntax17"> </span><span class="syntax17">action</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">auth.php</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">method</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">POST</span><span class="syntax13">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">  11:</span>   Username<span class="syntax17">&lt;</span><span class="syntax17">br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  12:</span>   <span class="syntax17">&lt;</span><span class="syntax17">input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">text</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">name</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">username</span><span class="syntax13">&quot;</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;</span><span class="syntax17">br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  13:</span>   Password<span class="syntax17">&lt;</span><span class="syntax17">br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  14:</span>   <span class="syntax17">&lt;</span><span class="syntax17">input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">password</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">name</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">password</span><span class="syntax13">&quot;</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;</span><span class="syntax17">br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  15:</span>   <span class="syntax17">&lt;</span><span class="syntax17">input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">hidden</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">name</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">login</span><span class="syntax13">&quot;</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;</span><span class="syntax17">br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  16:</span>   <span class="syntax17">&lt;</span><span class="syntax17">input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">submit</span><span class="syntax13">&quot;</span><span class="syntax17">&gt;</span> <span class="syntax17">&lt;</span><span class="syntax17">input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">reset</span><span class="syntax13">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">  17:</span>  <span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">form</span><span class="syntax17">&gt;</span>
+<span class="gutter">  18:</span> <span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  19:</span><span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+On line 7 is a link to the protected page (Page 3) where special content can be
+read only if the visitor has typed in a valid username and password.
+</p><p>
+After the form has been submitted, the PHP script (Page 2), auth.php, will be
+executed. This page will determine whether or not the visitor has provided valid
+log in credentials and is authorized to view protected content.
+</p><p>
+The visitor is asked to type in the username and password on lines 11-14.
+</p><p>
+To submit information that is not entered by the visitor, a hidden field
+is used and assigned the value "login".
+</p>
+<h4>
+Filename: auth.php - Page 2
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax9">session_start</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   3:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">User</span><span class="syntax2"> </span><span class="syntax2">is</span><span class="syntax2"> </span><span class="syntax2">logging</span><span class="syntax2"> </span><span class="syntax2">in</span>
+<span class="gutter">   4:</span>  <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax8">isset</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_POST</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">login</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutterH">   5:</span>    <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax8">isset</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_POST</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">username</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">)</span>
+<span class="gutter">   6:</span>        <span class="syntax18">&amp;</span><span class="syntax18">&amp;</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">_POST</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">username</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">=</span><span class="syntax18">=</span> <span class="syntax13">'</span><span class="syntax13">phpbee</span><span class="syntax13">'</span><span class="syntax18">)</span>
+<span class="gutter">   7:</span>        <span class="syntax18">&amp;</span><span class="syntax18">&amp;</span> <span class="syntax8">isset</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_POST</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">password</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">)</span>
+<span class="gutter">   8:</span>        <span class="syntax18">&amp;</span><span class="syntax18">&amp;</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">_POST</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">password</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">=</span><span class="syntax18">=</span> <span class="syntax13">'</span><span class="syntax13">phpbee</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   9:</span>       <span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">Authenticated</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">=</span> <span class="syntax5">1</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>     <span class="syntax18">}</span>
+<span class="gutter">  11:</span>     <span class="syntax8">else</span> <span class="syntax18">{</span>
+<span class="gutter">  12:</span>       <span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">Authenticated</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">=</span> <span class="syntax5">0</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>     <span class="syntax18">}</span>
+<span class="gutter">  14:</span>     <span class="syntax9">session_write_close</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  15:</span>     <span class="syntax9">header</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">Location:</span><span class="syntax13"> </span><span class="syntax13">protected.php</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  16:</span>   <span class="syntax18">}</span>
+<span class="gutter">  17:</span>   <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">User</span><span class="syntax2"> </span><span class="syntax2">is</span><span class="syntax2"> </span><span class="syntax2">logging</span><span class="syntax2"> </span><span class="syntax2">out</span>
+<span class="gutter">  18:</span>   <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax8">isset</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_GET</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">logout</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  19:</span>     <span class="syntax9">session_destroy</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  20:</span>     <span class="syntax9">header</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">Location:</span><span class="syntax13"> </span><span class="syntax13">login.html</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  21:</span>   <span class="syntax18">}</span>
+<span class="gutter">  22:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+If the user has filled out the login form in login.html (Page 1), then the
+$_POST["login"] variable will be set, and the statements in the if block will
+be executed.
+</p><p>
+If the username is set and has the value "phpbee", and the password is set and
+also has the value "phpbee", the statement on line 9 is executed.
+</p><p>
+The session variable is set to 1. The value of 1 will be used later to
+determine that the user is logged in.
+</p><p>
+If either a valid username or password were not entered, the session variable
+is set to 0. A value of 0 will be used to determine that the user is not logged in.
+</p><p>
+The <b>session_write_close()</b> function stores the session data now and closes
+the session.
+</p><p>
+The user is redirected to protected.php (Page 3). This is the page that contains
+content not accessible to anyone who is not logged in.
+</p><p>
+If the user entered the protected page and clicked the link to log out,
+the variable $_GET['logout'] will be set, and the statements in the if block on
+lines 18-21 will be executed.
+</p><p>
+On line 19 the session and all its data are destroyed.
+</p><p>
+On line 20 the user is redirected back to the login page.
+</p><p>
+Because the session was destroyed, he or she is no longer authenticated
+to go to the protected page.
+</p>
+<h4>
+Filename: protected.php - Page 3
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax9">session_start</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   3:</span><span class="syntax17">?&gt;</span>
+<span class="gutter">   4:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Protected page<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   8:</span> <span class="syntax17">&lt;body</span><span class="syntax17">&gt;</span>
+<span class="gutter">   9:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutterH">  10:</span>    <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax8">isset</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">Authenticated</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">)</span>
+<span class="gutter">  11:</span>        <span class="syntax18">&amp;</span><span class="syntax18">&amp;</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">Authenticated</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">=</span><span class="syntax18">=</span> <span class="syntax5">1</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  12:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  13:</span>  <span class="syntax17">&lt;h2</span><span class="syntax17">&gt;</span>Protected content<span class="syntax17">&lt;/h2</span><span class="syntax17">&gt;</span>
+<span class="gutter">  14:</span>  <span class="syntax17">&lt;p</span><span class="syntax17">&gt;</span>Hello. Since you are logged in, you can view protected content<span class="syntax17">&lt;/p</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  15:</span>  <span class="syntax17">&lt;p</span><span class="syntax17">&gt;</span>You can also <span class="syntax17">&lt;a</span><span class="syntax17"> </span><span class="syntax17">href</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">auth</span><span class="syntax14">.</span><span class="syntax14">php</span><span class="syntax14">?</span><span class="syntax14">logout</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>log out<span class="syntax17">&lt;/a</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;/p</span><span class="syntax17">&gt;</span>
+<span class="gutter">  16:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">  17:</span>    <span class="syntax18">}</span>
+<span class="gutter">  18:</span>    <span class="syntax8">else</span> <span class="syntax18">{</span>
+<span class="gutter">  19:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutterH">  20:</span>  <span class="syntax17">&lt;h2</span><span class="syntax17">&gt;</span>You are not logged in<span class="syntax17">&lt;/h2</span><span class="syntax17">&gt;</span>
+<span class="gutter">  21:</span>  <span class="syntax17">&lt;p</span><span class="syntax17">&gt;</span>Hello. Since you are not logged in, you cannot view protected content<span class="syntax17">&lt;/p</span><span class="syntax17">&gt;</span>
+<span class="gutter">  22:</span>  <span class="syntax17">&lt;p</span><span class="syntax17">&gt;</span>But you can <span class="syntax17">&lt;a</span><span class="syntax17"> </span><span class="syntax17">href</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">login</span><span class="syntax14">.</span><span class="syntax14">html</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>log in<span class="syntax17">&lt;/a</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;/p</span><span class="syntax17">&gt;</span>
+<span class="gutter">  23:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">  24:</span>    <span class="syntax18">}</span>
+<span class="gutterH">  25:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  26:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  27:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+If, on Page 2, the session variables were set and $SESSION['Authenticated']
+was set to 1, the visitor is logged in and will be able to read whatever is
+on lines 13-15.
+</p><p>
+You could add more content to the section "protected" by login and the session
+variable.
+</p><p>
+The link on line 15 will send the user back to Page 2, auth.php.
+The word logout appended to the question mark, will be passed via the GET
+method and assigned to the $_GET[ ] superglobal array.
+</p><p>
+The link on line 22 returns the visitor back to the login page, Page 1.
+</p>
+</li>
+</ul>
+</div>
+</body>
+</html>

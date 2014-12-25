@@ -1,0 +1,475 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>Conditionals</title>
+<link href="../../../css/basic.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" language="JavaScript">
+<!--
+function putSemester() {
+    var today=new Date();
+    var thisMonth=today.getMonth()+1;
+    var thisYear=today.getFullYear();
+    if(thisMonth <=6) {
+        return "Spring, " + thisYear;
+    }
+    else {
+       return "Fall, " + thisYear;
+    }
+}//-->
+</script>
+<style type="text/css">
+<!--
+    .bgStripes {
+        background-image:url(../../../images/Xstripes.gif);
+        background-attachment: fixed;
+    }
+    body {
+        background-color:white;
+    }
+    strong {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+-->
+</style>
+</head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
+<table class="bgStripes" border="0" width="100%">
+<tbody>
+<tr name="firstRow">
+<td valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+<script type="text/javascript">
+<!--
+    document.write(putSemester());
+-->
+</script>
+</span> <br />
+</td>
+<td style="text-align: center;"><span style="font-weight: bold; font-size: medium; color: darkblue;">
+PHP Web Development with MySQL
+</span> </td>
+<td align="right" valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+3 Credits</span> </td>
+</tr>
+<tr>
+<td colspan="3" style="text-align: center;"><span style="font-size: xx-small; font-weight: bold;">
+152-166</span> </td>
+</tr>
+</tbody>
+</table>
+<!--The heading for the slides --> <br />
+<table class="headTable1" border="0">
+<tbody>
+<tr>
+<td width="100"><a href="moreOps.html"><img alt="" src="../../../images/btn_lArrow.gif" border="0"></a><a href="index.html"><img alt="" src="../../../images/btn_upArrow.gif" border="0"></a><a href="loops.html"><img alt="" src="../../../images/btn_rArrow.gif" border="0"></a></td>
+<td>Conditional Statements in PHP</td>
+</tr>
+</tbody>
+</table>
+<br />
+<div class="disp1">
+<ul class="slidesUl1">
+<li><p>
+Control Structures, Blocks, and Compound Statements
+</p><p>
+People control their lives by making decisions, and so do programs.
+In fact, acccording to computer science books, a good language allows you to
+control the flow of your program in three ways:
+</p>
+<ul>
+<li><p>Execute a sequence of statements.</p></li>
+<li><p>Based on a test, branch to an alternative sequence of statements.</p></li>
+<li><p>Repeat a sequence of statements until some condition is met.</p></li>
+</ul>
+<p>
+We've already used programs that execute a sequence of statements,
+one after another. Now we examine the branching and looping control structures
+that allow the flow of the program's control to change depending on some
+conditional expression.
+</p><p>
+The decision-making constructs (<b>if</b> , <b>if/else</b> , <b>if/else if</b>)
+contain a control expression that determines whether a block of statements will
+be executed.
+</p><p>
+The looping constructs (<b>while</b> , <b>for</b>) allow the program to
+repetitively execute a statement block until some condition is satisfied.
+</p><p>
+A compound statement or block consists of a statement or a group of statements
+surrounded by curly braces.
+</p><p>
+The block is syntactically equivalent to a single statement and usually
+follows an if, else, while, or for construct. This is a block:
+</p>
+<blockquote><code><small>
+{ statement; statement; statement }<br>
+</small></code></blockquote>
+</li>
+<li><p>
+Conditionals
+</p><p>
+Conditional constructs control the flow of a program. If a condition is true,
+the program will execute a block of statements and if the condition is false,
+flow will go to an alternate block of statements.
+</p><p>
+Decision-making constructs (if, else, switch) contain a control expression
+that determines whether or not a block of expressions will be executed.
+</p><p>
+If the condition after the <b>if</b> is met, the result is true, and the
+following block of statements is executed; otherwise, the result is false
+and the block is not executed.
+</p>
+<blockquote><code><small>
+if (condition) {<br>
+&nbsp;&nbsp;statements;<br>
+}<br>
+</small></code></blockquote>
+<p>
+Example:
+</p>
+<blockquote><code><small>
+if ( $age > 21 ) {<br>
+&nbsp;&nbsp;print "Let's Party!";<br>
+}<br>
+</small></code></blockquote>
+<p>
+The block of statements (or single statement) is enclosed in curly braces.
+Normally statements are executed sequentially. If there is only one statement
+after the conditional expression, the curly braces are optional.
+</p></li>
+<li><p>
+if/else
+</p><p>
+PHP statements can be conditionally executed with the if/else branching construct.
+This construct allows for a two-way decision.
+</p><p>
+The if evaluates the first conditional expression in parentheses, and if the
+expression evaluates to true, the block after the opening curly braces is executed;
+otherwise, the block after the else is executed. The else is optional.
+</p>
+<blockquote><code><small>
+if (condition) {<br>
+&nbsp;&nbsp;statements1;<br>
+}<br>
+else {<br>
+&nbsp;&nbsp;statements2;<br>
+}<br>
+</small></code></blockquote>
+<p>
+The examples below illustrate if/else logic.
+</p>
+<blockquote><code><small>
+if ( $x > $y ) {<br>
+&nbsp;&nbsp;print "$x is larger";<br>
+}<br>
+else {<br>
+&nbsp;&nbsp;print "y is larger";<br>
+}<br>
+</small></code></blockquote>
+<h4>
+Filename: yourfare.html (The HTML Form)
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Your Fare<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">lightgreen</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">face</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">arial</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">+1</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">form</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">method</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">get</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">action</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">ifelse.php</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">p</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>How old are you?
+<SPAN CLASS="gutter">   7:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">input</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">type</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">text</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">name</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">age</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax17">2</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">p</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">input</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">type</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">submit</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">name</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">submit_age</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">value</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">Get</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">Fare</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">form</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  12:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+</div>
+</small></blockquote>
+<h4>
+Filename: ifelse.php (The PHP Script)
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Your Fare<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">lightgreen</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">face</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">arial</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">+</SPAN><SPAN CLASS="syntax13">1</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">p</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>  <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>    <SPAN CLASS="syntax9">extract</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">_REQUEST</SPAN>)<SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>    <SPAN CLASS="syntax8">if</SPAN> (<SPAN CLASS="syntax18">!</SPAN> <SPAN CLASS="syntax8">isset</SPAN> ( <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">submit_age</SPAN> )) <SPAN CLASS="syntax18">{</SPAN> <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">Simple</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">conditional</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>      <SPAN CLASS="syntax9">exit</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN>    <SPAN CLASS="syntax18">}</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN>  <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutter">  12:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">table</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">border</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">1</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">cellpadding</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">10</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  13:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">tr</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">yellow</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  14:</SPAN>  <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutterH">  15:</SPAN>    <SPAN CLASS="syntax8">if</SPAN> (<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">age</SPAN> <SPAN CLASS="syntax18">&gt;=</SPAN> <SPAN CLASS="syntax5">55</SPAN> )<SPAN CLASS="syntax18">{</SPAN>
+<SPAN CLASS="gutter">  16:</SPAN>      <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">price</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax5">8</SPAN><SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax5">25</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  17:</SPAN>      print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">td</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">b</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">You</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">pay</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">\$</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">price</SPAN><SPAN CLASS="syntax13">,</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">the</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">senior</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">fare</SPAN><SPAN CLASS="syntax13">!</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">td</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  18:</SPAN>    <SPAN CLASS="syntax18">}</SPAN>
+<SPAN CLASS="gutter">  19:</SPAN>    <SPAN CLASS="syntax8">else</SPAN> <SPAN CLASS="syntax18">{</SPAN>
+<SPAN CLASS="gutterH">  20:</SPAN>      <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">price</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax5">10</SPAN><SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax5">00</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  21:</SPAN>      print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">td</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">b</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">You</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">pay</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">\$</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">price</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">regular</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">adult</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">fare</SPAN><SPAN CLASS="syntax13">.</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">td</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  22:</SPAN>    <SPAN CLASS="syntax18">}</SPAN>
+<SPAN CLASS="gutter">  23:</SPAN>  <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutter">  24:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">tr</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">  25:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">table</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  26:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  27:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+Note that if the form field has not been set, the program will exit.
+</p><p>
+If the value of the variable $age is greater than or equal to 55, lines 16 and 17
+are executed. The else statement block is executed if the expression on line 15 is false.
+</p></li>
+<li><p>
+if/else if
+</p><p>
+If you've got $1, we can go to the Dollar Store, else if you've got $10,
+we could rent a couple of movies, else if you've got $20 we could buy a CD
+. . . or else forget it!"
+</p><p>
+PHP provides another form of branching, the <b>if/elseif</b> construct.
+This construct provides a multiway decision structure.
+</p>
+<blockquote><code><small>
+if (condition) {<br>
+&nbsp;&nbsp;statements1;<br>
+}<br>
+elseif (condition) {<br>
+&nbsp;&nbsp;statements2;<br>
+}<br>
+elseif (condition) {<br>
+&nbsp;&nbsp;statements3;<br>
+}<br>
+else {<br>
+&nbsp;&nbsp;statements4;<br>
+}<br>
+</small></code></blockquote>
+<p>
+If the first conditional expression following the if keyword is true,
+the statement or block of statements following the expression are executed
+and control starts after the else block.
+</p><p>
+Otherwise, if the conditional expression following the if keyword is false,
+control branches to the first elseif and the expression following it is evaluated.
+</p><p>
+If that expression is true, the statement or block of statements following it are
+executed, and if false, the next elseif is tested.
+</p><p>
+All else ifs are tested and if none of their expressions are true, control goes
+to the else statement.
+</p><p>
+Although the else is not required, it normally serves as a default action
+if all previous conditions were false.
+</p>
+<h4>
+Filename: movie.html (The HTML Form)
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Your Movie Price<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">azure</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">form</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">method</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">GET</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">action</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">elseif.php</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">p</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>How old are you?<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">br</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">input</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">type</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">text</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">name</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">age</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax17">3</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">p</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">input</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">type</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">submit</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">name</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">submit_price</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">value</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">Get</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">Price</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">form</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+</div>
+</small></blockquote>
+<h4>
+Filename: elseif.php (The PHP Script)
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Your Price<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">chartreuse</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">face</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">arial</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">+</SPAN><SPAN CLASS="syntax13">1</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN>  <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>    <SPAN CLASS="syntax9">extract</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">_REQUEST</SPAN>)<SPAN CLASS="syntax18">;</SPAN> <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">Get</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">form</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">input</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">data</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>    <SPAN CLASS="syntax8">if</SPAN> (<SPAN CLASS="syntax18">!</SPAN> <SPAN CLASS="syntax8">isset</SPAN> (<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">submit_price</SPAN>) <SPAN CLASS="syntax18">|</SPAN><SPAN CLASS="syntax18">|</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">age</SPAN> <SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN> ) <SPAN CLASS="syntax18">{</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>      print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">You</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">must</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">enter</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">your</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">age</SPAN><SPAN CLASS="syntax13">.</SPAN><SPAN CLASS="syntax13">.</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>      <SPAN CLASS="syntax9">exit</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN>    <SPAN CLASS="syntax18">}</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN>  <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutter">  12:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">table</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">border</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">1</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">cellpadding</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">10</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  13:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">tr</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">azure</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  14:</SPAN>  <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutterH">  15:</SPAN>    <SPAN CLASS="syntax8">if</SPAN> (<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">age</SPAN> <SPAN CLASS="syntax18">&gt;</SPAN> <SPAN CLASS="syntax5">0</SPAN> <SPAN CLASS="syntax18">&amp;</SPAN><SPAN CLASS="syntax18">&amp;</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">age</SPAN> <SPAN CLASS="syntax18">&lt;</SPAN> <SPAN CLASS="syntax5">13</SPAN>) <SPAN CLASS="syntax18">{</SPAN>
+<SPAN CLASS="gutter">  16:</SPAN>       <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">price</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax5">5</SPAN><SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax5">00</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  17:</SPAN>       print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">td</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">b</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">You</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">pay</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">\$</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">price</SPAN><SPAN CLASS="syntax13">,</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">the</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">child</SPAN><SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax13">s</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">price</SPAN><SPAN CLASS="syntax13">!</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">td</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  18:</SPAN>    <SPAN CLASS="syntax18">}</SPAN>
+<SPAN CLASS="gutter">  19:</SPAN>    <SPAN CLASS="syntax8">elseif</SPAN> (<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">age</SPAN> <SPAN CLASS="syntax18">&gt;=</SPAN> <SPAN CLASS="syntax5">13</SPAN> <SPAN CLASS="syntax18">&amp;</SPAN><SPAN CLASS="syntax18">&amp;</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">age</SPAN> <SPAN CLASS="syntax18">&lt;</SPAN> <SPAN CLASS="syntax5">55</SPAN> ) <SPAN CLASS="syntax18">{</SPAN>
+<SPAN CLASS="gutterH">  20:</SPAN>      <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">price</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax5">8</SPAN><SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax5">25</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  21:</SPAN>      print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">td</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">b</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">You</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">pay</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">\$</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">price</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">regular</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">adult</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">price</SPAN><SPAN CLASS="syntax13">.</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">td</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  22:</SPAN>    <SPAN CLASS="syntax18">}</SPAN>
+<SPAN CLASS="gutter">  23:</SPAN>    <SPAN CLASS="syntax8">elseif</SPAN> (<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">age</SPAN> <SPAN CLASS="syntax18">&gt;=</SPAN> <SPAN CLASS="syntax5">55</SPAN> <SPAN CLASS="syntax18">&amp;</SPAN><SPAN CLASS="syntax18">&amp;</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">age</SPAN> <SPAN CLASS="syntax18">&lt;=</SPAN> <SPAN CLASS="syntax5">120</SPAN>) <SPAN CLASS="syntax18">{</SPAN>
+<SPAN CLASS="gutter">  24:</SPAN>      <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">price</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax5">10</SPAN><SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax5">00</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  25:</SPAN>      print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">td</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">b</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">You</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">pay</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">\$</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">price</SPAN><SPAN CLASS="syntax13">,</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">the</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">senior</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">price</SPAN><SPAN CLASS="syntax13">.</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">td</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  26:</SPAN>    <SPAN CLASS="syntax18">}</SPAN>
+<SPAN CLASS="gutter">  27:</SPAN>    <SPAN CLASS="syntax8">else</SPAN> <SPAN CLASS="syntax18">{</SPAN>
+<SPAN CLASS="gutter">  28:</SPAN>      print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">td</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">b</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">You</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">are</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">not</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">a</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">human</SPAN><SPAN CLASS="syntax13">!</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">td</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  29:</SPAN>    <SPAN CLASS="syntax18">}</SPAN>
+<SPAN CLASS="gutterH">  30:</SPAN>  <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutter">  31:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">tr</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  32:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">table</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  33:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  34:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">  35:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+</div>
+</small></blockquote>
+</li>
+<li><p>
+The switch Statement
+</p><p>
+The <b>switch</b> statement is an alternative to the if/elseif conditional construct.
+It is commonly called a case statement, and often makes the program more readable
+when handling multiple options.
+</p>
+<blockquote><code><small>
+switch (expression) {<br>
+&nbsp;&nbsp;case label :<br>
+&nbsp;&nbsp;&nbsp;&nbsp;statement(s);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+&nbsp;&nbsp;case label :<br>
+&nbsp;&nbsp;&nbsp;&nbsp;statement(s);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+&nbsp;&nbsp;default : statement;<br>
+}<br>
+</small></code></blockquote>
+<p>
+Examples:</p>
+<blockquote><code><small>
+switch ($color){<br>
+&nbsp;&nbsp;case "red":<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print "Hot!";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+&nbsp;&nbsp;case "blue":<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print "Cold.";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+&nbsp;&nbsp;default:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;print "Not a good choice.";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;break;<br>
+}<br>
+</small></code></blockquote>
+<p>
+The value of the switch expression is matched against the expressions,
+called labels, following the case keyword.
+</p><p>
+The case labels are constants, either string or numeric. Each label is
+terminated with a colon. The default label is optional, but its action is taken
+if none of the other cases match the switch expression. After a match is found,
+the statements after the matched label are executed for that case.
+</p><p>
+If none of the cases are matched, the control drops to the default case.
+The default is optional.
+</p><p>
+If a break statement is omitted, all statements below the matched label are
+executed until either a break is reached or the entire switch block exits.
+</p>
+<h4>
+Filename: colors.html (The HTML Form)
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Pick a Font Color<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">9BCD93</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">face</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">arial</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">b</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">form</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">method</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">GET</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">action</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">switch.php</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">br</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Choose a font color:
+<SPAN CLASS="gutterH">  10:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">br</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">input</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">type</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">radio</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">name</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">color</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">value</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">red</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN> red
+<SPAN CLASS="gutter">  11:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">br</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">input</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">type</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">radio</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">name</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">color</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">value</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">blue</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN> blue
+<SPAN CLASS="gutter">  12:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">br</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">input</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">type</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">radio</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">name</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">color</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">value</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">purple</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN> purple
+<SPAN CLASS="gutter">  13:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">br</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">input</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">type</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">radio</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">name</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">color</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">value</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">green</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN> green
+<SPAN CLASS="gutter">  14:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">p</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">  15:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">input</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">type</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">submit</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">name</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">submit_color</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">value</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">Submit</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">color</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  16:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">form</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  17:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">b</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  18:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  19:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+</div>
+</small></blockquote>
+<h4>
+Filename: switch.php (The PHP Script)
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Font Color<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">lightgreen</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">face</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">arial</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">+</SPAN><SPAN CLASS="syntax13">1</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">p</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>  <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>    <SPAN CLASS="syntax9">extract</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">_REQUEST</SPAN>)<SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>    <SPAN CLASS="syntax8">if</SPAN> (<SPAN CLASS="syntax18">!</SPAN> <SPAN CLASS="syntax8">isset</SPAN> (<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">submit_color</SPAN>)) <SPAN CLASS="syntax18">{</SPAN> <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">check</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">that</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">variables</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">were</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">set</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>      <SPAN CLASS="syntax9">exit</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN>    <SPAN CLASS="syntax18">}</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN>  <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutter">  12:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">table</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">border</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">2</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">cellpadding</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">10</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  13:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">tr</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">white</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  14:</SPAN>  <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutterH">  15:</SPAN>    <SPAN CLASS="syntax8">switch</SPAN> ( <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">color</SPAN> ) <SPAN CLASS="syntax18">{</SPAN>
+<SPAN CLASS="gutter">  16:</SPAN>      <SPAN CLASS="syntax8">case</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">red</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">:</SPAN>
+<SPAN CLASS="gutter">  17:</SPAN>        print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">td</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">b</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">font</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">color</SPAN><SPAN CLASS="syntax13">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">color</SPAN><SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">Font</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">is</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">red</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">td</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  18:</SPAN>        <SPAN CLASS="syntax8">break</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  19:</SPAN>      <SPAN CLASS="syntax8">case</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">blue</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">:</SPAN>
+<SPAN CLASS="gutterH">  20:</SPAN>        print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">td</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">b</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">font</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">color</SPAN><SPAN CLASS="syntax13">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">color</SPAN><SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">Font</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">is</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">blue</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">td</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  21:</SPAN>        <SPAN CLASS="syntax8">break</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  22:</SPAN>      <SPAN CLASS="syntax8">case</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">purple</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">:</SPAN>
+<SPAN CLASS="gutter">  23:</SPAN>        print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">td</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">b</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">font</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">color</SPAN><SPAN CLASS="syntax13">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">color</SPAN><SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">Font</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">is</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">purple</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">td</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  24:</SPAN>        <SPAN CLASS="syntax8">break</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  25:</SPAN>      <SPAN CLASS="syntax8">case</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">green</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">:</SPAN>
+<SPAN CLASS="gutter">  26:</SPAN>        print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">td</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">b</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">font</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">color</SPAN><SPAN CLASS="syntax13">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">color</SPAN><SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">Font</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">is</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">green</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">td</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  27:</SPAN>        <SPAN CLASS="syntax8">break</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  28:</SPAN>      <SPAN CLASS="syntax8">default</SPAN><SPAN CLASS="syntax18">:</SPAN>
+<SPAN CLASS="gutter">  29:</SPAN>        print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">td</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">b</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">font</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">color</SPAN><SPAN CLASS="syntax13">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax13">black</SPAN><SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">Font</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">is</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">black</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">td</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  30:</SPAN>        <SPAN CLASS="syntax8">break</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  31:</SPAN>    <SPAN CLASS="syntax18">}</SPAN>
+<SPAN CLASS="gutter">  32:</SPAN>  <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutter">  33:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">tr</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  34:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">table</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">  35:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  36:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  37:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+In the switch expression, the value of $color is matched against the values of
+each of the following case labels.
+</p><p>
+PHP names the variable, $color, by the same name assigned to the radio button
+and assigns to the variable the value that was selected by the user when he or
+she clicked the button. If the user clicked red, then $color will evaluate to red.
+</p><p>
+The default statement is not necessary, but is good practice in case you should
+decide to replace the default with an additional case label later on.
+</p>
+</li>
+</ul>
+</div>
+</body>
+</html>

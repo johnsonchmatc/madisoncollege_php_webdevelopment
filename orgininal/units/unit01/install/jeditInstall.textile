@@ -1,0 +1,93 @@
+h2. Installing jEdit
+
+---
+
+h3. Step 1
+
+Close jEdit if it is running.
+
+<br />
+
+---
+
+h3. Step 2 
+
+Search for all directories on your computer named ".jedit", the period is important:
+
+<div style="text-align: center;">
+  !/attachment/jEditInstall/search.jpg/!
+</div>
+
+<br />
+
+---
+
+h3. Step 3 
+
+Your search might result in 0, 1, 2, or even 3 different copies of the .jedit directory:
+
+<div style="text-align: center;">
+  !/attachment/jEditInstall/results.jpg/!
+</div>
+
+<br />
+
+---
+
+h3. Step 4
+
+If your search found some .jedit directories the *delete them all!*
+
+<div style="text-align: center;">
+  !/attachment/jEditInstall/delete.jpg/!
+</div>
+
+<br />
+
+---
+
+h3. Step 5
+
+Now launch jEdit, because it can't find a .jedit directory it will think this is the very first time you have ever launched it and will show you this:
+
+<div style="text-align: center;">
+  !/attachment/jEditInstall/first_time.jpg/!
+</div>
+
+If you don't see this then you have not deleted all the copies of the .jedit directory.
+
+<br />
+
+---
+
+h3. Step 6
+
+Close the welcome window and you should see this. It is the default jEdit without any plugins:
+
+<div style="text-align: center;">
+  !/attachment/jEditInstall/jedit_new.jpg/!
+</div>
+
+<br />
+
+---
+
+h3. Step 7
+
+Now close jEdit. When you launched jEdit it will have created a .jedit directory where it wants it to be. The next step is to find where it put it. You can do another search like in Step 2 if you can't find it quickly. Remember where you found it and delete it one more time. 
+
+Now access the CD that you purchased from the MITA club. In the jEdit directory is a file named *jedit_plugins.zip*. Unzip this file, it will result in a directory named *.jedit*. Move this directory to the spot where jEdit had created one.
+
+<br />
+
+---
+
+h3. Step 8
+
+Launch jEdit. If you see the following then you have installed it correctly:
+
+<div style="text-align: center;">
+  !/attachment/jEditInstall/jedit_done.jpg/!
+</div>
+
+<br />

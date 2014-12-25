@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta name="generator" content="HTML Tidy, see www.w3.org" />
+  <title>PHP-MySQL Server</title>
+  <link href="../css/basic.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" language="JavaScript">
+
+<!--
+
+function putSemester() {
+
+var today=new Date();
+
+var thisMonth=today.getMonth()+1;
+
+var thisYear=today.getFullYear();
+
+if(thisMonth <=6) {
+
+return "Spring, " + thisYear;
+
+}
+
+else {
+
+return "Fall, " + thisYear;
+
+}
+
+}//-->
+
+  
+
+  </script>
+  <style type="text/css">
+
+<!--
+
+.bgStripes {
+
+background-image:url(../images/Xstripes.gif);
+
+background-attachment: fixed;
+
+}
+
+
+
+body {
+
+background-color:white;
+
+}
+
+
+
+strong {
+
+font-family: Arial, Helvetica, sans-serif;
+
+}
+
+
+
+.table1 {
+
+font-family:Arial, Helvetica, sans-serif;
+
+font-size: small;
+
+}
+
+
+
+.table2 {
+
+font-family:Arial, Helvetica, sans-serif;
+
+font-size: small;
+
+text-align:center;
+
+}
+
+
+
+td.cen {
+
+text-align:center;
+
+}
+
+
+
+.small_title {
+
+font-family: Arial, Helvetica, sans-serif;
+
+font-size:x-small;
+
+font-weight:bold;
+
+}
+
+
+
+.med_title {
+
+font-family: Arial, Helvetica, sans-serif;
+
+font-size:medium;
+
+font-weight:bold;
+
+text-align:center;
+
+color:darkblue;
+
+}
+
+
+
+-->
+
+  
+
+  </style>
+</head>
+<body>
+<table class="bgStripes" border="0" width="100%">
+  <tbody>
+    <tr name="firstRow">
+      <td valign="top" width="80"><span
+ style="font-size: x-small; font-weight: bold;">
+      <script type="text/javascript">
+
+<!--
+
+document.write(putSemester());
+
+-->
+
+      
+
+      </script>
+      </span> <br />
+</td>
+<td style="text-align: center;"><span
+ style="color: darkblue; font-size: medium; font-weight: bold;">
+PHP Web Development with MySQL</span><span
+ style="color: darkblue; font-size: medium; font-weight: bold;">&nbsp;</span></td>
+<td align="right" valign="top" width="80"><span
+ style="font-size: x-small; font-weight: bold;">
+3 Credits</span> </td>
+</tr>
+<tr>
+<td colspan="3" style="text-align: center;"><span
+ style="font-size: xx-small; font-weight: bold;">152-166</span> </td>
+    </tr>
+  </tbody>
+</table>
+<h3>PHP &amp; MySQL Class Server<br />
+</h3>
+<table style="width: 100%; text-align: left;" border="0" cellpadding="2"
+ cellspacing="2">
+<tbody>
+<tr>
+<td style="vertical-align: top; text-align: right; width: 25%;"><span
+ style="font-weight: bold;">Host &amp; Domain Name:</span><br />
+</td>
+<td style="border-bottom: 1px solid black; vertical-align: top;">&nbsp;
+itins3.matcmadison.edu<br />
+</td>
+</tr>
+</tbody>
+</table>
+<ol>
+  <li><span style="font-weight: bold;">About our class server:</span> <br />
+    <br />
+Each student will have an account on a shared Linux-based server.
+You may use it to store copies of PHP files for in-class labs and projects.
+We will use it for some labs during the semester.
+Student usernames on the server will be first initial and last
+name. The instructor will tell you the password at the first class period.<br />
+    <br />
+  </li>
+  <li><span style="font-weight: bold;">Sign-On instructions:</span><br />
+<p>To sign-on to the server, use <b>ssh</b> from your Linux virtual machine (VM):</p>
+<blockquote><code>
+ssh djefferson@itins3.matcmadison.edu<br>
+</code></blockquote>
+<p>From a Windows PC you can use the <b>Putty</b> terminal emulator to connect
+to the class server.</p>
+<p>Only use YOUR first initial and last name. You will be prompted for a password.
+Once you login to the server you may change your password using the <b>passwd</b>
+command.</p>
+</li>
+  <li><span style="font-weight: bold;">Copying Files:</span><br />
+    <p class="WW-BodyTextIndent2"
+ style="margin-left: 0in; text-indent: 0in;">Use the
+secure copy command, <b>scp</b>, to copy the files to and from the
+server from your Linux VM. To copy to a directory on the server use:</p>
+<blockquote><code>
+scp filename djefferson@itins3.matcmadison.edu:/home/djefferson/<br>
+</code></blockquote>
+<p>To copy from a directory on the server to your current directory use:</p>
+<blockquote><code>
+scp djefferson@itins3.matcmadison.edu:/home/djefferson/filename .<br>
+</code></blockquote>
+<p>
+Note the period (.) at the end of the last command! It indicates that the file
+should be copied to the current directory and given the same name as the source file.
+</p>
+<p>On Windows you can download and install <b>WinSCP</b> to copy files to and from
+the class server.</p>
+</li>
+</ol>
+</body>
+</html>

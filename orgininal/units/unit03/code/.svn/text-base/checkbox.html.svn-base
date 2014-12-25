@@ -1,0 +1,24 @@
+<html>
+ <head>
+  <title>Logical OR Operators</title>
+ </head>
+ <body bgcolor="yellow">
+  <font face="arial" size="+1">
+  <form action="checkbox.php" method=GET>
+   <p> Where should we eat:
+   <br />
+   <input type="checkbox" name="place1" value="Wendy" />Wendy's
+   <br />
+   <input type="checkbox" name="place2" value="Taco" />Taco Bell
+   <br />
+   <input type="checkbox" name="place3" value="CliffHouse" /> Cliff House
+   <br />
+   <input type="checkbox" name="place4" value="OliveGarden" /> Olive Garden
+   <br />
+   <input type="checkbox" name="place5" value="McDonald" /> McDonald's
+   <p>
+   <input type=submit value="submit now!">
+   </p>
+  </form>
+ </body>
+</html>

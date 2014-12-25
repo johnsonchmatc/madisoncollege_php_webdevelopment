@@ -1,0 +1,1183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+
+ <meta name="generator" content="HTML Tidy, see www.w3.org">
+
+ <title>Strings</title>
+ <link href="../../../css/basic.css" rel="stylesheet" type="text/css">
+
+ 
+ <script type="text/javascript" language="JavaScript">
+
+<!--
+
+function putSemester() {
+
+ var today=new Date();
+
+ var thisMonth=today.getMonth()+1;
+
+ var thisYear=today.getFullYear();
+
+ if(thisMonth <=6) {
+
+ return "Spring, " + thisYear;
+
+ }
+
+ else {
+
+ return "Fall, " + thisYear;
+
+ }
+
+}//-->
+
+ </script>
+ 
+ <style type="text/css">
+
+<!--
+
+ .bgStripes {
+
+ background-image:url(../../../images/Xstripes.gif);
+
+ background-attachment: fixed;
+
+ }
+
+ 
+
+ body {
+
+ background-color:white;
+
+ }
+
+ 
+
+ strong {
+
+ font-family: Arial, Helvetica, sans-serif;
+
+ }
+
+ 
+
+ .table1 {
+
+ font-family:Arial, Helvetica, sans-serif;
+
+ font-size: small;
+
+ }
+
+ 
+
+ .table2 {
+
+ font-family:Arial, Helvetica, sans-serif;
+
+ font-size: small;
+
+ text-align:center;
+
+ }
+
+ 
+
+ td.cen {
+
+ text-align:center;
+
+ }
+
+ 
+
+ .small_title {
+
+ font-family: Arial, Helvetica, sans-serif;
+
+ font-size:x-small;
+
+ font-weight:bold;
+
+ }
+
+ 
+
+ .med_title {
+
+ font-family: Arial, Helvetica, sans-serif;
+
+ font-size:medium;
+
+ font-weight:bold;
+
+ text-align:center;
+
+ color:darkblue;
+
+ }
+
+
+
+ -->
+
+ </style>
+</head>
+
+
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
+
+<table class="bgStripes" border="0" width="100%">
+
+ <tbody>
+
+ <tr name="firstRow">
+
+ <td valign="top" width="80">
+ 
+ <p class="small_title">
+ 
+ <script type="text/javascript">
+
+ <!--
+
+ document.write(putSemester());
+
+ -->
+
+ </script>
+ </p>
+
+ <br>
+
+ </td>
+
+ <td>
+ 
+<p class="med_title">PHP Web Development with MySQL<br>
+</p>
+</td>
+<td align="right" valign="top" width="80">
+<p class="small_title">3 Credits</p>
+</td>
+</tr>
+<tr>
+<td colspan="3" height="10">
+<p class="small_title" align="center">152-166</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+<!--The heading for the slides --> <br>
+
+<table class="headTable1" border="0">
+<tbody>
+<tr>
+<td width="100"><a href="index.html"><img alt="" src="../../../images/btn_lArrow.gif" border="0"></a><a href="index.html"><img alt="" src="../../../images/btn_upArrow.gif" border="0"></a><a href="regexp.html"><img alt="" src="../../../images/btn_rArrow.gif" border="0"></a></td>
+<td>
+<p>String Manipulation in PHP<br>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<div class="disp1">
+<ul class="slidesUl1">
+<li>
+<p>
+In this section we discuss how to use PHP's string functions to format and
+manipulate text. We also discuss using string functions to
+search (and replace) words, phrases, or other patterns within a
+string.</p>
+<p>
+These functions are useful in many contexts. You often may want to clean
+up or reformat user input that is going to be stored in a database.
+Search functions are great when building search engine applications
+(among other things).</p>
+</li>
+<li>
+<p>
+Creating a Sample Application: Smart Form Mail</p>
+<p>
+In this section, we use string and regular expression functions in the
+context of a Smart Form Mail application.
+We then add these scripts to the Bob's Auto Parts site we have
+been building.</p>
+<p>
+This time, we build a straightforward and commonly used customer
+feedback form for Bob's customers to enter their complaints and compliments,
+as the instructor will demonstrate.
+However, this application has one improvement over many you will find on the Web.
+Instead of emailing the form to a generic email address
+like <code>feedback@example.com</code> ,
+we will attempt to put some intelligence into the process by
+searching the input for key words and phrases and then sending the email
+to the appropriate employee at Bob's company.
+For example, if the email contains the word "advertising", we might send the
+feedback to the Marketing department. If the email is from Bob's
+biggest client, it can go straight to Bob.</p>
+<p>
+We will start with the simple script shown below and add to it as we go along.
+</p>
+<p>
+Listing: processfeedback.php<br>
+Basic Script to Email Form Contents</p>
+<blockquote><code><small>
+&lt;?php<br>
+&nbsp;&nbsp;//create short variable names<br>
+&nbsp;&nbsp;$name=$_POST['name'];<br>
+&nbsp;&nbsp;$email=$_POST['email'];<br>
+&nbsp;&nbsp;$feedback=$_POST['feedback'];<br>
+<br>
+&nbsp;&nbsp;$toaddress = 'feedback@example.com';<br>
+&nbsp;&nbsp;$subject = 'Feedback from web site';<br>
+&nbsp;&nbsp;$mailcontent = 'Customer name: '.$name."\n"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+.'Customer email: '.$email."\n"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+."Customer comments:\n".$feedback."\n";<br>
+&nbsp;&nbsp;$fromaddress = 'From: webserver@example.com';<br>
+<br>
+&nbsp;&nbsp;mail($toaddress, $subject, $mailcontent, $fromaddress);<br>
+?&gt;<br>
+&lt;html&gt;<br>
+&nbsp;&lt;head&gt;<br>
+&nbsp;&nbsp;&lt;title&gt;Bob's Auto Parts - Feedback Submitted&lt;/title&gt;<br>
+&nbsp;&lt;/head&gt;<br>
+&nbsp;&lt;body&gt;<br>
+&nbsp;&nbsp;&lt;h1&gt;Feedback submitted&lt;/h1&gt;<br>
+&nbsp;&nbsp;&lt;p&gt;Your feedback has been sent.&lt;/p&gt;<br>
+&nbsp;&lt;/body&gt;<br>
+&lt;/html&gt;<br>
+</small></code></blockquote>
+<p>
+Generally, you should check that users have filled out all the required
+form fields using, for example, <code>isset()</code> .</p>
+<p>
+In this script, you can see that we have concatenated the form fields
+together and used PHP's <code>mail()</code> function to email them to
+<code>feedback@example.com</code> .
+This is a fake email address. To test the code in this section,
+we will need to substitute a real email address here.</p>
+<p>
+The <code>mail()</code> function sends email.
+The prototype for <code>mail()</code> looks like this:</p>
+<blockquote><code><small>
+bool mail(string to , string subject, string message,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+string [additional_headers [, string additional_parameters]]);<br>
+</small></code></blockquote>
+<p>
+The first three parameters are compulsory and represent the address to
+send email to, the subject line, and the message contents, respectively.
+The fourth parameter can be used to send any additional valid email headers.
+Valid email headers are described in the document RFC822,
+which is available online if you want more details.
+(RFCs, or Requests for Comment, are the source of many Internet standards;
+the text discusses them in Chapter 19, "Using Network and Protocol Functions".)
+Here, the fourth parameter adds a "From:" address for the mail.
+You can also use it to add "Reply-To:" and "Cc:" fields, among others.
+If you want more than one additional header, just separate them
+by using newlines and carriage returns (<code>\n\r</code>) within the string,
+as follows:</p>
+<blockquote><code><small>
+$additional_headers="From: webserver@example.com\r\n "<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+.'Reply-To: bob@example.com';<br>
+</small></code></blockquote>
+<p>
+The optional fifth parameter can be used to pass a parameter to
+whatever program you have configured to send mail.</p>
+<p>
+To use the <code>mail()</code> function, we must
+set up our PHP installation to point at your mail-sending program.
+If the script does not work for you in its current form,
+double-check your <b>php.ini</b> file.</p>
+</li>
+<li>
+<p>
+Formatting Strings</p>
+<p>
+We often need to tidy up user strings
+(typically from an HTML form interface)
+before we can use them.
+The following sections describe some of the functions we can use.</p>
+</li>
+<li>
+<p>
+Trimming Strings: chop(), ltrim(), and trim()</p>
+<p>
+The first step in tidying up is to trim any excess whitespace from the string.
+Although this step is never compulsory, it can be useful if you are going to
+store the string in a file or database,
+or if you are going to compare it to other strings.</p>
+<p>
+PHP provides three useful functions for this purpose.
+You can use the <code>trim()</code>
+function to tidy up your input data as follows:</p>
+<blockquote><code>
+$name = trim($name);<br>
+$email = trim($email);<br>
+$feedback = trim($feedback);<br>
+</code></blockquote>
+<p>
+The <code>trim()</code> function strips whitespace from the start and
+end of a string and returns the resulting string.
+The characters it strips by default are newlines and carriage returns
+(<code>\n</code> and <code>\r</code>), horizontal and vertical tabs
+(<code>\t</code> and <code>\x0B</code>), end-of-string characters
+(<code>\0</code>), and spaces.
+You can also pass it a second parameter containing a list of 
+characters to strip instead of this default list.
+Depending on your particular purpose, you might like to use
+the <code>ltrim()</code> or <code>rtrim()</code> functions instead.
+They are both similar to <code>trim()</code> , taking the
+string in question as a parameter and returning the formatted
+string. The difference between these three is that
+<code>trim()</code> removes whitespace from the start and end of a
+string, <code>ltrim()</code> removes whitespace from the start (or left)
+only, and <code>rtrim()</code> removes whitespace from the end (or right)
+only.</p>
+</li>
+<li>
+<p>
+Formatting Strings for Presentation</p>
+<p>
+PHP includes a set of functions that you can use to reformat a string
+in different ways.</p>
+<p>
+Using HTML Formatting: The nl2br() Function</p>
+<p>
+The <code>nl2br()</code> function takes a string as a parameter and
+replaces all the newlines in it with the XHTML "&lt;br /&gt;" tag
+(or the HTML "&lt;br&gt;" tag in versions prior to 4.0.5).
+This capability is useful for echoing a long string to the browser.
+For example, you can use this function to format the customer's
+feedback to echo it back:</p>
+<blockquote><code><small>
+&lt;p&gt;Your feedback (shown below) has been sent.&lt;/p&gt;<br>
+&lt;p&gt;&lt;?php echo nl2br($mailcontent); ?&gt; &lt;/p&gt;<br>
+</small></code></blockquote>
+<p>
+Remember that HTML disregards plain whitespace, so if you do not
+filter this output through <code>nl2br()</code> ,
+it will appear on a single line
+(except for newlines forced by the browser window).</p>
+</li>
+<li>
+<p>
+Formatting a String for Printing</p>
+<p>
+So far, we have used the echo language construct to print strings to
+the browser. PHP also supports a <code>print()</code> construct,
+which does the same thing as echo, but returns a
+value (true or false , denoting success).</p>
+<p>
+Both of these techniques print a string "as is".
+You can apply some more sophisticated formatting using the functions
+<code>printf()</code> and <code>sprintf()</code> .
+They work basically the same way, except that <code>printf()</code>
+prints a formatted string to the browser and <code>sprintf()</code>
+returns a formatted string.</p>
+<p>
+If you have previously programmed in C, you will find that these
+functions are conceptually similar to the C versions.
+Be careful, though, because the syntax is not exactly the same.
+They take getting used to but are useful and powerful.</p>
+<p>
+The prototypes for these functions are:</p>
+<blockquote><code>
+string sprintf (string format [, mixed args...])<br>
+void printf (string format [, mixed args...])<br>
+</code></blockquote>
+<p>
+The first parameter passed to both of these functions is a format
+string that describes the basic shape of the output with format
+codes instead of variables.
+The other parameters are variables that will be substituted
+into the format string.</p>
+<p>
+For example, using echo, you can use the variables you want to print
+inline, like this:</p>
+<blockquote><code>
+echo "Total amount of order is $total.";<br>
+</code></blockquote>
+<p>
+To get the same effect with <code>printf()</code> ,
+you would use:</p>
+<blockquote><code>
+printf ("Total amount of order is %s.", $total);<br>
+</code></blockquote>
+<p>
+The "%s" in the format string is called a conversion specification.
+This one means "replace with a string".
+In this case, it is replaced with <code>$total</code> interpreted as a string.
+If the value stored in <code>$total</code> was 12.4,
+both of these approaches would print it as 12.4 .</p>
+<p>
+The advantage of <code>printf()</code> is that you can use a more useful
+conversion specification to specify that <code>$total</code>
+is actually a floating-point number and that it should have two
+decimal places after the decimal point, as follows:</p>
+<blockquote><code>
+printf ("Total amount of order is %.2f", $total);<br>
+</code></blockquote>
+<p>
+Given this formatting, and 12.4 stored in <code>$total</code> ,
+this statement will print as 12.40.</p>
+<p>
+We can have multiple conversion specifications in the format string.
+If you have N conversion specifications, you will usually have N arguments
+after the format string. Each conversion specification will be replaced
+by a reformatted argument in the order they are listed. For example:</p>
+<blockquote><code><small>
+printf("Total amount of order is %.2f (with shipping %.2f)",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+$total, $total_shipping);<br>
+</small></code></blockquote>
+<p>
+Here, the first conversion specification uses the variable <code>$total</code> ,
+and the second uses the variable <code>$total_shipping</code> .</p>
+<p>
+Each conversion specification follows the same format, which is:</p>
+<blockquote><code>
+%['padding_character][-][width][.precision]type<br>
+</code></blockquote>
+<p>
+All conversion specifications start with a "%" symbol.
+If you actually want to print a "%" symbol,
+you need to use "%%". </p>
+<p>
+The "padding_character" is optional.
+It is used to pad your variable to the width you have specified.
+An example would be to add leading zeros to a number like a counter.
+The default padding character is a space. If you are specifying a space
+or zero, you do not need to prefix it with the apostrophe (').
+For any other padding character, you need to prefix it with an apostrophe.</p>
+<p>
+The "-" symbol is optional. It specifies that the data in the field will
+be left-justified rather than right-justified, which is the default.</p>
+<p>
+The "width" specifier tells <code>printf()</code> how much room
+(in characters) to leave for the variable to be substituted in here.</p>
+<p>
+The precision specifier should begin with a decimal point.
+It should contain the number of places after the decimal point you would like
+displayed.</p>
+<p>
+The final part of the specification is a type code.
+A summary of these codes is shown in the table that follows:</p>
+<code><small>
+<strong><u>
+Type
+&nbsp;&nbsp;
+Meaning
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</u></strong><br>
+&nbsp;b&nbsp;&nbsp;
+Interpret as an integer and print as a binary number.<br>
+&nbsp;c&nbsp;&nbsp;
+Interpret as an integer and print as a character.<br>
+&nbsp;d&nbsp;&nbsp;
+Interpret as an integer and print as a decimal number.<br>
+&nbsp;f&nbsp;&nbsp;
+Interpret as a double and print as a floating-point number.<br>
+&nbsp;o&nbsp;&nbsp;
+Interpret as an integer and print as an octal number.<br>
+&nbsp;s&nbsp;&nbsp;
+Interpret as a string and print as a string.<br>
+&nbsp;u&nbsp;&nbsp;
+Interpret as an integer and print as an unsigned decimal.<br>
+&nbsp;x&nbsp;&nbsp;
+Interpret as an integer and print as a hexadecimal number<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+with lowercase letters for the digits a-f.<br>
+&nbsp;X&nbsp;&nbsp;
+Interpret as an integer and print as a hexadecimal number<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+with uppercase letters for the digits A-F.<br>
+</small></code>
+<p>
+Since PHP version 4.0.6, you can use argument numbering, which means
+that the arguments do not need to be in the same order as the conversion
+specifications. For example:</p>
+<blockquote><code><small>
+printf("Total amount of order is %2\$.2f (with shipping %1\$.2f) ",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+$total_shipping, $total);<br>
+</small></code></blockquote>
+<p>
+Just add the argument position in the list directly after the % sign,
+followed by an escaped "$" symbol. In this example "2\$", means "replace
+with the second argument in the list".
+This method can also be used to repeat arguments.</p>
+<p>
+Two alternative versions of these functions are called <code>vprintf()</code>
+and <code>vsprintf()</code> .
+These variants accept two parameters: the format string and an array of
+the arguments rather than a variable number of parameters.</p>
+</li>
+<li>
+<p>
+Changing the Case of a String</p>
+<p>
+We can also reformat the case of a string.
+This capability is not particularly useful for the sample application,
+but we will look at some brief examples.</p>
+<p>
+If we start with the subject string, <code>$subject</code> ,
+which we are using for our email, we can change its case by using several functions.
+The effect of these functions is summarized in the table below.
+The first column shows the function name, the second
+describes its effect, the third shows how it would be applied to the
+string <code>$subject</code> , and the last column shows
+what value would be returned from the function.</p>
+<code><small>
+<strong><u>
+Function
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;
+Description
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Use
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Value
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;
+</u></strong><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+$subject
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Feedback from <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;
+web site<br>
+strtoupper()&nbsp;
+Turns string to&nbsp;&nbsp;&nbsp;&nbsp;
+strtoupper($subject)&nbsp;
+FEEDBACK<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+uppercase
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+FROM<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+WEB SITE<br>
+strtolower()&nbsp;
+Turns string to&nbsp;&nbsp;&nbsp;&nbsp;
+strtolower($subject)&nbsp;
+feedback from<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+lowercase
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+web site<br>
+ucfirst()&nbsp;&nbsp;&nbsp;&nbsp;
+Capitalizes first&nbsp;&nbsp;
+ucfirst($subject)&nbsp;&nbsp;&nbsp;&nbsp;
+Feedback from<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+character of string
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+web site<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+if it's alphabetic<br>
+ucwords()&nbsp;&nbsp;&nbsp;&nbsp;
+Capitalizes first&nbsp;&nbsp;
+ucwords($subject)&nbsp;&nbsp;&nbsp;&nbsp;
+Feedback From<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+character of each
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Web Site<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+word in the string<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+that begins with<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+an alphabetic<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+character<br>
+</small></code>
+</li>
+<li>
+<p>
+Formatting Strings for Storage: addslashes() and stripslashes()</p>
+<p>
+In addition to using string functions to reformat a string visually,
+you can use some of these functions to reformat strings for storage
+in a database. Although we do not cover actually writing to the database
+until later, we will cover formatting strings for database storage now.</p>
+<p>
+Certain characters are perfectly valid as part of a string but can
+cause problems, particularly when you are inserting data into a
+database because the database could interpret
+these characters as control characters.
+The problematic ones are quotation marks (single and double),
+backslashes (\), and the NULL character.</p>
+<p>
+You need to find a way of marking or escaping these characters so that
+databases such as MySQL can understand that you meant a literal special
+character rather than a control sequence.
+To escape these characters, add a backslash in front of them.
+For example, " (double quotation mark) becomes \" (backslash double quotation mark),
+and \ (backslash) becomes \\ (backslash backslash).
+(This rule applies universally to special characters, so if you have
+\\ in your string, you need to replace it with \\\\ .)</p>
+<p>
+PHP provides two functions specifically designed for escaping
+characters. Before you write any strings into a database,
+you should reformat them with <code>addslashes()</code> ,
+as follows:</p>
+<blockquote><code>
+$feedback = addslashes($feedback);<br>
+</code></blockquote>
+<p>
+Like many of the other string functions, <code>addslashes()</code>
+takes a string as a parameter and returns the reformatted string.</p>
+<p>
+Your instructor will show you the actual effects of using these functions
+on a string.</p>
+<p>
+Try these functions on your web server and see what result you get.
+If all problematic characters have been escaped twice,
+it means the "magic quotes" feature is turned on on the server.
+That is, your configuration of PHP is set up to add and strip
+slashes automatically.</p>
+<p>
+This capability is controlled by the 
+<b>magic_quotes_gpc</b> configuration directive.
+This directive is now on by default in new versions of PHP.
+The letters "gpc" stand for GET, POST, and cookie.
+This means that variables coming from these sources
+are automatically quoted. You can check whether this directive is
+switched on for your server by using the
+<code>get_magic_quotes_gpc()</code> function, which returns true if strings
+from these sources are being automatically quoted for you.
+If this directive is on for your server,
+you need to call <code>stripslashes()</code> before displaying user data.
+Otherwise, the slashes will be displayed.</p>
+<p>
+Using magic quotes allows you to write more portable code.
+You can read more about this feature in Chapter 23 of the text.</p>
+</li>
+<li>
+<p>
+Joining and Splitting Strings with String Functions</p>
+<p>
+Often, you may want to look at parts of a string individually.
+For example, you might want to look at words in a sentence
+(say, for spellchecking) or split a domain name or
+email address into its component parts. PHP provides several string
+functions (and one regular expression function) that allow you to do this.</p>
+<p>
+In our example, Bob wants any customer feedback from
+<code>bigcustomer.com</code> to go directly to him,
+so you can split the email address the customer typed
+into parts to find out whether he or she works for Bob's big customer.</p>
+</li>
+<li>
+<p>
+Using explode(), implode(), and join()</p>
+<p>
+ 
+The first function you could use for this purpose,
+<code>explode()</code> , has the following prototype:</p>
+<blockquote><code><small>
+array explode(string separator, string input [, int limit]);<br>
+</small></code></blockquote>
+<p>
+This function takes a string "input" and splits it into pieces on a
+specified "separator" string.
+The pieces are returned in an array.
+You can limit the number of pieces with the
+optional "limit" parameter, added in PHP 4.0.1.</p>
+<p>
+To get the domain name from the customer's email address in the
+script, you can use the following code:</p>
+<blockquote><code>
+$email_array = explode('@', $email);<br>
+</code></blockquote>
+<p>
+This call to <code>explode()</code> splits the customer's email address
+into two parts: the username, which is stored in
+<code>$email_array[0]</code> , and the domain name, which is stored in
+<code>$email_array[1]</code> .
+Now you can test the domain name to determine the customer's
+origin and then send the feedback to the appropriate person:</p>
+<blockquote><code>
+if ($email_array[1] == 'bigcustomer.com')<br>
+&nbsp;&nbsp;$toaddress = 'bob@example.com';<br>
+else<br>
+&nbsp;&nbsp;$toaddress = 'feedback@example.com';<br>
+</code></blockquote>
+<p>
+If the domain is capitalized, however, this approach will not work.
+You could avoid this problem by converting the domain to all uppercase
+or all lowercase and then checking, as follows:</p>
+<blockquote><code>
+$email_array[1] = strtolower($email_array[1]);<br>
+</code></blockquote>
+<p>
+You can reverse the effects of <code>explode()</code> by using either
+<code>implode()</code> or <code>join()</code> , which are identical.
+For example:</p>
+<blockquote><code>
+$new_email = implode('@', $email_array);<br>
+</code></blockquote>
+<p>
+This statement takes the array elements from
+<code>$email_array</code> and joins them with the
+string passed in the first parameter.
+The function call is similar to <code>explode()</code> ,
+but the effect is the opposite.</p>
+</li>
+<li>
+<p>
+Using strtok()</p>
+<p>
+Unlike <code>explode()</code> , which breaks a string into all its
+pieces at one time <code>strtok()</code> ,gets
+pieces (called tokens) from a string one at a time.
+<code>strtok()</code> is a useful alternative to using
+<code>explode()</code> for processing words from a string one at a time.</p>
+<p>
+The prototype for <code>strtok()</code> is</p>
+<blockquote><code>
+string strtok(string input, string separator);<br>
+</code></blockquote>
+<p>
+The "separator" can be either a character or a string of characters,
+but the "input" string is split on each of the characters in the separator
+string rather than on the whole separator string (as explode does).</p>
+<p>
+Calling <code>strtok()</code> is not quite as simple as it seems in the prototype.
+To get the first token from a string, you call <code>strtok()</code>
+with the string you want tokenized and a separator.
+To get the subsequent tokens from the string, you just pass a
+single parameter, the separator.
+The function keeps its own internal pointer to its place in
+the string. If you want to reset the pointer,
+you can pass the string into it again.</p>
+<p>
+<code>strtok()</code> is typically used as follows:</p>
+<blockquote><code>
+$token = strtok($feedback, ' ');<br>
+echo $token . '&lt;br /&gt;';<br>
+while ($token != '')<br>
+{<br>
+&nbsp;&nbsp;$token = strtok(' ');<br>
+&nbsp;&nbsp;echo $token . '&lt;br /&gt;';<br>
+};<br>
+</code></blockquote>
+<p>
+It is a good idea to check that the customer actually typed some feedback
+into the form, using, for example, the <code>empty()</code> function!</p>
+<p>
+The preceding code prints each token from the customer's feedback on a
+separate line and loops until there are no more tokens.
+Note that prior to version 4.1.0, PHP's <code>strtok()</code>
+did not work exactly the same as the one in the C language.
+If two instances of a separator appeared in a row in your target string
+(in this example, two spaces in a row), <code>strtok()</code>
+would return an empty string.
+You could not differentiate this from the empty string
+returned when you got to the end of the target string.
+Also, if one of the tokens was zero, the empty string was returned.
+This made the PHP <code>strtok()</code> somewhat less useful
+than the one in C. The new version works correctly,
+skipping empty strings.</p>
+</li>
+<li>
+<p>
+Using substr()</p>
+<p>
+The <code>substr()</code> function enables you to access a substring
+between given start and end points of a string.
+It is not appropriate for the example used here but can be useful when
+you need to get at parts of fixed format strings.</p>
+<p>
+The <code>substr()</code> function has the following prototype:</p>
+<blockquote><code><small>
+string substr(string string, int start[, int length]);<br>
+</small></code></blockquote>
+<p>
+This function returns a substring copied from within "string".
+</p><p>
+The following examples use this test string:</p>
+<blockquote><code>
+$test = 'Your customer service is excellent';<br>
+</code></blockquote>
+<p>
+If you call it with a positive number for "start" (only),
+you will get the string from the
+start position to the end of the string.
+For example:</p>
+<blockquote><code>
+substr($test, 1);<br>
+</code></blockquote>
+<p>
+returns "our customer service is excellent". Note that the
+string position starts from 0, as with arrays.</p>
+<p>
+If you call <code>substr()</code> with a negative "start" (only),
+you will get the string from the
+end of the string minus "start" characters to the end of the
+string. For example:</p>
+<blockquote><code>
+substr($test, -9);<br>
+</code></blockquote>
+<p>
+returns "excellent".</p>
+<p>
+The "length" parameter can be used to specify either a number
+of characters to return (if it is positive) or the end character
+of the return sequence (if it is negative). For example:</p>
+<blockquote><code>
+substr($test, 0, 4);<br>
+</code></blockquote>
+<p>
+returns the first four characters of the string, namely: "Your".
+The code:</p>
+<blockquote><code>
+echo substr($test, 5, -13);<br>
+</code></blockquote>
+<p>
+returns the characters between the fourth character and the thirteenth-to-last
+character, that is: "customer service".
+The first character is location "0", so location "5" is the sixth character.</p>
+</li>
+<li>
+<p>
+Comparing Strings</p>
+<p>
+So far, we have just seen how to use "==" to compare two strings for equality.
+We can do some slightly more sophisticated comparisons using PHP.
+Let's divide these comparisons into two categories: partial matches and others.
+We deal with the others first and then get into partial matching,
+which we need to further develop the Smart Form example.</p>
+</li>
+<li>
+<p>
+Performing String Ordering: strcmp(), strcasecmp(), and strnatcmp()</p>
+<p>
+The <code>strcmp()</code> , <code>strcasecmp()</code> , and
+<code>strnatcmp()</code> functions can be used to order strings.
+This capability is useful when you are sorting data.</p>
+<p>
+The prototype for <code>strcmp()</code> is:</p>
+<blockquote><code>
+int strcmp(string str1, string str2);<br>
+</code></blockquote>
+<p>
+The function expects to receive two strings, which it compares.
+If they are equal, it will return 0.
+If "str1" comes after (or is greater than) "str2" in lexicographic
+order, <code>strcmp()</code> will return a number greater than zero.
+If "str1" is less than "str2", <code>strcmp()</code>
+will return a number less than zero.
+This function is case sensitive.</p>
+<p>
+The function <code>strcasecmp()</code> is identical except
+that it is not case sensitive.</p>
+<p>
+The function <code>strnatcmp()</code> and its non-case sensitive twin,
+<code>strnatcasecmp()</code> , were added in PHP 4.
+These functions compare strings according to a "natural ordering",
+which is more the way a human would do it.
+For example <code>strcmp()</code> , would order the
+string "2" as greater than the string "12" because it is
+lexicographically greater.
+<code>strnatcmp()</code> would order them the other way around.
+You can read more about natural ordering at:</p>
+<blockquote><code>
+http://www.naturalordersort.org/<br>
+</code></blockquote>
+</li>
+<li>
+<p>
+Testing String Length with  strlen()</p>
+<p>
+You can check the length of a string by using the <code>strlen()</code>
+function. If you pass it a string, this function will return its length.
+For example, <code>strlen('hello')</code> returns 5.</p>
+<p>
+You can use this function for validating input data. Consider the email
+address on the sample form, stored in <code>$email</code> .
+One basic way of validating an email address stored in a variable
+is to check its length. By our reasoning, the minimum length of an email address
+is six characters, for example <code>a@a.to</code> , if you have a country
+code with no second-level domains, a one-letter server name,
+and a one-letter email address.
+Therefore, an error could be produced if the address is not at least this
+length:</p>
+<blockquote><code>
+if (strlen($email) &lt; 6)<br>
+{<br>
+&nbsp;&nbsp;echo 'That email address is not valid';<br>
+&nbsp;&nbsp;exit;&nbsp;&nbsp;// finish execution of PHP script<br>
+}<br>
+</code></blockquote>
+<p>
+Clearly, this approach is a very simplistic way of validating this
+information. We look at better ways in the next section.</p>
+</li>
+<li>
+<p>
+Matching and Replacing Substrings with String Functions</p>
+<p>
+Checking whether a particular substring is present in a larger string
+is a common operation. This partial matching is usually more useful
+than testing for complete equality in strings.</p>
+<p>
+In the Smart Form example, we want to look for certain key phrases in
+the customer feedback and send the mail to the appropriate department.
+If we want to send emails discussing Bob's shops to the retail manager,
+for example, we want to know whether the word shop or derivatives
+thereof appear in the message.</p>
+<p>
+Given the functions we have already looked at, we could use
+<code>explode()</code> or <code>strtok()</code>
+to retrieve the individual words in the message and then compare them
+using the "==" operator or <code>strcmp()</code> .</p>
+<p>
+We could also do the same thing, however, with a single function call
+to one of the string-matching or regular expression-matching functions.
+They search for a pattern inside a string.
+Next, we look at each set of functions one by one.</p>
+</li>
+<li>
+<p>
+Finding Strings in Strings: strstr(), strchr(), strrchr(), and stristr()</p>
+<p>
+To find a string within another string, you can use any of the functions
+<code>strstr() , strchr() , strrchr() ,</code> or <code>stristr()</code> .</p>
+<p>
+The function <code>strstr()</code> , which is the most generic,
+can be used to find a string or character match within a longer string.
+In PHP, the <code>strchr()</code> function is exactly the
+same as <code>strstr()</code> , although its name implies that it is used to
+find a character in a string, similar to the C language version of this function.
+In PHP, either of these functions can be used to
+find a string inside a string, including finding a string containing
+only a single character.</p>
+<p>
+The prototype for <code>strstr()</code> is as follows:</p>
+<blockquote><code>
+string strstr(string haystack, string needle);<br>
+</code></blockquote>
+<p>
+You pass the function a "haystack" to be searched and a
+"needle" to be found. If an exact match of the needle is found,
+the function returns the "haystack" from the "needle"
+onward; otherwise, it returns "false". If the "needle" occurs more than
+once, the returned string will start from the first occurrence of "needle".
+</p>
+<p>
+For example, in the Smart Form application, you can decide where to
+send the email as follows:</p>
+<blockquote><code><small>
+$toaddress = 'feedback@example.com'; // the default value<br>
+<br>
+// Change the $toaddress if the criteria are met<br>
+if (strstr($feedback, 'shop'))<br>
+&nbsp;&nbsp;$toaddress = 'retail@example.com';<br>
+else if (strstr($feedback, 'delivery'))<br>
+&nbsp;&nbsp;$toaddress = 'fulfillment@example.com';<br>
+else if (strstr($feedback, 'bill'))<br>
+&nbsp;&nbsp;$toaddress = 'accounts@example.com';<br>
+</small></code></blockquote>
+<p>
+This code checks for certain keywords in the feedback and sends the
+mail to the appropriate person. If, for example, the customer feedback reads
+"I still haven't received delivery of my last order",
+the string "delivery" will be detected and the feedback will be sent
+to "fulfillment@example.com".</p>
+<p>
+There are two variants on <code>strstr()</code> . The first variant is
+<code>stristr()</code>, which is nearly identical but is not case sensitive.
+This variation is useful for this application because the
+customer might type "delivery", "Delivery", or "DELIVERY".</p>
+<p>
+The second variant is <code>strrchr()</code> , which is again nearly
+identical, but returns the "haystack" from the last occurrence of the
+"needle" onward.</p>
+</li>
+<li>
+<p>
+Finding the Position of a Substring: strpos() and strrpos()</p>
+<p>
+The functions <code>strpos()</code> and <code>strrpos()</code>
+operate in a similar fashion to <code>strstr()</code> ,
+except, instead of returning a substring, they return the numerical
+position of a "needle" within a "haystack".
+Interestingly enough, the PHP manual now recommends using
+<code>strpos()</code> instead of <code>strstr()</code>
+to check for the presence of a string within a string
+because it runs faster.</p>
+<p>
+The <code>strpos()</code> function has the following prototype:</p>
+<blockquote><code><small>
+int strpos(string haystack, string needle, int [offset ]);<br>
+</small></code></blockquote>
+<p>
+The integer returned represents the position of the first occurrence of
+the "needle" within the "haystack".
+The first character is in position 0 as usual.</p>
+<p>
+For example, the following code echoes the value 4 to the browser:</p>
+<blockquote><code>
+$test = 'Hello world';<br>
+echo strpos($test, 'o');<br>
+</code></blockquote>
+<p>
+This code passes in only a single character as the "needle", but it can
+be a string of any length.</p>
+<p>
+The optional offset parameter specifies a point within the
+"haystack" to start searching. For example:</p>
+<blockquote><code>
+echo strpos($test, 'o', 5);<br>
+</code></blockquote>
+<p>
+This code echoes the value 7 to the browser because PHP has started
+looking for the character "o" at position 5 and therefore does not
+see the one at position 4.</p>
+<p>
+The <code>strrpos()</code> function is almost identical but
+returns the position of the last occurrence of the "needle" in the "haystack".
+</p><p>
+In any of these cases, if the "needle" is not in the string,
+<code>strpos()</code> or <code>strrpos()</code> will
+return "false". This result can be problematic because false in a
+weakly typed language such as PHP is equivalent to 0 - that is,
+the first character in a string!</p>
+<p>
+You can avoid this problem by using the "===" operator to test return values:</p>
+<blockquote><code>
+$result = strpos($test, 'H');<br>
+if ($result === false)<br>
+&nbsp;&nbsp;echo 'Not found';<br>
+else<br>
+&nbsp;&nbsp;echo "Found at position $result";<br>
+</code></blockquote>
+<p>
+Note that this approach works only in PHP 4 and later.
+In earlier versions, you could test for false by testing the return value
+to see whether it was a string (that is, "false").</p>
+</li>
+<li>
+<p>
+Replacing Substrings: str_replace() and substr_replace()</p>
+<p>
+Find-and-replace functionality can be extremely useful with strings.
+You can use find and replace for personalizing documents generated
+by PHP - for example, by replacing <code>&lt;&lt;name&gt;&gt;</code>
+with a person's name and <code>&lt;&lt;address &gt;&gt;</code>
+with her address. You can also use it
+for censoring particular terms, such as in a discussion forum
+application, or even in the Smart Form application.
+Again, you can use string functions or regular expression
+functions for this purpose.</p>
+<p>
+The most commonly used string function for replacement is <code>str_replace()</code> .
+It has the following prototype:</p>
+<blockquote><code><small>
+mixed str_replace(mixed needle, mixed new_needle,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;
+mixed haystack [, int &amp;count ]));<br>
+</small></code></blockquote>
+<p>
+This function replaces all the instances of "needle" in
+"haystack" with "new_needle" and returns the new version of the "haystack".
+The optional fourth parameter, "count", contains the number of replacements made.
+Note that "count" was added in PHP5.</p>
+<p><strong>
+Note:</strong>
+As of PHP 4.0.5, you can pass all parameters as arrays, and the
+<code>str_replace()</code> function works remarkably intelligently.
+You can pass an array of words to be replaced, an array of words to replace them with
+(respectively), and an array of strings to apply these rules to. The
+function then returns an array of revised strings.</p>
+<p>
+For example, because people can use the Smart Form to complain, they
+might use some colorful words. As a programmer, you can easily prevent
+Bob's various departments from being abused in that way if you have an
+arrayy <code>$offcolor</code> that contains a number of offensive words.
+Here is an example using <code>str_replace()</code> with an array:</p>
+<blockquote><code><small>
+$feedback = str_replace($offcolor, '%!@*', $feedback);<br>
+</small></code></blockquote>
+<p>
+The function <code>substr_replace()</code> finds and
+replaces a particular substring of a string based on its position.
+It has the following prototype:</p>
+<blockquote><code><small>
+string substr_replace(string string, string replacement,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+int start, int [length]);<br>
+</small></code></blockquote>
+<p>
+This function replaces part of the string "string" with the string "replacement".
+Which part is replaced depends on the values of the "start" and optional
+"length" parameters.</p>
+<p>
+The "start" value represents an offset into the "string" where
+replacement should begin.
+If it is zero or positive, it is an offset from the beginning of the string.
+If it is negative, it is an offset from the end of the string.
+For example, this line of code replaces the last character in <code>$test</code>
+with "X":</p>
+<blockquote><code>
+$test = substr_replace($test, 'X', -1);<br>
+</code></blockquote>
+<p>
+The "length" value is optional and represents the point at
+which PHP will stop replacing.
+If you do not supply this value, the string will be replaced
+from "start" to the end of the string.</p>
+<p>
+If "length" is zero, the replacement string will actually be
+inserted into the string without overwriting the existing string.
+A positive "length" represents the number of characters that you want
+replaced with the new string. A negative "length" represents the point
+at which you would like to stop replacing characters,
+counted from the end of the string.</p>
+</li>
+</ul>
+</div>
+</body>
+</html>

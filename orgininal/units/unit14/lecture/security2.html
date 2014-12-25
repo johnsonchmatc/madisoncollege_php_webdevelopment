@@ -1,0 +1,545 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>Securing PHP and MySQL</title>
+<link href="../../../css/basic.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" language="JavaScript">
+<!--
+function putSemester() {
+    var today=new Date();
+    var thisMonth=today.getMonth()+1;
+    var thisYear=today.getFullYear();
+    if(thisMonth <=6) {
+        return "Spring, " + thisYear;
+    }
+    else {
+       return "Fall, " + thisYear;
+    }
+}//-->
+</script>
+<style type="text/css">
+<!--
+    .bgStripes {
+        background-image:url(../../../images/Xstripes.gif);
+        background-attachment: fixed;
+    }
+    body {
+        background-color:white;
+    }
+    strong {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+-->
+</style>
+</head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
+<table class="bgStripes" border="0" width="100%">
+<tbody>
+<tr name="firstRow">
+<td valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+<script type="text/javascript">
+<!--
+    document.write(putSemester());
+-->
+</script>
+</span> <br>
+</td>
+<td style="text-align: center;"><span style="font-weight: bold; font-size: medium; color: darkblue;">
+PHP Web Development with MySQL
+</span> </td>
+<td align="right" valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+3 Credits</span> </td>
+</tr>
+<tr>
+<td colspan="3" style="text-align: center;"><span style="font-size: xx-small; font-weight: bold;">
+152-166</span> </td>
+</tr>
+</tbody>
+</table>
+<!--The heading for the slides --> <br>
+<table class="headTable1" border="0">
+<tbody>
+<tr>
+<td width="100"><a href="security1.html"><img alt="" src="../../../images/btn_lArrow.gif" border="0"></a><a href="index.html"><img alt="" src="../../../images/btn_upArrow.gif" border="0"></a><a href="debug.html"><img alt="" src="../../../images/btn_rArrow.gif" border="0"></a></td>
+<td>Securing PHP and MySQL</td>
+</tr>
+</tbody>
+</table>
+<br>
+<div class="disp1">
+<ul class="slidesUl1">
+<li><p>
+Whereas the infrastructure components such as the operating system, Web server,
+and the network are created by someone else, the Web application itself is
+something that you wrote, so you have much more say in how secure it is.
+</p><p>
+In this section we discuss securing PHP and MySQL scripts.
+</p></li>
+<li><p>
+Basic PHP Security Principles
+</p></li>
+<li><p>
+Validate Form Fields
+</p><p>
+To ensure basic security in a PHP script that uses HTML forms, all the user
+input fields should be validated.
+</p><p>
+For example, an application might have many forms consisting of fields to be
+filled in with contact information. If the fields are not validated before
+being processed, a smart hacker can inject unwanted information into those
+fields, causing unwanted behavior in the script.
+</p><p>
+For example, if an e-mail address is not validated first, then instead of an
+e-mail address, an entire e-mail message could be inserted and later sent from
+your site as spam.
+</p></li>
+<li><p>
+About register_globals
+</p><p>
+The <b>register_globals</b> directive in the <b>php.ini</b> file, if set to "On",
+converts all the data submitted from a form to PHP global variables.
+</p><p>
+Because global variables might represent a major security risk, register_globals
+has been disabled, by default, since PHP 4.2.0. and it is recommended to keep
+it set to "Off" as shown in the following section from the php.ini file:
+</p>
+<code><small>
+; You should do your best to write your scripts so that they do not require<br>
+; register_globals to be on;  Using form variables as globals can easily lead<br>
+; to possible security problems, if the code is not very well thought of.<br>
+register_globals = Off<br>
+</small></code>
+<p>
+The following example demonstrates how security can be undermined when
+register_globals is set to "On."
+</p>
+<h4>
+Filename: registerGlobals.php
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">user</span> <span class="syntax18">=</span><span class="syntax18">=</span> <span class="syntax13">'</span><span class="syntax13">admin</span><span class="syntax13">'</span> <span class="syntax18">&amp;</span><span class="syntax18">&amp;</span> <span class="syntax10">$</span><span class="syntax10">password</span> <span class="syntax18">=</span><span class="syntax18">=</span> <span class="syntax13">'</span><span class="syntax13">guess</span><span class="syntax13">'</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   3:</span>    <span class="syntax10">$</span><span class="syntax10">authorized</span> <span class="syntax18">=</span> <span class="syntax8">true</span><span class="syntax18">;</span>
+<span class="gutter">   4:</span>  <span class="syntax18">}</span>
+<span class="gutterH">   5:</span>  <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">authorized</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   6:</span>    <span class="syntax8">include</span><span class="syntax18"> (</span><span class="syntax13">'</span><span class="syntax13">secret.php</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   7:</span>  <span class="syntax18">}</span>
+<span class="gutter">   8:</span>  <span class="syntax8">else</span> <span class="syntax18">{</span>
+<span class="gutter">   9:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">You</span><span class="syntax13"> </span><span class="syntax13">are</span><span class="syntax13"> </span><span class="syntax13">not</span><span class="syntax13"> </span><span class="syntax13">authorized</span><span class="syntax13"> </span><span class="syntax13">to</span><span class="syntax13"> </span><span class="syntax13">view</span><span class="syntax13"> </span><span class="syntax13">secret</span><span class="syntax13"> </span><span class="syntax13">information!</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>  <span class="syntax18">}</span>
+<span class="gutter">  11:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+The program checks to see if the user has entered a valid username and password.
+If so, true is assigned to the variable $authorized.
+</p><p>
+If the value of $authorized is set to true, the secret.php page is included.
+</p><p>
+If the hacker knows how this program is written, he or she can bypass the
+authentication test by passing the value of the $authorized variable directly
+into the script via the URL line.
+</p><p>
+Assuming this script is called <b>registerGlobals.php</b> , a "?" can be appended to
+the address and <b>authorized</b> is set to 1:
+</p>
+<blockquote><code><small>
+http://localhost/mypath/registerGlobals.php?authorized=1<br>
+</small></code></blockquote>
+<p>
+Then PHP would create a local variable named <b>$authorized</b> in the script
+with a value of 1, making the expression on line 5 always evaluate to true and
+include the file secret.php even if the user has not logged in.
+</p><p>
+If the <b>register_globals</b> directive in the php.ini file had been set to
+"Off," the values of $user and $password could then be explicitly tested as
+index values in the <b>$_GET</b> or <b>$_POST</b> superglobal arrays, a small
+inconvenience to improve security.
+</p><p>
+The next example demonstrates how to use the <b>$_GET</b> superglobal
+array for checking user input.
+</p>
+<h4>
+Filename: usingGet.php
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">_GET</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">user</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">=</span><span class="syntax18">=</span> <span class="syntax13">'</span><span class="syntax13">admin</span><span class="syntax13">'</span> <span class="syntax18">&amp;</span><span class="syntax18">&amp;</span>
+<span class="gutter">   3:</span>      <span class="syntax10">$</span><span class="syntax10">_GET</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">password</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">=</span><span class="syntax18">=</span> <span class="syntax13">'</span><span class="syntax13">guess</span><span class="syntax13">'</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   4:</span>    <span class="syntax10">$</span><span class="syntax10">authorized</span> <span class="syntax18">=</span> <span class="syntax8">true</span><span class="syntax18">;</span>
+<span class="gutterH">   5:</span>  <span class="syntax18">}</span>
+<span class="gutter">   6:</span>  <span class="syntax8">else</span> <span class="syntax18">{</span>
+<span class="gutter">   7:</span>    <span class="syntax10">$</span><span class="syntax10">authorized</span><span class="syntax18">=</span><span class="syntax8">false</span><span class="syntax18">;</span>
+<span class="gutter">   8:</span>  <span class="syntax18">}</span>
+<span class="gutter">   9:</span>  <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">authorized</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutterH">  10:</span>    <span class="syntax8">include</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">secret.php</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span>  <span class="syntax18">}</span>
+<span class="gutter">  12:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+The $_GET array is used to retrieve the data from the form. If the register_globals
+directive is off, the user cannot directly set $authorized from the URL.
+</p><p>
+An added security precaution is to set the variable to false if the username
+and password do not match.
+</p><p>
+Then even if register_globals is set to on and the culprit user specifies:
+<b>?authorized=1</b> , the script resets it to false because the login
+information is incorrect.
+</p><p>
+In summary, with register_globals turned on, a user can overwrite and inject
+unwanted variables into your PHP script.
+</p><p>
+From a security standpoint, it is much better to set register globals to off,
+and explicitly retrieve and validate everything passed into the script from a form.
+</p><p>
+It is also good practice to initialize all variables and then check the error
+logs for the use of uninitialized variables.
+</p><p>
+We discuss error logs more at the end of this section.
+</p></li>
+<li><p>
+SQL Injection
+</p><p>
+SQL injection is a technique that allows unwanted text to be placed into a SQL
+statement that will then be executed on the database server.
+</p><p>
+In the following example, the culprit user fills a form field with unwanted
+parentheses, quotes, and text, which will then be used as part of a SQL INSERT
+statement and sent to the database.
+</p>
+<h4>
+Filename: injectSQL.php
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax10">$</span><span class="syntax10">sql</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">INSERT</span><span class="syntax14"> </span><span class="syntax14">INTO</span><span class="syntax14"> </span><span class="syntax14">users</span><span class="syntax14"> </span><span class="syntax14">(</span><span class="syntax14">username</span><span class="syntax14">,</span><span class="syntax14"> </span><span class="syntax14">password</span><span class="syntax14">)</span><span class="syntax14">&quot;</span>
+<span class="gutter">   3:</span>        <span class="syntax18">.</span><span class="syntax14">&quot;</span><span class="syntax14"> </span><span class="syntax14">VALUES</span><span class="syntax14"> </span><span class="syntax14">(</span><span class="syntax14">'</span><span class="syntax14">{</span><span class="syntax10">$</span><span class="syntax10">_GET</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">user</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax14">}</span><span class="syntax14">'</span><span class="syntax14">,</span><span class="syntax14"> </span><span class="syntax14">'</span><span class="syntax14">{</span><span class="syntax10">$</span><span class="syntax10">_GET</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">password</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax14">}</span><span class="syntax14">'</span><span class="syntax14">)</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">   4:</span>  <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax10">sql</span><span class="syntax18">;</span>
+<span class="gutterH">   5:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+The username and password are coming in from a form and will be added to the
+SQL INSERT statement and entered into the "users" table of the database.
+</p><p>
+The user can inject unwanted information into the database by entering a
+username such as:
+</p>
+<blockquote><code><small>
+mikey','secret'),('bob<br>
+</small></code></blockquote>
+<p>
+and then entering a password for user "bob", such as "hello".
+</p><p>
+So the final SQL will be:
+</p>
+<blockquote><code><small><pre>
+INSERT INTO users (username, password)
+  VALUES ('mikey','secret'),(' bob','hello')
+</pre></small></code></blockquote>
+<p>
+Now the username and password for <b>mikey / secret</b> have been injected into
+the database.
+</p><p>
+SQL injection is a simple process, but requires that the hacker have some
+knowledge of the code in the Web application and some knowledge about SQL syntax.
+</p><p>
+This knowledge is easy to obtain if the application is open source,
+or if your application is using third-party software that is known to the hacker.
+</p><p>
+The solution to inhibiting SQL injection is to escape all quote marks in the user
+input.
+</p><p>
+This can be done automatically by turning on the <b>magic_quotes_gpc</b>
+directive in the php.ini file or explicitly by using the PHP built-in function
+<b>addslashes()</b> .
+</p><p>
+You can check Wikipedia for a more thorough discussion:
+<a href="http://en.wikipedia.org/wiki/SQL_injection">http://en.wikipedia.org/wiki/SQL_injection</a>
+</p>
+<h4>
+Filename: noInjectSQL.php
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax10">$</span><span class="syntax10">username</span> <span class="syntax18">=</span> <span class="syntax9">addslashes</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_GET</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">user</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   3:</span>  <span class="syntax10">$</span><span class="syntax10">password</span>  <span class="syntax18">=</span> <span class="syntax9">addslashes</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_GET</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">password</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   4:</span>
+<span class="gutterH">   5:</span>  <span class="syntax10">$</span><span class="syntax10">sql</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">INSERT</span><span class="syntax14"> </span><span class="syntax14">INTO</span><span class="syntax14"> </span><span class="syntax14">users</span><span class="syntax14"> </span><span class="syntax14">(</span><span class="syntax14">username</span><span class="syntax14">,</span><span class="syntax14"> </span><span class="syntax14">password</span><span class="syntax14">)</span><span class="syntax14">&quot;</span>
+<span class="gutter">   6:</span>        <span class="syntax18">.</span><span class="syntax14">&quot;</span><span class="syntax14"> </span><span class="syntax14">VALUES</span><span class="syntax14"> </span><span class="syntax14">(</span><span class="syntax14">'</span><span class="syntax10">$</span><span class="syntax10">username</span><span class="syntax14">'</span><span class="syntax14">,</span><span class="syntax14"> </span><span class="syntax14">'</span><span class="syntax10">$</span><span class="syntax10">password</span><span class="syntax14">'</span><span class="syntax14">)</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">   7:</span>  <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax10">sql</span><span class="syntax18">;</span>
+<span class="gutter">   8:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+In this code, even if the user inputs:
+</p>
+<blockquote><code><small>
+mikey','secret'),('bob<br>
+</small></code></blockquote>
+<p>
+for the username, the quotes will be escaped and the final SQL will look like:
+</p>
+<blockquote><code><small><pre>
+INSERT INTO users (username, password)
+  VALUES ('mikey\',\'secret\'),(\'bob', 'hello')
+</pre></small></code></blockquote>
+<p>
+In other words, the username will just be one long piece of text:
+</p>
+<blockquote><code><small>
+mikey\',\'secret\'),(\'bob<br>
+</small></code></blockquote>
+</li>
+<li><p>
+File Names
+</p><p>
+Most Web sites use include files to include headers, footers, or database
+connection information for each page.
+</p><p>
+The following example uses a <b>global.inc</b> file included at the beginning
+of every script requiring database connectivity.
+</p>
+<code><small>
+&lt;?php<br>
+&nbsp;&nbsp;// This is the database_connect.inc file<br>
+&nbsp;&nbsp;$db = mysql_connect('localhost','root','secret');<br>
+?&gt;<br>
+</small></code>
+<p>
+The problem with naming a file with the ".inc" extension is that the Web server
+might not process ".inc" files as PHP scripts.
+</p><p>
+In other words, if someone knew the name of this file, he or she could view the
+source code just by typing the address of the file in the URL. For example:
+</p>
+<blockquote><code><small>
+http://localhost/mypath/global.inc<br>
+</small></code></blockquote>
+<p>
+would return, in most cases, the actual source code, thus revealing the username
+and password.
+</p><p>
+Although you can set your server to process ".inc" files as PHP files, it is
+better to add the ".php" extension to your include files. For example use:
+<b>global.inc.php</b>
+</p><p>
+By doing this, even if you install your Web application on another server,
+the source code of the include file cannot be viewed in the browser.
+</p></li>
+<li><p>
+Safe Mode
+</p><p>
+PHP offers a configuration directive called <b>safe_mode</b> to help secure
+your PHP environment.
+</p><p>
+However, you will quickly realize that many things that should be allowed for
+your application to function properly are disabled with this directive.
+</p><p>
+As a better alternative you should consider exactly which features should be
+allowed and which should not.
+</p><p>
+To do this, look at the directives <b>disabled_functions</b> and
+<b>disabled_classes</b> in the php.ini file.
+</p><p>
+The functions your script should never be able to execute can be listed here.
+</p><p>
+For example, the following line denies access to the underlying operating system,
+a good idea:
+</p>
+<code><small>
+disable_functions = exec, passthru, proc_open, shell_exec, system<br>
+</small></code>
+</li>
+<li><p>
+The File System
+</p><p>
+Another useful directive in the php.ini file is: <b>open_basedir</b>
+</p><p>
+When set, it limits what directories and subdirectories PHP can access.
+</p><p>
+For example, you might have a folder called <b>C:\Webroot\</b> that contains all
+your public PHP scripts. If you set:
+</p>
+<blockquote><code><small>
+open_basedir=C:\Webroot\<br>
+</small></code></blockquote>
+<p>
+PHP could open files only in this folder. If you had another folder where you
+keep all your database files, such as: <b>C:\MySQL\Data</b> , PHP would not have
+direct access to that folder, preventing the files from being exploited by a
+potential hacker, and any raw data files residing outside the open_basedir
+directory could not be downloaded either.
+</p></li>
+<li><p>
+Log Everything
+</p><p>
+A good rule of thumb is to log everything. There will always be security holes
+you did not think about, and if someone exploited them, the log files will give
+you clues as to what happened.
+</p><p>
+PHP 5 offers configuration directives you can set to ensure everything you want
+logged is logged. You can set these directives either in the php.ini file or by
+using the <b>ini_set()</b> function in your script.
+</p></li>
+<li><p>
+error_reporting Directive
+</p><p>
+This directive specifies what is going to be logged. There are multiple settings
+you can use. See the table below.
+</p><p>
+You can combine settings with the "&amp;" character or exclude certain options
+with the "~" character.
+</p><p>
+Table: Error Reporting Settings
+</p>
+<table>
+<tr>
+<td><code><b><u>
+Setting</u></b></code></td>
+<td><code><b><u>
+What It Reports</u></b></code></td>
+</tr><tr>
+<td><code>
+E_ALL	All</code></td>
+<td><code>
+errors and warnings (does not include E_STRICT).</code></td>
+</tr><tr>
+<td><code>
+E_ERROR</code></td>
+<td><code>
+Fatal runtime errors.</code></td>
+</tr><tr>
+<td><code>
+E_WARNING</code></td>
+<td><code>
+Runtime warnings (nonfatal errors).</code></td>
+</tr><tr>
+<td><code>
+E_PARSE</code></td>
+<td><code>
+Compile-time parse errors.</code></td>
+</tr><tr>
+<td><code>
+E_NOTICE</code></td>
+<td><code>
+Runtime notices. These are warnings that often result from a bug in your code,
+but it is possible that it was intentional; for example, using an uninitialized
+variable and relying on the fact it is automatically initialized to an empty
+string.</code></td>
+</tr><tr>
+<td><code>
+E_STRICT</code></td>
+<td><code>
+Runtime notices. Enable to have PHP suggest changes to your code that will
+ensure the best interoperability and forward compatibility of your code.</code></td>
+</tr><tr>
+<td><code>
+E_CORE_ERROR</code></td>
+<td><code>
+Fatal errors that occur during PHP's initial startup.</code></td>
+</tr><tr>
+<td><code>
+E_CORE_WARNING</code></td>
+<td><code>
+Warnings (nonfatal errors) that occur during PHP's initial startup.</code></td>
+</tr><tr>
+<td><code>
+E_COMPILE_ERROR</code></td>
+<td><code>
+Fatal compile-time errors.</code></td>
+</tr><tr>
+<td><code>
+E_COMPILE_WARNING&nbsp;</code></td>
+<td><code>
+Compile-time warnings (nonfatal errors).</code></td>
+</tr><tr>
+<td><code>
+E_USER_ERROR</code></td>
+<td><code>
+User-generated error message.</code></td>
+</tr><tr>
+<td><code>
+E_USER_WARNING</code></td>
+<td><code>
+User-generated warning message.</code></td>
+</tr><tr>
+<td><code>
+E_USER_NOTICE</code></td>
+<td><code>
+User-generated notice message.</code></td>
+</tr>
+</table>
+<p>
+Here are some examples:
+</p>
+<code><small>
+; Show all errors, except for notices and coding standards warnings<br>
+error_reporting = E_ALL &amp; ~E_NOTICE &amp; ~E_STRICT<br><br>
+; Show all errors, except for notices<br>
+error_reporting = E_ALL &amp; ~E_NOTICE<br>
+</small></code>
+<p>
+If you set error reporting to <b>E_ALL</b> , you will get all the errors,
+warning, notices, and so on — often an overwhelming amount of data.
+</p><p>
+Try to fine-tune this directive to meet your particular needs. The data will be
+logged into the Web server specified log file.
+</p></li>
+<li><p>
+display_errors Directive
+</p><p>
+This directive is either on or off. If set to on, errors will be displayed in
+the browser as well as logged.
+</p><p>
+This is what you want while you are developing the application. Once you are
+happy with how it is working, you can turn this feature off so that your users
+and potential hackers do not see the error messages.
+</p></li>
+<li><p>
+log_errors and error_log Directives
+</p><p>
+These two directives set whether the errors are to be logged and where the log
+file is located.
+</p><p>
+You want errors logged and you want to know where this file is to locate any
+suspicious activity and debugging clues. This file should be monitored in the
+early stages of application development as it can quickly become quite large.
+</p></li>
+<li><p>
+Where to Get More Security Information
+</p><p>
+Security is a huge topic and requires educating yourself and staying on top of
+the trends. The PHP Security Consortium states:
+</p>
+<blockquote><p>
+"Founded in January 2005, the PHP Security Consortium (PHPSC) is an international
+group of PHP experts dedicated to promoting secure programming practices within
+the PHP community. Members of the PHPSC seek to educate PHP developers about
+security through a variety of resources, including documentation, tools, and
+standards".
+</p></blockquote>
+<p>
+Visit their Web site at:
+<a href="http://phpsec.org/">http://phpsec.org/</a>
+</p>
+</li>
+</ul>
+</div>
+</body>
+</html>

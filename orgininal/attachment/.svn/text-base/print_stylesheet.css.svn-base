@@ -1,0 +1,25 @@
+/* Thanks to Pavel Sykora for fixing this */
+#menu, .command { display:none !important; }
+
+a {	
+    color:#000;
+    text-decoration:none;	
+}
+
+body {
+  margin:0px;	
+  padding:0px;
+  font-size:small;
+  color:#333;
+  font-family: arial, sans-serif;	
+  background-color:white;	
+}
+
+table {
+  border: solid 1px #AAAAAA;
+  border-spacing: 0pt;
+}
+
+td {
+  border: solid 1px #AAAAAA;
+}

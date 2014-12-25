@@ -1,0 +1,89 @@
+h2. In-class Lab 7.2
+
+h3. Exercise 1 - Create custom exceptions that extend the PHP 5 Exception class
+
+# Create a directory named *lab07* under your labs directory, which is under your webserver's document root, if it does not already exist.
+# Create a script named *exceptions.inc.php* and save it into your *lab07* directory.
+# Create the following custom exception classes that extend the built-in *Exception* class in PHP 5:
+<br /><pre><?php
+  class notArrayException extends Exception {
+    function __toString() {
+      return 'notArrayException '. $this->getCode()
+            .': '. $this->getMessage() .'<br />'.' in '
+            . $this->getFile() .' on line '
+            . $this->getLine() .'<br />';
+    }
+  }
+  class emptyArrayException extends Exception {
+    function __toString() {
+      return 'emptyArrayException '. $this->getCode()
+            .': '. $this->getMessage() .'<br />'.' in '
+            . $this->getFile() .' on line '
+            . $this->getLine() .'<br />';
+    }
+  }
+  class notNumericException extends Exception {
+    function __toString() {
+      return 'notNumericException '. $this->getCode()
+            .': '. $this->getMessage() .'<br />'.' in '
+            . $this->getFile() .' on line '
+            . $this->getLine() .'<br />';
+    }
+  }
+?>
+</pre>
+
+h3. Exercise 2 - Create a function that throws your custom exceptions
+
+# Create a script named *functions.inc.php* and save it into your *lab07* directory.
+# Use the *@require_once@* directive to include the file *exceptions.inc.php*.
+# Create a function named *average* that accepts an array as an input parameter and returns the average of the numbers in the array. Here is a template to use when creating your *@average()@* function:
+<br /><pre>
+ function average($numArray) {
+   // test if $numArray is an array, throw exception otherwise
+   $total = 0;
+   $itemCount = count($numArray);
+   // test for empty array, throw exception if empty
+   foreach ($numArray as $i) {
+       // test if array element is numeric, throw exception if not
+       $total += $i;
+   }
+   return $total / $itemCount;
+ }
+</pre>
+# If the input parameter to your average function is not an array, the function should throw an exception of the *notArrayException* class with a message such as: "Input parameter not an array".
+# If the input parameter to your average function is an empty array - that is if the element count is zero - the function should throw an exception of the *emptyArrayException* class with a message such as: "Number of items to average = 0".
+# If the input parameter to your average function is a non-empty array, but one or more of the array elements are not numeric, the function should throw an exception of the *notNumericException* class with a message such as: "Array element not numeric".
+<br />*Hint*: PHP built-in functions such as *@gettype()@*, *@is_array()@*, *@is_int()@*, and *@is_float()@* can be used to test the array and its elements.
+
+h3. Exercise 3 - Use a @try...catch@ block to test the function
+
+# Create a script named *lab7x2.php* and save it into your *lab07* directory.
+# Use the require_once directive to include the file *functions.inc.php*.
+# Add code to the *lab7x2.php* script to test your *@average()@* function. Note that the function definition that "throws" the exceptions does not need to be inside the try part of the block. Only the calls to the *@average()@* function must be!
+# Because your custom exceptions implement the *@__toString()@* function, the catch parts of your block just need to print out the exception that occurred:
+<br /><pre>
+ catch (notArrayException $ex) {
+     echo $ex;
+ }
+</pre>
+# You should include 3 catch blocks, one for each custom exception. Is there another way to catch exceptions of these classes because they inherit from a common parent, the Exception class?
+# Define 4 variables:
+** An array variable containing the list of numbers: *@(10, 15, 17, 23, 9, 11, 13)@*
+** A string variable containing the string: "I am not an array"
+** An empty array variable
+** An array variable containing the list of elements: *@(1, 2, 'three', 4, 5, 'sick')@*
+* Test your *@average()@* function by calling it with each of the 4 variables as input. Be sure to include a statement similar to:
+<br /><pre>
+echo "The average is $myAverage <br>";
+</pre>
+so you can verify that your function works correctly with the "good" array. (You may temporarily comment out 3 of the 4 calls to average() for each test run.)
+# The second, third and fourth variables should cause your *@average()@* function to throw exceptions.
+# Show your instructor your code and demonstrate how it works in a browser.
+
+<br />
+
+---
+
+[[Unit Seven => 152-166 Unit Seven Index]]
+

@@ -1,0 +1,89 @@
+h2. In-class Lab 11.2
+
+<hr />
+
+h3. Exercise 1
+
+# If you are using a Linux virtual machine, or Mac OS X, open a terminal window. On Windows, you should open a command-line window or command prompt.
+# Log in to your local MySQL server by issuing a command similar to the one below. Use the root user name. The instructor will tell you the password for lab computers and virtual machines.
+<br /><pre>
+mysql -u root -p
+</pre>
+# View existing database schemas by entering:
+<br /><pre>
+show databases;
+</pre>
+# Create a new database schema named bookstore.
+<br /><pre>
+create database bookstore;
+</pre>
+# Now create a regular user and grant them all rights on the bookstore schema.
+<br /><pre>
+grant all on bookstore.* to astudent identified by 'password';
+</pre>
+# If you wish you may also create a user with the same username as you have on the class server.
+<br /><pre>
+grant all on bookstore.* to djefferson identified by 'password';
+</pre>
+# If your MySQL server also contains the northwind database schema, you may wish to also grant both users access to it with the following commands:
+<br /><pre>
+grant all on northwind.* to astudent;
+grant all on northwind.* to djefferson;
+</pre>
+Note that you only use the "identified by" clause when creating a new user account, not when granting that same user access to additional databases.
+# Now let's change the password of user astudent without altering any privileges granted to the account:
+<br /><pre>
+set password for astudent = password('astudent');
+</pre>
+Note that you can change the password of any existing account, including root, using the "set password" command.
+# Now let's verify what user accounts exist on this MySQL server. To do so we must change our default database to mysql and query the "user" table using the following commands:
+<br /><pre>
+use mysql;
+select user, host, password from user;
+</pre>
+List the names of all valid users of this MySQL server:
+<br /><br />
+What internet host or hosts can the user root connect from?
+<br /><br />
+What internet host or hosts can the user astudent connect from?
+<br /><br />
+# Type:  exit;  to log out of the MySQL server.
+
+h3. Exercise 2
+
+* Log in to your local MySQL server by issuing a command similar to the one below. Use the astudent user name this time (password also astudent).
+<br /><pre>
+mysql -u astudent -p
+</pre>
+* Set your default database to bookstore and verify this setting using a built-in MySQL function as follows:
+<br /><pre>
+use bookstore;
+select database();
+</pre>
+* Create a table in the bookstore database schema using the SQL "CREATE TABLE" command. The table should be named "book" and should contain the following columns:
+<br /><br />
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Name*|{background:#ccc}.*Data_Type*|{background:#ccc}.*Length*|
+|id      |int        |10 digits                        |
+|isbn    |char       |13 characters                    |
+|author  |varchar    |50 characters                    |
+|title   |varchar    |100 characters                   |
+|price   |float      |10 digits with 2 decimal places  |
+
+<br />
+bq. Make the "id" column the primary key of the table, and enable the "auto increment" feature so it will be populated for you.
+
+* Verify that the table was created to specifications with the following commands:
+<br /><pre>
+show tables;
+describe book;
+</pre>
+* Use the SQL INSERT command to add three rows (records) to the book table. You may use real book names and authors or make some up, but please don't just type in gibberish!
+* Show your instructor the results of your work by issuing SELECT and DESCRIBE commands on your new table.
+
+<br />
+
+<hr />
+
+[[Unit Eleven => 152-166 Unit Eleven Index]]
+

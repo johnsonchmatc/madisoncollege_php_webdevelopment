@@ -1,0 +1,319 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta name="generator" content="HTML Tidy, see www.w3.org">
+  <title>Useful Functions</title>
+  <link href="basic.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" language="JavaScript">
+<!--
+function putSemester() {
+    var today=new Date();
+    var thisMonth=today.getMonth()+1;
+    var thisYear=today.getFullYear();
+    if(thisMonth <=6) {
+        return "Spring, " + thisYear;
+    }
+    else {
+       return "Fall, " + thisYear;
+    }
+}//-->
+  </script>
+  <style type="text/css">
+<!--
+    .bgStripes {
+        background-image:url(images/Xstripes.gif);
+        background-attachment: fixed;
+    }
+    body {
+        background-color:white;
+    }
+    strong {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .table1 {
+        font-family:Arial, Helvetica, sans-serif;
+        font-size: small;
+    }
+    .table2 {
+        font-family:Arial, Helvetica, sans-serif;
+        font-size: small;
+        text-align:center;
+    }
+    td.cen {
+        text-align:center;
+    }
+    .small_title {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size:x-small;
+        font-weight:bold;
+    }
+    .med_title {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size:medium;
+        font-weight:bold;
+        text-align:center;
+        color:darkblue;
+    }
+    -->
+  </style>
+</head>
+<body bgcolor="#ffffff" text="#000000">
+<table class="bgStripes" border="0" width="100%">
+      <tbody>
+    <tr name="firstRow">
+        <td valign="top" width="80">
+      <p class="small_title">
+      
+      <script type="text/javascript">
+          <!--
+            document.write(putSemester());
+            -->
+      </script>
+          </p>
+        </td>
+        <td>
+      <p class="med_title"><span style="color: darkblue; font-size: medium; font-weight: bold;">PHP
+and
+MySQL Development</span></p>
+        </td>
+        <td align="right" valign="top" width="80">
+          
+      
+      <p class="small_title">3 Credits</p>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" height="10">
+      <p class="small_title" align="center">152-151</p>
+        </td>
+      </tr>
+  </tbody>
+</table>
+    <!--The heading for the slides -->
+    <br>
+<table class="headTable1" border="0">
+      <tbody>
+    <tr>
+        <td width="100"><a href="readfl.html"><img alt="" src="images/btn_lArrow.gif" border="0"></a><a href="index.html"><img alt="" src="images/btn_upArrow.gif" border="0"></a><a href="database.html"><img alt="" src="images/btn_rArrow.gif" border="0"></a></td>
+        <td>
+      <p>Other Useful File Functions</p>
+        </td>
+      </tr>
+  </tbody>
+</table>
+    <br>
+<div class="disp1">
+<ul class="slidesUl1">
+  <li>
+    <p>
+Using Other Useful File Functions</p>
+    <p>
+Numerous other file functions are useful from time to time.
+Some are described in this section.</p>
+  </li>
+  <li>
+    <p>
+Checking Whether a File Is There: <code>file_exists()</code></p>
+    <p>
+If you want to check whether a file exists without actually opening it,
+you can use <code>file_exists()</code> , as follows:</p>
+<blockquote><code><small>
+if (file_exists("$DOCUMENT_ROOT/../orders/orders.txt"))<br>
+&nbsp;&nbsp;echo 'There are orders waiting to be processed.';<br>
+else<br>
+&nbsp;&nbsp;echo 'There are currently no orders.';<br>
+</small></code></blockquote>
+</li><li>
+    <p>
+Determining How Big a File Is: <code>filesize()</code></p>
+    <p>
+You can check the size of a file by using the <code>filesize()</code>
+function:</p>
+<blockquote><code>
+echo filesize("$DOCUMENT_ROOT/../orders/orders.txt");<br>
+</code></blockquote>
+    <p>
+It returns the size of a file in bytes and can be used in conjunction
+with <code>fread()</code> to read a whole file
+(or some fraction of the file) at a time.
+You can even replace the entire original script with the following:</p>
+<blockquote><code><small>
+$fp = fopen("$DOCUMENT_ROOT/../orders/orders.txt", 'rb');<br>
+echo nl2br(fread( $fp, filesize("$DOCUMENT_ROOT/../orders/orders.txt")));<br>
+fclose( $fp );<br>
+</small></code></blockquote>
+    <p>
+The <code>nl2br()</code> function converts the "\n" characters in the
+output to HTML line breaks (&lt;br /&gt;).</p>
+  </li>
+  <li>
+    <p>
+Deleting a File: <code>unlink()</code></p>
+    <p>
+If you want to delete the order file after the orders have been
+processed, you can do so by using <code>unlink()</code> .
+(There is no function called delete.) For example,</p>
+<blockquote><code>
+unlink("$DOCUMENT_ROOT/../orders/orders.txt");<br>
+</code></blockquote>
+    <p>
+This function returns false if the file could not be deleted.
+This situation typically occurs if the permissions on the file are insufficient
+or if the file does not exist.</p>
+  </li>
+  <li>
+    <p>
+Navigating Inside a File: <code>rewind()</code> ,
+<code>fseek()</code> , and <code>ftell()</code></p>
+    <p>
+You can manipulate and discover the position of the file pointer inside
+a file by using <code>rewind()</code> , <code>fseek()</code>
+, and <code>ftell()</code> .</p>
+    <p>
+The <code>rewind()</code> function resets the file pointer to the
+beginning of the file. The <code>ftell()</code>
+function reports how far into the file the pointer
+is in bytes. For example,
+you can add the following lines to the bottom of the original script
+(before the <code>fclose()</code> command):
+    </p>
+<blockquote><code><small>
+echo 'Final position of the file pointer is ' . (ftell($fp));<br>
+echo '&lt;br /&gt;';<br>
+rewind($fp);<br>
+echo 'After rewind, the position is ' . (ftell($fp));<br>
+echo '&lt;br /&gt;';<br>
+</small></code></blockquote>
+    <p>
+After reading the orders, the file pointer points to
+the end of the file, an offset of about 230 bytes.
+The call to rewind sets it back to position 0, the start of the file.</p>
+    <p>
+You can use the function <code>fseek()</code> to set the file
+pointer to some point within the file.
+Its prototype is</p>
+<blockquote><code><small>
+int fseek ( resource fp , int offset [, int whence])<br>
+</small></code></blockquote>
+    <p>
+A call to <code>fseek()</code> sets the file pointer "fp" at a point starting
+from "whence" and moving "offset" bytes into the file.
+The optional "whence" parameter defaults to the value <code>SEEK_SET</code> ,
+which is effectively the start of the file.
+The other possible values are <code>SEEK_CUR</code>
+(the current location of the file pointer) and <code>SEEK_END</code>
+(the end of the file).</p>
+    <p>
+The <code>rewind()</code> function is equivalent to calling the
+<code>fseek()</code> function with an offset of zero.
+For example, you can use <code>fseek()</code> to find the
+middle record in a file or to perform a binary search.
+Often, if you reach the level of complexity in a
+data file where you need to do these kinds of things,
+your life will be much easier if you
+use a database.
+    </p>
+  </li>
+  <li>
+    <p>
+Locking Files</p>
+    <p>
+Imagine a situation in which two customers are trying to order a
+product at the same time. (This situation is not uncommon, especially when your website
+starts to get any kind of traffic volume.) What if one customer calls
+<code>fopen()</code> and begins writing, and then the other customer calls
+<code>fopen()</code> and also begins writing?
+What will be the final contents of the file?
+Will it be the first order followed by the second order, or vice versa?
+Will it be one order or the other?
+Or will it be something less useful,
+such as the two orders interleaved somehow?
+The answer depends on your operating system
+but is often impossible to know.</p>
+    <p>
+To avoid problems like this, you can use file locking.
+You use this feature in PHP by using the <code>flock()</code> function.
+This function should be called after a file has been opened
+but before any data is read from or written to the file.
+The prototype for <code>flock()</code> is:</p>
+<blockquote><code><small>
+bool flock (resource fp , int operation [, int &amp;wouldblock])<br>
+</small></code></blockquote>
+    <p>
+You need to pass it a pointer to an open file and a constant
+representing the kind of lock you require.
+It returns true if the lock was successfully acquired and
+false if it was not.
+The optional third parameter will contain the value true if acquiring
+the lock would cause the current process to block
+(that is, have to wait).</p>
+    <p>
+The possible values for "operation" are shown below.
+The possible values changed at PHP 4.0.1, so both sets of values are shown.</p>
+<blockquote><code><small>
+<span style="text-decoration: underline;">Value of Operation
+&nbsp;&nbsp;&nbsp;&nbsp;
+Meaning&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+LOCK_SH(formerly 1)&nbsp;&nbsp;&nbsp;&nbsp;
+Reading lock. The file can be shared with<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+other readers.<br>
+LOCK_EX(formerly 2)&nbsp;&nbsp;&nbsp;&nbsp;
+Writing lock. This operation is exclusive;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+the file cannot be shared.<br>
+LOCK_UN(formerly 3)&nbsp;&nbsp;&nbsp;&nbsp;
+The existing lock is released.<br>
+LOCK_NB(formerly 4)&nbsp;&nbsp;&nbsp;&nbsp;
+Blocking is prevented while you are trying<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+to acquire a lock.<br>
+</small></code></blockquote>
+    <p>
+If you are going to use <code>flock()</code> ,
+you need to add it to all the scripts that use the file;
+otherwise, it is worthless.</p>
+    <p>
+Note that <code>flock()</code> does not work with NFS or other networked
+file systems. It also does not work with older file systems that do not support locking,
+such as FAT. On some operating systems,
+it is implemented at the process level and does
+not work correctly if you are using a multithreaded server API.</p>
+    <p>
+To use it with the order example, you can alter
+processorder.php as follows:</p>
+<blockquote><code><small>
+$fp = fopen("$DOCUMENT_ROOT/../orders/orders.txt", 'ab');<br>
+flock($fp, LOCK_EX); // lock the file for writing<br>
+fwrite($fp, $outputstring);<br>
+flock($fp, LOCK_UN); // release write lock<br>
+fclose($fp);<br>
+</small></code></blockquote>
+    <p>
+You should also add locks to vieworders.php:</p>
+<blockquote><code><small>
+$fp = fopen("$DOCUMENT_ROOT /../orders/orders.txt", 'r');<br>
+flock($fp, LOCK_SH); // lock file for reading<br>
+// read from the file<br>
+flock($fp, LOCK_UN); // release read lock<br>
+fclose($fp);<br>
+</small></code></blockquote>
+    <p>
+The code is now more robust but still not perfect.
+What if two scripts tried to acquire a lock at the same time?
+This would result in a race condition, in which the
+processes compete for locks but it is uncertain which will succeed.
+Such a condition could cause more problems.
+You can do better by using a database management system (DBMS).
+</p>
+</li>
+</ul>
+</div>
+</body>
+</html>

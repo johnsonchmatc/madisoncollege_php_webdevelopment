@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>About Security</title>
+<link href="../../../css/basic.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" language="JavaScript">
+<!--
+function putSemester() {
+    var today=new Date();
+    var thisMonth=today.getMonth()+1;
+    var thisYear=today.getFullYear();
+    if(thisMonth <=6) {
+        return "Spring, " + thisYear;
+    }
+    else {
+       return "Fall, " + thisYear;
+    }
+}//-->
+</script>
+<style type="text/css">
+<!--
+    .bgStripes {
+        background-image:url(../../../images/Xstripes.gif);
+        background-attachment: fixed;
+    }
+    body {
+        background-color:white;
+    }
+    strong {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+-->
+</style>
+</head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
+<table class="bgStripes" border="0" width="100%">
+<tbody>
+<tr name="firstRow">
+<td valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+<script type="text/javascript">
+<!--
+    document.write(putSemester());
+-->
+</script>
+</span> <br>
+</td>
+<td style="text-align: center;"><span style="font-weight: bold; font-size: medium; color: darkblue;">
+PHP Web Development with MySQL
+</span> </td>
+<td align="right" valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+3 Credits</span> </td>
+</tr>
+<tr>
+<td colspan="3" style="text-align: center;"><span style="font-size: xx-small; font-weight: bold;">
+152-166</span> </td>
+</tr>
+</tbody>
+</table>
+<!--The heading for the slides --> <br>
+<table class="headTable1" border="0">
+<tbody>
+<tr>
+<td width="100"><a href="index.html"><img alt="" src="../../../images/btn_lArrow.gif" border="0"></a><a href="index.html"><img alt="" src="../../../images/btn_upArrow.gif" border="0"></a><a href="security2.html"><img alt="" src="../../../images/btn_rArrow.gif" border="0"></a></td>
+<td>About Security</td>
+</tr>
+</tbody>
+</table>
+<br>
+<div class="disp1">
+<ul class="slidesUl1">
+<li><p>
+Security is a set of measures applied to a Web application to meet the security
+requirements of the Web site. A site will never be 100 percent secure — there is
+always a way in.
+</p><p>
+Just as there is always a thief who can break into bank vault, there is always
+a hacker who can break into your site.
+</p><p>
+To be secure, you must define your security requirements and how much you are
+willing to spend to meet them.
+</p><p>
+In defining the security requirements of your site, there are several issues
+to consider: The security of your network, the operating system, the file system,
+the Web server your Web applications are running on, and, finally, the Web
+application itself and the database it is using.
+</p><p>
+Because the focus of this course is on PHP and MySQL, we discuss the security
+of PHP scripts and the MySQL database as they relate to one another.
+</p><p>
+The security of the network, operating system, file system, and Web server depend
+on specific vendors and are typically managed by your ISP or system administrator.
+</p></li>
+<li><p>
+Network Security and SSL
+</p><p>
+Network security refers to securing the physical communication between the user
+of a Web application and the application itself.
+</p><p>
+For example, you may go to a local Internet coffee shop while traveling and want
+to pay your bills online, so you go to your bank's Web site and type in your
+username and password.
+</p><p>
+This information is highly sensitive, yet it travels over public lines that
+cannot be trusted.
+</p><p>
+Most Web applications solve this problem by using an inexpensive system called
+Secure Sockets Layer (SSL).
+</p><p>
+SSL is an encryption system that automatically creates a secure channel between
+the client's Web browser and Web server.
+</p><p>
+For example, when you go to your online banking site, you will be redirected to
+a secure server shown in the address bar of your browser as an address starting
+with https, the protocol for SSL.
+</p><p>
+The client and server do a hand-shake in which they generate a key to be used
+for encryption. This key is good for only this one session and it is disposable.
+</p><p>
+Even if a hacker could break it, chances are it would take much longer than the
+time needed to pay your bills and log out!
+</p><p>
+To prepare a Web server for accepting HTTPS connections, the administrator must
+create a public key certificate for the Web server.
+</p><p>
+You will need to purchase an SSL certificate from a trusted party.
+This certificate, usually good for one year at a time, certifies that you are
+who you say you are.
+</p><p>
+There are a number of companies who sell SSL certificates, among them VeriSign,
+Thawte, and GoDaddy.
+</p><p>
+Installing SSL is also dependent on the Web server you are using. Contact your
+ISP or your system administrator for help with setting up SSL.
+</p><p>
+Once set up, there is nothing you need to change in your PHP/MySQL application.
+You just want to ensure that all the links use the HTTPS protocol rather than
+the HTTP protocol.
+</p></li>
+<li><p>
+Operating System, Web Server, and File System Security
+</p><p>
+Even before a hacker attacks your PHP application, he or she might try to exploit
+the weaknesses of your underlying infrastructure.
+</p><p>
+Web servers are a common target for the attackers. Commonly used servers are
+Apache and Microsoft Internet Information Server.
+</p><p>
+These Web servers are available to everyone and security holes are constantly
+being discovered and patched. Make sure you stay on top of security updates for
+your Web server.
+</p><p>
+The same rule applies to the security of the operating system, regardless of
+whether you are using Windows, Linux, or Mac OS X.
+</p><p>
+Additionally, it is good practice to run the Web server under its own system user.
+Then, even if someone breaks into your Web server, he or she cannot easily
+exploit the rest of your operating system. Create a user specific to the Web server.
+</p><p>
+On UNIX and Linux systems, this is already done. The Apache user account is
+commonly given a username of <b>apache</b>, <b>http</b> or <b>nobody</b> .
+</p><p>
+Make sure that this user has read/write access only to the file system
+directories where your PHP files are stored and not to the directories where
+you have system files (such as <b>/etc</b> on UNIX or <b>C:\Windows</b> on Windows).
+</p><p>
+Also, make sure this user does not have access to your database files.
+</p><p>
+The database server, MySQL, should also run under its own system username and
+have access only to its own files.
+</p><p>
+By giving the Web server and the database server each their own system user
+accounts, you are creating multiple levels of security.
+</p><p>
+If one level is breached, the damage is limited to that component, not spread
+through the entire infrastructure.
+</p>
+</li>
+</ul>
+</div>
+</body>
+</html>

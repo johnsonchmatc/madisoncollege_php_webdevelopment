@@ -1,0 +1,10 @@
+<?php
+  $color = "purple";
+  function welcome() {
+    global $color;
+    $mood = "marvelous";
+    echo "Welcome to you!\n<br />";
+    echo "<font color=$color>"."What a $mood $color
+          sky!\n</font><br />";
+  }
+?>

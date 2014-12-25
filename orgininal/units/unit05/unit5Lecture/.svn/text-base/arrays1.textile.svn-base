@@ -1,0 +1,500 @@
+h2.  Creating and Using Arrays
+
+
+
+h3.  What Is an Array?
+
+* An array of products, an array of pills, an array of shoes, an array of problems . . . When we speak of an array of things, we think of not just one, but a list of things.
+* A variable that stores one value is called a scalar variable, whereas an array is a variable that can store a collection of scalars, such as an array of numbers, an array of strings, an array of images, colors, and so on.
+* If you want to define one number you would store it in a simple scalar variable, but if you want to store a whole list of numbers, it would be more practical to use an array, and give the array a name to represent all of the numbers.
+* An array is described in the PHP manual as "an ordered map" where a map is a type that maps values to keys.
+* Simply stated, an array is collection of key--value pairs. The key, called an index, can be a number or a string, or a combination of both, used to identify a corresponding value in the array. The value in an array is called an element and can be of any data type, even mixed types.
+* Although PHP internally treats both numeric and associative arrays in the same way, there are two ways to visualize an array: an array indexed by a number and an array indexed by a string.
+* If the key is a number, it represents the position of the value (or element) in the array (usually starting at position 0 and incrementing by 1 for each successive value).
+* If the key is a string, the string is associated with a corresponding value.
+* Arrays indexed by numbers are called numeric arrays and those indexed by strings are called associative arrays.
+* When you access elements with an array, PHP keeps track of the current position with an internal pointer, and provides built-in functions to move the array pointer.
+* For example, if you want to go to the end of the array you can use the *@end()@* function and if you want to go back to the beginning of the array, you can use the *@reset()@* function.
+* Let's look at an example which shows a numeric array, an array indexed by number.
+* Filename: *arrays1.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Array of Products<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">lightgreen</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutterH">   5:</span>    <span class="syntax10">$</span><span class="syntax10">products</span> <span class="syntax18">=</span> <span class="syntax8">array</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">floral</span><span class="syntax13"> </span><span class="syntax13">talc</span><span class="syntax13">'</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">body</span><span class="syntax13"> </span><span class="syntax13">mist</span><span class="syntax13">'</span><span class="syntax18">,</span>
+<span class="gutter">   6:</span>                      <span class="syntax13">'</span><span class="syntax13">perfumed</span><span class="syntax13"> </span><span class="syntax13">powder</span><span class="syntax13">'</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">bath</span><span class="syntax13"> </span><span class="syntax13">gel</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   7:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">b</span><span class="syntax14">&gt;</span><span class="syntax14">\$products</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14">:</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">products</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">   8:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">\$products</span><span class="syntax14">[</span><span class="syntax14">0</span><span class="syntax14">]</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14">:</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">products</span><span class="syntax14">[</span><span class="syntax14">0</span><span class="syntax14">]</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">   9:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">\$products</span><span class="syntax14">[</span><span class="syntax14">1</span><span class="syntax14">]</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14">:</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">products</span><span class="syntax14">[</span><span class="syntax14">1</span><span class="syntax14">]</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">\$products</span><span class="syntax14">[</span><span class="syntax14">2</span><span class="syntax14">]</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14">:</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">products</span><span class="syntax14">[</span><span class="syntax14">2</span><span class="syntax14">]</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">\$products</span><span class="syntax14">[</span><span class="syntax14">3</span><span class="syntax14">]</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14">:</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">products</span><span class="syntax14">[</span><span class="syntax14">3</span><span class="syntax14">]</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  13:</span>  <span class="syntax17">&lt;br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;em</span><span class="syntax17">&gt;</span>Let's add another element to the array.
+<span class="gutter">  14:</span>  <span class="syntax17">&lt;/em</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  15:</span>  $products[] = 'gentle soap';<span class="syntax17">&lt;br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  16:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">  17:</span>    <span class="syntax10">$</span><span class="syntax10">products</span><span class="syntax18">[</span><span class="syntax18">]</span> <span class="syntax18">=</span> <span class="syntax13">'</span><span class="syntax13">gentle</span><span class="syntax13"> </span><span class="syntax13">soap</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  18:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">\$products</span><span class="syntax14">[</span><span class="syntax14">4</span><span class="syntax14">]</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14">:</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">products</span><span class="syntax14">[</span><span class="syntax14">4</span><span class="syntax14">]</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  19:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutterH">  20:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  21:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* A numeric array called $products is defined as a list of four values. The array is indexed by numbers, starting at 0.
+* A new element is added to the end of the array. PHP figures out the value of the new index by adding 1 to the index value of the last element in the original array. The new element is $products[4], which is assigned the value 'gentle soap'.
+* Now let's look at an example of an associative array, an array indexed by strings.
+* Filename: *arrays2.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Array of Key/Value Pairs<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">lavender</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;h3</span><span class="syntax17">&gt;</span>An Array Indexed by Strings<span class="syntax17">&lt;/h3</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  <span class="syntax17">&lt;b</span><span class="syntax17">&gt;</span>
+<span class="gutter">   8:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">   9:</span>    <span class="syntax10">$</span><span class="syntax10">show</span> <span class="syntax18">=</span> <span class="syntax8">array</span><span class="syntax18">(</span> <span class="syntax13">'</span><span class="syntax13">Title</span><span class="syntax13">'</span><span class="syntax18">=</span><span class="syntax18">&gt;</span><span class="syntax13">'</span><span class="syntax13">Aga-Boom</span><span class="syntax13">'</span><span class="syntax18">,</span>
+<span class="gutterH">  10:</span>                   <span class="syntax13">'</span><span class="syntax13">Author</span><span class="syntax13">'</span><span class="syntax18">=</span><span class="syntax18">&gt;</span> <span class="syntax13">'</span><span class="syntax13">Dmitri</span><span class="syntax13"> </span><span class="syntax13">Bogatirev</span><span class="syntax13">'</span><span class="syntax18">,</span>
+<span class="gutter">  11:</span>                   <span class="syntax13">'</span><span class="syntax13">Genre</span><span class="syntax13">'</span><span class="syntax18">=</span><span class="syntax18">&gt;</span> <span class="syntax13">'</span><span class="syntax13">Physical</span><span class="syntax13"> </span><span class="syntax13">comedy</span><span class="syntax13">'</span><span class="syntax18">,</span>
+<span class="gutter">  12:</span>                 <span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">\$show</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">show</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutterH">  15:</span>    $show['Title'] is: <span class="syntax17">&lt;?</span><span class="syntax18">=</span><span class="syntax10">$</span><span class="syntax10">show</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">Title</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax17">?&gt;</span><span class="syntax17">&lt;br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  16:</span>    $show['Author'] is: <span class="syntax17">&lt;?</span><span class="syntax18">=</span><span class="syntax10">$</span><span class="syntax10">show</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">Author</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax17">?&gt;</span><span class="syntax17">&lt;br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  17:</span>    $show['Genre'] is: <span class="syntax17">&lt;?</span><span class="syntax18">=</span><span class="syntax10">$</span><span class="syntax10">show</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">Genre</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax17">?&gt;</span><span class="syntax17">&lt;br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  18:</span>    <span class="syntax17">&lt;br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;em</span><span class="syntax17">&gt;</span>Let's add another element to the array.
+<span class="gutter">  19:</span>    <span class="syntax17">&lt;/em</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  20:</span>    $show['Theater'] = 'Alcazar';<span class="syntax17">&lt;br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  21:</span>
+<span class="gutter">  22:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">  23:</span>    <span class="syntax10">$</span><span class="syntax10">show</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">Theater</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">Alcazar</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  24:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">\$show</span><span class="syntax14">[</span><span class="syntax14">'</span><span class="syntax14">Theater</span><span class="syntax14">'</span><span class="syntax14">]</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14">:</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">.</span> <span class="syntax10">$</span><span class="syntax10">show</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">Theater</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">.</span><span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  25:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  26:</span>  <span class="syntax17">&lt;/b</span><span class="syntax17">&gt;</span>
+<span class="gutter">  27:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  28:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* An associative array called $show is defined with three keys and three values. The value of $show displays only the data type of this variable. It is an array.
+* The HTML segment beginning on line 15 contains a PHP short tags and the associative array with its keys. Each value associated with the key enclosed in brackets will be extracted and printed.
+* A new key--value pair is created for the $show associative array, the key is 'Theater' and the value associated with it, "Alcazar".
+
+h3. Creating and Naming an Array
+
+* Like PHP scalar variables, the array's name starts with a dollar sign and the first character is a letter or a number, followed by any number of letters, numbers, and/or an underscore.
+* Scalar variables and array variables cannot have the same name. If you have a scalar variable called $menu and then create an array called $menu, the first $menu will be overwritten.
+* Names are case sensitive; for example, $foods is not the same as $Foods. The following table describes a number of PHP functions that can be used to create an array. The most common of them is the *@array()@* function.
+* Table: Functions to Create an Array
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Function*|{background:#ccc}.*What_It_Does*|
+|@array()@          |Creates an array                                   |
+|@array_combine()@  |Creates an array by using one array for keys<br />and another for its values|
+|@array_fill()@     |Fills an array with values                         |
+|@array_pad()@      |Pads an array to the specified length with a value |
+|@compact()@        |Creates array containing variables and their values|
+|@range()@          |Creates an array containing a range of elements    |
+
+h3. The @array()@ Function
+
+* One way tocreate a PHP array is with a special built-in function called *@array()@* . The arguments to the *@array()@* function are the key--value pairs that will make up the elements of the array variable.
+* If you do not specify a key, PHP automatically assigns it a number, starting at 0 and incrementing by 1 for each successive value. The number 0 will correspond to the first value in the array, 1 to the second value in the array, and so on.
+* If you assign your own key, whether a number or string, the key is separated from its value by "=>".
+* For example, "Name"=>"Tom", where "Name" is the key, and "Tom" is the value associated with it.
+* Format:
+<br /><pre>
+$array_name = array(value1, value2, value3 ...);
+$array_name = array(key=>value, key=>value, ...);
+</pre>
+* Example: (Array indexed by number, starting at 0, no key specified, the default)
+<br /><pre>
+$colors = array('red','green','blue');
+</pre>
+* (Array indexed by number, key specified)
+<br /><pre>
+$colors = array(1 => 'red', 2 => 'green', 3 => 'blue');
+</pre>
+* (Array indexed by string)
+<br /><pre>
+$book = array('Title' => 'War and Peace','Author' => 'Leo Tolstoy');
+</pre>
+
+h3. The Array Identifier @[]@
+
+* Another way to create PHP arrays is with the array identifier: "[ ]".
+* If you assign a value to an array and do not include an index between the square brackets, PHP automatically creates a numeric array, with an index starting at 0, and increments the index for each value added to the array.
+* If you provide a starting index value or ending index value, PHP creates an array consisting of the named elements and does not attempt to fill the array with the missing elements.
+* For example, $names[4] = "Tommy" creates a one-element array where the size of the array is 1, and indexes 0, 1, 2, and 3 do not exist.
+* Format:
+<br /><pre>
+$array_name[] = value1;
+$array_name[] = value2;
+</pre>
+* Example:
+<br /><pre>
+$colors[] = "red"; // Will become $colors[0]
+$colors[] = "green"; // Will become $colors[1]
+$colors[] = "blue"; // Will become $colors[2]
+</pre>
+* Example:
+<br /><pre>
+// A one-element array, starting at index 10
+$names[10] = "Tommy";
+// A two-element array
+$cars[0]="Ford"; $cars[5]="Honda";
+// A two-element array, first index is 0
+$cars[] = "Ford"; $cars[5]="Honda";
+// A two-element array, second index is 6
+$cars[5]="Ford"; $cars[] = "Honda";
+// A two-element array, second index is 0
+$cars[-1]="Ford"; $cars[ ] = "Honda";
+</pre>            
+
+h3. The @range()@ Function
+
+* Starting from a low value and going to a high value, the *@range()@* function creates an array of consecutive integer or character values.
+* It takes up to three arguments: a starting value, an ending value, and an increment value. If only two arguments are given, the increment value defaults to 1.
+* The example below demonstrates the *@range()@* function.
+* Format:
+<br /><pre>
+array range ( mixed low, mixed high [, number step] )
+</pre>
+* Example:
+<br /><pre>
+range(1,10); // Returns 1,2,3,4,5,6,7,8,9,10
+range(1,10,2); // Returns 1,3,5,7,9
+range(15,0, -5); // Returns 15,10,5,0
+range(10,1); // Returns 10,9,8,7,6,5,4,3,2,1
+range(-2,-8); // Returns -2,-3,-4,-5,-6,-7,-8
+range('a','c'); // a,b,c
+</pre>
+* Filename: *range.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Setting a Range of Values<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">azure</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;font</span><span class="syntax17"> </span><span class="syntax17">face</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">arial</span><span class="syntax14">&quot;</span><span class="syntax17"> </span><span class="syntax17">size</span><span class="syntax18">=</span><span class="syntax13">'</span><span class="syntax13">+</span><span class="syntax13">1</span><span class="syntax13">'</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">   8:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">Range</span><span class="syntax14"> </span><span class="syntax14">of</span><span class="syntax14"> </span><span class="syntax14">numbers</span><span class="syntax14"> </span><span class="syntax14">incrementing</span><span class="syntax14"> </span><span class="syntax14">by</span><span class="syntax14"> </span><span class="syntax14">1</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">   9:</span>    <span class="syntax10">$</span><span class="syntax10">years</span> <span class="syntax18">=</span> <span class="syntax9">range</span><span class="syntax18">(</span><span class="syntax5">2000</span><span class="syntax18">,</span> <span class="syntax5">2010</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>    <span class="syntax8">foreach</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">years</span> <span class="syntax8">as</span> <span class="syntax10">$</span><span class="syntax10">value</span><span class="syntax18">)</span><span class="syntax18">{</span>
+<span class="gutter">  11:</span>      <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax10">$</span><span class="syntax10">value</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>    <span class="syntax18">}</span>
+<span class="gutter">  13:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">hr</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">Range</span><span class="syntax14"> </span><span class="syntax14">of</span><span class="syntax14"> </span><span class="syntax14">numbers</span><span class="syntax14"> </span><span class="syntax14">incrementing</span><span class="syntax14"> </span><span class="syntax14">by</span><span class="syntax14"> </span><span class="syntax14">10</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  15:</span>    <span class="syntax10">$</span><span class="syntax10">decades</span><span class="syntax18">=</span><span class="syntax9">range</span><span class="syntax18">(</span><span class="syntax5">2000</span><span class="syntax18">,</span> <span class="syntax5">2050</span><span class="syntax18">,</span> <span class="syntax5">10</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  16:</span>    <span class="syntax8">foreach</span><span class="syntax18">(</span> <span class="syntax10">$</span><span class="syntax10">decades</span> <span class="syntax8">as</span> <span class="syntax10">$</span><span class="syntax10">value</span><span class="syntax18">)</span><span class="syntax18">{</span>
+<span class="gutter">  17:</span>      <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax10">$</span><span class="syntax10">value</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  18:</span>    <span class="syntax18">}</span>
+<span class="gutter">  19:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">hr</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  20:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">Range</span><span class="syntax14"> </span><span class="syntax14">of</span><span class="syntax14"> </span><span class="syntax14">numbers</span><span class="syntax14"> </span><span class="syntax14">decrementing</span><span class="syntax14"> </span><span class="syntax14">by</span><span class="syntax14"> </span><span class="syntax14">5</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  21:</span>    <span class="syntax10">$</span><span class="syntax10">decades</span><span class="syntax18">=</span><span class="syntax9">range</span><span class="syntax18">(</span><span class="syntax5">2000</span><span class="syntax18">,</span> <span class="syntax5">1980</span><span class="syntax18">,</span> <span class="syntax18">-</span><span class="syntax5">5</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  22:</span>      <span class="syntax8">foreach</span><span class="syntax18">(</span> <span class="syntax10">$</span><span class="syntax10">decades</span> <span class="syntax8">as</span> <span class="syntax10">$</span><span class="syntax10">value</span><span class="syntax18">)</span><span class="syntax18">{</span>
+<span class="gutter">  23:</span>      <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax10">$</span><span class="syntax10">value</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  24:</span>    <span class="syntax18">}</span>
+<span class="gutterH">  25:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">hr</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  26:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">Range</span><span class="syntax14"> </span><span class="syntax14">of</span><span class="syntax14"> </span><span class="syntax14">characters</span><span class="syntax14"> </span><span class="syntax14">incrementing</span><span class="syntax14"> </span><span class="syntax14">by</span><span class="syntax14"> </span><span class="syntax14">1</span><span class="syntax14">(</span><span class="syntax14">ASCII</span><span class="syntax14"> </span><span class="syntax14">value</span><span class="syntax14">)</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  27:</span>    <span class="syntax10">$</span><span class="syntax10">alpha</span><span class="syntax18">=</span><span class="syntax9">range</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">A</span><span class="syntax13">'</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">Z</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  28:</span>    <span class="syntax8">foreach</span><span class="syntax18">(</span> <span class="syntax10">$</span><span class="syntax10">alpha</span> <span class="syntax8">as</span> <span class="syntax10">$</span><span class="syntax10">value</span><span class="syntax18">)</span><span class="syntax18">{</span>
+<span class="gutter">  29:</span>      <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax10">$</span><span class="syntax10">value</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  30:</span>    <span class="syntax18">}</span>
+<span class="gutter">  31:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  32:</span>  <span class="syntax17">&lt;/font</span><span class="syntax17">&gt;</span>
+<span class="gutter">  33:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  34:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+
+h3. The @array_fill()@ Function
+
+* PHP provides the *@array_fill()@* function to declare and populate an array at the same time. (Populating an array means giving it values.)
+* The function takes three arguments: the starting index value, the number of elements to put into the array (must be greater than 0), and the default value to be assigned to each element.
+* The following examples demonstrates the *@array_fill()@* function.
+* Format:
+<br /><pre>
+array array_fill ( int start_index, int num, mixed value )
+</pre>
+* Example:
+<br /><pre>
+// A 5-element array, starting at index 0, each value given
+// the string "to be defined".
+$names=array_fill(0, 5, "to be defined");
+
+// A 10-element array, starting at index 5, each element given
+// a value of 0.
+$nums=array_fill(5, 10, 0);
+</pre>
+* Filename: *fill.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>The array_fill() Function<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">lightgreen</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;b</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  The arrays are displayed as: index value =&gt; element value<span class="syntax17">&lt;br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">   8:</span>  <span class="syntax17">&lt;/b</span><span class="syntax17">&gt;</span>
+<span class="gutter">   9:</span>  <span class="syntax17">&lt;pre</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  10:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">  11:</span>    <span class="syntax10">$</span><span class="syntax10">numbers</span> <span class="syntax18">=</span> <span class="syntax9">array_fill</span><span class="syntax18">(</span><span class="syntax5">0</span><span class="syntax18">,</span> <span class="syntax5">10</span><span class="syntax18">,</span> <span class="syntax5">0</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>    <span class="syntax9">print_r</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">numbers</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>    
+<span class="gutter">  14:</span>    <span class="syntax10">$</span><span class="syntax10">methods</span> <span class="syntax18">=</span> <span class="syntax9">array_fill</span><span class="syntax18">(</span><span class="syntax5">1</span><span class="syntax18">,</span> <span class="syntax5">3</span><span class="syntax18">,</span><span class="syntax14">&quot;</span><span class="syntax14">To</span><span class="syntax14"> </span><span class="syntax14">be</span><span class="syntax14"> </span><span class="syntax14">defined</span><span class="syntax14">&quot;</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  15:</span>    <span class="syntax9">print_r</span><span class="syntax18">(</span> <span class="syntax10">$</span><span class="syntax10">methods</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  16:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  17:</span>  <span class="syntax17">&lt;/pre</span><span class="syntax17">&gt;</span>
+<span class="gutter">  18:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  19:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* On line 11, the *@array_fill()@* function creates an array called: $numbers The index starts at 0 (first argument). There will be 10 elements (second argument), and the default value for each element will be 0.
+* The *@print_r()@* function on line 12 prints out the keys and value of the new array.
+* The *@array_fill()@* function on line 14 creates an array called: $methods , starting with an index value of 1, containing three elements, with the string "To be defined" as its default value.
+
+h3. Accessing an Array's Elements (Values)
+
+* A particular element of an array can be selected by appending the array operator "[ ]", square brackets, to the array name.
+* The key/index is placed within the brackets, such as $name[0] or $book['Author'] .
+* If a key is not specified when the array is created, the array is automatically indexed by a number starting at 0. If an array is assigned a new element, PHP automatically increments numeric keys by 1.
+* The index of the last element of the array will be one less than the size of the array; for example, if an array has five values, its last index value would be four.
+* If the array has been assigned both a key and a value, and the key is a string, then the index is the key enclosed in either single or double quotes.
+
+h3. Elements of a Numeric Array
+
+* At the beginning of this unit, our first example was a numeric array. To reiterate, a numeric array is indexed by numbers, by default, starting at 0 and incrementing by 1 as each element is added to the array, although you can start the array at a different number, as shown in the example below.
+* Filename: brackets.php
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Array of Colors<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">lightgreen</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">   7:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">PHP</span><span class="syntax2"> </span><span class="syntax2">assigns</span><span class="syntax2"> </span><span class="syntax2">keys</span><span class="syntax2"> </span><span class="syntax2">starting</span><span class="syntax2"> </span><span class="syntax2">at</span><span class="syntax2"> </span><span class="syntax2">0</span>
+<span class="gutter">   8:</span>    <span class="syntax10">$</span><span class="syntax10">colors</span> <span class="syntax18">=</span> <span class="syntax8">array</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">red</span><span class="syntax13">'</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">green</span><span class="syntax13">'</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">blue</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   9:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">b</span><span class="syntax14">&gt;</span><span class="syntax14">\$colors</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">colors</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Accessing</span><span class="syntax2"> </span><span class="syntax2">array</span><span class="syntax2"> </span><span class="syntax2">elements</span>
+<span class="gutter">  11:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">\$colors</span><span class="syntax14">[</span><span class="syntax14">0</span><span class="syntax14">]</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">colors</span><span class="syntax14">[</span><span class="syntax14">0</span><span class="syntax14">]</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">\$colors</span><span class="syntax14">[</span><span class="syntax14">1</span><span class="syntax14">]</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">colors</span><span class="syntax14">[</span><span class="syntax14">1</span><span class="syntax14">]</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">\$colors</span><span class="syntax14">[</span><span class="syntax14">2</span><span class="syntax14">]</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">colors</span><span class="syntax14">[</span><span class="syntax14">2</span><span class="syntax14">]</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>    <span class="syntax10">$</span><span class="syntax10">colors</span><span class="syntax18">[</span><span class="syntax18">]</span> <span class="syntax18">=</span> <span class="syntax13">'</span><span class="syntax13">yellow</span><span class="syntax13">'</span><span class="syntax18">;</span>   <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Let's</span><span class="syntax2"> </span><span class="syntax2">add</span><span class="syntax2"> </span><span class="syntax2">another</span><span class="syntax2"> </span><span class="syntax2">element</span>
+<span class="gutterH">  15:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">\$colors</span><span class="syntax14">[</span><span class="syntax14">3</span><span class="syntax14">]</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">colors</span><span class="syntax14">[</span><span class="syntax14">3</span><span class="syntax14">]</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  16:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">hr</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  17:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Start</span><span class="syntax2"> </span><span class="syntax2">a</span><span class="syntax2"> </span><span class="syntax2">new</span><span class="syntax2"> </span><span class="syntax2">$colors</span><span class="syntax2"> </span><span class="syntax2">array</span>
+<span class="gutter">  18:</span>    <span class="syntax10">$</span><span class="syntax10">colors</span> <span class="syntax18">=</span> <span class="syntax8">array</span><span class="syntax18">(</span><span class="syntax5">1</span><span class="syntax18">=</span><span class="syntax18">&gt;</span><span class="syntax13">'</span><span class="syntax13">purple</span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax5">2</span><span class="syntax18">=</span><span class="syntax18">&gt;</span><span class="syntax13">'</span><span class="syntax13">orange</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  19:</span>    <span class="syntax10">$</span><span class="syntax10">colors</span><span class="syntax18">[</span><span class="syntax18">]</span> <span class="syntax18">=</span> <span class="syntax13">'</span><span class="syntax13">yellow</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutterH">  20:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">\$colors</span><span class="syntax14">[</span><span class="syntax14">1</span><span class="syntax14">]</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">colors</span><span class="syntax14">[</span><span class="syntax14">1</span><span class="syntax14">]</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  21:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">\$colors</span><span class="syntax14">[</span><span class="syntax14">2</span><span class="syntax14">]</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">colors</span><span class="syntax14">[</span><span class="syntax14">2</span><span class="syntax14">]</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  22:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">\$colors</span><span class="syntax14">[</span><span class="syntax14">3</span><span class="syntax14">]</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">colors</span><span class="syntax14">[</span><span class="syntax14">3</span><span class="syntax14">]</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  23:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  24:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  25:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* The *@array()@* function on line 8 creates a numeric array called $colors, consisting of three elements, 'red', 'green', and 'blue'. By default, the index starts at 0.
+* On line 14 a new element is added to the array. PHP will figure out what number to use for the index by adding 1 to the last index number in the existing array.
+* On line 18, another new array is created with the *@array()@* function. Because this array is also called $colors, the original $colors array will be overwritten. This array starts with an index of 1.
+* A new element is added to the array on line 19. PHP will figure out what number to use for the index by adding 1 to the last index number in the existing array.
+
+h3. Elements of an Associative Array
+
+* An associative array is an array indexed by any key values you choose. The definition of an associative array consists of specifying both keys and values separated by the "=>" symbol; for example: $key => $value
+* The key is a number or string that will be used to store data into the value associated with it. The key will be specified in the "[ ]", just as a number was used in basic arrays.
+* Be sure that you quote a string index with either single or double quotes. Otherwise, the bare string may be interpreted as a predefined constant value.
+* This example demonstrates an associative array.
+* Filename: *assocArray.php*
+<br /><div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Array of Books<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">lightblue</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;h2</span><span class="syntax17">&gt;</span>Defining an associative array<span class="syntax17">&lt;/h2</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">   8:</span>    <span class="syntax10">$</span><span class="syntax10">book</span> <span class="syntax18">=</span> <span class="syntax8">array</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">Title</span><span class="syntax13">'</span> <span class="syntax18">=</span><span class="syntax18">&gt;</span> <span class="syntax13">'</span><span class="syntax13">War</span><span class="syntax13"> </span><span class="syntax13">and</span><span class="syntax13"> </span><span class="syntax13">Peace</span><span class="syntax13">'</span><span class="syntax18">,</span>
+<span class="gutter">   9:</span>                  <span class="syntax13">'</span><span class="syntax13">Author</span><span class="syntax13">'</span> <span class="syntax18">=</span><span class="syntax18">&gt;</span> <span class="syntax13">'</span><span class="syntax13">Tolstoy</span><span class="syntax13">'</span><span class="syntax18">,</span>
+<span class="gutterH">  10:</span>                  <span class="syntax13">'</span><span class="syntax13">Publisher</span><span class="syntax13">'</span> <span class="syntax18">=</span><span class="syntax18">&gt;</span> <span class="syntax13">'</span><span class="syntax13">Oxford</span><span class="syntax13"> </span><span class="syntax13">University</span><span class="syntax13"> </span><span class="syntax13">Press</span><span class="syntax13">'</span>
+<span class="gutter">  11:</span>                 <span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>    <span class="syntax10">$</span><span class="syntax10">book</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">ISBN</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">0192833987</span><span class="syntax14">&quot;</span><span class="syntax18">;</span> <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Add</span><span class="syntax2"> </span><span class="syntax2">a</span><span class="syntax2"> </span><span class="syntax2">new</span><span class="syntax2"> </span><span class="syntax2">element</span>
+<span class="gutter">  13:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">b</span><span class="syntax14">&gt;</span><span class="syntax14">\$book</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">book</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">\$book</span><span class="syntax14">[</span><span class="syntax14">'</span><span class="syntax14">Title</span><span class="syntax14">'</span><span class="syntax14">]</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">.</span> <span class="syntax10">$</span><span class="syntax10">book</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">Title</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">.</span><span class="syntax14">&quot;</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  15:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">\$book</span><span class="syntax14">[</span><span class="syntax14">'</span><span class="syntax14">Author</span><span class="syntax14">'</span><span class="syntax14">]</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">.</span> <span class="syntax10">$</span><span class="syntax10">book</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">Author</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">.</span><span class="syntax14">&quot;</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  16:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">\$book</span><span class="syntax14">[</span><span class="syntax14">'</span><span class="syntax14">Publisher</span><span class="syntax14">'</span><span class="syntax14">]</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">.</span> <span class="syntax10">$</span><span class="syntax10">book</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">Publisher</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">.</span><span class="syntax14">&quot;</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  17:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">\$book</span><span class="syntax14">[</span><span class="syntax14">'</span><span class="syntax14">Pages</span><span class="syntax14">'</span><span class="syntax14">]</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">.</span> <span class="syntax10">$</span><span class="syntax10">book</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">ISBN</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">.</span><span class="syntax14">&quot;</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  18:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  19:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  20:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* An associative array named $book is created consisting of key--value pairs. The keys are on the left side of the "=>" operator. The associated values are on the right side of the "=>" operator.
+* A new value, "0192833987", is assigned to the $book array, with a key of 'ISBN' on line 12.
+* The values of the $book array are accessed via the keys we specified!
+
+h3. Watch Those Quotes!
+
+* When quotes are embedded within other quotes, you can run into problems. Look at the following example:
+<br /><pre>
+echo "$book['Title']<br />";
+Parse error: syntax error, unexpected T_ENCAPSED_AND_WHITESPACE,
+expecting T_STRNG or TVARIABLE or T_NUM_STRING in C:\\wamp\book.php on line 11
+</pre>
+* A parse error occurred because single quotes were embedded inside double quotes. This can be fixed by concatenating the strings as follows:
+<br /><pre>
+echo $book['Title'] ."<br />";
+</pre>
+* or by surrounding the array element with curly brackets:
+<br /><pre>
+echo "{$book['Title']}<br />";
+</pre>
+* Do not eliminate the quotes around the key as shown here:
+<br /><pre>
+echo $book[Title];
+</pre>
+* because PHP will treat the key 'Title' as a constant, not as a string. You might inadvertently use a key value that has been defined somewhere else as a constant and produce the error message: "E_NOTICE (undefined constant)"
+
+h3. Mixing Elements in an Array
+
+* The index/key value in an array can be a positive or negative number or a string, and the value associated with it can be a string, a number, another array, and so on.
+* If an index value is not given, PHP provides a numeric index, incrementing the index of the next position in the array by 1.
+* The following example demonstrates how the index and the value of the elements can be mixed.
+* Filename: *mixedKeys.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Using a Negative Index<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">lightgreen</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;h3</span><span class="syntax17">&gt;</span>Associative array with keys of mixed data types<span class="syntax17">&lt;/h3</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  <span class="syntax17">&lt;b</span><span class="syntax17">&gt;</span>
+<span class="gutter">   8:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">   9:</span>    <span class="syntax10">$</span><span class="syntax10">colors</span> <span class="syntax18">=</span> <span class="syntax8">array</span><span class="syntax18">(</span><span class="syntax18">-</span><span class="syntax5">1</span> <span class="syntax18">=</span><span class="syntax18">&gt;</span><span class="syntax13">'</span><span class="syntax13">purple</span><span class="syntax13">'</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">orange</span><span class="syntax13">'</span><span class="syntax18">,</span><span class="syntax14">&quot;</span><span class="syntax14">brown</span><span class="syntax14">&quot;</span><span class="syntax18">=</span><span class="syntax18">&gt;</span><span class="syntax14">&quot;</span><span class="syntax14">burnt</span><span class="syntax14"> </span><span class="syntax14">sienna</span><span class="syntax14">&quot;</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>    <span class="syntax10">$</span><span class="syntax10">colors</span><span class="syntax18">[</span><span class="syntax18">]</span> <span class="syntax18">=</span> <span class="syntax5">255</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">$colors[&#45;1]</span><span class="syntax13"> </span><span class="syntax13">is:</span><span class="syntax13"> </span><span class="syntax13">'</span><span class="syntax18">.</span> <span class="syntax10">$</span><span class="syntax10">colors</span><span class="syntax18">[</span><span class="syntax18">&#45;</span><span class="syntax5">1</span><span class="syntax18">]</span> <span class="syntax18">.</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">$colors[0]</span><span class="syntax13"> </span><span class="syntax13">is:</span><span class="syntax13"> </span><span class="syntax13">'</span><span class="syntax18">.</span> <span class="syntax10">$</span><span class="syntax10">colors</span><span class="syntax18">[</span><span class="syntax5">0</span><span class="syntax18">]</span> <span class="syntax18">.</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">\$colors</span><span class="syntax14">[</span><span class="syntax14">1</span><span class="syntax14">]</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14">:</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">colors</span><span class="syntax14">[</span><span class="syntax14">1</span><span class="syntax14">]</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">$colors[&quot;brown&quot;]</span><span class="syntax13"> </span><span class="syntax13">is:</span><span class="syntax13"> </span><span class="syntax13">'</span><span class="syntax18">.</span> <span class="syntax10">$</span><span class="syntax10">colors</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">brown</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">.</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutterH">  15:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">or</span><span class="syntax2"> </span><span class="syntax2">this</span><span class="syntax2"> </span><span class="syntax2">also</span><span class="syntax2"> </span><span class="syntax2">works</span>
+<span class="gutter">  16:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">\$colors</span><span class="syntax14">[</span><span class="syntax14">'</span><span class="syntax14">brown</span><span class="syntax14">'</span><span class="syntax14">]</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14">:</span><span class="syntax14"> </span><span class="syntax14">{</span><span class="syntax10">$</span><span class="syntax10">colors</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">brown</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax14">}</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  17:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  18:</span>  <span class="syntax17">&lt;/b</span><span class="syntax17">&gt;</span>
+<span class="gutter">  19:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  20:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* The array $colors starts with a negative key, -1. PHP will add 1 to each consecutive index in the array, so that element value 'orange' will be associated with a key of 0.
+* The third key is a string, "brown", associated with a value of "burnt sienna".
+* On line 10, a new element is added to the array. Because the last numeric key was 0, the new key will be 1.
+* Line 16 demonstrates the use of curly brackets when using arrays and nested quotes. When an array element is enclosed inside a string in double quotes, the curly brackets allow the key to be surrounded by single quotes, without causing a PHP error.
+
+h3. Printing an Array
+
+* There are a number of ways to print the contents of an array. PHP provides built-in functions to display all of the keys and values, or you can use loops. We discuss the built-in functions first.
+
+h3. The @print_r()@ Function
+
+* The *@print_r()@* built-in function displays detailed information about a variable, such as its type, length, and contents. It displays the value of a string, integer, or float.
+* In the case of an array, *@print_r()@* displays all of the elements of the array; that is, the key--value pairs.
+* We use the HTML "&lt;pre&gt;" tag, to display each element on a separate line; otherwise, the output is displayed on one line.
+* If you would like to capture the output of *@print_r()@* in a variable, set the return parameter to boolean TRUE.
+* The *@print_r()@* function can also be useful when debugging a program.
+* Note: In PHP 4.x a call to the *@print_r()@* function would move the internal array pointer to the end of the array. We would use *@reset()@* to bring it back to the beginning. But PHP 5 appears to reset the pointer automatically after using *@print_r()@*.
+* These examples demonstrate the *@print_r()@* function.
+* Format:
+<br /><pre>
+bool print_r ( mixed expression [, bool return] )
+</pre>
+* Example:
+<pre>
+print_r($colors); // Display the contents of the array
+$list = print_r( $colors, true); // Save the return value in $list
+reset($colors); // Move internal array pointer to array beginning
+</pre>
+* Filename: *print_r.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>The print_r() Function<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">yellow</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;h3</span><span class="syntax17">&gt;</span>The print_r() Function<span class="syntax17">&lt;/h3</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  <span class="syntax17">&lt;b</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;pre</span><span class="syntax17">&gt;</span>
+<span class="gutter">   8:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">   9:</span>    <span class="syntax10">$</span><span class="syntax10">colors</span> <span class="syntax18">=</span> <span class="syntax8">array</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">red</span><span class="syntax13">'</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">green</span><span class="syntax13">'</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">blue</span><span class="syntax13">'</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">yellow</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>    <span class="syntax10">$</span><span class="syntax10">book</span> <span class="syntax18">=</span> <span class="syntax8">array</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">Title</span><span class="syntax13">'</span> <span class="syntax18">=</span><span class="syntax18">&gt;</span> <span class="syntax13">'</span><span class="syntax13">War</span><span class="syntax13"> </span><span class="syntax13">and</span><span class="syntax13"> </span><span class="syntax13">Peace</span><span class="syntax13">'</span><span class="syntax18">,</span>
+<span class="gutter">  11:</span>                  <span class="syntax13">'</span><span class="syntax13">Author</span><span class="syntax13">'</span> <span class="syntax18">=</span><span class="syntax18">&gt;</span> <span class="syntax13">'</span><span class="syntax13">Tolstoy</span><span class="syntax13">'</span><span class="syntax18">,</span>
+<span class="gutter">  12:</span>                  <span class="syntax13">'</span><span class="syntax13">Publisher</span><span class="syntax13">'</span> <span class="syntax18">=</span><span class="syntax18">&gt;</span> <span class="syntax13">'</span><span class="syntax13">Oxford</span><span class="syntax13"> </span><span class="syntax13">University</span><span class="syntax13"> </span><span class="syntax13">Press</span><span class="syntax13">'</span><span class="syntax18">,</span>
+<span class="gutter">  13:</span>                 <span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>    <span class="syntax9">print_r</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">colors</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  15:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;hr&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  16:</span>    <span class="syntax9">print_r</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">book</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  17:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  18:</span>  <span class="syntax17">&lt;/pre</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;/b</span><span class="syntax17">&gt;</span>
+<span class="gutter">  19:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  20:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* A numeric array named $colors is created with four elements, and an associative array named $book is created with key--value pairs.
+* The *@print_r()@* function displays both arrays in human readable format, keys on the left of the "=>" operator and values of the elements on the right.
+* We use the HTML "&lt;pre&gt;" tag to present the arrays one element per line.
+* Filename: *print_r2.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Assign print_r() output to a variable<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">CCFF66</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;h3</span><span class="syntax17">&gt;</span>Assign print_r() output to a variable<span class="syntax17">&lt;/h3</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  <span class="syntax17">&lt;pre</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;b</span><span class="syntax17">&gt;</span>
+<span class="gutter">   8:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">   9:</span>    <span class="syntax10">$</span><span class="syntax10">colors</span> <span class="syntax18">=</span> <span class="syntax8">array</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">red</span><span class="syntax13">'</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">green</span><span class="syntax13">'</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">blue</span><span class="syntax13">'</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">yellow</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>    <span class="syntax10">$</span><span class="syntax10">display</span> <span class="syntax18">=</span> <span class="syntax9">print_r</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">colors</span><span class="syntax18">,</span><span class="syntax8">true</span><span class="syntax18">)</span><span class="syntax18">;</span> <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Assign</span><span class="syntax2"> </span><span class="syntax2">output</span><span class="syntax2"> </span><span class="syntax2">to</span><span class="syntax2"> </span><span class="syntax2">$display</span>
+<span class="gutter">  11:</span>    <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax10">display</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>    <span class="syntax9">reset</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">colors</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  14:</span>  <span class="syntax17">&lt;/b</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;/pre</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  15:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  16:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* By giving *@print_r()@* an additional boolean argument of TRUE, you can capture the output of *@print_r()@* in a variable.
+* The *@reset()@* function puts the internal array pointer back at the beginning of the array. The PHP manual suggests using this function to reset the array pointer before doing further operations on the array, but in PHP 5 it is not necessary.
+
+h3. The @var_dump()@ Function
+
+* The *@var_dump()@* function displays the array (or object), the number of elements, and the lengths of each of the string values.
+* It also provides output with indentation to show the structure of the array or object.
+* The examples below demonstrate the *@var_dump()@* function.
+* Format:
+<br /><pre>
+void var_dump ( mixed expression [, mixed expression [, ...]] )
+</pre>
+* Example:
+<br /><pre>
+$states = array('CA' => 'California','MT'=>'Montana','NY'=>'New York');
+var_dump($states); // Dumps output in a structured format
+</pre>
+* Filename: *vardump.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>The var_dump() Function<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">CCFF99</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;h3</span><span class="syntax17">&gt;</span>The var_dump() Function<span class="syntax17">&lt;/h3</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  <span class="syntax17">&lt;pre</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;b</span><span class="syntax17">&gt;</span>
+<span class="gutter">   8:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">   9:</span>    <span class="syntax10">$</span><span class="syntax10">colors</span> <span class="syntax18">=</span> <span class="syntax8">array</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">red</span><span class="syntax13">'</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">green</span><span class="syntax13">'</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">blue</span><span class="syntax13">'</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">yellow</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>    <span class="syntax10">$</span><span class="syntax10">book</span><span class="syntax18">=</span><span class="syntax8">array</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">Title</span><span class="syntax13">'</span><span class="syntax18">=</span><span class="syntax18">&gt;</span><span class="syntax13">'</span><span class="syntax13">War</span><span class="syntax13"> </span><span class="syntax13">and</span><span class="syntax13"> </span><span class="syntax13">Peace</span><span class="syntax13">'</span><span class="syntax18">,</span>
+<span class="gutter">  11:</span>                <span class="syntax13">'</span><span class="syntax13">Author</span><span class="syntax13">'</span><span class="syntax18">=</span><span class="syntax18">&gt;</span><span class="syntax13">'</span><span class="syntax13">Tolstoy</span><span class="syntax13">'</span><span class="syntax18">,</span>
+<span class="gutter">  12:</span>                <span class="syntax13">'</span><span class="syntax13">Publisher</span><span class="syntax13">'</span><span class="syntax18">=</span><span class="syntax18">&gt;</span><span class="syntax13">'</span><span class="syntax13">Oxford</span><span class="syntax13"> </span><span class="syntax13">University</span><span class="syntax13"> </span><span class="syntax13">Press</span><span class="syntax13">'</span>
+<span class="gutter">  13:</span>               <span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>    <span class="syntax9">var_dump</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">colors</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  15:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;hr&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  16:</span>    <span class="syntax9">var_dump</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">book</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  17:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  18:</span>  <span class="syntax17">&lt;/b</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;/pre</span><span class="syntax17">&gt;</span>
+<span class="gutter">  19:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  20:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* The *@var_dump()@* function takes the name of the array as its argument, and displays the output by first printing the number of elements in the array, key value, and then the number of characters in each of the assigned string values and its value.
+
+<br />
+
+---
+
+[[Unit Five => 152-166 Unit Five Index]]

@@ -1,0 +1,200 @@
+h2. Course Outline
+
+
+
+h3. Course Description
+
+
+This course introduces the student to dynamic web page development using the PHP programming language and the popular MySQL open source database management software (DBMS). Students will gain LAMP development experience using the Linux operating system, and the Apache web server platform. Students will learn how PHP works, how to effectively use many of its powerful extensions, and how to design and build their own PHP web applications.
+
+
+
+h3. Prerequisites
+
+Grade of C or better in 10-152-101, Introduction to Visual Basic .NET Programming, and grade of C or better in 10-152-124, Introduction to Databases with MS Access, or consent of instructor.
+
+
+
+h3. Course Objectives
+
+
+Upon successful completion of this course, the student will be able to :
+
+
+* Set up a basic PHP and MySQL development environment on Linux and Windows.
+* Write PHP scripts using the basic functionality of the language.
+* Write PHP scripts that use strings, arrays and regular expressions.
+* Use the object-oriented features of PHP.
+* Write PHP scripts that query a MySQL database.
+* Write PHP scripts that update a MySQL database.
+* Use graphics features of PHP including creating and scaling images.
+* Use authentication and security features of PHP.
+* Implement custom error handling in PHP.
+
+
+h3. Environment
+
+Students will need to participate in lecture/discussion sections, and open laboratory sessions to complete programming projects and class assignments. Lab access to PHP and MySQL is available on computers in lab 220B at the Truax Campus main building and in lab M103 in the McAllen building. Lab hours are posted on the doors. Students, who have access to PHP and MySQL at home, may work there to complete course assignments.
+
+
+
+h3. Textbooks and Materials
+
+* *PHP and MySQL by Example* Ellie Quigley with Marko Gargenta, Prentice Hall
+* A recommended book is: *PHP and MySQL Web Development, 3rd Edition*, Luke Welling & Laura Thompson, Sams
+
+
+
+h3. Class software
+
+We will use the jEdit text editor for this class. Students, however, are free to use any editor that is compatible with the project submission standards and expectations. jEdit can be downloaded at http://www.jedit.org and is also available on the MITA CD for programming students.
+
+
+
+h3. Attendance
+
+Attendance is the responsibility of the student. In case of absence, in class work cannot be made up. Projects (i.e. programs) can still be turned in for credit. Refer to the college catalog for "rule of attendance". As an adult you may have other priorities than this class, but you need to keep focus on the projects not to fall behind. Your instructor is not responsible for withdrawing you from the course. If you choose to withdraw from the course, you must initiate the proper action in the Agriscience and Technologies Center Office (Room 173 - 246-6802). You may be dropped from the course if you do not attend for two consecutive weeks or miss 25 percent or more of the total scheduled calendar days. No student will be re-admitted. Missing an examination without notifying the instructor and without a satisfactory excuse will result in an automatic grade of zero on the examination.
+
+
+
+h3. ADA (Americans with Disabilities Act)
+
+If you believe that you may require special accommodations or services in order to participate in this course, please contact the instructor or a counselor in Student Services.
+
+
+
+h3. College Catalog and Student Handbook
+
+Many important MATC policies and procedures are found in the MATC College Catalog, available from the Student Services Office. Students are expected to be familiar with such policies and procedures, and are encouraged to retain a copy of the Handbook for reference as needed during their attendance at MATC.
+
+h3. Academic Conduct
+
+Plagiarism and cheating are serious offenses and may be punished by failure on a project, test or assignment, failure in the course, and or expulsion from the college. For more information refer to the "Student Code of Conduct" policy in the student catalog.
+
+"Student_Rights_and_Responsibilities":http://matcmadison.edu/matc/studentresources/rights/
+<br />
+"Academic_Misconduct":http://matcmadison.edu/matc/studentresources/rights/misconduct.shtm
+<br />
+"Appeals_Process":http://matcmadison.edu/matc/studentresources/rights/appeals.shtm
+
+
+
+h3. Projects
+
+
+There are fifteen units in the course. For each three to four units there will be a project worth 20 points. The projects will always be due by the next class period after the last unit for that project is finished. The projects will be submitted electronically as a zipped (compressed) archive through the course Blackboard website. Instructions for zipping and submitting your projects are addressed in another course document. An individual instructor may have a different submission prodecure which supersedes this one. The total points for projects is 80. You must accumulate at least 50 points on projects in order to pass the course regardless of how you do in other parts of the class.
+
+
+
+h3. Late Project Policy
+
+
+The maximum point total that a project is worth is based on when the project is submitted in comparison to the due date for the project. The late penalty is assessed at the rate of 0.4 points per day. The following table lists maximum point totals:
+
+table{text-align:center; margin-left: 4em;}.
+|{background:#ccc}.*When submitted*|{background:#ccc}.*Maximum Points*|{background:#ccc}.*Maximum Grade*|
+|*On or before due date and time*|20.0|A|
+|1 day late|19.6|A|
+|2 days late|19.2|A|
+|3 days late|18.8|A|
+|4 days late|18.4|A|
+|5 days late|18.0|AB|
+|6 days late|17.6|AB|
+|7 days late|17.2|B|
+|8 days late|16.8|B|
+|9 days late|16.4|B|
+|10 days late|16.0|BC|
+|11 days late|15.6|BC|
+|12 days late|15.2|C|
+|13 days late|14.8|C|
+|14 days late|14.4|C|
+|{background:#f00}.*More than 14 days late*|{background:#f00}.*0*|{background:#f00}.*F*|
+
+bq{background:#f00}. *Note*: projects will not be accepted if more than two weeks late!
+
+bq. *Note*: Some instructors will have a different policy for late assignments and they will have other handouts which will supersede this policy.
+
+
+
+h3. In-class Labs
+
+There will be 15-18 in-class labs during the semester. They will be worth 3 points each. This corresponds to one to two lab(s) per week when there is no exam that week.
+
+
+h3. In-class Labs Grading
+
+* In-class labs can *only* be done during scheduled class time.
+* To get the full 3 points you must fully complete the lab and be checked off by the instructor.
+* The total number of points that can be earned for in-class labs is 45 to 54.
+
+
+
+h3. Exams
+
+There will be 2 exams in this course worth 50 points each. They will be given during the eighth week and finals week.
+
+
+h3. Exam Grading Policy
+
+
+You must receive a cumulative passing grade on all the exams during the semester. The two exams total 100 points and you must have at least 60 total points on exams in order to pass the course. This is true even if you pass all other portions of the course. You must pass the exams in order to pass the class.
+
+
+
+h3. Course Points
+
+
+The point totals for the course are:
+
+
+table{text-align:center; margin-left: 4em;}.
+|{background:#ccc}.*Course Items*|{background:#ccc}.*Total Possible Points*|
+|Projects|80|
+|In-class Labs|45-54|
+|Exams|100|
+|Total|225-234|
+
+
+
+h3. IT Curve and Course Curve
+
+
+There are an estimated total of 234 points in the course.
+
+table{text-align:center; margin-left: 4em;}.
+|{background:#ccc}.*Grade*|{background:#ccc}.*Percentage*|{background:#ccc}.*Points*|
+|A|92.0-100|215-234|
+|AB|88.0-91.9|206-214|
+|B|82.0-87.9|192-205|
+|BC|78.0-81.9|182-192|
+|C|70.0-77.9|164-181|
+|D|60.0-69.9|140-163|
+|F|00.0-59.9|0-139|
+
+
+
+h3. Course Schedule
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Week*|{background:#ccc}.*Date*|{background:#ccc}.*Unit*|{background:#ccc}.*Topics*|{background:#ccc}.*Readings*|{background:#ccc}.*In-class<br/>Lab*|{background:#ccc}.*Important*<br/>*Dates*|
+|1|1/14|1|-Introduction to PHP, MySQL and Web Applications<br />-Getting Started w/ PHP, HTML, MySQL|-Chapters 1, 2|-Lab 1.1<br />-Lab 1.2|&nbsp;|
+|2|1/21|2|-Basic PHP Syntax & HTML Forms|-Chapter 4|-Lab 2.1|&nbsp;|
+|3|1/28|2|-Data Types, Literals, Variables, Constants||-Lab 2.2|
+|4|2/4|3|-More PHP Syntax<br />-Operators, Expressions, Conditionals & Loops|-Chapters 5, 7|-Lab 3.1<br />-Lab 3.2|&nbsp;|
+|5|2/11|4|-Strings and String Manipulation Functions|-Chapter 6|-Lab 4.1<br />-Lab 4.2|-Project 1 due Wednesday before class|
+|6|2/18|5|-Arrays & Associative Arrays|-Chapter 8|-Lab 5.1<br />-Lab 5.2|&nbsp;|
+|7|2/25|6|-Functions & Writing Your Own Functions|-Chapter 9|-Lab 6.1<br />-Lab 6.2|&nbsp;|
+|8|3/3|7-8|-Object-Oriented PHP|-Chapter 17|-Lab 7.1<br />-Lab 7.2<br />-Lab 8.1|&nbsp;|
+|9|3/10|1-8|-Using HTML Forms with PHP<br />-Exam 1, covers Units 1-8|-Chapter 10|-Lab 8.2|-Project 2 due Monday before class<br />-Exam 1 on Wednesday|
+|-|3/17|&nbsp;|-Spring Break - No Class|&nbsp;|&nbsp;|&nbsp;|
+|10|3/24|9|-Accessing Files & Directories with PHP|-Chapter 11|-Lab 9.1<br />-Lab 9.2|&nbsp;|
+|11|3/31|10|-Pattern Matching & Regular Expressions|-Chapter 12|-Lab 10.1<br />-Lab 10.2|&nbsp;|
+|12|4/7|11|-Using the MySQL DBMS |-Chapter 13, 14|-Lab 11.1<br />-Lab 11.2|&nbsp;|
+|13|4/14|12|-Accessing a MySQL Database Using PHP|-Chapter 15|-Lab 12.1<br />-Lab 12.2|-Project 3 due Monday before class|
+|14|4/21|13|-Cookies and Session Control in PHP|-Chapter 16|-Lab 13.1<br />-Lab 13.2|&nbsp;|
+|15|4/28|14|-Exception Handling & Debugging|-Appendix D|-Lab 14.1<br />-Lab 14.2|&nbsp;|
+|16|5/5|15|-Date & Time Functions and Sending Mail|-Appendix B, C|-Lab 15.1<br />-Lab 15.2|&nbsp;|
+|17|5/12|1-15|-Exam 2, covers Units 1-15|&nbsp;|&nbsp;|-Exam 2<br />-Project 4 due by start of exam|
+
+
+

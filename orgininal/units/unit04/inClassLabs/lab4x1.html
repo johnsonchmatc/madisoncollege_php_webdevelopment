@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta name="generator" content="HTML Tidy, see www.w3.org">
+  <title>In-class Lab 4.1</title>
+  <link href="../../../css/basic.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" language="JavaScript">
+
+<!--
+
+function putSemester() {
+
+    var today=new Date();
+
+    var thisMonth=today.getMonth()+1;
+
+    var thisYear=today.getFullYear();
+
+    if(thisMonth <=6) {
+
+        return "Spring, " + thisYear;
+
+    }
+
+    else {
+
+       return "Fall, " + thisYear;
+
+    }
+
+}//-->
+
+  </script>
+  <style type="text/css">
+
+<!--
+
+    .bgStripes {
+
+        background-image:url(../../../images/Xstripes.gif);
+
+        background-attachment: fixed;
+
+    }
+
+    
+
+    body {
+
+        background-color:white;
+
+    }
+
+    strong {
+
+        font-family: Arial, Helvetica, sans-serif;
+
+    }
+
+-->
+
+  </style>
+</head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
+<table class="bgStripes" border="0" width="100%">
+  <tbody>
+    <tr name="firstRow">
+      <td valign="top" width="80"><span
+ style="font-size: x-small; font-weight: bold;">
+      <script type="text/javascript">
+
+          <!--
+
+            document.write(putSemester());
+
+            -->
+
+      </script>
+      </span> <br>
+      </td>
+      <td style="text-align: center;"><span
+ style="color: darkblue; font-size: medium; font-weight: bold;">
+PHP Web Development with MySQL
+</span> </td>
+      <td align="right" valign="top" width="80"><span
+ style="font-size: x-small; font-weight: bold;">
+3 Credits
+</span> </td>
+    </tr>
+    <tr>
+      <td colspan="3" style="text-align: center;"><span
+ style="font-size: xx-small; font-weight: bold;">152-166</span> </td>
+    </tr>
+  </tbody>
+</table>
+<h2>In-class Lab 4.1<br>
+</h2>
+<ol type="I">
+<li class="row0">
+<p>Exercise 1 - The strcmp() function</p>
+<ol type="1">
+<li class="row0">
+<p>
+Create a directory named <b>lab04</b> under your <b>labs</b> directory,
+which is under your webserver's document root, if it does not already exist.
+</p>
+</li>
+<li class="row1">
+<p>
+Create a script named <strong>lab4x1ex1.php</strong> and save it into your
+<b>lab04</b> directory.
+</p>
+</li>
+<li class="row0">
+<p>
+Create the following 2 string variables:
+</p>
+<blockquote><code>
+$string1 = 'Pear';<br>
+$string2 = 'Pearson';<br>
+</code></blockquote>
+</li>
+<li class="row1">
+<p>First compare the 2 string variables using the equality operator (==).
+Use the <b>if/else</b> construct and <strong>echo</strong> statements to
+display the result of the comparison.
+</p>
+</li>
+<li class="row0">
+<p>
+Next compare the 2 string variables using the <b>strcmp()</b> function. This
+time also display the value returned by strcmp() in your <b>echo</b>
+statements.
+</p>
+<p>
+Note: Try the comparison both ways, first with $string1 as the first
+argument to the function, and then with $string2 as the first argument.
+Does strcmp() return different values?
+</li>
+<li class="row1">
+<p>
+Finally, compare $string1 to itself using the strcmp() function. What value
+is returned by the function this time?
+</p>
+</li>
+<li class="row0">
+<p>
+Show your instructor the working <b>lab4x1ex1.php</b>
+file and demonstrate it in a browser.
+</p>
+</li>
+</ol>
+</li>
+<li class="row1">
+<p>Exercise 2 - Using the number_format() function
+</p>
+</li>
+<ol>
+<li class="row1">
+<p>Create a script named <strong>lab4x1ex2.php</strong>
+and save it into your lab04 directory.</p>
+</li>
+<li class="row1">
+<p>
+Create a scalar variable to contain a money amount of 155000000. Use the
+<b>number_format()</b> function to display the number as U.S. dollars with a
+comma as the thousands separator and a decimal point. Print some text with it
+similar to: "The amount in US dollars is: $"
+</p>
+</li>
+<li class="row1">
+<p>
+Now display the same number in Euros as it would be formated in Western Europe,
+with a space for the thousands separator and a comma to indicate decimal places.
+Place the Euro symbol, &#8364;, before the number. The HTML entity to display
+the Euro symbol is: &amp;#8364;
+</p>
+</li>
+<li class="row0">
+<p>
+Show your instructor the working <b>lab4x1ex2.php</b>
+file and demonstrate it in a browser.
+</p>
+</li>
+</ol>
+</ol>
+</body>
+</html>

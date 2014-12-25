@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta name="generator" content="HTML Tidy, see www.w3.org" />
+  <title>Project Three</title>
+  <link href="../../../css/basic.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" language="JavaScript">
+
+<!--
+
+function putSemester() {
+
+    var today=new Date();
+
+    var thisMonth=today.getMonth()+1;
+
+    var thisYear=today.getFullYear();
+
+    if(thisMonth <=6) {
+
+        return "Spring, " + thisYear;
+
+    }
+
+    else {
+
+       return "Fall, " + thisYear;
+
+    }
+
+}//-->
+
+  
+
+  </script>
+  
+  <style type="text/css">
+
+<!--
+
+    .bgStripes {
+
+        background-image:url(../../../images/Xstripes.gif);
+
+        background-attachment: fixed;
+
+    }
+
+    
+
+    body {
+
+        background-color:white;
+
+    }
+
+    
+
+    strong {
+
+        font-family: Arial, Helvetica, sans-serif;
+
+    }
+
+    
+
+ 
+
+-->
+
+  
+
+  </style>
+</head>
+
+
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
+
+<table class="bgStripes" border="0" width="100%">
+
+  <tbody>
+
+    <tr name="firstRow">
+
+      <td valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+      
+      <script type="text/javascript">
+
+          <!--
+
+            document.write(putSemester());
+
+            -->
+
+      
+
+      </script>
+      </span> <br />
+
+      </td>
+<td style="text-align: center;"><span style="font-weight: bold; font-size: medium; color: darkblue;">
+PHP Web Development with MySQL</span> </td>
+<td align="right" valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+3 Credits</span> </td>
+</tr>
+<tr>
+<td colspan="3" style="text-align: center;"><span style="font-size: xx-small; font-weight: bold;">152-166</span> </td>
+</tr>
+</tbody>
+</table>
+<h2>Project Three</h2>
+<blockquote>
+<h4>Enhancing the PHP Application</h4>
+</blockquote>
+<h3>Table of Contents</h3>
+<ul>
+<li><a href="#concepts">1. Concepts</a></li>
+<li><a href="#readings">2. Readings</a></li>
+<li><a href="#overview">3. Project Overview</a></li>
+<li><a href="#execs">4. Exercises</a></li>
+<li><a href="#submit">5. Submitting the project.</a></li>
+</ul>
+<h3><a id="concepts" name="concepts">1. Concepts</a></h3>
+<blockquote>
+<a id="concepts" name="concepts">  </a>
+<p>
+<a id="concepts" name="concepts">This project is designed to enhance a
+simple PHP web application to use additional HTML Form features, a file,
+and regular expressions. You will learn theseconcepts:</a>
+</p>
+<a id="concepts" name="concepts">  </a>
+<ul>
+<a id="concepts" name="concepts">
+<li>Creating and Adding Functionality to PHP scripts</li>
+<li>Using Additional Functionality of HTML Forms</li>
+<li>Accessing Files and Directories</li>
+<li>Using Array Variables for File Data</li>
+<li>Pattern Matching and Regular Expressions<br />
+</li>
+</a>
+</ul>
+</blockquote>
+<h3><a id="readings" name="readings">2. Readings</a></h3>
+<blockquote>
+<a id="readings" name="readings">  </a>
+<p><a id="readings" name="readings">To prepare for this project
+you should study or review the following:</a></p>
+<ul>
+<a id="readings" name="readings">
+<li><p>
+<strong>PHP and MySQL by Example</strong>
+Ellie Quigley with Marko Gargenta, Prentice Hall
+</p></a>
+<ul>
+<li><a id="readings" name="readings">
+Chapter 10, More on PHP Forms</a>
+</li>
+<li>Chapter 11, Files and Directories</li>
+<li>Chapter 12, Regular Expressions and Pattern Matching</li>
+</ul>
+</li>
+</a>
+</ul>
+</blockquote>
+<h3><a id="overview" name="overview">3. Project Overview</a></h3>
+<blockquote>
+<p><a id="overview" name="overview">
+This project will introduce the use of files, additional HTML form features,
+and regular expressions for pattern matching in the PHP programming language.
+</a></p>
+</blockquote>
+<h3><a id="execs" name="execs">4.
+Exercises</a></h3>
+<blockquote>
+<a id="execs" name="execs"> </a><a id="ex1" name="ex1">
+<p>
+Create a directory named <b>project3</b> under your web server's document root
+directory. Place all HTML files and PHP scripts for this project in this new
+directory.
+</p>
+<p>
+<b>Note:</b>
+If you are working on an MATC lab computer, always save a copy of this
+directory and all the files in it to either the class server, a USB
+thumb drive, a floppy disk or similar media, at the end of each work
+session. Otherwise your work will be lost!
+</p>
+</a>
+<h4><a id="ex1" name="ex1">Exercise 1</a></h4>
+<ul>
+<li>
+<p><a id="ex1" name="ex1">
+Download these two files containing an HTML form</a> (<a href="p3form.html.txt">p3form.html</a>)
+and a PHP script for processing the form (<a href="p3process.php.txt">p3process.php</a>)
+into your project3 directory. Be sure to give the files the original names, since
+the HTML form file invokes the PHP file by name.
+</p>
+</li>
+<li>
+<p>
+Modify the data collected by the form in <b>p2form.html</b> to include customer
+name and address fields, and hidden fields that identify the form.
+Modify the PHP script named <b>p3process.php</b>
+to use string functions (and possibly regular expressions) to validate customer
+and order information, and to save order information to a file.
+</p>
+<ul>
+<li>
+<p>
+Create form fields for:
+</p>
+<ul>
+<li>customer name - text box</li>
+<li>customer address - text area with 2 rows</li>
+<li>form identifier - hidden</li>
+<li>form version date - hidden</li>
+</ul>
+</li>
+<li><p>
+Prior to processing the HTML form, your script should verify that the input in
+the $_POST array came from your form by checking that the form identifier hidden
+field is set to the value you gave it. If the input is not from your form, display
+a message such as "Invalid form input, script aborted!" and exit.
+</p></li>
+<li><p>
+Create local variables in the PHP script to store the data from the form's new fields.
+</p></li>
+<li><p>
+Display the customer name and address along with other order information already
+being displayed by the PHP script.
+</p></li>
+<li><p>
+Use a PHP regular expression based function to verify that the customer has
+included either a 5 digit or 9 digit zip code as the last thing in the address field.
+If a valid zip code is not found, display a message such as "Your order can not
+be processed without a valid zip code!" and exit.
+</p></li>
+<li><p>
+If the total number of items ordered is greater than zero, write the customer
+order to a file named <b>orders.txt</b> in your project3 directory.
+</p></li>
+
+<li><p>
+Write the data to the file in comma-delimited format (CSV) with a newline character
+(\n) to mark end-of-record.
+</p><p>
+As part of your data validation, you should check for
+any embedded commas in all variables to be written to the data record. If any
+are found, the value of the variable must be enclosed in double quotes when it
+is written to the file. As an alternative, you may choose to enclose all values
+in double quotes when writing them to orders.txt.
+</p><p>
+Note that you also need to check for embedded "\n" characters in the variables
+(particularly the address variable). Replace each embedded "\n" character with
+a space.
+</p></li>
+<li><p>
+Use appropriate file lock and unlock functions to prevent multiple users of your
+script from writing to the orders.txt file at the same time.
+</p></li>
+</ul>
+</li>
+</ul>
+<h4>Exercise 2</h4>
+<ul>
+<li>
+<p>
+Write a PHP script named <b>p3view.php</b> that reads the <b>orders.txt</b>
+file in your project3 directory and displays the records on a web page:
+</p>
+<ul>
+<li><p>
+Open <b>orders.txt</b> for reading and display your own appropriate message if
+the file open statement fails (suppress the default PHP error message).
+</p></li>
+<li><p>
+Display the company name, "RPCV of Wisconsin", and the text "Pending Orders"
+both as a title and as headers in the body of the web page.
+</p></li>
+<li><p>
+Lock the file with a shared, read lock before attempting to read data from it.
+</p></li>
+<li><p>
+Display each order on a separate line. Be sure to strip off the enclosing double
+quotes from any fields that contain them. Note that if the <b>magic_qutoes_gpc</b>
+directive is turned on, the double quotes will be escaped when they are read in
+from the file.
+</p></li>
+<li><p>
+Do not forget to unlock the file when done reading it, and close the file explicitly.
+</p></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+
+<h3><a id="submit" name="submit">5.
+Submitting the project</a></h3>
+<blockquote>
+<p>
+<a id="submit" name="submit">
+All of your PHP scripts and HTML files for this project should be in one directory.
+Using a compression program like WinZip, zip this directory and its contents into
+a single file named <strong>project3.zip</strong>&nbsp;.
+If you are using Linux or Macintosh OSX then you should tar and
+gzip your directory into a file named <strong>project3.tar.gz</strong>&nbsp;.
+Submit the <strong>project3.tar.gz</strong> or <strong>project3.zip</strong>
+file to your instructor via Blackboard, using the
+<b><i>Blackboard Assignment Submission Procedures</i></b>&nbsp;.
+In <strong>addition</strong> to this your instructor might grade your projects
+with you in the lab.
+</a></p>
+</blockquote>
+<hr width="90%" />
+</body>
+</html>

@@ -1,0 +1,15 @@
+<html>
+ <head>
+  <title>Uploading a file</title>
+ </head>
+ <body>
+  <form enctype="multipart/form-data"
+        action="PHPscript.php"
+        method="POST">
+<!--MAX_FILE_SIZE is optional and must precede the file input field-->
+   <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+   Choose a file to upload: <input name="uploadfile" type="file" />
+   <input type="submit" value="Send File" />
+  </form>
+ </body>
+</html>

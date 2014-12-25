@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta name="generator" content="HTML Tidy, see www.w3.org">
+  <title>In-class Lab 5.1</title>
+  <link href="../../../css/basic.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" language="JavaScript">
+
+<!--
+
+function putSemester() {
+
+    var today=new Date();
+
+    var thisMonth=today.getMonth()+1;
+
+    var thisYear=today.getFullYear();
+
+    if(thisMonth <=6) {
+
+        return "Spring, " + thisYear;
+
+    }
+
+    else {
+
+       return "Fall, " + thisYear;
+
+    }
+
+}//-->
+
+  </script>
+  <style type="text/css">
+
+<!--
+
+    .bgStripes {
+
+        background-image:url(../../../images/Xstripes.gif);
+
+        background-attachment: fixed;
+
+    }
+
+    
+
+    body {
+
+        background-color:white;
+
+    }
+
+    strong {
+
+        font-family: Arial, Helvetica, sans-serif;
+
+    }
+
+-->
+
+  </style>
+</head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
+<table class="bgStripes" border="0" width="100%">
+  <tbody>
+    <tr name="firstRow">
+      <td valign="top" width="80"><span
+ style="font-size: x-small; font-weight: bold;">
+      <script type="text/javascript">
+
+          <!--
+
+            document.write(putSemester());
+
+            -->
+
+      </script>
+      </span> <br>
+      </td>
+      <td style="text-align: center;"><span
+ style="color: darkblue; font-size: medium; font-weight: bold;">
+PHP Web Development with MySQL
+</span> </td>
+      <td align="right" valign="top" width="80"><span
+ style="font-size: x-small; font-weight: bold;">
+3 Credits
+</span> </td>
+    </tr>
+    <tr>
+      <td colspan="3" style="text-align: center;"><span
+ style="font-size: xx-small; font-weight: bold;">152-166</span> </td>
+    </tr>
+  </tbody>
+</table>
+<h2>In-class Lab 5.1<br>
+</h2>
+<ol type="I">
+<li class="row0">
+<p>Exercise 1 - Creating Arrays</p>
+<ol type="1">
+<li class="row0">
+<p>
+Create a directory named <b>lab05</b> under your <b>labs</b> directory,
+which is under your webserver's document root, if it does not already exist.
+</p>
+</li>
+<li class="row1">
+<p>
+Create a script named <strong>lab5x1ex1.php</strong> and save it into your
+<b>lab05</b> directory.
+</p>
+</li>
+<li class="row0">
+<p>
+Create a basic, numerically indexed, array named <b>$items</b> by using the
+"<b>[ ]</b>" operator. The values of the array elements should be: "milk",
+"bread", "juice", "hamburger", "sausage"
+</p>
+</li>
+<li class="row1">
+<p>
+Use the <b>print_r()</b> function to display the contents of your $items array.
+</p><p>
+<b>Note:</b> Use "&lt;pre&gt;" tags so that print_r() displays each element of
+the array on its own line.
+</p>
+</li>
+<li class="row0">
+<p>
+Now create a basic array named <b>$groceries</b> by using the <b>array()</b>
+function. It should have the same keys and values as array $items.
+</p>
+</li>
+<li class="row1">
+<p>
+Use the <b>print_r()</b> function to display the contents of your $groceries array.
+</p>
+</li>
+<hr>
+</ol>
+</li>
+<li class="row1">
+<p>Exercise 2 - Associative Arrays
+</p>
+</li>
+<ol>
+<li class="row0">
+<p>Create a script named <strong>lab5x1ex2.php</strong>
+and save it into your lab05 directory.</p>
+</li>
+<li class="row1">
+<p>
+Create an array variable named <b>$properties</b> using the array() function
+with these key/value pairs: "Color"/"Red", "Style"/"Coupe", "Engine"/"2 liter V6",
+"Seats"/"Cloth with Leather", "Wheels"/"Aluminum Alloy".
+</p>
+</li>
+<li class="row0">
+<p>
+Use the <b>var_dump()</b> function to display the contents of your $properties array.
+You will want to use "&lt;pre&gt;" tags to enclose the output of var_dump() .
+</p>
+</li>
+<li class="row1">
+<p>
+Use the <b>array_keys()</b> function to create an array named <b>$names</b>
+from the keys of the $properties array. Then use var_dump() to display the
+contents of your $names array.
+</p>
+</li>
+<li class="row0">
+<p>
+Use the <b>array_values()</b> function to create an array named <b>$values</b>
+from the values of the $properties array. Then use var_dump() to display the
+contents of your $values array.
+</p>
+</li>
+<hr>
+<p>
+Show your instructor the working <b>lab5x1ex1.php</b> and <b>lab5x1ex2.php</b>
+scripts and demonstrate them in a browser.
+</p>
+</ol>
+</ol>
+</body>
+</html>

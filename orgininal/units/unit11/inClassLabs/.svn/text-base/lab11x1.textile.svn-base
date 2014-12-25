@@ -1,0 +1,50 @@
+h2. In-class Lab 11.1
+
+<hr />
+
+h3. Exercise 1 - Create the Northwind database schema on your computer or VM
+
+# Download the file "northwind.sql":/attachment/unit11/northwind.sql.txt to your lab computer, laptop or virtual machine (VM), from the Blackboard version of this file.
+<br />Note: The *northwind.sql* file is also available on Blackboard under the Course Information tab.
+# Open a command-line or terminal window and navigate to the directory (folder) where the *northwind.sql* file is.
+# Load the Northwind database into your local MySQL server by issuing a command similar to the one below. Use the root user name. The instructor will tell you the password for lab computers and VMware virtual machines.
+<br /><pre>
+mysql -u root -p < northwind.sql
+</pre>
+# Now log into MySQL to explore the Northwind database, by entering the following command.
+<br /><pre>
+mysql -u root -p
+</pre>
+# View all database schemas in this instance of MySQL by entering:
+<br /><pre>
+show databases;
+</pre>
+# If the northwind database does not exist, consult your instructor before proceding to the next step. (You need to load the Northwind database successfully before you can do the rest of this lab.)
+# Select the Northwind database as your default for queries by entering:
+<br /><pre>
+use northwind;
+</pre>
+# Next, enter the following command to see the names of all of the tables in the Northwind schema.
+<br /><pre>
+show tables;
+</pre>
+# Use the describe command to view the structure of each of the Northwind tables.
+<br /><br />How many columns are there in the "products" table, and what is the primary key?
+# Now, enter the following commands to view the contents of some of the tables in the Northwind schema.
+<br /><pre>
+select * from categories;
+select * from region;
+select * from shippers;
+select * from orders;
+select * from order_details;
+</pre>
+How many rows are there in the "orders" table, and how many rows in "order_details"?
+# Feel free to explore the Northwind database schema as much as you wish. We will be using it the rest of the semester, so it is a good idea to become familiar with it.
+<br /><br />When you are ready to end your MySQL session, enter:  exit;  to quit MySQL and close the terminal window.
+# Show your instructor the results of your work by signing in to your local MySQL database and displaying the structure and contents of the "customers" table in the northwind database.
+
+<br />
+
+<hr />
+
+[[Unit Eleven => 152-166 Unit Eleven Index]]

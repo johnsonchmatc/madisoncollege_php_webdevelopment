@@ -1,0 +1,16 @@
+h2. A brief history of MySQL
+
+---
+
+* MySQL had its beginnings in UNIREG, a database system created in 1979 by Michael "Monty" Widenius for the Swiss company, TcX.
+* In the mid-1990s, TcX began looking for a DBMS using the SQL query language. After trying to use mSQL unsuccessfully, the company again turned to Widenius who completed the first version of MySQL in May of 1996.
+* A few months later, MySQL 3.11 was first publicly released as a binary distribution for Sun Solaris.
+* Linux source and binaries were released shortly after. An enthusiastic developer community and a friendly General Public License (GPL) based licensing policy took care of the rest!
+* A few years later, TcX spun off MySQL AB as a private company. Today MySQL AB is the sole owner of the MySQL server source code and trademark, and is responsible for maintenance, marketing and further development of the MySQL database server.
+* MySQL is installed on more than 6 million servers worldwide to power many high-volume and business-critical Web sites. See: http://www.mysql.com/ company/factsheet.html
+
+<br />
+
+---
+
+[[Unit One => 152-166 Unit One Index]]

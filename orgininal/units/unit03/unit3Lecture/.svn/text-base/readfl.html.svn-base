@@ -1,0 +1,351 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta name="generator" content="HTML Tidy, see www.w3.org">
+  <title>Reading Files</title>
+  <link href="../../../css/basic.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" language="JavaScript">
+<!--
+function putSemester() {
+    var today=new Date();
+    var thisMonth=today.getMonth()+1;
+    var thisYear=today.getFullYear();
+    if(thisMonth <=6) {
+        return "Spring, " + thisYear;
+    }
+    else {
+       return "Fall, " + thisYear;
+    }
+}//-->
+  </script>
+  <style type="text/css">
+<!--
+    .bgStripes {
+        background-image:url(../../../images/Xstripes.gif);
+        background-attachment: fixed;
+    }
+    body {
+        background-color:white;
+    }
+    strong {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .table1 {
+        font-family:Arial, Helvetica, sans-serif;
+        font-size: small;
+    }
+    .table2 {
+        font-family:Arial, Helvetica, sans-serif;
+        font-size: small;
+        text-align:center;
+    }
+    td.cen {
+        text-align:center;
+    }
+    .small_title {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size:x-small;
+        font-weight:bold;
+    }
+    .med_title {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size:medium;
+        font-weight:bold;
+        text-align:center;
+        color:darkblue;
+    }
+    -->
+  </style>
+</head>
+<body bgcolor="#ffffff" text="#000000">
+<table class="bgStripes" border="0" width="100%">
+      <tbody>
+    <tr name="firstRow">
+        <td valign="top" width="80">
+      <p class="small_title">
+      
+      <script type="text/javascript">
+          <!--
+            document.write(putSemester());
+            -->
+      </script>
+          </p>
+        </td>
+        <td>
+      <p class="med_title">Scripting with Perl</p>
+        </td>
+        <td align="right" valign="top" width="80">
+      <p class="small_title">3 Credits</p>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="3" height="10">
+      <p class="small_title" align="center">107-196</p>
+        </td>
+      </tr>
+  </tbody>
+</table>
+    <!--The heading for the slides -->
+    <br>
+     
+<table class="headTable1" border="0">
+      <tbody>
+    <tr>
+        <td width="100"><a href="files.html"><img alt="" src="../../../images/btn_lArrow.gif" border="0"></a><a href="index.html"><img alt="" src="../../../images/btn_upArrow.gif" border="0"></a><a href="other.html"><img alt="" src="../../../images/btn_rArrow.gif" border="0"></a></td>
+        <td>
+          
+      
+      <p>Reading from a File</p>
+        </td>
+      </tr>
+  </tbody>
+</table>
+    <br>
+<div class="disp1">
+<ul class="slidesUl1">
+  <li>
+    <p>
+Reading from a File</p>
+    <p>
+Right now, Bob's customers can leave their orders via the Web,
+but if Bob's staff members want to look at the orders,
+they have to open the files themselves.</p>
+    <p>
+Let's create a web interface to let Bob's staff read the
+files easily. The code for this interface is shown in PHP script
+<a href="../examples/vieworders_php.html">vieworders.php</a>
+</p>
+<p>
+This script follows the sequence we described earlier: open the file,
+read from the file, close the file.
+Let's look at the functions in this script in detail.</p>
+  </li>
+  <li>
+    <p>
+Opening a File for Reading: <code>fopen()</code></p>
+    <p>
+Again, we open the file by using <code>fopen()</code> .
+In this case, we open the file for reading only,
+so we use the file mode 'rb':</p>
+<blockquote><code>
+$fp = fopen("$DOCUMENT_ROOT/../orders/orders.txt", 'rb');<br>
+</code></blockquote>
+  </li>
+  <li>
+<p>
+Knowing When to Stop: <code>feof()</code></p>
+<p>
+In this example, we use a <code>while</code> loop to read from the file until
+the end of the file is reached. The while loop tests for the end of the file using
+the <code>feof()</code> function:</p>
+<blockquote><code>
+while (!feof($fp))<br>
+</code></blockquote>
+<p>
+The <code>feof()</code> function takes a file handle as its single parameter.
+It returns true if the file pointer is at the end of the file.
+Although the name might seem strange, you can remember it more easily
+if you know that <code>feof</code> stands for File End Of File.</p>
+<p>
+In this case (and generally when reading from a file),
+we read from the file until EOF is reached.</p>
+  </li>
+  <li>
+<p>
+Reading a Line at a Time: <code>fgets()</code>,
+<code>fgetss()</code>, and <code>fgetcsv()</code></p>
+<p>
+In this example, we use the <code>fgets()</code>
+function to read from the file:</p>
+<blockquote><code>
+$order= fgets($fp, 999);<br>
+</code></blockquote>
+<p>
+This function reads one line at a time from a file.
+In this case, it reads until it encounters a newline character (\n),
+encounters an EOF, or has read 998 bytes from the file.
+The maximum length read is the length specified minus one (1) byte.</p>
+<p>
+You can use many different functions to read from files.
+The <code>fgets()</code> function, for example,
+is useful when you are dealing with files that contain
+plain text that you want to deal with in chunks.</p>
+  </li>
+  <li>
+<p>
+An interesting variation on <code>fgets()</code> is <code>fgetss()</code> ,
+which has the following prototype:</p>
+<blockquote><code><small>
+string fgetss(resource fp , int length , string [allowable_tags]);<br>
+</small></code></blockquote>
+<p>
+This function is similar to <code>fgets()</code>
+except that it strips out any PHP and HTML
+tags found in the string. If you want to leave in any particular tags,
+you can include them in the <code>allowable_tags</code> string.
+You would use <code>fgetss()</code> for safety when reading a file
+written by somebody else or one containing user input.
+Allowing unrestricted HTML code in the file could mess up your carefully
+planned formatting. Allowing unrestricted
+PHP could give a malicious user almost free rein on your server!</p>
+    <p>
+The function <code>fgetcsv()</code> is another variation on <code>fgets()</code> .
+It has the following prototype:</p>
+<blockquote><code>
+array fgetcsv ( resource fp , int length [, string delimiter<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[, string enclosure]])<br>
+</code></blockquote>
+<p>
+This function breaks up lines of files when you have used a delimiting
+character, such as the tab character (as we suggested earlier) or a comma
+(as commonly used by spreadsheets and other applications).
+If you want to reconstruct the variables from the
+order separately rather than as a line of text,
+<code>fgetcsv()</code> allows you to do this simply.
+You call it in much the same way as you would call <code>fgets()</code> ,
+but you pass it the delimiter you used to separate fields.
+For example,</p>
+<blockquote><code>
+$order = fgetcsv($fp, 100, "\t");<br>
+</code></blockquote>
+<p>
+This code would retrieve a line from the file and break it up
+wherever a tab (\t ) was encountered.
+The results are returned in an array (<code>$order</code>
+in this code example).</p>
+<p>
+The length parameter should be greater than the length in
+characters of the longest line in the file you are trying to
+read.</p>
+<p>
+The enclosure parameter specifies what each field in
+a line is surrounded by.
+If not specified, it defaults to " (a double quotation mark).</p>
+  </li>
+  <li>
+<p>
+Reading the Whole File: <code>readfile()</code> ,
+<code>fpassthru()</code> , and <code>file()</code></p>
+<p>
+Instead of reading from a file a line at a time,
+we can read the whole file at once.
+There are four different ways to do this!</p>
+<p>
+The first uses <code>readfile()</code> .
+You can replace the entire script we wrote previously with one line:</p>
+<blockquote><code>
+readfile("$DOCUMENT_ROOT/../orders/orders.txt");<br>
+</code></blockquote>
+<p>
+A call to the <code>readfile()</code> function opens the file,
+echoes the content to standard output (the browser),
+and then closes the file.
+The prototype for <code>readfile()</code> is</p>
+<code><small>
+int readfile(string filename , [int use_include_path [, resource context ]]);<br>
+</small></code>
+<p>
+The optional second parameter specifies whether PHP should look for the
+file in the include_path and operates the same way as in <code>fopen()</code> .
+The optional "context" parameter is used only when
+files are opened remotely via, for example, HTTP.
+The function returns the total number of bytes read from the file.</p>
+<p>
+Second, you can use <code>fpassthru()</code> .
+To do so, you need to open the file using <code>fopen()</code> first.
+You can then pass the file pointer as an argument to <code>fpassthru()</code>
+, which dumps the contents of the file from the pointer's position onward to
+standard output.
+It closes the file when it is finished.</p>
+<p>
+You can replace the previous script with <code>fpassthru()</code> as follows:</p>
+<blockquote><code>
+$fp = fopen("$DOCUMENT_ROOT/../orders/orders.txt", 'rb');<br>
+fpassthru($fp);<br>
+</code></blockquote>
+<p>
+The function <code>fpassthru()</code> returns true if the
+read is successful and false otherwise.</p>
+<p>
+The third option for reading the whole file is using the <code>file()</code>
+function. This function is identical to <code>readfile()</code>
+except that instead of echoing the file to standard output,
+it turns it into an array. We cover this function in more detail
+when we look at arrays later.
+Just for reference, you would call it using:</p>
+<blockquote><code>
+$filearray = file("$DOCUMENT_ROOT/../orders/orders.txt");<br>
+</code></blockquote>
+<p>
+This line reads the entire file into the array called <code>$filearray</code> .
+Each line of the file is stored in a separate element of the array.
+Note that this function is not binary safe.</p>
+<p>
+Finally, as of PHP 4.3.0, you can use the <code>file_get_contents()</code> function.
+This function is identical to <code>readfile()</code>
+except that it returns the content of
+the file as a string instead of outputting it to the browser.
+The advantage of this new function is that it is binary safe,
+unlike the <code>file()</code> function.</p>
+  </li>
+  <li>
+<p>
+Reading a Character: <code>fgetc()</code></p>
+<p>
+Another option for file processing is to read a single character at a
+time from a file. You can do this by using the <code>fgetc()</code> function.
+It takes a file pointer as its only parameter and returns the next character in the file.
+You can replace the while loop in the original script with one that uses
+<code>fgetc()</code> , as follows:</p>
+<blockquote><code>
+while (!feof($fp))<br>
+{<br>
+&nbsp;&nbsp;$char = fgetc($fp);<br>
+&nbsp;&nbsp;if (!feof($fp))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo ($char == "\n" ? '&lt;br /&gt;': $char);<br>
+}<br>
+</code></blockquote>
+<p>
+This code reads a single character at a time from the file using
+<code>fgetc()</code> and stores it in <code>$char</code> ,
+until the end of the file is reached. It then does a little
+processing to replace the text end-of-line characters (\n)
+with HTML line breaks (&lt;br /&gt;).</p>
+<p>
+This is just to clean up the formatting. If you try to output the file
+with newlines between records, the whole file will be printed on a
+single line. Web browsers do not render whitespace, such as
+newlines, so you need to replace them
+with HTML linebreaks (&lt;br /&gt;) instead.
+You can use the ternary operator to do this neatly.</p>
+<p>
+A minor side effect of using <code>fgetc()</code> instead of
+<code>fgets()</code> is that <code>fgetc()</code> returns
+the EOF character, whereas <code>fgets()</code> does not.
+You need to test <code>feof()</code> again after you have
+read the character because you do not want to echo the EOF to the browser.</p>
+<p>
+Reading a file character by character is the least efficient way to read it,
+so you would not do it unless you have a compelling reason to process each
+character, individually.</p>
+  </li>
+  <li>
+<p>
+Reading an Arbitrary Length: <code>fread()</code></p>
+<p>
+The final way you can read from a file is to use the <code>fread()</code>
+function to read an arbitrary number of bytes from the file.
+This function has the following prototype:</p>
+<blockquote><code>
+string fread(resource fp , int length);<br>
+</code></blockquote>
+<p>
+It reads up to "length" bytes, to the end of the file or network packet,
+whichever comes first.
+</p>
+</li>
+</ul>
+</div>
+</body>
+</html>

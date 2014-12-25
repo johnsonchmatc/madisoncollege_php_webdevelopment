@@ -1,0 +1,75 @@
+h2. Welcome to PHP
+
+h2. <code>http://itins1.matcmadison.edu:8020</code>
+
+
+h3. Course Group
+
+* We will be using a Yahoo! Group for communication this semester. You may register more than once if you would like to have messages from me go to multiple email accounts. 
+* "PHP and MySQL 152-166 Group":http://groups.yahoo.com/group/php-mysql-s08/
+
+
+<br />
+
+
+h3. Instructors
+
+bq. Check this page for how to communicate with your instructor
+
+* [[Instructor Page => 152-166 Instructors]]
+
+
+<br />
+
+
+h3. Course Outline
+
+* [[Syllabus => 152-166 Syllabus]]
+* [[Course Server => 152-166 course server]]
+
+<br />
+
+h3. Installing VMWare
+
+* Go [[here => 152-166 vmware install]] to find out how to install VMWare.
+
+<br />
+
+
+h3. Installing jEdit
+
+bq. [[Here => 152-166 jEdit Install]] are more detailed instructions on installing jEdit.
+
+<br />
+
+
+h3. Installing PHP
+
+bq. [[Here => 152-166 installing php]] are the instructions for installing PHP.
+
+<br />
+
+
+h3. Installing MySQL
+
+bq. [[Here => 152-166 installing mysql]] are the instructions for installing MySQL.
+
+<br />
+
+
+h3. Course Units
+
+* [[Unit One: => 152-166 Unit One Index]]  *Introduction to PHP, MySQL and Web Applications*
+* [[Unit Two: => 152-166 Unit Two Index]]  *Basic PHP Syntax*
+* [[Unit Three: => 152-166 Unit Three Index]] *More PHP Syntax*
+* [[Unit Four: => 152-166 Unit Four Index]] *Strings and String Manipulation Functions*
+* [[Unit Five: => 152-166 Unit Five Index]] *Arrays & Associative Arrays*
+* [[Unit Six: => 152-166 Unit Six Index]] *Functions & Writing Your Own Functions*
+* [[Unit Seven: => 152-166 Unit Seven Index]] *Object-Oriented PHP*
+* [[Unit Eight: => 152-166 Unit Eight Index]] *Using HTML Forms with PHP*
+* [[Unit Nine: => 152-166 Unit Nine Index]] *Accessing Files & Directories with PHP*
+* [[Unit Ten: => 152-166 Unit Ten Index]] *Pattern Matching & Regular Expressions*
+* [[Unit Eleven: => 152-166 Unit Eleven Index]] *Using the MySQL DBMS*
+* [[Unit Twelve: => 152-166 Unit Twelve Index]] *Accessing a MySQL Database Using PHP*
+
+<br />

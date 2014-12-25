@@ -1,0 +1,68 @@
+h2. A walk through PHP
+
+---
+
+* PHP Web pages are HTML pages with PHP commands embedded in them. The Web server processes the PHP commands and sends their output (and any HTML from the file) to the browser.
+* Open a text editor. Anything that can easily save as a plain text file will do.
+* Type the following lines:
+<br /><pre> <html>
+  <head>
+   <title>Test PHP</title>
+  </head>
+  <body>
+   <?php phpinfo() ?>
+  </body>
+ </html>
+</pre>
+* Save the text to a file named TestPHP.php in your computer Web server's document root directory.
+* On Linux with Apache installed with the OS this will usually be:
+<br /><pre>
+/var/www/html
+</pre>  
+* On Linux with Apache version 2 installed from the source code, as was done on our class server, it will usually be:
+<br /><pre>
+/usr/local/apache2/htdocs
+</pre>
+* On Windows with Apache, assuming the default installation, it will be:
+<br /><pre>
+C:\Program Files\Apache Group\Apache\htdocs
+</pre>
+* On Windows with IIS, assuming the default installation, it will be:
+<br /><pre>
+C:\Inetpub\wwwroot
+</pre>
+* On Apple OSX with Apache it will usually be:
+<pre>
+/Library/WebServer/Documents
+</pre>
+* If you do not currently have write access to your document root directory on Linux or Unix (including Apple OSX) you will need to login as root in a terminal window and change the permissions.
+* Now, open a browser and type in the following URL:
+<br /><pre>
+http://localhost/TestPHP.php
+</pre>
+* A web page describing your computer's PHP installation in great detail should be displayed.
+* Edit a new document in your text editor. Type the following:
+<br /><pre>  <html>
+   <head>
+    <title>Look Out World!</title>
+   </head>
+   <body>
+    <?php echo 'Hello, world!' ?>
+   </body>
+  </html>
+</pre>
+* Now, type in the following URL in your browser:
+<br /><pre>
+http://localhost/hello.php
+</pre>
+* You should see this output.
+<br /><pre>
+Hello, world!
+</pre>
+* That's it!
+
+<br />
+
+---
+
+[[Unit One => 152-166 Unit One Index]]

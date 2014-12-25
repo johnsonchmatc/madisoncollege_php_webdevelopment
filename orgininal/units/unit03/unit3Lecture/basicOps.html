@@ -1,0 +1,1084 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>Operators</title>
+<link href="basic.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" language="JavaScript">
+<!--
+function putSemester() {
+    var today=new Date();
+    var thisMonth=today.getMonth()+1;
+    var thisYear=today.getFullYear();
+    if(thisMonth <=6) {
+        return "Spring, " + thisYear;
+    }
+    else {
+       return "Fall, " + thisYear;
+    }
+}//-->
+</script>
+<style type="text/css">
+<!--
+    .bgStripes {
+        background-image:url(images/Xstripes.gif);
+        background-attachment: fixed;
+    }
+    body {
+        background-color:white;
+    }
+    strong {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+-->
+</style>
+</head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
+<table class="bgStripes" border="0" width="100%">
+<tbody>
+<tr name="firstRow">
+<td valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+<script type="text/javascript">
+<!--
+    document.write(putSemester());
+-->
+</script>
+</span> <br />
+</td>
+<td style="text-align: center;"><span style="font-weight: bold; font-size: medium; color: darkblue;">
+PHP Web Development with MySQL
+</span> </td>
+<td align="right" valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+3 Credits</span> </td>
+</tr>
+<tr>
+<td colspan="3" style="text-align: center;"><span style="font-size: xx-small; font-weight: bold;">
+152-166</span> </td>
+</tr>
+</tbody>
+</table>
+<!--The heading for the slides --> <br />
+<table class="headTable1" border="0">
+<tbody>
+<tr>
+<td width="100"><a href="index.html"><img alt="" src="images/btn_lArrow.gif" border="0"></a><a href="index.html"><img alt="" src="images/btn_upArrow.gif" border="0"></a><a href="moreOps.html"><img alt="" src="images/btn_rArrow.gif" border="0"></a></td>
+<td>The Basics of PHP Operators</td>
+</tr>
+</tbody>
+</table>
+<br />
+<div class="disp1">
+<ul class="slidesUl1">
+<li><p>
+Data objects can be manipulated in a number of ways by the large number of
+operators provided by PHP.
+</p><p>
+Operators are symbols, such as +, -, =, &gt;, and &lt;, that produce a result
+based on some rules.
+</p><p>
+An operator manipulates data objects called operands; for example, 5 and 4 are
+operands in the expression: <b>5 + 4</b>
+Operators and operands are found in expressions.
+</p><p>
+An expression combines a group of values to make a new value: <b>n = 5 + 4</b>
+When you terminate an expression with a semicolon, you have a complete statement;
+for example: <code>n = 5 + 4;</code>
+</p><p>
+In the numeric expression <b>5 + 4 - 2</b> , three numbers are combined.
+The operators are the + and - signs. The operands for the + sign are 5 and 4.
+After that part of the expression is evaluated to 9, the expression becomes
+<b>9 - 2</b> .
+After evaluating the complete expression, the result is 7.
+</p><p>
+Because the plus and minus operators each manipulate two operands, they are
+called binary operators.
+</p><p>
+If there is only one operand, the operator is called a unary operator,
+and if there are three operands, it is called a ternary operator.
+</p><p>
+We'll see examples of these operators later in this unit.
+</p><p>
+The operands can be either strings, numbers, booleans, or a combination of these.
+Some of the operators we have already used are the concatenation operator to
+join two strings together, the reference operator to create an alias for a variable,
+and the assignment operator to assign a value to a variable.
+</p><p>
+Now let's look at a whole plethora of additional PHP operators and see how they
+manipulate their operands.
+</p></li>
+<li><p>
+Assignment
+</p><p>
+An assignment statement evaluates the expression on the right side of the equal
+sign and assigns the result to the variable on the left side of the equal sign.
+The equal sign is the assignment operator.
+</p>
+<blockquote><code><small>
+$total = 5 + 4;<br>
+$name = "Tony";<br>
+</small></code></blockquote>
+</li>
+<li><p>
+Precedence and Associativity
+</p><p>
+When an expression contains a number of operators and operands,
+such as <b>5 * 4 + 3 / -2.2</b> , and the order of evaluation is ambiguous,
+then PHP must determine what to do.
+</p><p>
+This is where the precedence and associative rules come in.
+They tell PHP how to evaluate such an expression. Precedence refers to the way
+in which the operator binds to its operand; that is, should addition be done
+before division or should assignment come before multiplication.
+The precedence of one operator over another determines what operation is done first.
+</p><p>
+As shown in the precedence table below, the operators are organized as a hierarchy,
+with the operators of highest precedence at the top, similar to a social system
+where those with the most power (or money) are at the top.
+</p><p>
+In the rules of precedence, the multiplication operator is of higher precedence
+than the addition operator, technically meaning the operator of higher precedence
+binds more tightly to its operands.
+</p><p>
+The assignment operators are low in precedence and thus bind loosely to their
+operand. In the expression sum = 5 + 4, the equal sign is of low precedence
+so the expression 5 + 4 is evaluated first and then the result is assigned to sum.
+</p><p>
+Parentheses are of the highest precedence. An expression placed within parentheses
+is evaluated first; for example, in the expression 2 * ( 10 - 4 ),
+the expression within the parentheses is evaluated first and that result is
+multiplied by 2.
+</p><p>
+When parentheses are nested, the expression contained within the innermost set
+of parentheses is evaluated first.
+</p><p>
+Table: Precedence and Associativity (Highest to Lowest)
+</p>
+<table>
+<tr><td><code><u><b>
+Operator</b></u></code></td>
+<td><code><u><b>
+Description</b></u></code></td>
+<td><code><u><b>
+Associativity</b></u></code></td>
+</tr><tr>
+<td><code>
+()</code></td>
+<td><code>
+Parentheses</code></td>
+<td><code>
+Left to right</code></td>
+</tr><tr>
+<td><code>
+new</code></td>
+<td><code>
+Creates an object</code></td>
+<td><code>
+Nonassociative</code></td>
+</tr><tr>
+<td><code>
+[</code></td>
+<td><code>
+Array subscript</code></td>
+<td><code>
+Right to left</code></td>
+</tr><tr>
+<td><code>
+++ --</code></td>
+<td><code>
+Auto increment, decrement</code></td>
+<td><code>
+Nonassociative</code></td>
+</tr><tr>
+<td><code>
+! ~ -</code></td>
+<td><code>
+Logical not, bitwise not, negation</code></td>
+<td><code>
+Nonassociative</code></td>
+</tr><tr>
+<td><code>
+(int) (float)<br>
+(string) (array) (object)</code></td>
+<td><code>
+Cast</code></td>
+<td></td>
+</tr><tr>
+<td><code>
+@</code></td>
+<td><code>
+Inhibit errors</code></td>
+<td></td>
+</tr><tr>
+<td><code>
+* / %</code></td>
+<td><code>
+Multiply, divide, modulus</code></td>
+<td><code>
+Left to right</code></td>
+</tr><tr>
+<td><code>
++ - .</code></td>
+<td><code>
+Add, subtract, string concatenation</code></td>
+<td><code>
+Left to right</code></td>
+</tr><tr>
+<td><code>
+&lt;&lt; &gt;&gt;</code></td>
+<td><code>
+Bitwise left shift, right shift</code></td>
+<td><code>
+Left to right</code></td>
+</tr><tr>
+<td><code>
+&lt; &lt;=</code></td>
+<td><code>
+Less than, less than or equal to</code></td>
+<td><code>
+Left to right</code></td>
+</tr><tr>
+<td><code>
+&gt; &gt;=</code></td>
+<td><code>
+Greater than, greater than or equal to</code></td>
+<td></td>
+</tr><tr>
+<td><code>
+= = !=</code></td>
+<td><code>
+Equal to, not equal to</code></td>
+<td><code>
+Nonassociative</code></td>
+</tr><tr>
+<td><code>
+= = = != =</code></td>
+<td><code>
+Identical to (same type), not identical to</code></td>
+<td></td>
+</tr><tr>
+<td><code>
+&amp;</code></td>
+<td><code>
+Bitwise AND</code></td>
+<td><code>
+Left to right</code></td>
+</tr><tr>
+<td><code>
+^</code></td>
+<td><code>
+Bitwise XOR</code></td>
+<td></td>
+</tr><tr>
+<td><code>
+|</code></td>
+<td><code>
+Bitwise OR</code></td>
+<td></td>
+</tr><tr>
+<td><code>
+&amp;&amp;</code></td>
+<td><code>
+Logical and</code></td>
+<td><code>
+Left to right</code></td>
+</tr><tr>
+<td><code>
+||</code></td>
+<td><code>
+Logical or</code></td>
+<td><code>
+Left to right</code></td>
+</tr><tr>
+<td><code>
+? :</code></td>
+<td><code>
+Ternary, conditional</code></td>
+<td><code>
+Left to right</code></td>
+</tr><tr>
+<td><code>
+= += -= *= /= %= &lt;&lt;= &gt;&gt;=</code></td>
+<td><code>
+Assignment</code></td>
+<td><code>
+Right to left</code></td>
+</tr><tr>
+<td><code>
+and</code></td>
+<td><code>
+Logical AND</code></td>
+<td><code>
+Left to right</code></td>
+</tr><tr>
+<td><code>
+xor</code></td>
+<td><code>
+Logical XOR</code></td>
+<td><code>
+Left to right</code></td>
+</tr><tr>
+<td><code>
+or</code></td>
+<td><code>
+Logical OR</code></td>
+<td><code>
+Left to right</code></td>
+</tr><tr>
+<td><code>
+, (comma)</code></td>
+<td><code>
+List separator, etc.</code></td>
+<td><code>
+Left to right</code></td>
+</tr>
+</table>
+<p>
+Associativity refers to the order in which an operator evaluates its operands:
+left to right, in no specified order, or right to left.
+</p><p>
+When all of the operators in an expression are of equal precedence,
+normally the association is left to right;
+for example, in the expression 5 + 4 + 3, the evaluation is from left to right.
+</p><p>
+In the following script, how is the expression evaluated? Is addition,
+multiplication, or division done first? In what order, right to left or left to right?
+</p>
+<h4>
+Filename: opassoc.php
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Precedence and Associativity()<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">lightgreen</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">face</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">arial</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax13">+</SPAN><SPAN CLASS="syntax13">1</SPAN><SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>  <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">result</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax5">5</SPAN> <SPAN CLASS="syntax18">+</SPAN> <SPAN CLASS="syntax5">4</SPAN> <SPAN CLASS="syntax18">*</SPAN> <SPAN CLASS="syntax5">12</SPAN> <SPAN CLASS="syntax18">/</SPAN> <SPAN CLASS="syntax5">4</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">result</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">=</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">5</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">+</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">4</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">*</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">12</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">4</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">result</SPAN> <SPAN CLASS="syntax18">=</SPAN> (<SPAN CLASS="syntax5">5</SPAN> <SPAN CLASS="syntax18">+</SPAN> <SPAN CLASS="syntax5">4</SPAN>) <SPAN CLASS="syntax18">*</SPAN> <SPAN CLASS="syntax5">12</SPAN> <SPAN CLASS="syntax18">/</SPAN> (<SPAN CLASS="syntax5">4</SPAN> <SPAN CLASS="syntax18">-</SPAN> <SPAN CLASS="syntax5">2</SPAN>)<SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">result</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">=</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">(</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">5</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">+</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">4</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">)</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">*</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">12</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">(</SPAN><SPAN CLASS="syntax13">4</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">-</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">2</SPAN><SPAN CLASS="syntax13">)</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  12:</SPAN>  <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutter">  13:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  14:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+The Table above summarizes the rules of precedence and associativity for the PHP
+operators. The operators on the same line are of equal precedence.
+The rows are in order of highest to lowest precedence.
+</p>
+<h4>
+Filename: opassoc2.php
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Precedence and Associativity()<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">lightgreen</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">face</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">arial</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax13">+</SPAN><SPAN CLASS="syntax13">1</SPAN><SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>  <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">result</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax5">5</SPAN> <SPAN CLASS="syntax18">+</SPAN> <SPAN CLASS="syntax5">4</SPAN> <SPAN CLASS="syntax18">*</SPAN> <SPAN CLASS="syntax5">12</SPAN> <SPAN CLASS="syntax18">/</SPAN> <SPAN CLASS="syntax5">4</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">result</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">=</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">5</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">+</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">4</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">*</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">12</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">4</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">result</SPAN> <SPAN CLASS="syntax18">=</SPAN> (<SPAN CLASS="syntax5">5</SPAN> <SPAN CLASS="syntax18">+</SPAN> <SPAN CLASS="syntax5">4</SPAN>) <SPAN CLASS="syntax18">*</SPAN> (<SPAN CLASS="syntax5">12</SPAN> <SPAN CLASS="syntax18">/</SPAN> <SPAN CLASS="syntax5">4</SPAN>) <SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">result</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">=</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">(</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">5</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">+</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">4</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">)</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">*</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">(</SPAN><SPAN CLASS="syntax13">12</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">4</SPAN><SPAN CLASS="syntax13">)</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  12:</SPAN>  <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutter">  13:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  14:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+Because multiplication and division are of higher precedence than addition,
+those expressions will be evaluated first, associating from left to right.
+</p></li>
+<li><p>
+Arithmetic Operators
+</p><p>
+Arithmetic operators take numerical values (either literals or variables) as
+their operands and return a single numerical value.
+</p><p>
+The standard arithmetic operators are addition (+), subtraction (-),
+multiplication (*), and division (/).
+</p><p>
+Table: Arithmetic Operators
+</p>
+<blockquote>
+<table>
+<tr>
+<td><code><u><b>
+Operator/Operands</b></u>&nbsp;</code></td>
+<td><u><b><code>
+Function</code></b></u></td>
+</tr><tr>
+<td><code>
+&nbsp;&nbsp;x + y</code></td>
+<td><code>
+Addition</code></td>
+</tr><tr>
+<td><code>
+&nbsp;&nbsp;x – y</code></td>
+<td><code>
+Subtraction</code></td>
+</tr><tr>
+<td><code>
+&nbsp;&nbsp;x * y</code></td>
+<td><code>
+Multiplication</code></td>
+</tr><tr>
+<td><code>
+&nbsp;&nbsp;x / y</code></td>
+<td><code>
+Division</code></td>
+</tr><tr>
+<td><code>
+&nbsp;&nbsp;x % y</code></td>
+<td><code>
+Modulus</code></td>
+</tr>
+</table>
+</blockquote>
+<p>
+The arithmetic operations in the following example illustrate precedence and
+associativity. The expression in parentheses is evaluated first,
+then the module operator (the % sign) will divide that result by 7
+and return the remainder, and addition is performed last.
+</p>
+<h4>
+Filename: arith.php
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Arithmetic Operators<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">#</SPAN><SPAN CLASS="syntax13">ccccff</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">text</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">000033</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">h2</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Arithmetic operators<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">h2</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">p</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>  <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">num1</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax5">5</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">num2</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax5">7</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">result</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">num1</SPAN> <SPAN CLASS="syntax18">+</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">num2</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">h3</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">result</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">=</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">num1</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">+</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">num2</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">result</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">result</SPAN> <SPAN CLASS="syntax18">+</SPAN> (<SPAN CLASS="syntax5">10</SPAN> <SPAN CLASS="syntax18">/</SPAN> <SPAN CLASS="syntax5">2</SPAN> <SPAN CLASS="syntax18">+</SPAN> <SPAN CLASS="syntax5">5</SPAN>) <SPAN CLASS="syntax18">%</SPAN> <SPAN CLASS="syntax5">7</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  12:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">result</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">=</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">12</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">+</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">(</SPAN><SPAN CLASS="syntax13">10</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">2</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">+</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">5</SPAN><SPAN CLASS="syntax13">)</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">%</SPAN><SPAN CLASS="syntax13">7</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">h3</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN> <SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  13:</SPAN>  <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutter">  14:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">  15:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  16:</SPAN>
+</PRE>
+</div>
+</small></blockquote>
+</li>
+<li><p>
+Short Circuit Assignment Operators
+</p><p>
+The "short circuit" assignment operators allow you to perform an arithmetic
+or string operation by combining an assignment operator with an arithmetic
+or string operator. For example: <b>$x = $x + 1</b> can be written:
+<b>$x+=1</b>
+</p><p>
+Table: Assignment Operators
+</p>
+<table>
+<tr>
+<td><code><u><b>
+Operator</b></u>&nbsp;</code></td>
+<td><code><u><b>
+Example</b></u>&nbsp;&nbsp;</code></td>
+<td><code><u><b>
+Meaning</b></u></code></td>
+</tr><tr>
+<td><code>
+&nbsp;&nbsp;=</code></td>
+<td><code>
+$x = 5;</code></td>
+<td><code>
+Assign 5 to variable $x.</code></td>
+</tr><tr>
+<td><code>
+&nbsp;&nbsp;+=</code></td>
+<td><code>
+$x += 3;</code></td>
+<td><code>
+Add 3 to $x and assign result to $x.</code></td>
+</tr><tr>
+<td><code>
+&nbsp;&nbsp;-=</code></td>
+<td><code>
+$x -= 2;</code></td>
+<td><code>
+Subtract 2 from $x and assign result to $x.</code></td>
+</tr><tr>
+<td><code>
+&nbsp;&nbsp;*=</code></td>
+<td><code>
+$x *= 4;</code></td>
+<td><code>
+Multiply $x by 4 and assign result to $x.</code></td>
+</tr><tr>
+<td><code>
+&nbsp;&nbsp;/=</code></td>
+<td><code>
+$x /= 2;</code></td>
+<td><code>
+Divide $x by 2 and assign result to $x.</code></td>
+</tr><tr>
+<td><code>
+&nbsp;&nbsp;%=</code></td>
+<td><code>
+$x %= 2;</code></td>
+<td><code>
+Divide $x by 2 and assign remainder to $x.</code></td>
+</tr>
+</table>
+<h4>
+Filename: shortcut.php
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Arithmetic Operators<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">#</SPAN><SPAN CLASS="syntax13">99ff66</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">h2</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Shortcut Operators<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">h2</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">+</SPAN><SPAN CLASS="syntax13">1</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>  <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>    <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2">Using</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">shortcuts</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">num</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax5">10</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">10</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">is</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">assigned</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">to</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">\$num</SPAN><SPAN CLASS="syntax13">.</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN>    
+<SPAN CLASS="gutter">  11:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">num</SPAN> <SPAN CLASS="syntax18">+</SPAN><SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax5">2</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  12:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">\$num</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">+</SPAN><SPAN CLASS="syntax13">=</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">2</SPAN><SPAN CLASS="syntax13">;</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">\$num</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">is</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">num</SPAN><SPAN CLASS="syntax13">.</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  13:</SPAN>
+<SPAN CLASS="gutter">  14:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">num</SPAN> <SPAN CLASS="syntax18">-</SPAN><SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax5">1</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  15:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">\$num</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">-</SPAN><SPAN CLASS="syntax13">=</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">1</SPAN><SPAN CLASS="syntax13">;</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">\$num</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">is</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">num</SPAN><SPAN CLASS="syntax13">.</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  16:</SPAN>
+<SPAN CLASS="gutter">  17:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">num</SPAN> <SPAN CLASS="syntax18">*</SPAN><SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax5">3</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  18:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">\$num</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">*</SPAN><SPAN CLASS="syntax13">=</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">3</SPAN><SPAN CLASS="syntax13">;</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">\$num</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">is</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">num</SPAN><SPAN CLASS="syntax13">.</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  19:</SPAN>
+<SPAN CLASS="gutterH">  20:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">num</SPAN> <SPAN CLASS="syntax18">%</SPAN><SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax5">5</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  21:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">\$num</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">%</SPAN><SPAN CLASS="syntax13">=</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">5</SPAN><SPAN CLASS="syntax13">;</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">\$num</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">is</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">num</SPAN><SPAN CLASS="syntax13">.</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  22:</SPAN>  <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutter">  23:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  24:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+The shortcut assignment modulus operator, %, yields the integer amount that
+remains after the scalar $num is divided by 5.
+</p><p>
+The operator is called the modulus operator or remainder operator.
+The expression <b>$num %=5</b> is equivalent to: <b>$num = $num % 5;</b>
+</p></li>
+<li><p>
+Autoincrement and Autodecrement Operators
+</p><p>
+To make programs easier to read, to simplify typing, and, at the machine level,
+to produce more efficient code, the autoincrement (++) and autodecrement (--)
+operators are provided.
+</p><p>
+The autoincrement operator performs the simple task of incrementing the value
+of its operand by 1, and the autodecrement operator decrements the value of its
+operand by 1.
+</p><p>
+The operator has two forms: The first form prefixes the variable with either
+++ or -- (e.g., <b>++$x</b> or <b>--$x</b>); the second form postfixes
+(places the operator after) the variable name with either ++ or --
+(e.g., <b>$x++</b>, <b>x--</b>).
+</p><p>
+For simple operations, such as $x++ or $x--, ++$x or --$x, the effect is the same;
+both ++$x and $x++ add 1 to the value of $x, and both --$x and $x-- subtract one
+from the value of $x.
+</p><p>
+Table: Autoincrement and Autodecrement Operators
+</p>
+<table>
+<tr>
+<td><code><u><b>
+Operator</b></u>&nbsp;</code></td>
+<td><code><u><b>
+Function</b></u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code></td>
+<td><code><u><b>
+What It Does</b></u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</code></td>
+<td><code><u><b>
+Examples</b></u></code></td>
+</tr><tr>
+<td><code>
+++$x</code></td>
+<td><code>
+Preincrement</code></td>
+<td><code>
+Adds 1 to $x</code></td>
+<td><code>
+$x = 3; $x++;
+$x is now 4</code></td>
+</tr><tr>
+<td><code>
+$x++</code></td>
+<td><code>
+Postincrement</code></td>
+<td><code>
+Adds 1 to $x</code></td>
+<td><code>
+$x = 3; ++$x;
+$x is now 4</code></td>
+</tr><tr>
+<td><code>
+--$x</code></td>
+<td><code>
+Predecrement</code></td>
+<td><code>
+Subtracts 1 from $x</code></td>
+<td><code>
+$x = 3; $x--;
+$x is now 2</code></td>
+</tr><tr>
+<td><code>
+$x--</code></td>
+<td><code>
+Postdecrement</code></td>
+<td><code>
+Subtracts 1 from $x</code></td>
+<td><code>
+$x = 3; --$x;
+$x is now 2</code></td>
+</tr>
+</table>
+<p>
+Now you have four ways to add 1 to the value of a variable:
+</p>
+<blockquote><code>
+$x = $x + 1;<br>
+$x += 1;<br>
+$x++;<br>
+++$x ;<br>
+</code></blockquote>
+<p>
+You also have four ways to subtract 1 from the value of a variable:
+</p>
+<blockquote><code>
+$x = $x - 1;<br>
+$x -= 1;<br>
+$x--;<br>
+--$x;<br>
+</code></blockquote>
+<p>
+The placement of the operators does make a difference in more complex expressions
+especially when part of an assignment.
+
+In the example below, <b>$y = $x++</b> is not the same as: <b>$y = ++$x</b>
+</p>
+<h4>
+Filename: prevspost.php
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Autoincrement and Autodecrement<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">6699ff</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>  <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">x</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax5">5</SPAN><SPAN CLASS="syntax18">;</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">y</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax5">0</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">y</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax18">+</SPAN><SPAN CLASS="syntax18">+</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">x</SPAN><SPAN CLASS="syntax18">;</SPAN>  <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">add</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">1</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">to</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">$x</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">first;</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">then</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">assign</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">to</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">$y</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">h3</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">Preincrement</SPAN><SPAN CLASS="syntax13">:</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">\$y</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">is</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">y</SPAN><SPAN CLASS="syntax13">.</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">\$x</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">is</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">x</SPAN><SPAN CLASS="syntax13">.</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  12:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">hr</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  13:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">x</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax5">5</SPAN><SPAN CLASS="syntax18">;</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">y</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax5">0</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  14:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">y</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">x</SPAN><SPAN CLASS="syntax18">+</SPAN><SPAN CLASS="syntax18">+</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  15:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">Postincrement</SPAN><SPAN CLASS="syntax13">:</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  16:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">\$y</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">is</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">y</SPAN><SPAN CLASS="syntax13">.</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  17:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">\$x</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">is</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">x</SPAN><SPAN CLASS="syntax13">.</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  18:</SPAN>  <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutter">  19:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">  20:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+When the preincrement operator is applied to $x, it will be incremented before
+the assignment is made, so $y gets a value of 6.
+</p><p>
+When the postincrement operator is applied to $x, it will be incremented after
+the assignment to the variable $y is made, so $y is 5 and $x is 6.
+</p>
+</li>
+<li><p>
+Some Useful Math Functions
+</p><p>
+The table below lists some of the math functions provided by PHP. The complete
+list can be found at the PHP Web site: <a href="http://php.net">http://php.net</a>
+</p><p>
+Table: Math Functions
+</p>
+<table>
+<tr>
+<td><code><u><b>
+Function</b></u></code></td>
+<td><code><u><b>
+Meaning</b></u></code></td>
+<td><code><u><b>
+Example</b></u></code></td>
+</tr><tr>
+<td><code>
+abs()</code></td>
+<td><code>
+Absolute value</code></td>
+<td><code>
+echo abs(-5);   // 5<br>
+echo abs(5.3);  // 5</code></td>
+</tr><tr>
+<td><code>
+base_convert()</code></td>
+<td><code>
+Convert a number between<br>
+arbitrary bases</code></td>
+<td><code>
+echo base_convert("ff",16,10); // 255<br>
+echo base_convert("a",16,2);   // 1010<br>
+echo base_convert(11,10,8);    // 13</code></td>
+</tr><tr>
+<td><code>
+bindec()</code></td>
+<td><code>
+Binary to decimal</code></td>
+<td><code>
+echo bindec('1010');   // 10<br>
+echo bindec('110010'); // 50</code></td>
+</tr><tr>
+<td><code>
+ceil()</code></td>
+<td><code>
+Round fractions up</code></td>
+<td><code>
+echo ceil(6.2);  // 7<br>
+echo ceil(6.8);  // 7</code></td>
+</tr><tr>
+<td><code>
+decbin()</code></td>
+<td><code>
+Decimal to binary</code></td>
+<td><code>
+echo decbin(5);   // 101<br>
+echo decbin(20);  // 10100</code></td>
+</tr><tr>
+<td><code>
+dechex()</code></td>
+<td><code>
+Decimal to hexadecimal</code></td>
+<td><code>
+echo dechex(15);   // f<br>
+echo dechex(124);  // 7c</code></td>
+</tr><tr>
+<td><code>
+decoct()</code></td>
+<td><code>
+Decimal to octal</code></td>
+<td><code>
+echo decoct(8);   // 10<br>
+echo decoct(20);  // 24</code></td>
+</tr><tr>
+<td><code>
+floor()</code></td>
+<td><code>
+Round fractions down</code></td>
+<td><code>
+echo floor(6.2);  // 6<br>
+echo floor(6.8);  // 6</code></td>
+</tr><tr>
+<td><code>
+getrandmax()</code></td>
+<td><code>
+Show largest possible<br>
+random value</code></td>
+<td><code>
+echo getrandmax();  // returns 32767</code></td>
+</tr><tr>
+<td><code>
+hexdec()</code></td>
+<td><code>
+Hexadecimal to decimal</code></td>
+<td><code>
+echo hexdec("ff");  // returns 255<br>
+echo hexdec("a");   // returns 10</code></td>
+</tr><tr>
+<td><code>
+is_finite()</code></td>
+<td><code>
+Finds whether a value is<br>
+a legal finite number,<br>
+returns boolean</code></td>
+<td><code>
+echo is_finite(pi()); // returns 1 true</code></td>
+</tr><tr>
+<td><code>
+is_infinite()</code></td>
+<td><code>
+Finds whether a value is<br>
+infinite</code></td>
+<td><code>
+echo is_infinite(pow(10, 1000000));<br>
+// returns 1 true</code></td>
+</tr><tr>
+<td><code>
+is_nan()</code></td>
+<td><code>
+Finds whether a value is<br>
+not a number</code></td>
+<td><code>
+echo is_nan(5.2)  // returns false</code></td>
+</tr><tr>
+<td><code>
+max()</code></td>
+<td><code>
+Find highest value</code></td>
+<td><code>
+echo max(1,3,5,12,8);  // 12</code></td>
+</tr><tr>
+<td><code>
+min()</code></td>
+<td><code>
+Find lowest value</code></td>
+<td><code>
+echo min(5,3.2, 8, 4);  // 3.2</code></td>
+</tr><tr>
+<td><code>
+octdec()</code></td>
+<td><code>
+Octal to decimal</code></td>
+<td><code>
+echo octdec(10);  // returns 8</code></td>
+</tr><tr>
+<td><code>
+pi()</code></td>
+<td><code>
+Get value of pi</code></td>
+<td><code>
+echo pi();  // 3.1415926535898</code></td>
+</tr><tr>
+<td><code>
+pow()</code></td>
+<td><code>
+Exponential expression</code></td>
+<td><code>
+echo pow(3,2);   // 9<br>
+echo pow(10,3);  // 1000</code></td>
+</tr><tr>
+<td><code>
+rand(start,finish)&nbsp;</code></td>
+<td><code>
+Generate a random integer&nbsp;<br>
+between start and finish</code></td>
+<td><code>
+echo rand(1,10);  // 5<br>
+echo rand(1,10);  // 7<br>
+echo rand(1,10);  // 10</code></td>
+</tr><tr>
+<td><code>
+round()</code></td>
+<td><code>
+Rounds a float</code></td>
+<td><code>
+echo round(6.4);  // 6<br>
+echo round(6.5);  // 7</code></td>
+</tr><tr>
+<td><code>
+sqrt()</code></td>
+<td><code>
+Square root</code></td>
+<td><code>
+echo sqrt(81);  // 9</code></td>
+</tr><tr>
+<td><code>
+srand()</code></td>
+<td><code>
+Seed the random number<br>
+generator</code></td>
+<td></td>
+</tr>
+</table>
+</li>
+<li><p>
+Casting Operators
+</p><p>
+PHP is a loosely typed language, which really means that you don't have to be
+concerned about what kind of data is stored in a variable.
+</p><p>
+You can assign a number to $x on one line and on the next line assign a string
+to $x; you can compare numbers and strings, strings and booleans, and so on.
+</p><p>
+PHP automatically converts values when it assigns values to a variable or
+evaluates an expression. If data types are mixed, that is, a number is compared
+to a string, a boolean is compared to a number, a string is compared to a boolean,
+PHP must decide how to handle the expression.
+</p><p>
+Most of the time, letting PHP handle the data works fine, but there are times
+when you want to force a conversion of one type to another. This is done by using
+the casting operators listed in the following table.
+</p><p>
+Casting doesn't change the value in a variable; it affects the way other
+operators interpret the value. Casting can be useful when casting strings to
+integers, arrays to objects, and so on.
+</p><p>
+Table: Casting Operators
+</p>
+<blockquote>
+<table>
+<tr>
+<td><code><u><b>
+Operator</b></u>&nbsp;</code></td>
+<td><code><u><b>
+Synonym</b></u></code></td>
+<td><code><u><b>
+Changes Data Type To</b></u></code></td>
+</tr><tr>
+<td><code>
+(int)</code></td>
+<td><code>
+(integer)</code></td>
+<td><code>
+Integer</code></td>
+</tr><tr>
+<td><code>
+(float)</code></td>
+<td><code>
+(real)</code></td>
+<td><code>
+Floating point</code></td>
+</tr><tr>
+<td><code>
+(string)</code></td>
+<td></td>
+<td><code>
+String</code></td>
+</tr><tr>
+<td><code>
+(bool)</code></td>
+<td><code>
+(boolean)&nbsp;</code></td>
+<td><code>
+Boolean</code></td>
+</tr><tr>
+<td><code>
+(array)</code></td>
+<td></td>
+<td><code>
+Array</code></td>
+</tr>
+</table>
+</blockquote>
+<p>
+Here is the format for using casting operators:
+</p><p>
+Format: <code><small>variable = (cast operator) value;</small></code>
+</p><p>
+The following are examples of casting:
+</p>
+<blockquote><code><small>
+$salary = "52000";      // Variable is assigned a string value<br>
+$salary = (float) $salary; // Value is forced to float and reassigned<br>
+</small></code></blockquote>
+<h4>
+Filename: casting.php
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Type Casting<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">aqua</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">face</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">verdana</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">+</SPAN><SPAN CLASS="syntax13">1</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN>  <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">string</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">500</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">dogs</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">number</SPAN> <SPAN CLASS="syntax18">=</SPAN> (int) <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">string</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>    <SPAN CLASS="syntax8">echo</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">The</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">value</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">in</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">\$string</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">has</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">been</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">cast</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">to</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">an</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">int</SPAN><SPAN CLASS="syntax13">:</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>        <SPAN CLASS="syntax18">,</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">number</SPAN><SPAN CLASS="syntax18">,</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN>  <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">hr</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  12:</SPAN>  <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutter">  13:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">total_seconds</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax5">1132</SPAN><SPAN CLASS="syntax18">;</SPAN> <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2">Total</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">running</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">time</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">in</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">seconds</SPAN>
+<SPAN CLASS="gutter">  14:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">minutes</SPAN> <SPAN CLASS="syntax18">=</SPAN> (int)(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">total_seconds</SPAN> <SPAN CLASS="syntax18">/</SPAN> <SPAN CLASS="syntax5">60</SPAN>)<SPAN CLASS="syntax18">;</SPAN> <SPAN CLASS="syntax1">/*</SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1">Result</SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1">of</SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1">expression</SPAN>
+<SPAN CLASS="gutterH">  15:</SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1">is</SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1">cast</SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1">to</SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1">an</SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1">integer</SPAN><SPAN CLASS="syntax1"> </SPAN><SPAN CLASS="syntax1">*/</SPAN>
+<SPAN CLASS="gutter">  16:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">seconds_left</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">total_seconds</SPAN> <SPAN CLASS="syntax18">%</SPAN> <SPAN CLASS="syntax5">60</SPAN><SPAN CLASS="syntax18">;</SPAN> <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">Modulus</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">returns</SPAN>
+<SPAN CLASS="gutter">  17:</SPAN>                                         <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">seconds</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">left</SPAN>
+<SPAN CLASS="gutter">  18:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">You</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">ran</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">for</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">minutes</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">minutes</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">and</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">seconds_left</SPAN>
+<SPAN CLASS="gutter">  19:</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">seconds\n</SPAN><SPAN CLASS="syntax13">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  20:</SPAN>  <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutter">  21:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">hr</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  22:</SPAN>  <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutter">  23:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">total</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax5">5</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  24:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">total</SPAN> <SPAN CLASS="syntax18">=</SPAN> (float) <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">total</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  25:</SPAN>    <SPAN CLASS="syntax8">echo</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">\$total</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">has</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">been</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">cast</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">to</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">float</SPAN><SPAN CLASS="syntax13">:</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">,</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">total</SPAN> <SPAN CLASS="syntax18">+</SPAN> <SPAN CLASS="syntax5">2</SPAN><SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax5">3</SPAN><SPAN CLASS="syntax18">,</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  26:</SPAN>    <SPAN CLASS="syntax8">if</SPAN>( <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">2</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">&gt;</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">100</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">dogs</SPAN><SPAN CLASS="syntax13">&quot;</SPAN>) <SPAN CLASS="syntax18">{</SPAN>print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">true</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN><SPAN CLASS="syntax18">}</SPAN>
+<SPAN CLASS="gutter">  27:</SPAN>  <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutter">  28:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  29:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+Your instructor will run the above script and discuss its output with you.
+</p>
+</li>
+<li><p>
+Concatention Operator
+</p><p>
+The process of joining strings together is called concatenation.
+The PHP string concatenation operator is a dot (.). Its operands are two strings.
+</p><p>
+It returns the concatenation of its right and left operands.
+If either operand is a number and the other is a string, PHP still concatenates
+them as strings.
+</p>
+<blockquote><code><small>
+"pop" . "corn"  // results in "popcorn"<br>
+"Route " . 66   // results in "Route 66"<br>
+</small></code></blockquote>
+<p>
+There is also a shortcut concatenation assignment operator which is used like
+the other shortcut operators (<b>.=</b>).
+</p>
+<h4>
+Filename: concat.php
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Concatenation<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">#</SPAN><SPAN CLASS="syntax13">33ff99</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">face</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">verdana</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">+</SPAN><SPAN CLASS="syntax13">1</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN>  <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">string1</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">My</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">dog</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">string2</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">has</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">fleas</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">string3</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">string1</SPAN> <SPAN CLASS="syntax18">.</SPAN> <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">string2</SPAN> <SPAN CLASS="syntax18">.</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>    <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">$string1</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">.=</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">$string2</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN>    <SPAN CLASS="syntax8">echo</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">First</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">string</SPAN><SPAN CLASS="syntax13">:</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">string1</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN>    <SPAN CLASS="syntax8">echo</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">Second</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">string</SPAN><SPAN CLASS="syntax13">:</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">string2</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  12:</SPAN>    <SPAN CLASS="syntax8">echo</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">After</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">concatenation</SPAN><SPAN CLASS="syntax13">:</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">string3</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  13:</SPAN>    <SPAN CLASS="syntax8">echo</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">Whoops</SPAN><SPAN CLASS="syntax13">!</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">Let</SPAN><SPAN CLASS="syntax13">'</SPAN><SPAN CLASS="syntax13">s</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">add</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">a</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">space</SPAN><SPAN CLASS="syntax13">:</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  14:</SPAN>    <SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">string3</SPAN> <SPAN CLASS="syntax18">=</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">string1</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">.</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN> <SPAN CLASS="syntax18">.</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">string2</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  15:</SPAN>    <SPAN CLASS="syntax8">echo</SPAN> <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">After</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">adding</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">a</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">space</SPAN><SPAN CLASS="syntax13">:</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">string3</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  16:</SPAN>  <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutter">  17:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  18:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+</div>
+</small></blockquote>
+</li>
+</ul>
+</div>
+</body>
+</html>
+

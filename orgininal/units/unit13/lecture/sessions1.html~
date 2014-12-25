@@ -1,0 +1,1053 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>Sessions</title>
+<link href="../../../css/basic.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" language="JavaScript">
+<!--
+function putSemester() {
+    var today=new Date();
+    var thisMonth=today.getMonth()+1;
+    var thisYear=today.getFullYear();
+    if(thisMonth <=6) {
+        return "Spring, " + thisYear;
+    }
+    else {
+       return "Fall, " + thisYear;
+    }
+}//-->
+</script>
+<style type="text/css">
+<!--
+    .bgStripes {
+        background-image:url(../../../images/Xstripes.gif);
+        background-attachment: fixed;
+    }
+    body {
+        background-color:white;
+    }
+    strong {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+-->
+</style>
+</head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
+<table class="bgStripes" border="0" width="100%">
+<tbody>
+<tr name="firstRow">
+<td valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+<script type="text/javascript">
+<!--
+    document.write(putSemester());
+-->
+</script>
+</span> <br>
+</td>
+<td style="text-align: center;"><span style="font-weight: bold; font-size: medium; color: darkblue;">
+PHP Web Development with MySQL
+</span> </td>
+<td align="right" valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+3 Credits</span> </td>
+</tr>
+<tr>
+<td colspan="3" style="text-align: center;"><span style="font-size: xx-small; font-weight: bold;">
+152-166</span> </td>
+</tr>
+</tbody>
+</table>
+<!--The heading for the slides --> <br>
+<table class="headTable1" border="0">
+<tbody>
+<tr>
+<td width="100"><a href="cookies.html"><img alt="" src="../../../images/btn_lArrow.gif" border="0"></a><a href="index.html"><img alt="" src="../../../images/btn_upArrow.gif" border="0"></a><a href="sessions2.html"><img alt="" src="../../../images/btn_rArrow.gif" border="0"></a></td>
+<td>PHP Session Control</td>
+</tr>
+</tbody>
+</table>
+<br>
+<div class="disp1">
+<ul class="slidesUl1">
+<li><p>
+What Is a Session?
+</p><p>
+Simply put, a session is the time that a user spends at a Web site. PHP provides
+us with a mechanism to manage sessions so that we can keep track of what a
+visitor is doing, what he or she likes, what he or she wants, and so on,
+even after the user logs off.
+</p><p>
+As with cookies, the idea is to "maintain state". Before delving into the
+details, let's use an analogy to give you an idea of how sessions work.
+</p><p>
+Imagine taking your favorite wool sweater to a dry cleaning establishment.
+You will drop off the sweater and be handed a claim ticket that will be used
+to identify the sweater when you return.
+</p><p>
+The other half of the claim ticket is pinned to your sweater with the same
+number you have on your claim ticket. Later when you come back, you will
+give your claim ticket to the attendant and he or she will use it to identify
+your sweater in the long rack of clothes.
+</p><p>
+A session works the same way!
+</p><p>
+A PHP session, like a cookie, is a way for the PHP to keep track of that
+Web site visitor even after he or she leaves or logs off.
+</p><p>
+A visitor makes a request from his or her browser to retrieve a Web page as
+follows:
+</p>
+<blockquote><code>
+http://server/homepage.php<br>
+</code></blockquote>
+</p><p>
+The server program, in this example, <b>homepage.php</b>, is a PHP program.
+PHP starts a session and sends a unique session ID number, similar to the claim
+ticket, back to the visitor's browser.
+</p><p>
+This unique ID number is a long random hexadecimal number that is used to key
+into the user's data. It can be sent via a cookie or added to all URLs of the
+pages for the site.
+</p><p>
+The actual user information is saved in a session file on the server, usually
+in a temporary directory. The session filename contains the unique ID number
+for the session.
+</p><p>
+The next time the visitor asks for the page, his or her browser hands the ID
+number back to the server, just as you hand the claim ticket to the dry cleaning
+attendant.
+</p><p>
+The server uses the session ID number to locate the file with the name that
+corresponds to the same session ID number.
+</p><p>
+The session file contains the actual session data; for example, username,
+preferences, or items in the shopping cart
+- information about the visitor that was stored the last time he or she visited
+the page.
+</p><p>
+If this is the first time the user has visited the page, his or her preferences
+will be collected and stored in the session file, to be retrieved later on.
+</p><p>
+By default, the session ID is sent in a cookie named <b>PHPSESSID</b> .
+</p><p>
+Unlike the cookies we discussed in the first part of this unit, where the user
+information was passed in a cookie, with sessions, the only data in the cookie
+is the session ID, not any other information about the user.
+</p><p>
+The user information is saved in a session file on the server so that the size
+limitation of cookies is not a factor and sensitive information is not being
+passed back and forth across the network.
+</p><p>
+If you are running Apache on Windows, this session file starts with "sess"
+followed by the session number.
+</p><p>
+The text it contains is a serialized line representing the data, the data type,
+and the number of characters saved for a session.
+</p><p>
+Because the (session) library uses different storage modules, you can keep
+the data in plain-text files, shared memory, or databases.
+</p><p>
+The exact location of data is not really important as long the performance
+of the medium is sufficient.
+</p><p>
+The following is a sample line from a session file:
+</p>
+<blockquote><code><small>
+book|s:7:"History";user|s:13:"Ellie Quigley";<br>
+</small></code></blockquote>
+<p>
+Once the user's browser has a session ID, it passes that ID back to the server
+program on every subsequent request. The session ID is disposable, so after
+some time it will expire and the information associated with it will also
+be removed.
+</p><p>
+A session might last for a few minutes or a few hours since the last request
+or it could last indefinitely. We look at various configuration options later
+in this unit.
+</p><p>
+Although cookies are the default way to pass the session ID back and forth
+between browser and server, you can also pass the session ID as GET or POST
+data in the same way as when submitting a form.
+</p><p>
+Recall that GET data is URL-encoded and attached with a "?" to the URL,
+whereas the POST data is part of the page header information.
+</p><p>
+It is also possible to send a session ID through a URL with a link within a page.
+</p></li>
+<li><p>
+Where to Store Sessions
+</p><p>
+If your site is sharing a server, it is recommended that session files for users
+should be in their own user area under the server, but not in a world writable
+directory such as <b>/tmp</b> .
+</p><p>
+If a site has a large number of users and session files, it is possible to
+store the session files in multiple levels of subdirectories.
+</p><p>
+To find out where your sessions are stored, or to change the default path,
+see <b>session.save_path</b> in the php.ini file or use PHP's
+<b>session_save_path()</b> function.
+</p><p>
+From the php.ini file:
+</p>
+<code><small>
+; session.save_path = "N;/path"<br>
+;<br>
+; where N is an integer. Instead of storing all the session files in<br>
+; /path, what this will do is use subdirectories N-levels deep, and<br>
+; store the session data in those directories. This is useful if you<br>
+; or your OS have problems with lots of files in one directory, and is<br>
+; a more efficient layout for servers that handle lots of sessions.<br>
+</small></code>
+<p>
+The session_save_path() function returns the path of the current directory
+used to save session data.
+</p><p>
+If a path is specified, the path to where data is saved will be changed for
+this session.
+</p><p>
+If this page will be linked to other pages, then the function must be called
+before starting the session in all the pages involved.
+</p><p>
+Of course, PHP will need read and write access to the new path to retrieve
+and save session data.
+</p><p>
+Format:
+</p>
+<code><small>
+string session_save_path ( [string path] )<br>
+</small></code>
+<p>
+Example:
+</p>
+<blockquote><code><small>
+session_save_path("/newpath");<br>
+echo session_save_path();<br>
+</small></code></blockquote>
+<h4>
+Filename: savePath.php
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax9">session_save_path</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">/Library/WebServer/Documents/files</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   3:</span>
+<span class="gutter">   4:</span>  <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">Your</span><span class="syntax13"> </span><span class="syntax13">session</span><span class="syntax13"> </span><span class="syntax13">files</span><span class="syntax13"> </span><span class="syntax13">are</span><span class="syntax13"> </span><span class="syntax13">stored</span><span class="syntax13"> </span><span class="syntax13">in:</span><span class="syntax13"> </span><span class="syntax13">&lt;b&gt;</span><span class="syntax13">'</span>
+<span class="gutterH">   5:</span>      <span class="syntax18">.</span> <span class="syntax9">session_save_path</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">.</span><span class="syntax13">'</span><span class="syntax13">&lt;/b&gt;&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   6:</span>  <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">handle</span> <span class="syntax18">=</span> <span class="syntax9">opendir</span><span class="syntax18">(</span><span class="syntax9">session_save_path</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   7:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;b&gt;Files:&lt;/b&gt;&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   8:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Loop</span><span class="syntax2"> </span><span class="syntax2">over</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">directory.</span>
+<span class="gutter">   9:</span>    <span class="syntax8">while</span><span class="syntax18"> (</span><span class="syntax8">FALSE</span> <span class="syntax18">!</span><span class="syntax18">=</span><span class="syntax18">=</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">file</span> <span class="syntax18">=</span> <span class="syntax9">readdir</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">handle</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutterH">  10:</span>      <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax10">$</span><span class="syntax10">file</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span>    <span class="syntax18">}</span>
+<span class="gutter">  12:</span>    <span class="syntax9">closedir</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">handle</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>  <span class="syntax18">}</span>
+<span class="gutter">  14:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+The first call to <b>session_save_path()</b> sets a directory path in which to
+save sessions. Your php.ini may not have a save path set; in which case PHP
+will use the operating systems temporary file directory.
+</p><p>
+The second call to the session_save_path() function returns the path location
+where the session files are stored.
+</p><p>
+The opendir() function opens the directory folder where the session data is
+stored and returns a handle to that directory in variable $handle.
+</p><p>
+The readdir() function retrieves the contents of the directory, and its output
+is displayed in the browser.
+</p></li>
+<li><p>
+Starting a Cookie-Based Session
+</p><p>
+A PHP session is started either explicitly with the <b>session_start()</b>
+function, or implicitly by registering a variable for the session with the
+<b>session_register()</b> function.
+</p><p>
+Typically, session_start() is called at the top of a page, and then session
+variables are registered in the superglobal <b>$_SESSION</b> array.
+</p><p>
+When PHP starts a session, it has to check first to see whether a valid session
+ID already exists for this user.
+</p><p>
+If a valid session ID does exist, PHP will go to the session file that
+corresponds to the ID number, retrieve the data from the file, and assign it
+to the superglobal $_SESSION associative array.
+The values in this array are then made available to your program.
+</p><p>
+If this is the first time the user has visited the page, PHP will create a new
+session ID, and the $_SESSION array will be empty.
+</p></li>
+<li><p>
+The session_start() Function
+</p><p>
+The <b>session_start()</b> function creates a session or resumes one that has
+already started. The session ID is passed via a cookie, via GET/POST, or in a
+link.
+</p><p>
+Each page that uses a session must start the session with the session_start()
+function. If the session ID is being sent by a cookie, then as with all cookie
+headers, the session_start() function is called before any other statements
+that send output to the browser. This function always returns TRUE.
+</p><p>
+Format
+</p>
+<blockquote><code><small>
+bool session_start ( void )<br>
+</small></code></blockquote>
+<p>
+Example:
+</p>
+<blockquote><code><small>
+session_start();
+</small></code></blockquote>
+</li>
+<li><p>
+Registering a Session
+</p><p>
+The data that is stored in the session file is created in a PHP script in the
+form of variables. The session variables can then be referenced across page
+requests during the life of a session.
+</p><p>
+These variables might represent the items placed in a shopping cart, a user's
+login and password, a user's color preference, and so on.
+</p><p>
+Although <b>session_start()</b> starts a session, it does not register session
+variables.
+</p><p>
+To create session variables, you must register the variables in the session library.
+This can be done in two ways. We address both methods next.
+</p></li>
+<li><p>
+The $_SESSION Associative Array
+</p><p>
+To register variables for the session, the preferred way is to assign values to
+the superglobal <b>$_SESSION</b> array. Superglobals are available everywhere
+in your script, even within functions.
+</p><p>
+PHP automatically registers the $_SESSION variables for you. The global 
+$_SESSION associative array is used to handle the session variables that will
+be saved on the server for the life of the session.
+</p><p>
+The key for the $_SESSION associative array is the name of the variable, and
+the value is what you are assigning to it.
+</p><p>
+To access the values in the $_SESSION associative array, you must first start
+a session and then extract the array values as you would any other associative
+array.
+</p><p>
+To unset these variables, the <b>unset()</b> function is used; for example:
+<b>unset($_SESSION['color'])</b>
+</p><p>
+You must use session_start() before using the $_SESSION array.
+</p><p>
+Example:
+</p>
+<code><small>
+$_SESSION['username'] = 'john';<br>
+$_SESSION['password'] = $_POST['passwd'];<br>
+</small></code>
+<h4>
+Filename: sessionArray.php
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax9">session_start</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   3:</span><span class="syntax17">?&gt;</span>
+<span class="gutter">   4:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Sessions<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">lavender</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  <span class="syntax17">&lt;font</span><span class="syntax17"> </span><span class="syntax17">size</span><span class="syntax18">=</span><span class="syntax17">+</span><span class="syntax17">1</span><span class="syntax17"> </span><span class="syntax17">face</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">arial</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   8:</span>  <span class="syntax17">&lt;h2</span><span class="syntax17">&gt;</span>Tracking Visitors with Sessions<span class="syntax17">&lt;/h2</span><span class="syntax17">&gt;</span>
+<span class="gutter">   9:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutterH">  10:</span>    <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax18">!</span> <span class="syntax8">isset</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  11:</span>      <span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">visitor_count</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">=</span> <span class="syntax5">0</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>    <span class="syntax18">}</span>
+<span class="gutter">  13:</span>    <span class="syntax8">else</span> <span class="syntax18">{</span>
+<span class="gutter">  14:</span>      <span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">visitor_count</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">+</span><span class="syntax18">+</span><span class="syntax18">;</span>
+<span class="gutterH">  15:</span>    <span class="syntax18">}</span>
+<span class="gutter">  16:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">You</span><span class="syntax13"> </span><span class="syntax13">are</span><span class="syntax13"> </span><span class="syntax13">visitor</span><span class="syntax13"> </span><span class="syntax13">number</span><span class="syntax13"> </span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">visitor_count</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">,</span>
+<span class="gutter">  17:</span>         <span class="syntax13">'</span><span class="syntax13">.&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  18:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">The</span><span class="syntax13"> </span><span class="syntax13">session</span><span class="syntax13"> </span><span class="syntax13">id</span><span class="syntax13"> </span><span class="syntax13">is:</span><span class="syntax13"> </span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax9">session_id</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  19:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutterH">  20:</span>  <span class="syntax17">&lt;/font</span><span class="syntax17">&gt;</span>
+<span class="gutter">  21:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  22:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+The session is started on line 2. All scripts using sessions start with the 
+<b>session_start()</b> function.
+</p><p>
+If the session variable has not been set, this is the start of a brand new
+session. A session ID will be assigned and the $_SESSION array will be
+initialized on line 11.
+</p><p>
+The key in the $_SESSION associative array is "visitor_count". The initial value
+assigned to it is 0.
+</p><p>
+When the user refreshes this page, the value of the $_SESSION is incremented
+by 1, and every time the visitor returns to this page, the count is incremented
+by 1.
+</p><p>
+The <b>session_id()</b> function returns the value of the current session ID.
+</p></li>
+<li><p>
+The session_register() Function
+</p><p>
+The traditional way to register session variables was to use the PHP
+<b>session_register()</b> function, but to use this function you must set the
+<b>register_globals</b> directive to "On" in the php.ini file, no longer the
+default setting.
+</p><p>
+If, on the other hand, you are using the session_register() function, once
+registered in the session library, these global variables will be available
+until the session ends or until the <b>session_unregister()</b> function is called.
+</p><p>
+Unlike registering session variables with the $_SESSION array, with the
+session_register() function it is not necessary to call session_start() first.
+After registering a variable, PHP will make an implicit call to session_start().
+</p><p>
+The arguments to session_register() can be strings containing the name of a
+variable or an array name. Note that this function takes the name of a variable
+as an argument, not the variable itself.
+</p><p>
+The <b>session_is_registered()</b> function can be used to check if a session
+variable has been set and <b>session_unregister()</b> to remove variables from
+the session; for example, to remove a product item from the shopping cart.
+</p><p>
+These functions should not be used if you are registering sessions with the
+$_SESSION array.
+</p><p>
+Format:
+</p>
+<code><small>
+bool session_register ( mixed name [, mixed ...] )<br>
+</small></code>
+<p>
+Example:
+</p>
+<blockquote><code><small>
+session_start();<br>
+session_register('username');<br>
+session_register('password');<br>
+</small></code></blockquote>
+</li>
+<li><p>
+Saving Arrays in a Session
+</p><p>
+When using a shopping cart, you can add multiple items to your cart,
+browse around, come back, delete some items, and go on like this until you
+submit your order.
+</p><p>
+A program that collects this data can store it in an array and save the data
+with a session. The $_SESSION array accepts simple scalar variables, but can
+also accept arrays.
+</p><p>
+The following example demonstrates how to register multiple items in a session,
+list the saved values on another page, return to the selection page, and add
+more items to the array.
+</p>
+<h4>
+Filename: session1.php - Page 1
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax9">session_start</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   3:</span>  <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax18">!</span> <span class="syntax8">isset</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">choices</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   4:</span>    <span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">choices</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">=</span> <span class="syntax8">array</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">   5:</span>  <span class="syntax18">}</span>
+<span class="gutter">   6:</span>  
+<span class="gutter">   7:</span>  <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax9">is_array</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_POST</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">books</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   8:</span>    <span class="syntax10">$</span><span class="syntax10">items</span> <span class="syntax18">=</span> <span class="syntax9">array_merge</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">choices</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">_POST</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">books</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   9:</span>    <span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">choices</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">=</span> <span class="syntax9">array_unique</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">items</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Redirect</span><span class="syntax2"> </span><span class="syntax2">to</span><span class="syntax2"> </span><span class="syntax2">listing</span><span class="syntax2"> </span><span class="syntax2">page</span>
+<span class="gutter">  11:</span>    <span class="syntax9">header</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">Location:</span><span class="syntax13"> </span><span class="syntax13">session2.php</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>  <span class="syntax18">}</span>
+<span class="gutter">  13:</span><span class="syntax17">?&gt;</span>
+<span class="gutter">  14:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  15:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Arrays and Sessions<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutter">  16:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">#</span><span class="syntax14">6666ff</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">  17:</span>  <span class="syntax17">&lt;font</span><span class="syntax17"> </span><span class="syntax17">face</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">verdana</span><span class="syntax14">&quot;</span><span class="syntax17"> </span><span class="syntax17">&gt;</span>
+<span class="gutter">  18:</span>  <span class="syntax17">&lt;div</span><span class="syntax17"> </span><span class="syntax17">align</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">center</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">  19:</span>  <span class="syntax17">&lt;form</span><span class="syntax17"> </span><span class="syntax17">action</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax17">&lt;?php</span> <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax10">_SERVER</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">PHP_SELF</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">;</span> <span class="syntax17">?&gt;</span><span class="syntax14">&quot;</span><span class="syntax17"> </span><span class="syntax17">method</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">POST</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  20:</span>   <span class="syntax17">&lt;p</span><span class="syntax17">&gt;</span>
+<span class="gutter">  21:</span>   Book Categories<span class="syntax17">&lt;br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  22:</span>   <span class="syntax17">&lt;select</span><span class="syntax17"> </span><span class="syntax17">name</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">books</span><span class="syntax14">[</span><span class="syntax14">]</span><span class="syntax14">&quot;</span><span class="syntax17"> </span><span class="syntax17">multiple</span><span class="syntax18">=</span><span class="syntax17">multiple</span><span class="syntax17"> </span><span class="syntax17">size</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">8</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">  23:</span>    <span class="syntax17">&lt;option</span><span class="syntax17">&gt;</span>Art<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  24:</span>    <span class="syntax17">&lt;option</span><span class="syntax17">&gt;</span>Computer<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  25:</span>    <span class="syntax17">&lt;option</span><span class="syntax17">&gt;</span>Engineering<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  26:</span>    <span class="syntax17">&lt;option</span><span class="syntax17">&gt;</span>Fiction<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  27:</span>    <span class="syntax17">&lt;option</span><span class="syntax17">&gt;</span>Language<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  28:</span>    <span class="syntax17">&lt;option</span><span class="syntax17">&gt;</span>Non Fiction<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  29:</span>    <span class="syntax17">&lt;option</span><span class="syntax17">&gt;</span>Poetry<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  30:</span>    <span class="syntax17">&lt;option</span><span class="syntax17">&gt;</span>Travel<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  31:</span>   <span class="syntax17">&lt;/select</span><span class="syntax17">&gt;</span>
+<span class="gutter">  32:</span>   <span class="syntax17">&lt;/p</span><span class="syntax17">&gt;</span>
+<span class="gutter">  33:</span>   <span class="syntax17">&lt;input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax17">submit</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">Select</span><span class="syntax14"> </span><span class="syntax14">category</span><span class="syntax14">&quot;</span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  34:</span>   <span class="syntax17">&lt;/p</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  35:</span>  <span class="syntax17">&lt;/form</span><span class="syntax17">&gt;</span>
+<span class="gutter">  36:</span>  <span class="syntax17">&lt;/div</span><span class="syntax17">&gt;</span>
+<span class="gutter">  37:</span>  <span class="syntax17">&lt;/font</span><span class="syntax17">&gt;</span>
+<span class="gutter">  38:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  39:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+A session for this page is started. All scripts that use sessions must call the
+session_start() function.
+</p><p>
+If this is the first time the visitor has viewed this page, the session variables
+will not be set. On line 4 the array() function makes sure the <b>$_SESSION['choices']</b>
+array is created with no values.
+</p><p>
+If the form has been submitted, <b>$_POST['books']</b> will contain a list of
+the books selected from the menu in the form.
+</p><p>
+The <b>array_merge()</b> function joins the values in $_SESSION['choices'] and the
+books that were listed in the form, $_POST['books'].
+</p><p>
+If this is the first time the user has visited the page, the $_SESSION[ ] array
+will be empty, but it will exist because it was set to the empty array on line 4.
+</p><p>
+If this is not the first visit and the $_SESSION['choices'] array has values
+from a previous session, the <b>array_unique()</b> function will remove any
+duplicates that might occur after the merge on line 8.
+</p><p>
+The visitor is redirected to the listing page, to see his or her currently
+saved selection of books.
+</p><p>
+This is a self-processing form. Once the visitor has filled out the form,
+the PHP code on this page will process it and then redirect the user to the
+listing page, session2.php.
+</p><p>
+The HTML select list is named "books[ ]", the name of the array PHP will use
+to collect the visitor's book choices.
+</p>
+<h4>
+Filename: session2.php - Page 2
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax9">session_start</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   3:</span><span class="syntax17">?&gt;</span>
+<span class="gutter">   4:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Listing User's Book Categories<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   8:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">#</span><span class="syntax14">6666FF</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   9:</span>  <span class="syntax17">&lt;font</span><span class="syntax17"> </span><span class="syntax17">face</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">verdana</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  10:</span>  <span class="syntax17">&lt;table</span><span class="syntax17"> </span><span class="syntax17">width</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">25</span><span class="syntax14">%</span><span class="syntax14">&quot;</span><span class="syntax17"> </span><span class="syntax17">border</span><span class="syntax18">=</span><span class="syntax13">'</span><span class="syntax13">1</span><span class="syntax13">'</span><span class="syntax17">&gt;</span>
+<span class="gutter">  11:</span>   <span class="syntax17">&lt;caption</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;b</span><span class="syntax17">&gt;</span>Selected Book Categories<span class="syntax17">&lt;/b</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;/caption</span><span class="syntax17">&gt;</span>
+<span class="gutter">  12:</span>   <span class="syntax17">&lt;col</span><span class="syntax17"> </span><span class="syntax17">span</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">1</span><span class="syntax14">&quot;</span><span class="syntax17"> </span><span class="syntax17">width</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">100</span><span class="syntax14">&quot;</span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  13:</span>   <span class="syntax17">&lt;?php</span>
+<span class="gutter">  14:</span>     <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax9">is_array</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">choices</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutterH">  15:</span>       <span class="syntax8">foreach</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">choices</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax8">as</span> <span class="syntax10">$</span><span class="syntax10">book</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  16:</span>   <span class="syntax17">?&gt;</span>
+<span class="gutter">  17:</span>       <span class="syntax17">&lt;tr</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">#</span><span class="syntax14">ffffff</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;td</span><span class="syntax17"> </span><span class="syntax17">&gt;</span><span class="syntax17">&lt;?php</span> <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax10">book</span><span class="syntax18">;</span> <span class="syntax17">?&gt;</span><span class="syntax17">&lt;/td</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;/tr</span><span class="syntax17">&gt;</span>
+<span class="gutter">  18:</span>   <span class="syntax17">&lt;?php</span>
+<span class="gutter">  19:</span>       <span class="syntax18">}</span> <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">End</span><span class="syntax2"> </span><span class="syntax2">foreach</span><span class="syntax2"> </span><span class="syntax2">block</span>
+<span class="gutterH">  20:</span>     <span class="syntax18">}</span> <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">End</span><span class="syntax2"> </span><span class="syntax2">if</span><span class="syntax2"> </span><span class="syntax2">block</span>
+<span class="gutter">  21:</span>     <span class="syntax8">else</span> <span class="syntax18">{</span> 
+<span class="gutter">  22:</span>       <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;p&gt;You</span><span class="syntax13"> </span><span class="syntax13">have</span><span class="syntax13"> </span><span class="syntax13">not</span><span class="syntax13"> </span><span class="syntax13">selected</span><span class="syntax13"> </span><span class="syntax13">any</span><span class="syntax13"> </span><span class="syntax13">book</span><span class="syntax13"> </span><span class="syntax13">categories</span><span class="syntax13"> </span><span class="syntax13">yet&lt;/p&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  23:</span>     <span class="syntax18">}</span>
+<span class="gutter">  24:</span>   <span class="syntax17">?&gt;</span>
+<span class="gutterH">  25:</span>  <span class="syntax17">&lt;/table</span><span class="syntax17">&gt;</span>
+<span class="gutter">  26:</span>  <span class="syntax17">&lt;p</span><span class="syntax17">&gt;</span>
+<span class="gutter">  27:</span>  <span class="syntax17">&lt;a</span><span class="syntax17"> </span><span class="syntax17">href</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">session1</span><span class="syntax14">.</span><span class="syntax14">php</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>Click here to return to category page<span class="syntax17">&lt;/a</span><span class="syntax17">&gt;</span>
+<span class="gutter">  28:</span>  <span class="syntax17">&lt;/p</span><span class="syntax17">&gt;</span>
+<span class="gutter">  29:</span>  <span class="syntax17">&lt;/font</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  30:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  31:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+A session is started for this page on line 2.
+</p><p>
+If $_SESSION['choices'] has values, then the user has selected books in a
+previous session, and the statements in the if block will be executed.
+</p><p>
+The foreach loop is used to iterate over the array and list each of the books
+in the $_SESSION['choices'] associative array.
+</p><p>
+The books selected by the user are displayed in the HTML table, lines 10-25.
+</p><p>
+The link on line 27 is used to send the user back to the first page.
+</p><p>
+After selecting another book item from the Book Categories in the original form,
+the new selection is saved by the session and redisplayed on this page.
+</p></li>
+<li><p>
+Session Cookie Functions and Configuration Options
+</p><p>
+Some developers feel that it is better to enforce the use of cookies rather
+than rely on passing sensitive session information through URLs.
+</p><p>
+Because the default method of passing session IDs back and forth from
+browser to server is through cookies, PHP provides specific cookie functions
+to handle the cookie-based sessions.
+</p><p>
+To set the cookie parameters use the <b>session_set_cookie_params()</b> function,
+similar to the way we used the setcookie() function when working strictly
+with cookies, not sessions.
+</p><p>
+The effect of this function lasts only for the duration of the script.
+Thus, you need to call session_set_cookie_params() for every request and before
+session_start() is called.
+</p><p>
+Format:
+</p>
+<code><small><pre>
+void session_set_cookie_params ( int lifetime [, string path [,
+                                 string domain [, bool secure]]] )
+</pre></small></code>
+<p>
+Example:
+</p>
+<code><small>
+$expire = 60*60*24*60 + time(); // Two months<br>
+session_set_cookie_params($expire,'/','abc.com', 1);<br>
+</small></code>
+<p>
+Not only are there a number of functions to handle cookies, but you can also
+set specific directives in the php.ini file that affect the cookies for all
+of your scripts.
+</p><p>
+The <b>ini_set()</b> option can be used in a script to change the value of a
+configuration option just for the duration of the session.
+</p><p>
+For example, the following header file enforces the use of cookies so that the
+user must have cookies enabled in his or her browser:
+</p>
+<code><small>
+ini_set('session.use_cookies', 1);<br>
+ini_set('session.use_only_cookies', 1);<br>
+session_start();<br>
+</small></code>
+<p>
+Table: Cookie Configuration Directives (in the php.ini File)
+</p>
+<table>
+<tr>
+<td><code><b><u>
+Directive</u></b></code></td>
+<td><code><b><u>
+What It Does</u></b></code></td>
+</tr><tr>
+<td><code>
+session.cookie_lifetime</code></td>
+<td><code>
+Specifies the lifetime of the cookie, sent to the browser, in seconds.
+The value 0 means "until the browser is closed." Defaults to 0.</code></td>
+</tr><tr>
+<td><code>
+session.cookie_path</code></td>
+<td><code>
+Specifies path to set in session_cookie. Defaults to /.</code></td>
+</tr><tr>
+<td><code>
+session.cookie_domain</code></td>
+<td><code>
+Specifies the domain to set in session_cookie. Defaults to the host name of the
+server that generated the cookie.</code></td>
+</tr><tr>
+<td><code>
+session.cookie_secure</code></td>
+<td><code>
+Specifies whether cookies should only be sent over secure connections.
+Defaults to off.</code></td>
+</tr><tr>
+<td><code>
+session.use_cookies</code></td>
+<td><code>
+Specifies whether the module will use cookies to store the session ID on the
+client side. Defaults to 1 (enabled).</code></td>
+</tr><tr>
+<td><code>
+session.use_only_cookies&nbsp;</code></td>
+<td><code>
+Specifies whether the module will only use cookies to store the session ID on
+the client side. Enabling this setting prevents attacks involved in passing
+session IDs in URLs.</code></td>
+</tr>
+</table>
+</li>
+<li><p>
+Setting Preferences with Sessions
+</p><p>
+Consider the following example. One page lets the user select a favorite
+background color.
+Using the session mechanism, when the user goes to another page,
+the color is displayed in the new page.
+</p>
+<h4>
+Filename: color1.php - Page 1
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax8">isset</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_GET</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">color</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   3:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Start</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">new</span><span class="syntax2"> </span><span class="syntax2">session</span>
+<span class="gutter">   4:</span>    <span class="syntax9">session_start</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">   5:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Set</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">favorite</span><span class="syntax2"> </span><span class="syntax2">color</span><span class="syntax2"> </span><span class="syntax2">for</span><span class="syntax2"> </span><span class="syntax2">this</span><span class="syntax2"> </span><span class="syntax2">user</span>
+<span class="gutter">   6:</span>    <span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">favorite_color</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">_GET</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">color</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">;</span>
+<span class="gutter">   7:</span>  <span class="syntax18">}</span>
+<span class="gutter">   8:</span><span class="syntax17">?&gt;</span>
+<span class="gutter">   9:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  10:</span> <span class="syntax17">&lt;body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  11:</span>  <span class="syntax17">&lt;h1</span><span class="syntax17">&gt;</span> Select Favorite Color<span class="syntax17">&lt;/h1</span><span class="syntax17">&gt;</span>
+<span class="gutter">  12:</span>  <span class="syntax17">&lt;form</span><span class="syntax17"> </span><span class="syntax17">action</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax17">&lt;?php</span> <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax18">{</span>_SERVER<span class="syntax18">}</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">PHP_SELF</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">;</span> <span class="syntax17">?&gt;</span><span class="syntax14">&quot;</span><span class="syntax17"> </span><span class="syntax17">method</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">GET</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">  13:</span>   <span class="syntax17">&lt;select</span><span class="syntax17"> </span><span class="syntax17">name</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">color</span><span class="syntax14">&quot;</span><span class="syntax17"> </span><span class="syntax17">&gt;</span>
+<span class="gutter">  14:</span>    <span class="syntax17">&lt;option</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">&quot;</span><span class="syntax17"> </span><span class="syntax17">selected</span><span class="syntax17">&gt;</span>Please select<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  15:</span>    <span class="syntax17">&lt;option</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">white</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>White<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  16:</span>    <span class="syntax17">&lt;option</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">blue</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>Blue<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  17:</span>    <span class="syntax17">&lt;option</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">red</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>Red<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  18:</span>    <span class="syntax17">&lt;option</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">yellow</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>Yellow<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  19:</span>    <span class="syntax17">&lt;option</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">gray</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>Gray<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  20:</span>   <span class="syntax17">&lt;/select</span><span class="syntax17">&gt;</span>
+<span class="gutter">  21:</span>   <span class="syntax17">&lt;input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">submit</span><span class="syntax14">&quot;</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">Set</span><span class="syntax14"> </span><span class="syntax14">color</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">  22:</span>  <span class="syntax17">&lt;/form</span><span class="syntax17">&gt;</span>
+<span class="gutter">  23:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  24:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+Because this form is submitting to itself, first we check whether the $_GET
+array contains the color variable at all.
+</p><p>
+If there is no color variable, there is no point in processing the form data.
+The first time the user visits the page, there will be no color variable set
+because the form has not yet been submitted.
+</p><p>
+Onced we know that the color is set in the $_GET array, we can start the session.
+We use session_start() function to do so. This function will create a brand new
+session for this user, or reinstantiate an existing one if the session ID is
+present in the cookie or POST/GET data.
+</p><p>
+Next we extract the color the user selected from $_GET and record it in the
+user's $_SESSION associate array.
+</p><p>
+Notice that $_GET is maintained for each request to PHP whereas $_SESSION is
+maintained for each user.
+</p><p>
+The 'favorite_color' is an arbitrary key that we use to identify this variable
+in the $_SESSION array. The 'color' key corresponds to the input field in the
+form on the same page with the name "color".
+</p><p>
+Again, notice that the form action is submitting to itself. We use the property
+of the $_SERVER variable where the name of the current page is stored in this
+array under the key PHP_SELF.
+</p>
+<h4>
+Filename: color2.php - Page 2
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax9">session_start</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   3:</span>  <span class="syntax10">$</span><span class="syntax10">favorite_color</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">favorite_color</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">;</span>
+<span class="gutter">   4:</span><span class="syntax17">?&gt;</span>
+<span class="gutterH">   5:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax17">&lt;?php</span> <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax10">favorite_color</span><span class="syntax18">;</span> <span class="syntax17">?&gt;</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  <span class="syntax17">&lt;h1</span><span class="syntax17">&gt;</span>Your Favorite Color<span class="syntax17">&lt;/h1</span><span class="syntax17">&gt;</span>
+<span class="gutter">   8:</span>  Your favorite color is <span class="syntax17">&lt;b</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;?php</span> <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax10">favorite_color</span><span class="syntax18">;</span> <span class="syntax17">?&gt;</span><span class="syntax17">&lt;/b</span><span class="syntax17">&gt;</span>.
+<span class="gutter">   9:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  10:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+This page will retrieve the user's favorite color from the session.
+</p><p>
+The first step is to start the session using the session_start() function.
+In this case, session_start() will retrieve the $_SESSION array for this user
+based on the current session ID (created on the previous page).
+</p><p>
+Once the session starts, the global $_SESSION array corresponding to this
+user can be accessed. The key–value pair of the $_SESSION array consists of
+"favorite_color", the key, and the color, "yellow", that was selected from the
+previous page.
+</p><p>
+If the previous page had not been viewed, $_SESSION would not have any session
+values.
+</p><p>
+The value of $favorite_color is assigned to the &lt;body&gt; tag of this page
+to customize the background color for this user.
+</p><p>
+Line 8 prints the favorite color just to confirm that the selected color was
+passed to this session.
+</p><p>
+Notice that in this example the only connection between the page that sets the
+color and the page that displays the color is the session.
+</p><p>
+Unlike HTML forms in which one page collects the information and passes it to
+another page via a GET/POST request, the session pages need not be connected.
+</p><p>
+In other words, we can set the color, then surf anywhere else and once we come
+back, the color should still be set.
+</p><p>
+Note that this "stickiness" is valid only as long as the session is valid.
+A typical session might expire within an hour or two, or never.
+</p><p>
+This is configured in the php.ini file and is up to the server setting to
+manage it.
+</p><p>
+Also, if the user restarts the computer or the Web browser, his or her session
+ID might be lost and the next visit to these pages will create a brand-new session.
+</p></li>
+<li><p>
+Remembering Users and Preferences over Multiple Pages
+</p><p>
+The following example consists of three pages: the HTML form, a file that
+handles the form data and starts a session, and links to another page where
+the session variables are used.
+</p><p>
+The example demonstrates a session using cookies to pass the form data from
+page to page.
+</p>
+<h4>
+Filename: books1.html - The HTML Form
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;</span><span class="syntax17">html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;</span><span class="syntax17">head</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;</span><span class="syntax17">title</span><span class="syntax17">&gt;</span>Sessions - Page 1<span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">title</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span> <span class="syntax17">&lt;</span><span class="syntax17">body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">lavender</span><span class="syntax13">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span>  <span class="syntax17">&lt;</span><span class="syntax17">font</span><span class="syntax17"> </span><span class="syntax17">face</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">verdana</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">size</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">+1</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span>  <span class="syntax17">&lt;</span><span class="syntax17">H1</span><span class="syntax17">&gt;</span>Book Categories<span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">H1</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;</span><span class="syntax17">form</span><span class="syntax17"> </span><span class="syntax17">action</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">books2.php</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">method</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">POST</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>   Your name:
+<span class="gutter">   8:</span>   <span class="syntax17">&lt;</span><span class="syntax17">br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">   9:</span>   <span class="syntax17">&lt;</span><span class="syntax17">input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">text</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">name</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">user</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">size</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">50</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  10:</span>   <span class="syntax17">&lt;</span><span class="syntax17">p</span><span class="syntax17">&gt;</span>
+<span class="gutter">  11:</span>   Select a book category:
+<span class="gutter">  12:</span>   <span class="syntax17">&lt;</span><span class="syntax17">br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  13:</span>   <span class="syntax17">&lt;</span><span class="syntax17">input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">radio</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">name</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">book</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">Art</span><span class="syntax13">&quot;</span><span class="syntax17">&gt;</span>Art
+<span class="gutter">  14:</span>   <span class="syntax17">&lt;</span><span class="syntax17">br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  15:</span>   <span class="syntax17">&lt;</span><span class="syntax17">input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">radio</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">name</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">book</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">Computer</span><span class="syntax13">&quot;</span><span class="syntax17">&gt;</span>Computer
+<span class="gutter">  16:</span>   <span class="syntax17">&lt;</span><span class="syntax17">br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  17:</span>   <span class="syntax17">&lt;</span><span class="syntax17">input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">radio</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">name</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">book</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">Drama</span><span class="syntax13">&quot;</span><span class="syntax17">&gt;</span>Drama
+<span class="gutter">  18:</span>   <span class="syntax17">&lt;</span><span class="syntax17">br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  19:</span>   <span class="syntax17">&lt;</span><span class="syntax17">input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">radio</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">name</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">book</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">History</span><span class="syntax13">&quot;</span><span class="syntax17">&gt;</span>History
+<span class="gutterH">  20:</span>   <span class="syntax17">&lt;</span><span class="syntax17">br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  21:</span>   <span class="syntax17">&lt;</span><span class="syntax17">input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">radio</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">name</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">book</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">Poetry</span><span class="syntax13">&quot;</span><span class="syntax17">&gt;</span>Poetry
+<span class="gutter">  22:</span>   <span class="syntax17">&lt;</span><span class="syntax17">br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  23:</span>   <span class="syntax17">&lt;</span><span class="syntax17">input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">radio</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">name</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">book</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">Sports</span><span class="syntax13">&quot;</span><span class="syntax17">&gt;</span>Sports
+<span class="gutter">  24:</span>   <span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">p</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;</span><span class="syntax17">p</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  25:</span>   <span class="syntax17">&lt;</span><span class="syntax17">input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">submit</span><span class="syntax13">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">  26:</span>   <span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">p</span><span class="syntax17">&gt;</span>
+<span class="gutter">  27:</span>  <span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">form</span><span class="syntax17">&gt;</span>
+<span class="gutter">  28:</span>  <span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">font</span><span class="syntax17">&gt;</span>
+<span class="gutter">  29:</span> <span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">body</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  30:</span><span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+This is the first page of a series of three pages. Once this form is submitted,
+the file named books2.php will be executed.
+</p>
+<h4>
+Filename: books2.php - Starting the Session
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax9">session_start</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   3:</span><span class="syntax17">?&gt;</span>
+<span class="gutter">   4:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Sessions - Page 2<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">lavender</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  <span class="syntax17">&lt;font</span><span class="syntax17"> </span><span class="syntax17">face</span><span class="syntax18">=</span><span class="syntax13">'</span><span class="syntax13">arial</span><span class="syntax13">'</span><span class="syntax17"> </span><span class="syntax17">size</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">+</span><span class="syntax14">1</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   8:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">   9:</span>    <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax18">!</span><span class="syntax18"> (</span><span class="syntax8">empty</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_POST</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">book</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">)</span> <span class="syntax18">or</span> <span class="syntax8">empty</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_POST</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">user</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutterH">  10:</span>      <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Create</span><span class="syntax2"> </span><span class="syntax2">short</span><span class="syntax2"> </span><span class="syntax2">variables</span>
+<span class="gutter">  11:</span>      <span class="syntax10">$</span><span class="syntax10">book</span> <span class="syntax18">=</span> <span class="syntax9">trim</span><span class="syntax18">(</span><span class="syntax9">stripslashes</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_POST</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">book</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>      <span class="syntax10">$</span><span class="syntax10">user</span> <span class="syntax18">=</span> <span class="syntax9">trim</span><span class="syntax18">(</span><span class="syntax9">stripslashes</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_POST</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">user</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>      
+<span class="gutter">  14:</span>      <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax8">isset</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">user</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutterH">  15:</span>        <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;h2&gt;Welcome</span><span class="syntax13"> </span><span class="syntax13">back,</span><span class="syntax13"> </span><span class="syntax13">'</span>
+<span class="gutter">  16:</span>            <span class="syntax18">.</span> <span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">user</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">.</span><span class="syntax13">'</span><span class="syntax13">!&lt;/h2&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  17:</span>        <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;h2&gt;You</span><span class="syntax13"> </span><span class="syntax13">recently</span><span class="syntax13"> </span><span class="syntax13">visited</span><span class="syntax13"> </span><span class="syntax13">our</span><span class="syntax13"> </span><span class="syntax13">'</span>
+<span class="gutter">  18:</span>            <span class="syntax18">.</span> <span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">book</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">.</span><span class="syntax13">'</span><span class="syntax13"> </span><span class="syntax13">store.&lt;/h2&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  19:</span>      <span class="syntax18">}</span>
+<span class="gutterH">  20:</span>      <span class="syntax8">else</span> <span class="syntax18">{</span>
+<span class="gutter">  21:</span>        <span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">book</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">book</span><span class="syntax18">;</span>
+<span class="gutter">  22:</span>        <span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">user</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">user</span><span class="syntax18">;</span>
+<span class="gutter">  23:</span>        <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">h2</span><span class="syntax14">&gt;</span><span class="syntax14">Welcome</span><span class="syntax14">,</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">user</span><span class="syntax14">!</span><span class="syntax14">&lt;</span><span class="syntax14">/</span><span class="syntax14">h2</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  24:</span>      <span class="syntax18">}</span>
+<span class="gutterH">  25:</span>    <span class="syntax18">}</span>
+<span class="gutter">  26:</span>    <span class="syntax8">else</span> <span class="syntax18">{</span>
+<span class="gutter">  27:</span>      <span class="syntax8">die</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">Form</span><span class="syntax13"> </span><span class="syntax13">incomplete&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  28:</span>    <span class="syntax18">}</span>
+<span class="gutter">  29:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">The</span><span class="syntax13"> </span><span class="syntax13">session</span><span class="syntax13"> </span><span class="syntax13">id</span><span class="syntax13"> </span><span class="syntax13">is:</span><span class="syntax13"> </span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax9">session_id</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutterH">  30:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">You</span><span class="syntax13"> </span><span class="syntax13">have</span><span class="syntax13"> </span><span class="syntax13">chosen</span><span class="syntax13"> </span><span class="syntax13">to</span><span class="syntax13"> </span><span class="syntax13">enter</span><span class="syntax13"> </span><span class="syntax13">the</span><span class="syntax13"> </span><span class="syntax13">&lt;b&gt;</span><span class="syntax13">'</span>
+<span class="gutter">  31:</span>        <span class="syntax18">.</span> <span class="syntax10">$</span><span class="syntax10">book</span> <span class="syntax18">.</span><span class="syntax13">'</span><span class="syntax13">&lt;/b&gt;</span><span class="syntax13"> </span><span class="syntax13">section.&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  32:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Create</span><span class="syntax2"> </span><span class="syntax2">a</span><span class="syntax2"> </span><span class="syntax2">variable</span><span class="syntax2"> </span><span class="syntax2">with</span><span class="syntax2"> </span><span class="syntax2">book</span><span class="syntax2"> </span><span class="syntax2">category</span><span class="syntax2"> </span><span class="syntax2">page</span><span class="syntax2"> </span><span class="syntax2">name</span>
+<span class="gutter">  33:</span>    <span class="syntax10">$</span><span class="syntax10">section</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">book</span> <span class="syntax18">.</span><span class="syntax13">'</span><span class="syntax13">_page.php</span><span class="syntax13">'</span><span class="syntax18">;</span> 
+<span class="gutter">  34:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutterH">  35:</span>  To browse the <span class="syntax17">&lt;?php</span> <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax10">book</span><span class="syntax18">;</span> <span class="syntax17">?&gt;</span> Section:
+<span class="gutter">  36:</span>  <span class="syntax17">&lt;a</span><span class="syntax17"> </span><span class="syntax17">href</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax17">&lt;?php</span> <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax10">section</span><span class="syntax18">;</span> <span class="syntax17">?&gt;</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>Click here<span class="syntax17">&lt;/a</span><span class="syntax17">&gt;</span>
+<span class="gutter">  37:</span>  <span class="syntax17">&lt;br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  38:</span>  <span class="syntax17">&lt;/font</span><span class="syntax17">&gt;</span>
+<span class="gutter">  39:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  40:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+If the user has filled out the form properly both the 'book' and 'user' fields
+will have values and the statements in the if block will be executed.
+</p><p>
+Any slashes or whitespace in the form data are removed. Variables are created
+from the $_POST[ ] array.
+</p><p>
+If the visitor has already been to this page, then the session variables will
+be available, and the statements in the if block will be executed.
+</p><p>
+If this is the first time the user has visited this page, the statements in the
+else block will be executed.
+</p><p>
+The session variables are assigned the values that came from the form on lines 11-12.
+</p><p>
+The name of the selected book and the string "_page.php" are concatenated together
+as a single string and assigned to the variable $section, which will be the next
+page where the user will be directed when he or she clicks the link on line 36.
+</p></li>
+<li><p>
+Naming Sessions
+</p><p>
+The session name refers to the session ID stored in both cookies and URLs.
+Instead of using the default name of your session, <b>PHPSESSID</b>, you can
+give your session a different name.
+</p><p>
+However, remember that if you change the name of the session, every page that
+uses your application must call <b>session_name()</b> with the new name before
+calling session_start().
+</p><p>
+The session_name() function will return the current session name if given no
+arguments, or reset the session name when the first argument is a string.
+See also the <b>session.name</b> configuration directive in the php.ini file.
+</p><p>
+Format:
+</p>
+<blockquote><code><small>
+string session_name ( [string name] )<br>
+</small></code></blockquote>
+<p>
+Example:
+</p>
+<code><small>
+// Only alphanumeric characters are allowed in the name<br>
+// (at least one letter)<br>
+session_name('MyKewlSite');<br>
+session_start();<br>
+</small></code>
+<h4>
+Filename: named1.php - Start the session on this page
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax9">ob_start</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   3:</span>  <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax8">isset</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_GET</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">color</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   4:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Start</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">new</span><span class="syntax2"> </span><span class="syntax2">session</span><span class="syntax2"> </span><span class="syntax2">with</span><span class="syntax2"> </span><span class="syntax2">a</span><span class="syntax2"> </span><span class="syntax2">new</span><span class="syntax2"> </span><span class="syntax2">name</span>
+<span class="gutterH">   5:</span>    <span class="syntax8">print</span> <span class="syntax13">'</span><span class="syntax13">The</span><span class="syntax13"> </span><span class="syntax13">previous</span><span class="syntax13"> </span><span class="syntax13">session</span><span class="syntax13"> </span><span class="syntax13">name</span><span class="syntax13"> </span><span class="syntax13">was:</span><span class="syntax13"> </span><span class="syntax13">'</span>
+<span class="gutter">   6:</span>         <span class="syntax18">.</span> <span class="syntax9">session_name</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">.</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   7:</span>    <span class="syntax9">session_name</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">ColorSite</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   8:</span>    <span class="syntax8">print</span> <span class="syntax13">'</span><span class="syntax13">The</span><span class="syntax13"> </span><span class="syntax13">new</span><span class="syntax13"> </span><span class="syntax13">session</span><span class="syntax13"> </span><span class="syntax13">name</span><span class="syntax13"> </span><span class="syntax13">is:</span><span class="syntax13"> </span><span class="syntax13">'</span>
+<span class="gutter">   9:</span>         <span class="syntax18">.</span> <span class="syntax9">session_name</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">.</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>    <span class="syntax9">session_start</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span>
+<span class="gutter">  12:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Set</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">favorite</span><span class="syntax2"> </span><span class="syntax2">color</span><span class="syntax2"> </span><span class="syntax2">for</span><span class="syntax2"> </span><span class="syntax2">this</span><span class="syntax2"> </span><span class="syntax2">user</span>
+<span class="gutter">  13:</span>    <span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">favorite_color</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">_GET</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">color</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>  <span class="syntax18">}</span>
+<span class="gutterH">  15:</span><span class="syntax17">?&gt;</span>
+<span class="gutter">  16:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">  17:</span> <span class="syntax17">&lt;body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  18:</span>  <span class="syntax17">&lt;h1</span><span class="syntax17">&gt;</span> Select Favorite Color<span class="syntax17">&lt;/h1</span><span class="syntax17">&gt;</span>
+<span class="gutter">  19:</span>  <span class="syntax17">&lt;form</span><span class="syntax17"> </span><span class="syntax17">action</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax17">&lt;?php</span> <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax18">{</span>_SERVER<span class="syntax18">}</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">PHP_SELF</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">;</span> <span class="syntax17">?&gt;</span><span class="syntax14">&quot;</span><span class="syntax17"> </span><span class="syntax17">method</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">GET</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  20:</span>   <span class="syntax17">&lt;select</span><span class="syntax17"> </span><span class="syntax17">name</span><span class="syntax18">=</span><span class="syntax17">color</span><span class="syntax17">&gt;</span>
+<span class="gutter">  21:</span>    <span class="syntax17">&lt;option</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">&quot;</span><span class="syntax17"> </span><span class="syntax17">selected</span><span class="syntax17">&gt;</span>Please select<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  22:</span>    <span class="syntax17">&lt;option</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">white</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>White<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  23:</span>    <span class="syntax17">&lt;option</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">blue</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>Blue<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  24:</span>    <span class="syntax17">&lt;option</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">red</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>Red<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  25:</span>    <span class="syntax17">&lt;option</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">yellow</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>Yellow<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  26:</span>    <span class="syntax17">&lt;option</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">gray</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>Gray<span class="syntax17">&lt;/option</span><span class="syntax17">&gt;</span>
+<span class="gutter">  27:</span>   <span class="syntax17">&lt;/select</span><span class="syntax17">&gt;</span>
+<span class="gutter">  28:</span>   <span class="syntax17">&lt;input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">submit</span><span class="syntax14">&quot;</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">Set</span><span class="syntax14"> </span><span class="syntax14">color</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">  29:</span>  <span class="syntax17">&lt;/form</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  30:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  31:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<h4>
+Filename: named2.php - This page uses the new name
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax9">session_name</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">ColorSite</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   3:</span>  <span class="syntax9">session_start</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   4:</span>  <span class="syntax10">$</span><span class="syntax10">favorite_color</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">favorite_color</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">;</span>
+<span class="gutterH">   5:</span>  <span class="syntax9">print_r</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_SESSION</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   6:</span><span class="syntax17">?&gt;</span>
+<span class="gutter">   7:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   8:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax17">&lt;?php</span> <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax10">favorite_color</span><span class="syntax18">;</span> <span class="syntax17">?&gt;</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   9:</span>  <span class="syntax17">&lt;h1</span><span class="syntax17">&gt;</span>Your Favorite Color<span class="syntax17">&lt;/h1</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  10:</span>  <span class="syntax17">&lt;font</span><span class="syntax17"> </span><span class="syntax17">size</span><span class="syntax18">=</span><span class="syntax13">'</span><span class="syntax13">+</span><span class="syntax13">2</span><span class="syntax13">'</span><span class="syntax17">&gt;</span>
+<span class="gutter">  11:</span>  Your favorite color is <span class="syntax17">&lt;b</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;?php</span> <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax10">favorite_color</span><span class="syntax18">;</span> <span class="syntax17">?&gt;</span><span class="syntax17">&lt;/b</span><span class="syntax17">&gt;</span>.
+<span class="gutter">  12:</span>  <span class="syntax17">&lt;/font</span><span class="syntax17">&gt;</span>
+<span class="gutter">  13:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  14:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  15:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">  16:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Flush</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">buffer</span><span class="syntax2"> </span><span class="syntax2">and</span><span class="syntax2"> </span><span class="syntax2">end</span><span class="syntax2"> </span><span class="syntax2">output</span><span class="syntax2"> </span><span class="syntax2">buffering</span>
+<span class="gutter">  17:</span>  <span class="syntax9">ob_end_flush</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  18:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+Before changing the name of the session, the session_name() function returns
+the name of the current session on line 6.
+</p><p>
+The session_name() function will change the name of the session to "ColorSite".
+Now any page using this session will also need to call session_name('ColorSite')
+before starting a new session.
+</p><p>
+A session is started for the first page on line 10. The session's name is
+"ColorSite".
+</p><p>
+The first page is a self-processing PHP script. It will present the form and
+then process it.
+</p><p>
+To use the session ID from the previous session, the second page needs to be
+able to refer to the correct session by its name, "ColorSite".
+A new session is started after the session name is changed.
+</p>
+</li>
+</ul>
+</div>
+</body>
+</html>

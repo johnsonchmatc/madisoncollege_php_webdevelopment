@@ -1,0 +1,273 @@
+h2. The Building Blocks: Data Types and Literals
+
+h3. Data Types
+
+* A computer program can do many things, including perform calculations, sort names, prepare phone lists, display images, play chess, etc. To do anything, however, the program works with the data that is given to it.
+* Data types specify what kind of data, such as numbers and letters of the alphabet, can be stored and manipulated by a program.
+* PHP supports a number of fundamental basic data types, such as integers, floats, and strings. Basic data types are the simplest building blocks of a program.
+* They are called scalars and can be assigned a single literal value such as a number, 5.7, or a string of characters, such as "hello", a date and time, or a boolean (true/false).
+* PHP also supports composite data types, such as arrays and objects. Composite data types represent a collection of data, rather than a single value.
+* PHP and other languages commonly store data in variables. Examples of PHP variables are: $num = 5 or $name = "John" where variables $num and $name are assigned an integer and a string, respectively.
+* Variables hold values that can change throughout the program, whereas once a constant is defined, its value does not change. PHP_VERSION and PHP_OS are examples of predefined PHP constants.
+* PHP supports four core data types:
+** Integer
+** Float (also called double)
+** String
+** Boolean
+* In addition to the four core data types, there are four other special types:
+** Null
+** Array
+** Object
+** Resource
+
+h3. Numeric Literals
+
+* PHP supports both integers and floating-point numbers.
+** *Integers* — Integers are whole numbers and do not contain a decimal point; for example: 123 and –6 Integers can be expressed in decimal (base 10), octal (base 8), and hexadecimal (base 16), and have either positive or negative values.
+** *Floating-point numbers* — Floating-point numbers, also called doubles or reals, are fractional numbers such as: 123.56 or –2.5 They must contain a decimal point or an exponent specifier, such as: 1.3e–2 The letter "e" can be either upper or lowercase.
+* PHP numbers can be very large (the size depends on your platform), but a precision of 14 decimal digits is a common value or (~1.8e308).
+* Table: Samples of numeric data types
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Number*|{background:#ccc}.*Data Type*|
+|12345    |integer                        |
+|23.45    |float                          |
+|.234E–2  |float in scientific notation   |
+|.234e+3  |float in scientific notation   |
+|0x456fff |integer in base 16, hexadecimal|
+|0x456FFF |integer in base 16, hexadecimal|
+|0777     |integer in base 8, octal       |
+
+* Here's a sample PHP script that displays numbers. Your instructor will show you it's output.
+<br /><pre>
+Filename: numbers.php
+
+<html>
+<head><title>Printing Numbers</title>
+</head>
+<body bgcolor="lightblue">
+<font face = "arial" size = '+1'>
+<?php
+  print "The positive integer is <em><b>" . 5623
+       ."</b></em><br />";
+  print "The negative integer is <em><b>" . -22 ."</b></em><br />";
+  print "The floating point number is <em><b>" . 15.3
+       ."</b></em><br />";
+  print "The number in scientfic notation is <em><b> " . 5e3
+       ."</b></em><br />";
+  print "\tThe string is: <em><b>I can't help you!</em></b><br />";
+?>
+</body>
+</html>
+</pre>
+
+h3. String Literals and Quoting
+
+* We introduce strings here but will cover them more comprehensively later in the course.
+* String literals are a row of characters enclosed in either double or single quotes. The quotes must be matched.
+* If the string starts with a single quote, it must end with a matching single quote; likewise if it starts with a double quote, it must end with a double quote.
+* If a string of characters is enclosed in single quotes, the characters are treated literally (each of the characters represents itself). We can say the single quotes are the democratic quotes: All characters are treated equally.
+* Double quotes do not treat all characters equally. If a string is enclosed in double quotes, most of the characters represent themselves, but dollar signs and backslashes have a special meaning as shown below.
+* Single quoted strings may contain double quotes, and double quoted strings may contain single quotes:
+** "This is a string"
+** 'This is another string'
+** "This is also 'a string'"
+** 'This is "a string"'
+* *Note*: PHP recognizes editors that use straight quotes, such as vi or Notepad, but not editors that automatically transform straight quotes into curly quotes (smart quotes).
+* An empty set of quotes is called the null string. If a number is enclosed in quotes, it is considered a string; for example, "5" is a string, whereas 5 is a number.
+* Strings are called constants or literals. The string value "hello" is called a string constant or literal.
+* Strings can contain escape sequences (a single character preceded by a backslash).
+* Escape sequences cause a character to behave in a certain way; for example, a "\t" represents a tab and "\n" represents a newline.
+* The backslash is also used for "quoting" a single character having a special meaning in PHP so that it will not be interpolated but simply displayed.
+* For example, "\$5.00" where the dollar sign in PHP is used to represent variables rather than money. "\$5.00" could also be written as '$5.00' because single quotes protect all characters from interpolation.
+* Here documents, also called here-docs, provide a way to create a block of text that simplifies displaying strings containing lots of single quotes, double quotes, and variables.
+<br /><pre>
+Filename: quotes.php
+
+<html>
+<head><title>Quotes</title></head>
+<body bgcolor="lightblue"><font size='+1'>
+<?php
+  $name = "Nancy"; // Setting a PHP variable
+  print "<ol>";
+  print "<li> $name is my friend.</li>";   // Double quotes
+  print '<li> $name is my neighbor.</li>'; // Single quotes
+  print "<li> I can't go with you.</li>";  // Nested quotes
+  print "<li> She cried, \"Help!\"</li>";  // Escaping quotes
+  print "<li> I need \$5.00.</li>"; // The backslash
+                                    // quotes one character
+  print "<li> $name needs ". '$5.00.</li>'; // Alternate quotes
+  print "</ol>";
+?>
+</body>
+</html>
+</pre>
+
+h3. The Here Document -- Special Kind of Quoting
+
+* Here documents are a kind of quoting popular in a number of languages, such as JavaScript, Perl, Unix Shell scripts, and so on.
+* Here documents, also called here-docs, allow you to quote a large block of text within your script without using multiple print statements and quotes.
+* The entire block of text is treated as though it is surrounded by double quotes.
+* This can be useful if you have a large block of HTML within your PHP script interspersed with variables, quotes, and escape sequences.
+* Rules for a Here Document:
+## The user-defined delimiter word starts and terminates the here document. Text is inserted between the delimiters.
+<br /><br />The delimiter can contain letters, numbers, and the underscore character. The first character must be a letter or an underscore.
+<br /><br />By convention, the delimiter should be in all uppercase letters to make it stand out from other words in your script.
+<br /><br />The delimiter is preceded by three @"<"@ characters; for example: @<<<DELIMITER@
+<br /><br /><pre>print <<<HERE_DOC_DELIMITER
+   <text here>
+   ...
+   < more text>
+   ...
+HERE_DOC_DELIMITER
+</pre>
+## The delimiter cannot be surrounded by any spaces, comments, or other text. The final delimiter can optionally be terminated with a semicolon and must be on a line by itself.
+## All variable and escape sequences will be interpreted within the here document.
+
+h3. Filename: heredoc.php
+
+<pre><?php
+  $bgcolor="darkblue";
+  $tablecolor = "yellow";
+  print <<< MY_BOUNDARY
+<html><head><title>heredoc</title></head>
+ <body bgcolor="$bgcolor">
+  <table border="1" bgcolor=$tablecolor>
+   <tr><th>Author</th<th>Book</th></tr>
+   <tr>
+    <td>Marcel Proust</td>
+    <td>Remembrance of Things Past</td>
+   </tr>
+   <tr>
+    <td>Charles Dickens</td>
+    <td>Tale of Two Cities</td>
+   </tr>
+  </table>
+ </body>
+</html>
+MY_BOUNDARY;
+?>
+</pre>
+
+
+h3. Escape Sequences
+
+* Escape sequences consist of a backslash followed by a single character.
+* When enclosed in double quotes, the backslash causes the interpretation of the next character to "escape" from its normal ASCII code and to represent something else.
+* To display the escape sequences in your browser, use the HTML &lt;pre&gt; tag. Otherwise, the escape sequences placed within your PHP script will not be interpolated.
+* Table: Escape Sequences
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Escape Sequence*|{background:#ccc}.*What It Represents*|
+|      \'       |Single quotation mark                |
+|      \"       |Double quotation                     |
+|      \t       |Tab                                  |
+|      \n       |Newline                              |
+|      \r       |Return/line feed                     |
+|      \$       |A literal dollar sign                |
+|      \\       |Backslash                            |
+|      \70      |Represents the octal value           |
+|      \x05     |Represents the hexadecimal character |
+
+<pre>
+Filename: escape.php
+
+<html>
+ <head><title>Escape Sequences</title></head>
+ <body bgcolor="orange">
+  <b>
+  <pre>
+   <?php
+     print "\t\tTwo tabs are \\t\\t, and two newlines are \\n\\n.\n\n";
+     print "\tThe escaped octal numbers represent: ASCII \101 \102 \103 \n";
+     print "\tThe escaped hexadecimal numbers represent: ASCII \x25 \x26 \n";
+     print '\tWith single quotes, backslash sequences are not interpolated.\n';
+  ?>
+  </pre>
+  </b>
+ </body>
+</html>
+</pre>
+
+
+h3. Boolean Literals
+
+* Boolean literals (introduced in PHP 4) are logical values that have only one of two values, true or false, both case insensitive.
+* You can think of the values as yes or no, on or off, or 1 or 0. They are used to test whether a condition is true or false.
+* When using numeric comparison and equality operators, the value true evaluates to 1 and false evaluates to the empty string.
+<br /><pre>
+$answer1 = true;
+</pre>
+* or
+<br /><pre>
+if ($answer2 == false) { do something; }
+</pre>
+<br /><pre>
+Filename: boolean.php
+
+<?php
+  if ( 0 == False && "" == FALSE) {
+    print "zero and null are <em>false.</em><br /> ";
+  }
+  if ( 1 == True && "abc" == true) {
+    print "1 and \"abc\" are both <em>true.</em><br /> ";
+  }
+?></pre>
+* Your instructor will demonstrate the use of Booleans using the above script.
+
+
+h3. Special Data Types
+
+* *NULL* - NULL represents "no value," meaning "nothing," not even an empty string or zero.
+* It is a type of NULL. An uninitialized variable contains the value NULL. A variable can be assigned the value NULL, and if a variable has been unset, it is considered to be NULL.
+* *Resource* - A resource is a special variable, holding a reference to an external resource such as a database object or file handler.
+* Resources are created and used by special functions. File and database resources are defined by the PHP interpreter and are only accessible by functions provided by the interpreter.
+
+h3. The gettype() Function
+
+* The *gettype()* built-in function returns a string to identify the data type of its argument. The argument might be a variable, string, keyword, and so on.
+* You can use the *gettype()* function to check whether or not a variable has been defined because if there is no value associated with the variable, the gettype() function returns NULL.
+* Strings returned from the gettype() function include the following:
+** "boolean" (since PHP 4)
+** "integer"
+** "double" (for historical reasons "double" is returned in case of a float, and not simply "float")
+** "string"
+** "array"
+** "object"
+** "resource" (since PHP 4)
+** "NULL" (since PHP 4)
+* Format: string gettype ( mixed var )
+* Examples:
+<br /><pre>$type=gettype(54.6);   // Returns "float"
+print gettype("yes");  // Returns and prints "string"
+</pre>
+<pre>Filename: gettype.php
+
+<html>
+ <head>
+  <title>Getting the Data Type with gettype()</title>
+ </head>
+ <body bgcolor="lightblue">
+  <font face = "arial" size = '+1'>
+  <pre>
+  <?php
+    print "\nType of <b>5623</b> is: ". gettype(5623) .".\n";
+    print "Type of <b>-22</b> is: ". gettype(-22) .".\n";
+    print "Type of <b>15.3</b> is: ". gettype(15.3) .".\n";
+    print "Type of <b>5e3</b> is: ". gettype(5e3) .".\n";
+    print "Type of <b>\"Hi\"</b> is: ". gettype("Hi") .".\n";
+    print "Type of <b>true</b> is: ". gettype(true) .".\n";
+    print "Type of <b>false</b> is: ". gettype(false) .".\n";
+    print "Type of <b>null</b> is: ". gettype(null) .".\n";
+    print "Type of <b>\$nothing</b> is: ". gettype($nothing) .".\n";
+  ?>
+  </pre>
+ </body>
+</html>
+</pre>
+
+<br />
+
+---
+
+[[Unit Two => 152-166 Unit Two Index]]

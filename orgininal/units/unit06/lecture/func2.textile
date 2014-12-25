@@ -1,0 +1,664 @@
+h2. Writing Functions - Additional Features
+
+
+
+h3. Return Values
+
+* After taking a detour from the main road, it is now time to return. The return statement in a function allows you to send a value back to the caller or to exit the function before it reaches the end.
+* Normally if a return call happens before a function ends, it is based on some condition that was met or not met.
+* Single or multiple values, as well as references, can be returned from a function.
+
+h3. Returning a Single Value
+
+* In the following example, the value of a simple scalar variable is returned from a function and assigned to a variable on the receiving end.
+* The function is called on the right-hand side of the equal sign, and the value returned is stored in the variable on the left-hand side.
+* Filename: *average.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax10">$</span><span class="syntax10">grades</span> <span class="syntax18">=</span> <span class="syntax8">array</span><span class="syntax18">(</span><span class="syntax5">40</span><span class="syntax18">,</span> <span class="syntax5">90</span><span class="syntax18">,</span> <span class="syntax5">89</span><span class="syntax18">,</span> <span class="syntax5">93</span><span class="syntax18">,</span> <span class="syntax5">75</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   3:</span>  <span class="syntax10">$</span><span class="syntax10">result</span> <span class="syntax18">=</span> <span class="syntax6">average</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">grades</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   4:</span>  <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax14">The</span><span class="syntax14"> </span><span class="syntax14">average</span><span class="syntax14"> </span><span class="syntax14">grade</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14">:</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">.</span> <span class="syntax10">$</span><span class="syntax10">result</span> <span class="syntax18">.</span><span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">   5:</span>  
+<span class="gutter">   6:</span>  <span class="syntax8">function</span> <span class="syntax6">average</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">scores</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   7:</span>    <span class="syntax10">$</span><span class="syntax10">sum</span> <span class="syntax18">=</span> <span class="syntax5">0</span><span class="syntax18">;</span>
+<span class="gutter">   8:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Find</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">size</span><span class="syntax2"> </span><span class="syntax2">of</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">array</span>
+<span class="gutter">   9:</span>    <span class="syntax10">$</span><span class="syntax10">size</span> <span class="syntax18">=</span> <span class="syntax9">count</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">scores</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>    <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">size</span> <span class="syntax18">=</span><span class="syntax18">=</span> <span class="syntax5">0</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  11:</span>      <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">Empty</span><span class="syntax14"> </span><span class="syntax14">parameter</span><span class="syntax14"> </span><span class="syntax14">list</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>      <span class="syntax8">exit</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>    <span class="syntax18">}</span>
+<span class="gutter">  14:</span>    <span class="syntax8">for</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">i</span><span class="syntax18">=</span><span class="syntax5">0</span><span class="syntax18">;</span> <span class="syntax10">$</span><span class="syntax10">i</span><span class="syntax18">&lt;</span><span class="syntax10">$</span><span class="syntax10">size</span><span class="syntax18">;</span> <span class="syntax10">$</span><span class="syntax10">i</span><span class="syntax18">+</span><span class="syntax18">+</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutterH">  15:</span>      <span class="syntax10">$</span><span class="syntax10">sum</span> <span class="syntax18">+</span><span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">scores</span><span class="syntax18">[</span><span class="syntax10">$</span><span class="syntax10">i</span><span class="syntax18">]</span><span class="syntax18">;</span>
+<span class="gutter">  16:</span>    <span class="syntax18">}</span>
+<span class="gutter">  17:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Return</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">average</span>
+<span class="gutter">  18:</span>    <span class="syntax8">return</span> <span class="syntax10">$</span><span class="syntax10">sum</span> <span class="syntax18">/</span> <span class="syntax10">$</span><span class="syntax10">size</span><span class="syntax18">;</span>
+<span class="gutter">  19:</span>  <span class="syntax18">}</span>
+<span class="gutterH">  20:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+* The user-defined function *@average()@* is on the right-hand side of the equal sign, causing it to be called before an assignment can be made to *@$result@*.
+* The function has one argument, the array, *@$grades@*. Whatever is returned from the function will be assigned to *@$result@*.
+* On the next line that result is displayed in the browser.
+* The function named average is defined with one parameter, an array of numbers.
+* The built-in *@count()@* function determines the number of elements in the array that was passed to the function.
+* If the function received no parameters, the exit statement will cause the function to quit here and exit the script. This statement prevents further execution of the remaining statements in the function.
+* The for loop is used to iterate through the array of scores accumulating the sum of the scores. The size of the array determines when the loop ends.
+* The expression *@$sum@* / *@$size@* is evaluated and its result is returned to where the function was called from, and that value will be assigned to *@$result@*.
+
+h3. Conditional Returns
+
+* If what is returned from a function is based on some condition, you can have multiple return statements in a function.
+* The return value can be a boolean TRUE or FALSE as we have already seen in a number of the PHP's built-in functions, or a value returned based on a test condition. Consider the following example in which there are three return statements.
+* Filename: *manyReturns.html* (The HTML file)
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;</span><span class="syntax17">html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;</span><span class="syntax17">head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;</span><span class="syntax17">title</span><span class="syntax17">&gt;</span>What time is it?<span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;</span><span class="syntax17">body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">silver</span><span class="syntax13">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;</span><span class="syntax17">div</span><span class="syntax17"> </span><span class="syntax17">align</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">center</span><span class="syntax13">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  <span class="syntax17">&lt;</span><span class="syntax17">form</span><span class="syntax17"> </span><span class="syntax17">action</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">manyReturns.php</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">method</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">post</span><span class="syntax13">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   8:</span>   Enter the number of hours since midnight<span class="syntax17">&lt;</span><span class="syntax17">br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">   9:</span>   <span class="syntax17">&lt;</span><span class="syntax17">input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">text</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">size</span><span class="syntax18">=</span><span class="syntax13">'</span><span class="syntax13">3</span><span class="syntax13">'</span><span class="syntax17"> </span><span class="syntax17">name</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">time</span><span class="syntax13">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  10:</span>   <span class="syntax17">&lt;</span><span class="syntax17">br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;</span><span class="syntax17">br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  11:</span>   <span class="syntax17">&lt;</span><span class="syntax17">input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">submit</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">Get</span><span class="syntax13"> </span><span class="syntax13">the</span><span class="syntax13"> </span><span class="syntax13">time!</span><span class="syntax13">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">  12:</span>   <span class="syntax17">&lt;</span><span class="syntax17">p</span><span class="syntax17">&gt;</span>
+<span class="gutter">  13:</span>   <span class="syntax17">&lt;</span><span class="syntax17">input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">reset</span><span class="syntax13">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">  14:</span>  <span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">form</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  15:</span>  <span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">div</span><span class="syntax17">&gt;</span>
+<span class="gutter">  16:</span> <span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  17:</span><span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* Filename: *manyReturns.php* (The PHP file)
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Conditional Return<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">silver</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;div</span><span class="syntax17"> </span><span class="syntax17">align</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">center</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  <span class="syntax17">&lt;font</span><span class="syntax17"> </span><span class="syntax17">size</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">+</span><span class="syntax14">1</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   8:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">   9:</span>    <span class="syntax8">function</span> <span class="syntax6">clock_time</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">total_hours</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutterH">  10:</span>      <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">total_hours</span> <span class="syntax18">&lt;</span> <span class="syntax5">0</span> <span class="syntax18">|</span><span class="syntax18">|</span> <span class="syntax10">$</span><span class="syntax10">total_hours</span> <span class="syntax18">&gt;</span> <span class="syntax5">23</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  11:</span>        <span class="syntax8">return</span> <span class="syntax14">&quot;</span><span class="syntax14">Invalid</span><span class="syntax14"> </span><span class="syntax14">input</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>      <span class="syntax18">}</span>
+<span class="gutter">  13:</span>      <span class="syntax10">$</span><span class="syntax10">hours</span> <span class="syntax18">=</span><span class="syntax18"> (</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">total_hours</span> <span class="syntax18">-</span> <span class="syntax5">1</span><span class="syntax18">)</span> <span class="syntax18">%</span> <span class="syntax5">12</span><span class="syntax18">)</span> <span class="syntax18">+</span> <span class="syntax5">1</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>      <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">total_hours</span> <span class="syntax18">&gt;</span><span class="syntax18">=</span> <span class="syntax5">12</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutterH">  15:</span>        <span class="syntax8">return</span> <span class="syntax14">&quot;</span><span class="syntax14">The</span><span class="syntax14"> </span><span class="syntax14">time</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">hours</span><span class="syntax14"> </span><span class="syntax14">PM</span><span class="syntax14">.</span><span class="syntax14">\n</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  16:</span>      <span class="syntax18">}</span>
+<span class="gutter">  17:</span>      <span class="syntax8">else</span> <span class="syntax18">{</span>
+<span class="gutter">  18:</span>        <span class="syntax8">return</span> <span class="syntax14">&quot;</span><span class="syntax14">The</span><span class="syntax14"> </span><span class="syntax14">time</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">hours</span><span class="syntax14"> </span><span class="syntax14">AM</span><span class="syntax14">.</span><span class="syntax14">\n</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  19:</span>      <span class="syntax18">}</span>
+<span class="gutterH">  20:</span>    <span class="syntax18">}</span>
+<span class="gutter">  21:</span>    
+<span class="gutter">  22:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">If</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">user</span><span class="syntax2"> </span><span class="syntax2">filled</span><span class="syntax2"> </span><span class="syntax2">in</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">text</span><span class="syntax2"> </span><span class="syntax2">field,</span><span class="syntax2"> </span><span class="syntax2">enter</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">block</span>
+<span class="gutter">  23:</span>    <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">_REQUEST</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">time</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  24:</span>      <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Remove</span><span class="syntax2"> </span><span class="syntax2">any</span><span class="syntax2"> </span><span class="syntax2">leading/trail</span><span class="syntax2"> </span><span class="syntax2">whitespace</span>
+<span class="gutterH">  25:</span>      <span class="syntax10">$</span><span class="syntax10">num_hours</span><span class="syntax18">=</span><span class="syntax9">trim</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">_REQUEST</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">time</span><span class="syntax13">'</span><span class="syntax18">]</span><span class="syntax18">)</span><span class="syntax18">;</span>  
+<span class="gutter">  26:</span>      <span class="syntax8">print</span> <span class="syntax6">clock_time</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">num_hours</span><span class="syntax18">)</span><span class="syntax18">;</span> <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Call</span><span class="syntax2"> </span><span class="syntax2">clock_time</span>
+<span class="gutter">  27:</span>    <span class="syntax18">}</span>
+<span class="gutter">  28:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  29:</span>  <span class="syntax17">&lt;/font</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  30:</span>  <span class="syntax17">&lt;/div</span><span class="syntax17">&gt;</span>
+<span class="gutter">  31:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  32:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* The HTML file will display an HTML form with a text box, named time. When the user presses the submit button, the form data will be sent to the PHP script manyReturns.php .
+* The function *@clock_time()@* is declared in our PHP script. It takes one argument and returns a string containing the current hour in AM/PM notation.
+* There are 3 return statements in the function. Each returns a string to be printed by the main script.
+
+h3. Returning Multiple Values
+
+* Sometimes you might want to return multiple values from a function.
+* For example, you have opened a file or database, and want to define a function to retrieve information by reading lines from a file or fetching rows from a database.
+* The function will return a list of the items that were retrieved, such as a product, unit number, price, quantity, and so on.
+* PHP allows you to return not only single values, but arrays and associative arrays. The following example uses a simple function to square all the values in an array and return the modified array.
+* Note: You must return the array, not its individual elements. For example: *@return($n[0], $n[1], $n[2], $n[3]);@* would be wrong.
+* Filename: *arrayReturn.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax10">$</span><span class="syntax10">numbers</span> <span class="syntax18">=</span> <span class="syntax8">array</span><span class="syntax18">(</span><span class="syntax5">1</span><span class="syntax18">,</span><span class="syntax5">2</span><span class="syntax18">,</span><span class="syntax5">3</span><span class="syntax18">,</span><span class="syntax5">4</span><span class="syntax18">,</span><span class="syntax5">5</span><span class="syntax18">,</span><span class="syntax5">6</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   3:</span>  <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">pre</span><span class="syntax14">&gt;</span><span class="syntax14">Before</span><span class="syntax14">:</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">   4:</span>  <span class="syntax9">print_r</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">numbers</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">   5:</span>  
+<span class="gutter">   6:</span>  <span class="syntax10">$</span><span class="syntax10">new_numbers</span> <span class="syntax18">=</span> <span class="syntax6">square</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">numbers</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   7:</span>  <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">After</span><span class="syntax14">:</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">   8:</span>  <span class="syntax9">print_r</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">new_numbers</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   9:</span>  <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">/</span><span class="syntax14">pre</span><span class="syntax14">&gt;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>  
+<span class="gutter">  11:</span>  <span class="syntax8">function</span> <span class="syntax6">square</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">n</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  12:</span>    <span class="syntax8">for</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">i</span><span class="syntax18">=</span><span class="syntax5">0</span><span class="syntax18">;</span> <span class="syntax10">$</span><span class="syntax10">i</span><span class="syntax18">&lt;</span><span class="syntax9">count</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">n</span><span class="syntax18">)</span><span class="syntax18">;</span> <span class="syntax10">$</span><span class="syntax10">i</span><span class="syntax18">+</span><span class="syntax18">+</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  13:</span>      <span class="syntax10">$</span><span class="syntax10">n</span><span class="syntax18">[</span><span class="syntax10">$</span><span class="syntax10">i</span><span class="syntax18">]</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">n</span><span class="syntax18">[</span><span class="syntax10">$</span><span class="syntax10">i</span><span class="syntax18">]</span> <span class="syntax18">&#42;</span> <span class="syntax10">$</span><span class="syntax10">n</span><span class="syntax18">[</span><span class="syntax10">$</span><span class="syntax10">i</span><span class="syntax18">]</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>    <span class="syntax18">}</span>
+<span class="gutterH">  15:</span>    <span class="syntax8">return</span> <span class="syntax10">$</span><span class="syntax10">n</span><span class="syntax18">;</span> <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Return</span><span class="syntax2"> </span><span class="syntax2">an</span><span class="syntax2"> </span><span class="syntax2">array</span>
+<span class="gutter">  16:</span>  <span class="syntax18">}</span>
+<span class="gutter">  17:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+* A numeric array of integers is defined, and passed to the function *@square()@* .
+* The function squares each of the numbers passed in the parameter list, and returns the array *@$n@* to the caller.
+* The array is displayed before and after its values were squared.
+* Consider the next example. We have not discussed how PHP interacts with the MYSQL database, but you can overlook the details and see that the function *@get_info()@* returns a multidimensional array resulting from a database query.
+* Filename: *dbReturn.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Returning a List<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">lavender</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;font</span><span class="syntax17"> </span><span class="syntax17">size</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">+</span><span class="syntax14">1</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  <span class="syntax17">&lt;h2</span><span class="syntax17">&gt;</span>Function Returns an Array of Hashes<span class="syntax17">&lt;/h2</span><span class="syntax17">&gt;</span>
+<span class="gutter">   8:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">   9:</span>    <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax14">Opening</span><span class="syntax14"> </span><span class="syntax14">a</span><span class="syntax14"> </span><span class="syntax14">MySQL</span><span class="syntax14"> </span><span class="syntax14">connection</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>    <span class="syntax10">$</span><span class="syntax10">connection</span> <span class="syntax18">=</span> <span class="syntax9">mysql_connect</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">itins3.matcmadison.edu</span><span class="syntax13">'</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">astudent</span><span class="syntax13">'</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">astudent</span><span class="syntax13">'</span><span class="syntax18">)</span>
+<span class="gutter">  11:</span>      <span class="syntax18">or</span> <span class="syntax8">die</span><span class="syntax18"> (</span><span class="syntax14">&quot;</span><span class="syntax14">Couldn</span><span class="syntax14">'</span><span class="syntax14">t</span><span class="syntax14"> </span><span class="syntax14">open</span><span class="syntax14"> </span><span class="syntax14">connection</span><span class="syntax14"> </span><span class="syntax14">to</span><span class="syntax14"> </span><span class="syntax14">class</span><span class="syntax14"> </span><span class="syntax14">server</span><span class="syntax14">&quot;</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>    <span class="syntax10">$</span><span class="syntax10">result</span> <span class="syntax18">=</span> <span class="syntax9">mysql_select_db</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">winestore</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>    <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">result</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  14:</span>      <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">Database</span><span class="syntax14"> </span><span class="syntax14">\&quot;winestore\&quot;</span><span class="syntax14"> </span><span class="syntax14">selected</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  15:</span>    <span class="syntax18">}</span>
+<span class="gutter">  16:</span>    
+<span class="gutter">  17:</span>    <span class="syntax8">function</span> <span class="syntax6">get_info</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  18:</span>      <span class="syntax10">$</span><span class="syntax10">record</span> <span class="syntax18">=</span> <span class="syntax8">array</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  19:</span>      <span class="syntax10">$</span><span class="syntax10">result_set</span> <span class="syntax18">=</span> <span class="syntax9">mysql_query</span><span class="syntax18">(</span><span class="syntax14">&quot;</span><span class="syntax14">SELECT</span><span class="syntax14"> </span><span class="syntax14">&#42;</span><span class="syntax14"> </span><span class="syntax14">FROM</span><span class="syntax14"> </span><span class="syntax14">winery</span><span class="syntax14">&quot;</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  20:</span>      <span class="syntax8">while</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">row</span> <span class="syntax18">=</span> <span class="syntax9">mysql_fetch_assoc</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">result_set</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  21:</span>        <span class="syntax9">array_push</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">record</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">row</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  22:</span>      <span class="syntax18">}</span>
+<span class="gutter">  23:</span>      <span class="syntax8">return</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">record</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  24:</span>    <span class="syntax18">}</span>
+<span class="gutterH">  25:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  26:</span>  <span class="syntax17">&lt;br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  27:</span>  <span class="syntax17">&lt;b</span><span class="syntax17">&gt;</span>
+<span class="gutter">  28:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">  29:</span>    <span class="syntax10">$</span><span class="syntax10">company_records</span> <span class="syntax18">=</span> <span class="syntax6">get_info</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  30:</span>    <span class="syntax8">foreach</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">company_records</span> <span class="syntax8">as</span> <span class="syntax10">$</span><span class="syntax10">key</span> <span class="syntax18">=</span><span class="syntax18">&gt;</span> <span class="syntax10">$</span><span class="syntax10">value</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  31:</span>      <span class="syntax8">foreach</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">value</span> <span class="syntax8">as</span> <span class="syntax10">$</span><span class="syntax10">field_key</span> <span class="syntax18">=</span><span class="syntax18">&gt;</span> <span class="syntax10">$</span><span class="syntax10">val</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  32:</span>        <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax10">$</span><span class="syntax10">field_key</span><span class="syntax14"> </span><span class="syntax14">=</span><span class="syntax14">&gt;</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">val</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  33:</span>      <span class="syntax18">}</span>
+<span class="gutter">  34:</span>      <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">hr</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  35:</span>    <span class="syntax18">}</span>
+<span class="gutter">  36:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  37:</span>  <span class="syntax17">&lt;/b</span><span class="syntax17">&gt;</span>
+<span class="gutter">  38:</span>  <span class="syntax17">&lt;/font</span><span class="syntax17">&gt;</span>
+<span class="gutter">  39:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  40:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* The PHP *@mysql_connect()@* function opens up a connection to the MYSQL server and returns a link to the server so that we can access a database.
+* The *@mysql_select_db()@* function selects a database named winestore is opened. A resource data type holds a special handler to the database connection created when the database connection is made.
+* The function *@get_info()@* is defined to retrieve all the records from the winery table and return them to the caller.
+* The *@mysql_query()@* function sends a query to the currently active database and returns a reference to the data it selected; that is, all of the records in table winery.
+* The *@mysql_fetch_assoc()@* function returns an associative array that corresponds to the fetched row and moves the internal data pointer ahead to the next row.
+* A set of records from the winery table are returned to the caller as an array of associative arrays.
+
+h3. Using Callback Functions
+
+* A callback function is one that is not directly invoked in the program. Instead it is invoked by another function.
+* What that means is that one function takes another function, called the "callback" function, as its argument.
+* Callback functions are often used to perform some arbitrary task on each item in a list of items. One function traverses the list, and the other provides the code that performs a task that will be performed on each item.
+* PHP provides a number of array functions that utilize "callbacks". Some of these functions are: *@preg_replace()@*, *@array_filter()@*, *@array_map()@*
+* Callback functions can be more than simple functions. They can also be object methods including static class methods.
+* A PHP function is simply passed by its name as a string. You can pass any built-in or user-defined function with the exception of: *@array()@*, *@echo()@*, *@empty()@*, *@eval()@*, *@exit()@*, *@isset()@*, *@list()@*, *@print()@*, and *@unset()@*.
+
+h3. The *@array_map()@* Function
+
+* The following example uses PHP's *@array_map()@* function to demonstrate the use of a callback function.
+* The *@array_map()@* function returns an array containing all the elements of the original array after applying the callback function to each element.
+* The number of parameters that the callback function accepts should match the number of arrays passed to *@array_map()@*.
+* Format:
+<br /><pre>
+array array_map ( callback callback, array arr1 [, array ...] )
+</pre>
+* Example:
+<br /><pre>
+// User-defined callback function
+function square($n) {
+ return $n * $n;
+}
+$numbers=array(1,4,6,8);
+$squared_list = array_map("square","$numbers");
+</pre>
+* Filename: *arrayMap.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Callback</span><span class="syntax2"> </span><span class="syntax2">function</span>
+<span class="gutter">   3:</span>  <span class="syntax8">function</span> <span class="syntax6">salestax</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">price</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   4:</span>    <span class="syntax10">$</span><span class="syntax10">tax</span> <span class="syntax18">=</span> <span class="syntax5">1</span><span class="syntax18">.</span><span class="syntax5">15</span><span class="syntax18">;</span>
+<span class="gutterH">   5:</span>    <span class="syntax8">return</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">price</span> <span class="syntax18">&#42;</span> <span class="syntax10">$</span><span class="syntax10">tax</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   6:</span>  <span class="syntax18">}</span>
+<span class="gutter">   7:</span>  <span class="syntax10">$</span><span class="syntax10">before_prices</span> <span class="syntax18">=</span> <span class="syntax8">array</span><span class="syntax18">(</span><span class="syntax5">1</span><span class="syntax18">.</span><span class="syntax5">50</span><span class="syntax18">,</span> <span class="syntax5">3</span><span class="syntax18">.</span><span class="syntax5">55</span><span class="syntax18">,</span> <span class="syntax5">4</span><span class="syntax18">.</span><span class="syntax5">75</span><span class="syntax18">,</span> <span class="syntax5">6</span><span class="syntax18">.</span><span class="syntax5">00</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   8:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">array_map</span>
+<span class="gutter">   9:</span>  <span class="syntax10">$</span><span class="syntax10">after_prices</span> <span class="syntax18">=</span> <span class="syntax9">array_map</span><span class="syntax18">(</span><span class="syntax14">&quot;</span><span class="syntax14">salestax</span><span class="syntax14">&quot;</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">before_prices</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>  <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">b</span><span class="syntax14">&gt;</span><span class="syntax14">Before</span><span class="syntax14"> </span><span class="syntax14">map</span><span class="syntax14">:</span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span>  <span class="syntax8">foreach</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">before_prices</span> <span class="syntax8">as</span> <span class="syntax10">$</span><span class="syntax10">value</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  12:</span>    <span class="syntax9">printf</span><span class="syntax18">(</span><span class="syntax14">&quot;</span><span class="syntax14">\$</span><span class="syntax14">%</span><span class="syntax14">.</span><span class="syntax14">2f</span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">value</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>  <span class="syntax18">}</span>
+<span class="gutter">  14:</span>  <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">\n</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  15:</span>  <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax14">After</span><span class="syntax14"> </span><span class="syntax14">map</span><span class="syntax14">:</span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  16:</span>  <span class="syntax8">foreach</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">after_prices</span> <span class="syntax8">as</span> <span class="syntax10">$</span><span class="syntax10">value</span><span class="syntax18">)</span><span class="syntax18">{</span>
+<span class="gutter">  17:</span>    <span class="syntax9">printf</span><span class="syntax18">(</span><span class="syntax14">&quot;</span><span class="syntax14">\$</span><span class="syntax14">%</span><span class="syntax14">.</span><span class="syntax14">2f</span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">value</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  18:</span>  <span class="syntax18">}</span>
+<span class="gutter">  19:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+* *@salestax()@* is a user-defined callback function. It will be called for each element in an array of values that it receives from another function, called *@array_map()@*.
+* The value of each element of the array will be returned after the sales tax has been applied to it.
+* An array nameded *@$after_prices@* is returned by the callback function after it has performed a calculation on each element of *@$before_prices@*.
+
+h3. The *@array_walk_recursive()@* Function
+
+* The *@array_walk_recursive()@* applies a user-defined callback function to every element of an array and will recurse into nested arrays.
+* Normally the *@array_walk_recursive()@* function takes two arguments: the first one is the array being walked over, and the second one is the value of the key or index of the array.
+* A third, optional argument is an additional value that you can send to the callback function. The functon returns true on success and false on failure.
+* If your callback function needs to be working with the actual values of the array, specify the first parameter of the callback as a reference. Then, any changes made to those elements will be made in the original array itself.
+* Format:
+<br /><pre>
+bool array_walk_recursive ( array &input, callback funcname
+                           [, mixed userdata] )
+</pre>
+* Example:
+<br /><pre>
+$employee = array("Name"=>"Bob","Title"=>"President");
+array_walk_recursive($employee,'callback_function');
+</pre>
+* Filename: *arrayWalk.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Walking Through a Multidimensional Array
+<span class="gutter">   4:</span>  <span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span> <span class="syntax17">&lt;body</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  <span class="syntax17">&lt;div</span><span class="syntax17"> </span><span class="syntax17">align</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">center</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   8:</span>  <span class="syntax17">&lt;h3</span><span class="syntax17">&gt;</span>Using a Callback Function with a Multidimensional Array<span class="syntax17">&lt;/h3</span><span class="syntax17">&gt;</span>
+<span class="gutter">   9:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutterH">  10:</span>    <span class="syntax10">$</span><span class="syntax10">numbers</span> <span class="syntax18">=</span> <span class="syntax8">array</span><span class="syntax18">(</span><span class="syntax8">array</span><span class="syntax18">(</span><span class="syntax5">1</span><span class="syntax18">,</span><span class="syntax5">2</span><span class="syntax18">,</span><span class="syntax5">3</span><span class="syntax18">,</span><span class="syntax5">4</span><span class="syntax18">)</span><span class="syntax18">,</span>
+<span class="gutter">  11:</span>                     <span class="syntax8">array</span><span class="syntax18">(</span><span class="syntax5">4</span><span class="syntax18">,</span><span class="syntax5">8</span><span class="syntax18">,</span><span class="syntax5">10</span><span class="syntax18">,</span><span class="syntax5">12</span><span class="syntax18">)</span><span class="syntax18">,</span>
+<span class="gutter">  12:</span>                     <span class="syntax8">array</span><span class="syntax18">(</span><span class="syntax5">20</span><span class="syntax18">,</span><span class="syntax5">25</span><span class="syntax18">,</span><span class="syntax5">30</span><span class="syntax18">,</span><span class="syntax5">35</span><span class="syntax18">)</span><span class="syntax18">,</span>
+<span class="gutter">  13:</span>                    <span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>    
+<span class="gutterH">  15:</span>    <span class="syntax8">function</span> <span class="syntax6">cube</span><span class="syntax18">(</span><span class="syntax18">&amp;</span><span class="syntax10">$</span><span class="syntax10">element</span><span class="syntax18">,</span><span class="syntax10">$</span><span class="syntax10">index</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  16:</span>      <span class="syntax8">print</span> <span class="syntax10">$</span><span class="syntax10">index</span><span class="syntax18">;</span>   <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">prints</span><span class="syntax2"> </span><span class="syntax2">012301230123</span>
+<span class="gutter">  17:</span>      <span class="syntax10">$</span><span class="syntax10">element</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">element</span> <span class="syntax18">&#42;</span> <span class="syntax10">$</span><span class="syntax10">element</span> <span class="syntax18">&#42;</span> <span class="syntax10">$</span><span class="syntax10">element</span><span class="syntax18">;</span>
+<span class="gutter">  18:</span>    <span class="syntax18">}</span>
+<span class="gutter">  19:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutterH">  20:</span>  <span class="syntax17">&lt;table</span><span class="syntax17"> </span><span class="syntax17">border</span><span class="syntax18">=</span><span class="syntax13">'</span><span class="syntax13">1</span><span class="syntax13">'</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;caption</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;font</span><span class="syntax17"> </span><span class="syntax17">size</span><span class="syntax18">=</span><span class="syntax13">'</span><span class="syntax13">-</span><span class="syntax13">1</span><span class="syntax13">'</span><span class="syntax17">&gt;</span>The <span class="syntax17">&lt;em</span><span class="syntax17">&gt;</span>
+<span class="gutter">  21:</span>  array_walk_recursive()<span class="syntax17">&lt;/em</span><span class="syntax17">&gt;</span> function<span class="syntax17">&lt;/font</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;/caption</span><span class="syntax17">&gt;</span>
+<span class="gutter">  22:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">  23:</span>    <span class="syntax9">array_walk_recursive</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">numbers</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">cube</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  24:</span>    <span class="syntax8">for</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">i</span><span class="syntax18">=</span><span class="syntax5">0</span><span class="syntax18">;</span> <span class="syntax10">$</span><span class="syntax10">i</span> <span class="syntax18">&lt;</span> <span class="syntax5">3</span><span class="syntax18">;</span> <span class="syntax10">$</span><span class="syntax10">i</span><span class="syntax18">+</span><span class="syntax18">+</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutterH">  25:</span>      <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">tr</span><span class="syntax14"> </span><span class="syntax14">bgcolor</span><span class="syntax14">=</span><span class="syntax14">'</span><span class="syntax14">999FFF</span><span class="syntax14">'</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  26:</span>      <span class="syntax8">for</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">j</span><span class="syntax18">=</span><span class="syntax5">0</span><span class="syntax18">;</span> <span class="syntax10">$</span><span class="syntax10">j</span><span class="syntax18">&lt;</span><span class="syntax5">4</span><span class="syntax18">;</span> <span class="syntax10">$</span><span class="syntax10">j</span><span class="syntax18">+</span><span class="syntax18">+</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  27:</span>        <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">td</span><span class="syntax14">&gt;</span><span class="syntax14">&lt;</span><span class="syntax14">b</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">.</span><span class="syntax10">$</span><span class="syntax10">numbers</span><span class="syntax18">[</span><span class="syntax10">$</span><span class="syntax10">i</span><span class="syntax18">]</span><span class="syntax18">[</span><span class="syntax10">$</span><span class="syntax10">j</span><span class="syntax18">]</span> <span class="syntax18">;</span>
+<span class="gutter">  28:</span>      <span class="syntax18">}</span>
+<span class="gutter">  29:</span>      <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">/</span><span class="syntax14">td</span><span class="syntax14">&gt;</span><span class="syntax14">&lt;</span><span class="syntax14">/</span><span class="syntax14">tr</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  30:</span>    <span class="syntax18">}</span>
+<span class="gutter">  31:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">/</span><span class="syntax14">table</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  32:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  33:</span>  <span class="syntax17">&lt;/div</span><span class="syntax17">&gt;</span>
+<span class="gutter">  34:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  35:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* *@$numbers@* is a multidimensional array containing three subarrays.
+* The *@cube()@* callback function takes a reference to the array being walked over as its first argument and the index of each element of the array. It cubes each of the array's elements.
+* The *@array_walk_recursive()@* function takes the array as its first argument, and the name of the function, 'cube', as a string value for its second argument.
+
+h3. Scope
+
+* Scope refers to the parts of a program that can see or access a variable. That is, where the variable is visible.
+* Lifetime is how long the variable exists. There are three types of scope for PHP variables: local, global, and static.
+* Local variables are visible inside a function and their life ends when the function ends.
+* Global variables are visible to a script, but not normally to a function. They live throughout the run of the script, and die when the script ends.
+* Static variables are local to a function but retain their value from one function call to another. They die when the script ends.
+* Let's look at some examples to see how scope and lifetime work.
+
+h3. Local Scope
+
+* By default, all variables declared within functions are local to the function; that is, they are not visible outside the function and die when the function exits.
+* In computer jargon, these variables are pushed onto a stack when the function starts and popped off when the function ends.
+* Filename: *scope1.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Global</span><span class="syntax2"> </span><span class="syntax2">variable,</span><span class="syntax2"> </span><span class="syntax2">visible</span><span class="syntax2"> </span><span class="syntax2">outside</span><span class="syntax2"> </span><span class="syntax2">functions</span>
+<span class="gutter">   3:</span>  <span class="syntax10">$</span><span class="syntax10">friend</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">Sam</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">   4:</span>  
+<span class="gutterH">   5:</span>  <span class="syntax8">function</span> <span class="syntax6">who</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   6:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Local</span><span class="syntax2"> </span><span class="syntax2">variable;</span><span class="syntax2"> </span><span class="syntax2">disappears</span><span class="syntax2"> </span><span class="syntax2">when</span><span class="syntax2"> </span><span class="syntax2">function</span><span class="syntax2"> </span><span class="syntax2">ends</span>
+<span class="gutter">   7:</span>    <span class="syntax10">$</span><span class="syntax10">friend</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">Joe</span><span class="syntax14">&quot;</span><span class="syntax18">;</span> 
+<span class="gutter">   8:</span>    <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax14">In</span><span class="syntax14"> </span><span class="syntax14">the</span><span class="syntax14"> </span><span class="syntax14">function</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">friend</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax14">your</span><span class="syntax14"> </span><span class="syntax14">local</span><span class="syntax14"> </span><span class="syntax14">friend</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">   9:</span>  <span class="syntax18">}</span>
+<span class="gutterH">  10:</span>  
+<span class="gutter">  11:</span>  <span class="syntax6">who</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>   <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Function</span><span class="syntax2"> </span><span class="syntax2">call</span>
+<span class="gutter">  12:</span>  <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax14">Out</span><span class="syntax14"> </span><span class="syntax14">of</span><span class="syntax14"> </span><span class="syntax14">the</span><span class="syntax14"> </span><span class="syntax14">function</span><span class="syntax14">,</span><span class="syntax14"> </span><span class="syntax14">your</span><span class="syntax14"> </span><span class="syntax14">friend</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">friend</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">.</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+* The first *@$friend@* is a global variable in that it is visible to the main script, and will disappear when the script ends. It will not be visible inside functions.
+* Even though the variable in *@who()@* is also called *@$friend@*, it is a different variable. It is local to the function and will disappear when the function ends.
+
+h3. Global Scope
+
+* From within a function you cannot access variables that were declared outside the function unless you pass the variable to the function as an argument, by reference.
+* If you need to access an external variable inside a function without passing it by reference, then you can use the global statement.
+* By placing the global keyword in front of a variable name, the variable that was defined outside the function can now be accessed.
+* Format:
+<br /><pre>
+global variable_name1, variable_name2, variable_name3 ...;
+</pre>
+* Example:
+<br /><pre>
+global $salary;
+</pre>
+* Filename: *scope2.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Function Arguments<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">lightgreen</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;font</span><span class="syntax17"> </span><span class="syntax17">size</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">+</span><span class="syntax14">1</span><span class="syntax14">&quot;</span><span class="syntax17"> </span><span class="syntax17">face</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">arial</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">   8:</span>    <span class="syntax8">function</span> <span class="syntax6">raise_sal</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   9:</span>      <span class="syntax8">global</span> <span class="syntax10">$</span><span class="syntax10">salary</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>      <span class="syntax10">$</span><span class="syntax10">salary</span> <span class="syntax18">&#42;</span><span class="syntax18">=</span> <span class="syntax5">1</span><span class="syntax18">.</span><span class="syntax5">1</span><span class="syntax18">;</span> <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">10</span><span class="syntax2"> </span><span class="syntax2">percent</span><span class="syntax2"> </span><span class="syntax2">raise</span>
+<span class="gutter">  11:</span>    <span class="syntax18">}</span>
+<span class="gutter">  12:</span>    <span class="syntax10">$</span><span class="syntax10">salary</span> <span class="syntax18">=</span> <span class="syntax5">50000</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>    <span class="syntax6">raise_sal</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">Congratulations!</span><span class="syntax13"> </span><span class="syntax13">Your</span><span class="syntax13"> </span><span class="syntax13">new</span><span class="syntax13"> </span><span class="syntax13">salary</span><span class="syntax13"> </span><span class="syntax13">is:</span><span class="syntax13"> </span><span class="syntax13">$</span><span class="syntax13">'</span><span class="syntax18">.</span> <span class="syntax10">$</span><span class="syntax10">salary</span> <span class="syntax18">.</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutterH">  15:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  16:</span>  <span class="syntax17">&lt;/font</span><span class="syntax17">&gt;</span>
+<span class="gutter">  17:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  18:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* The keyword global allows the *@raise_sal()@* function to have access to the variable, *@$salary@*, defined outside this function.
+* The variable, *@$salary@*, is defined outside the function and is not available to the function, unless it is passed by reference or is made global within the function.
+
+h3. The @$GLOBALS()@ Array
+
+* The other way to access a global variable inside a function is with the *@$GLOBALS[]@* array. It contains all the variables that have global scope in the script (i.e., any variables declared outside of functions).
+* Filename: *scope3.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Function Arguments<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">lightblue</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;font</span><span class="syntax17"> </span><span class="syntax17">size</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">+</span><span class="syntax14">1</span><span class="syntax14">&quot;</span><span class="syntax17"> </span><span class="syntax17">face</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">arial</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">   8:</span>    <span class="syntax8">function</span> <span class="syntax6">raise_sal</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   9:</span>      <span class="syntax10">$</span><span class="syntax10">GLOBALS</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">salary</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">&#42;</span><span class="syntax18">=</span> <span class="syntax5">1</span><span class="syntax18">.</span><span class="syntax5">1</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>    <span class="syntax18">}</span>
+<span class="gutter">  11:</span>    <span class="syntax10">$</span><span class="syntax10">salary</span> <span class="syntax18">=</span> <span class="syntax5">50000</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>    <span class="syntax6">raise_sal</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">Congratulations!</span><span class="syntax13"> </span><span class="syntax13">Your</span><span class="syntax13"> </span><span class="syntax13">new</span><span class="syntax13"> </span><span class="syntax13">salary</span><span class="syntax13"> </span><span class="syntax13">is:</span><span class="syntax13"> </span><span class="syntax13">$</span><span class="syntax13">'</span><span class="syntax18">.</span> <span class="syntax10">$</span><span class="syntax10">salary</span> <span class="syntax18">.</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutterH">  15:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  16:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* The *@$GLOBALS[]@* array gives the function access to variables defined from outside the function; in this case, *@$salary@*.
+* The name of the variable becomes the key in the *@$GLOBALS[]@* associative array.
+
+h3. Static Variables
+
+* The variables declared inside functions normally disappear when the function ends. They are local to the function. They are created when the function is called and die when it ends.
+* A static variable is local to the function, meaning it is not visible outside of the function, but it does not die when the function ends.
+* Once initialized a static variable will not lose its value between function calls. It "remembers" the value it held from one call to the next. 
+* Filename: *static.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax8">function</span> <span class="syntax6">trackme</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   3:</span>    <span class="syntax8">static</span> <span class="syntax10">$</span><span class="syntax10">count</span> <span class="syntax18">=</span> <span class="syntax5">0</span><span class="syntax18">;</span>
+<span class="gutter">   4:</span>    <span class="syntax10">$</span><span class="syntax10">count</span><span class="syntax18">++</span><span class="syntax18">;</span>
+<span class="gutterH">   5:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">You</span><span class="syntax14"> </span><span class="syntax14">have</span><span class="syntax14"> </span><span class="syntax14">been</span><span class="syntax14"> </span><span class="syntax14">here</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">count</span><span class="syntax14"> </span><span class="syntax14">times</span><span class="syntax14">.</span><span class="syntax14">\n</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">   6:</span>  <span class="syntax18">}</span>
+<span class="gutter">   7:</span>  <span class="syntax6">trackme</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   8:</span>  <span class="syntax6">trackme</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   9:</span>  <span class="syntax6">trackme</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+* By making the variable *@$count@* static, it will retain its value even after the function exits.
+* Each time *@trackme()@* is called, the count will be incremented by 1. The variable is only initialized to zero the first time the function is called.
+* Filename: *static2.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Function Arguments<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">lightgreen</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;font</span><span class="syntax17"> </span><span class="syntax17">face</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">verdana</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">   8:</span>    <span class="syntax8">function</span> <span class="syntax6">increase_font</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">size</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   9:</span>      <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">The</span><span class="syntax2"> </span><span class="syntax2">value</span><span class="syntax2"> </span><span class="syntax2">of</span><span class="syntax2"> </span><span class="syntax2">$total</span><span class="syntax2"> </span><span class="syntax2">will</span><span class="syntax2"> </span><span class="syntax2">persist</span><span class="syntax2"> </span><span class="syntax2">between</span><span class="syntax2"> </span><span class="syntax2">calls</span>
+<span class="gutterH">  10:</span>      <span class="syntax8">static</span> <span class="syntax10">$</span><span class="syntax10">total</span><span class="syntax18">=</span><span class="syntax5">0</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span>      <span class="syntax10">$</span><span class="syntax10">newfont</span><span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">size</span><span class="syntax18">++</span> <span class="syntax18">;</span>
+<span class="gutter">  12:</span>      <span class="syntax10">$</span><span class="syntax10">total</span> <span class="syntax18">+</span><span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">newfont</span><span class="syntax18">;</span> <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Keep</span><span class="syntax2"> </span><span class="syntax2">a</span><span class="syntax2"> </span><span class="syntax2">running</span><span class="syntax2"> </span><span class="syntax2">total</span>
+<span class="gutter">  13:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  14:</span>  <span class="syntax17">&lt;font</span><span class="syntax17"> </span><span class="syntax17">size</span><span class="syntax18">=</span><span class="syntax13">'</span><span class="syntax17">&lt;?</span><span class="syntax18">=</span><span class="syntax18">+</span><span class="syntax10">$</span><span class="syntax10">newfont</span><span class="syntax17">?&gt;</span><span class="syntax13">'</span><span class="syntax17">&gt;</span>bigger<span class="syntax17">&lt;br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  15:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">  16:</span>      <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">total</span> <span class="syntax18">&gt;</span> <span class="syntax5">10</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  17:</span>        <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax14">+</span><span class="syntax10">$</span><span class="syntax10">total</span><span class="syntax14">:</span><span class="syntax14"> </span><span class="syntax14">Too</span><span class="syntax14"> </span><span class="syntax14">big</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  18:</span>        <span class="syntax8">exit</span><span class="syntax18">;</span>
+<span class="gutter">  19:</span>      <span class="syntax18">}</span>
+<span class="gutterH">  20:</span>    <span class="syntax18">}</span>
+<span class="gutter">  21:</span>    <span class="syntax8">for</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">n</span><span class="syntax18">=</span><span class="syntax5">0</span><span class="syntax18">;</span> <span class="syntax10">$</span><span class="syntax10">n</span><span class="syntax18">&lt;</span><span class="syntax18">=</span><span class="syntax5">10</span><span class="syntax18">;</span> <span class="syntax10">$</span><span class="syntax10">n</span><span class="syntax18">+</span><span class="syntax18">+</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  22:</span>      <span class="syntax6">increase_font</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">n</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  23:</span>    <span class="syntax18">}</span>
+<span class="gutter">  24:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutterH">  25:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  26:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* The function *@increase_font()@* is defined. It has parameter *@$size@* which represents the font size for the verdana font listed above.
+* The static variable *@$total@* is defined and is assigned an initial value of 0. This variable will not forget its value after the function exits.
+* The variable *@$newfont@* is increased by 1 when the function is called. Then *@$newfont@* is added to *@$total@*.
+* When the accumulated total reaches a value greater than 10, the script exits.
+
+h3. Nesting Functions
+
+* PHP supports nesting of functions. A nested function is defined and called from within another function.
+* The outer function, also called the parent function, has to be invoked for the nested function to become available to the program. Nested functions are rarely used in PHP.
+* Format:
+<br /><pre>
+function OuterFunction() {
+    function NestedFunction() {
+        // OuterFunction() must be called before
+        // NestedFunction() is available.
+        statements;
+    }
+}
+</pre>
+* PHP functions can also be nested inside other statement blocks, such as conditional statements.
+* As with nested functions, such functions will only be defined when that block of code has been executed.
+* Filename: *nested.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax8">function</span> <span class="syntax6">outer</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">a</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">b</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   3:</span>    <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax14">Greetings</span><span class="syntax14"> </span><span class="syntax14">from</span><span class="syntax14"> </span><span class="syntax14">outer</span><span class="syntax14">(</span><span class="syntax14">)</span><span class="syntax14">\n</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">   4:</span>    
+<span class="gutterH">   5:</span>    <span class="syntax8">function</span> <span class="syntax6">square</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">x</span><span class="syntax18">)</span> <span class="syntax18">{</span>   <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Nested</span><span class="syntax2"> </span><span class="syntax2">function</span>
+<span class="gutter">   6:</span>      <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax14">Greetings</span><span class="syntax14"> </span><span class="syntax14">from</span><span class="syntax14"> </span><span class="syntax14">square</span><span class="syntax14">(</span><span class="syntax14">)</span><span class="syntax14">\n</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">   7:</span>      <span class="syntax8">return</span> <span class="syntax10">$</span><span class="syntax10">x</span> <span class="syntax18">&#42;</span> <span class="syntax10">$</span><span class="syntax10">x</span><span class="syntax18">;</span>
+<span class="gutter">   8:</span>    <span class="syntax18">}</span>
+<span class="gutter">   9:</span>    <span class="syntax8">return</span> <span class="syntax6">square</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">a</span><span class="syntax18">)</span> <span class="syntax18">+</span> <span class="syntax6">square</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">b</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>  <span class="syntax18">}</span>
+<span class="gutter">  11:</span>  
+<span class="gutter">  12:</span>  <span class="syntax10">$</span><span class="syntax10">sum</span> <span class="syntax18">=</span> <span class="syntax6">outer</span><span class="syntax18">(</span><span class="syntax5">5</span><span class="syntax18">,</span><span class="syntax5">8</span><span class="syntax18">)</span><span class="syntax18">;</span> <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Call</span><span class="syntax2"> </span><span class="syntax2">to</span><span class="syntax2"> </span><span class="syntax2">outer()</span>
+<span class="gutter">  13:</span>  <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">The</span><span class="syntax14"> </span><span class="syntax14">sum</span><span class="syntax14"> </span><span class="syntax14">of</span><span class="syntax14"> </span><span class="syntax14">the</span><span class="syntax14"> </span><span class="syntax14">squares</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14">:</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">sum\n</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>  <span class="syntax10">$</span><span class="syntax10">squared</span> <span class="syntax18">=</span> <span class="syntax6">square</span><span class="syntax18">(</span><span class="syntax5">5</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  15:</span>  <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax14">5</span><span class="syntax14"> </span><span class="syntax14">squared</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14">:</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">squared</span><span class="syntax14">.</span><span class="syntax14">\n</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  16:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+* The function *@outer()@* will be the parent function for the nested function *@square()@* .
+* Because *@square()@* is nested in the *@outer()@* function, it will not be defined until *@outer()@* Has been called.
+* Once the outer or parent function has been executed, the nested function is defined and accessible from anywhere within the current program just like any other function.
+* You can only execute the parent function once if it contains nested functions; otherwise, PHP will generate a fatal error.
+* Filename: *nested2.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax8">function</span> <span class="syntax6">outer</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">a</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">b</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   3:</span>    <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax14">Greetings</span><span class="syntax14"> </span><span class="syntax14">from</span><span class="syntax14"> </span><span class="syntax14">outer</span><span class="syntax14">(</span><span class="syntax14">)</span><span class="syntax14">\n</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">   4:</span>    
+<span class="gutterH">   5:</span>    <span class="syntax8">function</span> <span class="syntax6">square</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">x</span><span class="syntax18">)</span> <span class="syntax18">{</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Nested</span><span class="syntax2"> </span><span class="syntax2">function</span>
+<span class="gutter">   6:</span>      <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax14">Greetings</span><span class="syntax14"> </span><span class="syntax14">from</span><span class="syntax14"> </span><span class="syntax14">square</span><span class="syntax14">(</span><span class="syntax14">)</span><span class="syntax14">\n</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">   7:</span>      <span class="syntax8">return</span> <span class="syntax10">$</span><span class="syntax10">x</span> <span class="syntax18">&#42;</span> <span class="syntax10">$</span><span class="syntax10">x</span><span class="syntax18">;</span>
+<span class="gutter">   8:</span>    <span class="syntax18">}</span>
+<span class="gutter">   9:</span>    <span class="syntax8">return</span> <span class="syntax6">square</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">a</span><span class="syntax18">)</span> <span class="syntax18">+</span> <span class="syntax6">square</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">b</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>  <span class="syntax18">}</span>
+<span class="gutter">  11:</span>  
+<span class="gutter">  12:</span>  <span class="syntax10">$</span><span class="syntax10">sum</span> <span class="syntax18">=</span> <span class="syntax6">outer</span><span class="syntax18">(</span><span class="syntax5">5</span><span class="syntax18">,</span><span class="syntax5">8</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>  <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">The</span><span class="syntax14"> </span><span class="syntax14">sum</span><span class="syntax14"> </span><span class="syntax14">of</span><span class="syntax14"> </span><span class="syntax14">the</span><span class="syntax14"> </span><span class="syntax14">squares</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14">:</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">sum\n</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Wrong!</span><span class="syntax2"> </span><span class="syntax2">Will</span><span class="syntax2"> </span><span class="syntax2">cause</span><span class="syntax2"> </span><span class="syntax2">square()</span><span class="syntax2"> </span><span class="syntax2">to</span><span class="syntax2"> </span><span class="syntax2">be</span><span class="syntax2"> </span><span class="syntax2">redeclared</span>
+<span class="gutterH">  15:</span>  <span class="syntax10">$</span><span class="syntax10">sum</span> <span class="syntax18">=</span> <span class="syntax6">outer</span><span class="syntax18">(</span><span class="syntax5">10</span><span class="syntax18">,</span><span class="syntax5">2</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  16:</span><span class="syntax17">?&gt;</span>
+</span>
+</PRE>
+
+h3. Recursive Functions
+
+* A recursive function is a function that calls itself. Recursive functions are often used to handle certain types of mathematical problems such as:
+** traverse directories, linked lists, and binary trees
+** crack passwords
+** create anagrams, and magic squares
+If a task is a smaller version of an original base task, then the problem can be solved by writing a recursive function.
+When you first encounter recursion, it might seem a little confusing, like being in a house of mirrors. When a function calls itself, the program starts up the same function again, executes the function statements, and when it returns, picks up where it left off in the function that called it.
+The recursion can go on indefinitely, so you must be careful to create a condition that, at some point, stops it.
+* An example often used to describe recursion can be demonstrated with a function to produce a Fibonacci number (see below).
+* What is that? Well before getting started, read this little bit of history, if you have the time or interest.
+* In the beginnning of the 13th century an Italian mathemetician, Leonardo Fibonacci, came up with a formula, called the Fibonacci sequence, to solve the following problem presented at a mathematical competition in Pisa:
+<br />bq. How many rabbits would be produced in a year if, beginning with a single pair of rabbits, every month each pair reproduces a new pair of rabbits, which become productive when they are one month old, and none of them die, and so on?
+* Fibonacci came up with a formula, named after himself, to answer the rabbit question. The Fibonacci sequence normally starts with 0 and 1, and then produces the next Fibonacci number by adding the two previous Fibonacci numbers together: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946 . . .
+* Thus, to get the next value after 21, add 13 to 21 resulting in the next Fibonacci number, which is 34.
+* So the number of pairs of rabbits at the start of each month is 1, 1, 2, 3, 5, 8, 13, 21, 34, and so on.
+* Filename: *recursion.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Fibonacci Series<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span>  <span class="syntax17">&lt;body</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;div</span><span class="syntax17"> </span><span class="syntax17">align</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">center</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">   8:</span>    <span class="syntax10">$</span><span class="syntax10">count</span><span class="syntax18">=</span><span class="syntax5">0</span><span class="syntax18">;</span>
+<span class="gutter">   9:</span>    
+<span class="gutterH">  10:</span>    <span class="syntax8">function</span> <span class="syntax6">fib</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">num</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  11:</span>      <span class="syntax1">/&#42;</span><span class="syntax1"> </span><span class="syntax1">Find</span><span class="syntax1"> </span><span class="syntax1">the</span><span class="syntax1"> </span><span class="syntax1">Fibonacci</span><span class="syntax1"> </span><span class="syntax1">value</span><span class="syntax1"> </span><span class="syntax1">of</span><span class="syntax1"> </span><span class="syntax1">a</span><span class="syntax1"> </span><span class="syntax1">number</span><span class="syntax1"> </span><span class="syntax1">&#42;/</span>
+<span class="gutter">  12:</span>      <span class="syntax8">global</span> <span class="syntax10">$</span><span class="syntax10">count</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>      <span class="syntax10">$</span><span class="syntax10">count</span><span class="syntax18">++</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>      <span class="syntax8">switch</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">num</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutterH">  15:</span>        <span class="syntax8">case</span> <span class="syntax5">0</span><span class="syntax18">:</span>
+<span class="gutter">  16:</span>          <span class="syntax8">return</span><span class="syntax18">(</span><span class="syntax5">0</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  17:</span>          <span class="syntax8">break</span><span class="syntax18">;</span>
+<span class="gutter">  18:</span>        <span class="syntax8">case</span> <span class="syntax5">1</span><span class="syntax18">:</span>
+<span class="gutter">  19:</span>          <span class="syntax8">return</span><span class="syntax18">(</span><span class="syntax5">1</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  20:</span>          <span class="syntax8">break</span><span class="syntax18">;</span>
+<span class="gutter">  21:</span>        <span class="syntax8">default</span><span class="syntax18">:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Including</span><span class="syntax2"> </span><span class="syntax2">recursive</span><span class="syntax2"> </span><span class="syntax2">calls</span>
+<span class="gutter">  22:</span>          <span class="syntax8">return</span><span class="syntax18">(</span><span class="syntax6">fib</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">num</span> <span class="syntax18">&#45;</span> <span class="syntax5">1</span><span class="syntax18">)</span> <span class="syntax18">+</span> <span class="syntax6">fib</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">num</span> <span class="syntax18">&#45;</span> <span class="syntax5">2</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  23:</span>          <span class="syntax8">break</span><span class="syntax18">;</span>
+<span class="gutter">  24:</span>      <span class="syntax18">}</span>
+<span class="gutterH">  25:</span>    <span class="syntax18">}</span>
+<span class="gutter">  26:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  27:</span>  <span class="syntax17">&lt;table</span><span class="syntax17"> </span><span class="syntax17">border</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">1</span><span class="syntax14">&quot;</span><span class="syntax17"> </span><span class="syntax17">cellspacing</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">2</span><span class="syntax14">&quot;</span><span class="syntax17"> </span><span class="syntax17">cellpadding</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">5</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">  28:</span>  <span class="syntax17">&lt;caption</span><span class="syntax17">&gt;</span>Fibonacci Sequence<span class="syntax17">&lt;/caption</span><span class="syntax17">&gt;</span>
+<span class="gutter">  29:</span>  <span class="syntax17">&lt;tr</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  30:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">  31:</span>    <span class="syntax8">for</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">num</span><span class="syntax18">=</span><span class="syntax5">0</span><span class="syntax18">;</span> <span class="syntax10">$</span><span class="syntax10">num</span> <span class="syntax18">&lt;</span> <span class="syntax5">10</span><span class="syntax18">;</span> <span class="syntax10">$</span><span class="syntax10">num</span><span class="syntax18">++</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  32:</span>      <span class="syntax10">$</span><span class="syntax10">value</span> <span class="syntax18">=</span> <span class="syntax6">fib</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">num</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  33:</span>      <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">The</span><span class="syntax2"> </span><span class="syntax2">Fibonacci</span><span class="syntax2"> </span><span class="syntax2">sequence</span><span class="syntax2"> </span><span class="syntax2">of</span><span class="syntax2"> </span><span class="syntax2">9</span><span class="syntax2"> </span><span class="syntax2">numbers</span><span class="syntax2"> </span><span class="syntax2">starting</span><span class="syntax2"> </span><span class="syntax2">at</span><span class="syntax2"> </span><span class="syntax2">0</span>
+<span class="gutter">  34:</span>      <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">td</span><span class="syntax14"> </span><span class="syntax14">bgcolor</span><span class="syntax14">=</span><span class="syntax14">'</span><span class="syntax14">#</span><span class="syntax14">33FF66</span><span class="syntax14">'</span><span class="syntax14">&gt;</span><span class="syntax10">$</span><span class="syntax10">value</span><span class="syntax14">&lt;</span><span class="syntax14">/</span><span class="syntax14">td</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  35:</span>    <span class="syntax18">}</span>
+<span class="gutter">  36:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  37:</span>  <span class="syntax17">&lt;tr</span><span class="syntax17">&gt;</span>
+<span class="gutter">  38:</span>  <span class="syntax17">&lt;br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  39:</span>  <span class="syntax17">&lt;/table</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  40:</span>  <span class="syntax17">&lt;br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  41:</span>  The function called itself <span class="syntax17">&lt;?php</span> <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax10">count</span><span class="syntax18">;</span> <span class="syntax17">?&gt;</span> times.<span class="syntax17">&lt;br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  42:</span>  <span class="syntax17">&lt;/div</span><span class="syntax17">&gt;</span>
+<span class="gutter">  43:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  44:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  45:</span></span>
+</PRE>
+* The variable *@$count@* is initialized outside the function. It will keep track of the number of times the function *@fib()@* is called.
+* Starting on line 10 is the recursive function *@fib()@*. This function starts the initial task and in itself is not recursive. When the same task needs to be repeated, that is when *@fib()@* will call itself.
+* The switch statement is used to check for the incoming values of a number *@$num@*. If *@$num@* is 0, the value returned will be 0, and if it is 1 the value returned is 0 + 1, or 1.
+* Because these cases are so simple there is no need for recursion. If the number is greater than 1, then the default case is entered.
+* This is the heart of the recursive program. The result of the first call to the *@fib()@* function is added to the result of another call to *@fib()@*.
+* The function will continue to call itself until it reaches a point where it either returns 0 or 1. If *@$num@* is 4, then *@fib()@* is called 9 times.
+* The for loop starting on line 31 will iterate through 10 numbers, starting at 0. Each number will be sent, in turn, to the *@fib()@* function for evaluation.
+* We display *@$count@* to show you how many times the function *@fib()@* was called to produce the sequence shown.
+
+h3. Function Libraries -- Requiring and Including
+
+* If you have a function or set of functions that you will reuse in other PHP programs, then you can save the functions in a file, called a library.
+* When you are ready to use the functions, just include the library in the current script with the *@include()@* or *@require()@* built-in functions.
+* Suppose, for example, you have two functions: one called *@total()@* to calculate the total of a set of numbers, and another called *@ave()@* to calculate the average of a set of numbers.
+* We will store these user-defined functions in a library file called mylibrary.php .
+
+h3. The *@require()@* and *@include()@* Constructs
+
+* PHP provides the *@require()@* and *@include()@* constructs to allow you to use the functions from the library file in a PHP script as shown here:
+* Examples:
+<br /><pre>
+<?php
+    require("mylibrary.php");
+    echo "The average is ", ave(array(11,3,5,7,34));
+?>
+
+<?php   include("mylibrary.php");
+    echo "The average is ", ave(array(11,3,5,7,34));
+?>
+</pre>
+* The *@include()@* and *@require()@* constructs cause a specified file to be included and evaluated in your script, similar to pasting the contents of a file in your script at the line where they were requested.
+* When you place a function in an external file that will later be included, be sure to enclose the function in PHP tags, because, when a file is included, if the PHP tags are missing, PHP automatically starts processing the included file as an HTML document.
+* The only difference between *@include()@* and *@require()@* is how they deal with failure.
+* The *@include()@* function produces a warning and allows the script to continue executing while *@require()@* produces a fatal error.
+* For PHP to find the file you want to include, it searches an *include_path* defined in the *php.ini* file, and if the file is not in the path, this would cause an error.
+* Files for including are first looked for in the *include_path* relative to the current working directory and then in the *include_path* relative to the directory of the current script.
+* If the filename specified begins with "./" or "../", it is looked for only in the *include_path* relative to the current working directory.
+* To change the *include_path* from your program, use the built-in *@ini_set()@* function described in the PHP manual.
+* With *@require()@* the missing file would cause the script to exit, whereas with *@include()@*, the program will continue to run.
+* You can also use an absolute path such as: *@require('C:\pub\library\file.php')@* or *@include('/usr/htdocs/file.php')@*
+* Just like *@require()@* and *@include()@*, the *@require_once()@* and *@include_once()@* statements, respectively, include and evaluate the specified file during the execution of the script, but *@require_once()@* and *@include_once()@* will only include a file once, even if you have more require or include statements throughout the script.
+* Include files are often used to help manage the content of a Web site. The files are external to the program and included as needed.
+* Filename: *include.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Including a file<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;body</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;font</span><span class="syntax17"> </span><span class="syntax17">size</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">+</span><span class="syntax14">1</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">   8:</span>    <span class="syntax10">$</span><span class="syntax10">color</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">red</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">   9:</span>    <span class="syntax8">require_once</span><span class="syntax18">(</span><span class="syntax14">&quot;</span><span class="syntax14">test</span><span class="syntax14">.</span><span class="syntax14">library</span><span class="syntax14">&quot;</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>    <span class="syntax6">welcome</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  12:</span>  <span class="syntax17">&lt;hr</span><span class="syntax17">&gt;</span>
+<span class="gutter">  13:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">  14:</span>    <span class="syntax10">$</span><span class="syntax10">color</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">blue</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  15:</span>    <span class="syntax6">welcome</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  16:</span>    <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax10">mood</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">color</span><span class="syntax18">,</span><span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  17:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  18:</span>  <span class="syntax17">&lt;/font</span><span class="syntax17">&gt;</span>
+<span class="gutter">  19:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  20:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* Filename: *test.library*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax10">$</span><span class="syntax10">color</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">purple</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">   3:</span>  <span class="syntax8">function</span> <span class="syntax6">welcome</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   4:</span>    <span class="syntax8">global</span> <span class="syntax10">$</span><span class="syntax10">color</span><span class="syntax18">;</span>
+<span class="gutterH">   5:</span>    <span class="syntax10">$</span><span class="syntax10">mood</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">marvelous</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">   6:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">Welcome</span><span class="syntax14"> </span><span class="syntax14">to</span><span class="syntax14"> </span><span class="syntax14">you</span><span class="syntax14">!</span><span class="syntax14">\n</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">   7:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">font</span><span class="syntax14"> </span><span class="syntax14">color</span><span class="syntax14">=</span><span class="syntax10">$</span><span class="syntax10">color</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">.</span><span class="syntax14">&quot;</span><span class="syntax14">What</span><span class="syntax14"> </span><span class="syntax14">a</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">mood</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">color</span>
+<span class="gutter">   8:</span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14">sky</span><span class="syntax14">!</span><span class="syntax14">\n</span><span class="syntax14">&lt;</span><span class="syntax14">/</span><span class="syntax14">font</span><span class="syntax14">&gt;</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">   9:</span>  <span class="syntax18">}</span>
+<span class="gutterH">  10:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+* The *@require_once()@* function includes a file given as its argument. At the point this file is loaded, all variables and functions in it are available to this program.
+* The *@require_once()@* function only loads the file once, so that if in the future another *@require()@* function is executed, it will not be included again.
+* The user-defined function *@welcome()@* is called on line 10. Its definition is in the included file.
+* The color of the font will be purple because the variable, *@$color@*, is assigned "purple" in the required file.
+* The user-defined function *@welcome()@* is called again. This time the color of the text will be "blue". The function defined a global variable, *@$color@*. It gets the value of *@$color@* as defined outside the function.
+* The included file contains PHP code. Remember, if you do not enclose the code of the included file with PHP tags, when PHP starts processing, it will treat the code as though it were an HTML document, causing an error.
+* When a file is required, the variables defined within it become part of the current PHP script. Notice that when the *@welcome()@* function is called, the color of the text is purple, not red, because the required file redefined *@$color@*, overwriting the definition in the main script.
+
+<br />
+
+---
+
+[[Unit Six => 152-166 Unit Six Index]]

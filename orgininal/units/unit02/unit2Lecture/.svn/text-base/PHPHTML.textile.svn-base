@@ -1,0 +1,327 @@
+h2. Embedding PHP in HTML
+
+h3. Embedding PHP in HTML
+
+* Under the <h2> heading in your file, add the following lines:
+<br /><pre>
+<?php
+  echo '<p>Order processed.</p>';
+?></pre>
+* We save this file as processorder.php and load it into a browser by filling out Bob's form and clicking the Submit Order button. Notice how the PHP code we wrote was embedded inside a normal-looking HTML file. If we try viewing the source from our browser, we should see this code:
+<br /><pre><html>
+<head>
+ <title>Bob's Auto Parts - Order Results</title>
+</head>
+<body>
+ <h1>Bob's Auto Parts</h1>
+ <h2>Order Results</h2>
+ <p>Order processed.</p>
+</body>
+</html></pre>
+* None of the raw PHP is visible because the PHP interpreter has run through the script and replaced it with the output from the script. This means that from PHP you can produce clean HTML viewable with any browser; in other words, the user's browser does not need to understand PHP.
+* This example illustrates the concept of server-side scripting in a nutshell. The PHP has been interpreted and executed on the web server, as distinct from JavaScript and other client-side technologies interpreted and executed within a web browser on a user's machine.
+* The code that you now have in this file consists of four types of text:
+** HTML
+** PHP tags
+** PHP statements
+** Whitespace
+* You can also add:
+** Comments
+* Most of the lines in the example are just plain HTML.
+
+h3. Use of PHP Tags
+
+* The PHP code in the preceding example began with @<?php@ and ended with @?>@. This is similar to all HTML tags because they all begin with a less than @(<)@ symbol and end with a greater than @(>)@ symbol. These symbols @(<?php and ?> )@ are called *PHP tags*. They tell the web server where the PHP code starts and finishes. Any text between the tags is interpreted as PHP. Any text outside these tags is treated as normal HTML. The PHP tags allow you to escape from HTML.
+* You can choose different tag styles. Let's look at these tags in more detail.
+
+h3. PHP Tag Styles
+
+*  There are actually four different styles of PHP tags. Each of the following fragments of code is equivalent:
+
+h3. XML style
+
+<pre><?php echo  '<p>Order processed.</p>'; ?></pre>
+  
+*   This is the tag style that we will use in this course; it is the preferred PHP tag style. The server administrator cannot turn it off, so you can guarantee it will be available on all servers, which is especially important if you are writing applications that may be used on different installations. This tag style can be used with Extensible Markup Language (XML) documents. If you plan to serve XML on your site, you should definitely use this tag style.
+
+h3. Short style
+<pre><? echo  '<p>Order processed.</p>'; ?></pre>
+
+*   This tag style is the simplest and follows the style of a Standard Generalized Markup Language (SGML) processing instruction. To use this type of tag - which is the shortest to type - you either need to enable the short_open_tag setting in your config file or compile PHP with short tags enabled. You can find more information on how to use this tag style in Appendix A of the text. The use of this style is not recommended because, although this tag style is currently enabled by default, system administrators occasionally disable it because it interferes with XML document declarations.
+
+h3. SCRIPT style
+
+<pre><SCRIPT LANGUAGE='php'> echo '<p>Order processed.</p>'; </SCRIPT></pre>
+
+*   This tag style is the longest and will be familiar if you have used JavaScript or VBScript. You might use it if you are using an HTML editor that gives you problems with the other tag styles.
+
+h3. ASP style
+<pre><% echo '<p>Order processed.</p>'; %></pre>
+
+*  This tag style is the same as used in Active Server Pages (ASP) or ASP.NET. You can use it if you have enabled the asp_tags configuration setting. You might want to use this style of tag if you are using an editor that is geared toward ASP or ASP.NET or if you already program in ASP or ASP.NET. Note that, by default, this tag style is disabled.
+
+h3. PHP Statements
+
+*  You tell the PHP interpreter what to do by including PHP statements between your opening and closing tags. The preceding example used only one type of statement:
+<br />
+<pre>echo '<p>Order processed.</p>';</pre>
+*  As you have probably guessed, using the echo construct has a very simple result: It prints (or echoes) the string passed to it to the browser. Notice that a semicolon appears at the end of the echo statement. It separates statements in PHP much like a period separates sentences in English. If you have programmed in C or Java before, you will be familiar with using the semicolon in this way. Leaving off the semicolon is a common syntax error that is easily made. However, it is equally easy to find and to correct.
+
+h3. Whitespace
+  
+*  Spacing characters such as newlines (carriage returns), spaces, and tabs are known as whitespace. As you probably already know, browsers ignore whitespace in HTML. So does the PHP engine. Consider these two HTML fragments:
+<br /><pre><h1>Welcome to Bob's Auto Parts!</h1><p>What would you like to order today?</
+p></pre>
+and
+<br /><pre>
+<h1>Welcome to Bob's
+Auto Parts!</h1>
+<p>What would you like
+to order today?</p></pre>
+* These two snippets of HTML code produce identical output because they appear the same to the browser. However, you can and are encouraged to use whitespace in your HTML as an aid to humans - to enhance the readability of your HTML code. The same is true for PHP. You don't need to have any whitespace between PHP statements, but it makes the code much easier to read if you put each statement on a separate line. For example,
+<br /><pre>echo 'hello ';
+echo 'world';</pre>
+and
+<br /><pre>echo 'hello ';echo 'world';</pre>
+are equivalent, but the first version is easier to read.
+
+h3. Comments
+
+* Comments are exactly that: Comments in code act as notes to people reading the code. Comments can be used to explain the purpose of the script, who wrote it, why they wrote it the way they did, when it was last modified, and so on. You generally find comments in all but the simplest PHP scripts.
+*  The PHP interpreter ignores any text in comments. Essentially, the PHP parser skips over the comments, making them equivalent to whitespace.
+*  PHP supports C, C++ and shell script style comments.
+*  The following is a C-style, multiline comment that might appear at the start of a PHP script.
+<br /><pre>/* Author: Bob Smith
+   Last modified: April 10
+   This script processes the customer orders.
+*/
+</pre>  
+* Multiline comments should begin with a /* and end with */ . As in C, multiline comments cannot be nested.
+* You can also use single-line comments, either in the C++ style:
+<br /><pre>
+echo '<p>Order processed.</p>'; // Start printing order</pre>
+or in the shell script style:
+<br /><pre>echo '<p>Order processed.</p>'; # Start printing order</pre>
+* With both of these styles, everything after the comment symbol (# or // ) is a comment until you reach the end of the line or the ending PHP tag, whichever comes first.
+* In the following line of code, the text before the closing tag, "here is a comment", is part of a comment. The text after the closing tag, "here is not", will be treated as HTML because it is outside the closing tag:
+<br /><pre>// here is a comment ?> here is not</pre>
+
+h3. Adding Dynamic Content
+
+* So far, you haven't used PHP to do anything you couldn't have done with plain HTML.
+* The main reason for using a server-side scripting language is to be able to provide dynamic content to a site's users. This is important because content that changes according to users' needs or over time will keep visitors coming back to a site. PHP allows you to do this easily.
+* Let's start with a simple example. Replace the PHP code in the processorder.php script with the following code:
+<br /><pre><?php
+  echo '<p>Order processed at  ';
+  echo date('H:i, jS F');
+  echo '</p>';
+?></pre>
+* In this code, PHP's built-in date() function tells the customer the date and time when his order was processed. This information will be different each time the script is run. Let's run the script to demonstrate this!
+
+h3. Calling Functions
+
+  Look at the call to date(). This is the general form that function calls
+  take. PHP has an extensive library of functions you can use when developing
+  web applications. Most of these functions need to have some data passed to
+  them and return some data.
+  Now look at the function call again:
+  date('H:i, jS F')
+  Notice that it passes a string (text data) to the function inside a pair of
+  parentheses. The element within the parentheses is called the function's
+  argument or parameter. Such arguments are the input the function uses to
+  output some specific results.
+* Using the date() Function
+  The date() function expects the argument you pass it to be a format string,
+  representing the style of output you would like. Each letter in the string
+  represents one part of the date and time. "H" is the hour in a 24-hour format
+  with leading zeros where required, "i" is the minutes with a leading zero
+  where required, "j" is the day of the month without a leading zero, "S"
+  represents the ordinal suffix (in this case "th"), and "F" is the full name
+  of the month.
+  For a full list of formats supported by date(), see Chapter 20 of the text,
+  "Managing the Date and Time." 
+* Accessing Form Variables
+  The whole point of using the order form is to collect customers' orders.
+  Getting the details of what the customers typed is easy in PHP, but the exact
+  method depends on the version of PHP you are using and a setting in your
+  php.ini file.
+* Form Variables
+  Within your PHP script, you can access each form field as a PHP variable
+  whose name relates to the name of the form field. You can recognize variable
+  names in PHP because they all start with a dollar sign ($). (Forgetting the
+  dollar sign is a common programming error.)
+  Depending on your PHP version and setup, you can access the form data via
+  variables in three ways. These methods do not have official names, so we have
+  nicknamed them short, medium, and long style. In any case, each form field on
+  a page submitted to a PHP script is available in the script.
+  You can access the contents of the field tireqty in the following ways:
+  $tireqty                        // short style
+  $_POST['tireqty']               // medium style
+  $HTTP_POST_VARS['tireqty']      // long style
+  In the previous example and throughout this course, we will use the medium
+  style (that is, $_POST['tireqty']) for referencing form variables, but we
+  have created short versions of the variables for ease of use. (This has been
+  the recommended approach since PHP version 4.2.0.)
+  For your own code, you might decide to use a different approach. To make an
+  informed choice, look at the different methods:
+
+  o Short style ($tireqty) is convenient but requires the register_globals
+    configuration setting be turned on. Whether it is on or off by default
+    depends on the version of PHP. In all versions since 4.2.0, it has been off
+    by default. Previously, it was on by default, and most PHP programmers used
+    the short tag style. This change caused quite a lot of confusion at the
+    time it was made. This style also allows you to make errors that could make
+    your code insecure, which is why it is no longer the recommended approach.
+  o Medium style ($_POST['tireqty']) is now the recommended approach. It is
+    fairly convenient but came into existence only with PHP 4.1.0, so it does
+    not work on older installations.
+  o Long style ($HTTP_POST_VARS['tireqty']) is the most verbose. Note, however,
+    that it is deprecated and is therefore likely to be removed in the long
+    term. This style used to be the most portable but can now be disabled via
+    the register_long_arrays configuration directive, which improves
+    performance.
+
+  When you use the short style, the names of the variables in the script are
+  the same as the names of the form fields in the HTML form. You don't need to
+  declare the variables or take any action to create these variables in your
+  script. They are passed into your script, essentially as arguments are passed
+  to a function. If you are using this style, you can use a variable such as
+  $tireqty. The field tireqty in the form creates the variable $tireqty in the
+  processing script.
+  Such convenient access to variables is appealing, but before you simply turn
+  on register_globals, it is worth considering why the PHP development team set
+  it to off.
+  Having direct access to variables like this is very convenient, but it does
+  allow you to make programming mistakes that could compromise your scripts'
+  security. With form variables automatically turned into global variables like
+  this, there is no obvious distinction between variables that you have created
+  and untrusted variables that have come directly from users.
+  If you are not careful to give all your own variables a starting value, your
+  scripts' users can pass variables and values as form variables that will be
+  mixed with your own. If you choose to use the convenient short style of
+  accessing variables, you need to give all your own variables a starting
+  value.
+  Medium style involves retrieving form variables from one of the arrays
+  $_POST, $_GET, or $_REQUEST. One of the $_GET or $_POST arrays holds the
+  details of all the form variables. Which array is used depends on whether the
+  method used to submit the form was GET or POST, respectively. In addition,
+  all data submitted via GET or POST is also available through $_REQUEST.
+  If the form was submitted via the POST method, the data entered in the
+  tireqty box will be stored in $_POST['tireqty']. If the form was submitted
+  via GET, the data will be in $_GET['tireqty']. In either case, the data will
+  also be available in $_REQUEST['tireqty'].
+  These arrays are some of the superglobal arrays. We will revisit the
+  superglobals when we discuss variable scope.
+  If you are using an older version of PHP, you might not have access to $_POST
+  or $_GET. Prior to version 4.1.0, this information was stored in arrays named
+  $HTTP_POST_VARS and $HTTP_GET_VARS. We call this the long style. As mentioned
+  previously, this style has been deprecated. There is no equivalent of
+  $_REQUEST in this style.
+  If you are using long style, you can access a user's response through
+  $HTTP_POST_VARS['tireqty'] or $HTTP_GET_VARS['tireqty'].
+  The examples used in this course were tested with PHP version 5.0 and will
+  sometimes be incompatible with older versions of PHP prior to version 4.1.0.
+  We recommend that, if possible, you use the current version.
+  Let's look at another example. Because the long and medium style variable
+  names are somewhat cumbersome and rely on a PHP variable type known as arrays
+  (which are covered later in the course), you can start by creating easier-to-
+  use copies.
+  To copy the value of one variable into another, you use the assignment
+  operator, which in PHP is an equal sign (=). The following statement creates
+  a new variable named $tireqty and copies the contents of $_POST ['tireqty']
+  into the new variable:
+  $tireqty = $_POST['tireqty'];
+  Place the following block of code at the start of the processing script.
+  Because this code will not produce any output, placing it above or below the
+  <html> and other HTML tags that start your page makes no difference. We
+  generally place such blocks at the start of the script to make them easy to
+  find.
+  <?php
+    // create short variable names
+    $tireqty = $_POST['tireqty'];
+    $oilqty = $_POST['oilqty'];
+    $sparkqty = $_POST['sparkqty'];
+  ?>
+  This code creates three new variables - $tireqty, $oilqty, and $sparkqty -
+  and sets them to contain the data sent via the POST method from the form.
+  To make the script start doing something visible, we will add the following
+  lines to the bottom of our PHP script:
+  echo '<p>Your order is as follows: </p>';
+  echo $tireqty. ' tires<br />';
+  echo $oilqty. ' bottles of oil<br />';
+  echo $sparkqty. ' spark plugs<br />';
+  At this stage, you have not checked the variable contents to make sure
+  sensible data has been entered in each form field. Try entering deliberately
+  wrong data and observe what happens. Later, you might want to try adding some
+  data validation to this script.
+  Now let's load this file into a browser, and look at the output. The actual
+  values shown, of course, depend on what was typed into the form.
+  The following subsections describe a couple of interesting elements of the
+  previous example.
+* String Concatenation
+  In the sample script, echo prints the value the user typed in each form
+  field, followed by some explanatory text. If you look closely at the echo
+  statements, you can see that the variable name and following text have a
+  period (. ) between them, such as this:
+  echo $tireqty . ' tires<br />';
+  This period is the string concatenation operator, which adds strings (pieces
+  of text) together. You will often use it when sending output to the browser
+  with echo. This way, you can avoid writing multiple echo commands.
+  You can also place any nonarray variables inside a double-quoted string to be
+  echoed. Consider this example:
+  echo "$tireqty tires<br />";>
+  This is equivalent to the first statement shown in this section. Either
+  format is valid, and which one you use is a matter of personal taste. This
+  process, replacing a variable with its contents within a string, is known as
+  interpolation.
+  Note that interpolation is a feature of double-quoted strings only. You
+  cannot place variable names inside a single-quoted string in this way.
+  Running the following line of code
+  echo '$tireqty tires<br />';
+  simply sends "$tireqty tires<br />" to the browser. Within double quotation
+  marks, the variable name is replaced with its value. Within single quotation
+  marks, the variable name or any other text is sent unaltered.
+* Variables and Literals
+  The variables and strings concatenated together in each of the echo
+  statements in the sample script are different types of things. Variables are
+  symbols for data. The strings are data themselves. When we use a piece of raw
+  data in a program like this, we call it a literal to distinguish it from a
+  variable. $tireqty is a variable, a symbol that represents the data the
+  customer typed in. On the other hand, ' tires<br />' is a literal. You can
+  take it at face value. Well, almost. Remember the second example in the
+  preceding section? PHP replaced the variable name $tireqty in the string with
+  the value stored in the variable.
+  Remember the two kinds of strings mentioned already: ones with double
+  quotation marks and ones with single quotation marks. PHP tries to evaluate
+  strings in double quotation marks, resulting in the behavior shown earlier.
+  Single-quoted strings are treated as true literals.
+  Recently, a third way of specifying strings was added. The heredoc syntax
+  (<<<), familiar to Perl users, was added to PHP4. Heredoc syntax allows you
+  to specify long strings tidily, by specifying an end marker that will be used
+  to terminate the string. The following example creates a three-line string
+  and echoes it:
+  echo <<<theEnd
+    line 1
+    line 2
+    line 3
+  theEnd
+  The token theEnd is entirely arbitrary. It just needs to be guaranteed not to
+  appear in the text. To close a heredoc string, place a closing token at the
+  start of a line.
+  Heredoc strings are interpolated, like double-quoted strings.
+* Understanding Identifiers
+  Identifiers are the names of variables, functions, classes, etc. in PHP. You
+  need to be aware of the simple rules defining valid identifiers:
+
+  o Identifiers can be of any length and can consist of letters, numbers, and
+    underscores.
+  o Identifiers cannot begin with a digit.
+  o In PHP, identifiers are case sensitive. $tireqty is not the same as
+    $TireQty. Trying to use them interchangeably is a common programming error.
+    Function names are an exception to this rule: Their names can be used in
+    any case.
+  o A variable can have the same name as a function. This usage is confusing,
+    however, and should be avoided. Also, you cannot create a function with the
+    same name as another function.
+
+

@@ -1,0 +1,18 @@
+h2. In-class Lab 8.2
+
+h3. Exercise 1
+
+# If using your Linux VM, create directory *lab08* under your */var/www/labs* directory, if it does not exist. Otherwise create directory *lab08* under the document root of whatever web server you are using. On the MATC Windows lab computers that will be: C:\Inetpub\wwwroot
+# In jEdit or another text editor, create an HTML form file named *@lab8x2form.html@* and a PHP script named *@lab8x2script.php@* that will allow you to upload files through your Browser and save them to a directory under the document root of your web server.
+# Use the Unit 8 class examples: *uploadFile.html* & *uploadFile.php*, and *uploadPicture.html* & *uploadPicture.php* as models.
+# Your HTML form and PHP script should upload a file through your Browser and save it to a directory named upload under the document root of your web server.
+# Note that on Linux and Mac OS X you will need to change the permissions on the upload directory so that anybody can write to it. Why do you suppose that is?
+# Your HTML form will allow you to browse and select the file to upload, and then copy it to your web server's temporary directory. But to save the file permanently on the server, you must use the PHP built-in function *@move_uploaded_file()@* to transfer the file to your upload directory. The copy of the file in the web server's temporary directory will be removed whenyour PHP script exits.
+# The *uploadPicture.php* PHP script example demonstrates how to use the *@move_uploaded_file()@* function to permanently save the uploaded file.
+# Test your code and show it to your instructor.
+
+<br />
+
+---
+
+[[Unit Eight => 152-166 Unit Eight Index]]

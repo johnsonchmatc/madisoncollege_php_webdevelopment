@@ -1,0 +1,826 @@
+h2. Pattern Matching with Regular Expressions
+
+h3. Say, What?
+
+* <pre>/^[a-zA-Z][\w \.\-]+[a-zA-Z0-9]@([a-zA-Z0-9][a-zA-Z0-9\-]*\.)+[a-zA-Z]{2,4}$/huh?</pre>
+
+h3. What Is a Regular Expression?
+
+* <pre>@/^[a-zA-Z][\w\.\-]+[a-zA-Z0-9]@([a-zA-Z0-9][a-zA-Z0-9\-]*\.)+[a-zA-Z]{2,4}$/@</pre> is called a regular expression and might look like jibberish, but by the time you finish this unit, you will understand what all these symbols mean and how to use them.
+* We will break the expression into very small units, and when all of the pieces have been explained, we will use it to validate an HTML form.
+* Let's start by defining a regular expression and what it is used for.
+* When a user fills out a form, you might want to verify that the format was correct before sending the data to a database.
+* For example, did the user enter a valid birthdate, e-mail address, or credit card number? This is where regular expressions enter the picture. Their power is great and they are used by many other programming languages for handling text, for performing refined searches and replacements, capturing subpatterns in strings, testing input data for certain characters, and more.
+* So, what is a regular expression? A regular expression is really just a sequence or pattern of characters that is matched against a string of text when performing searches.
+* When you create a regular expression, you test the regular expression against a string. The regular expression is enclosed in forward slashes.
+* For example, the regular expression @/green/@ might be matched against the string "The green grass grows". If green is contained in the string, there is a successful match.
+* Like Perl, PHP also provides a large variety of regular expression metacharacters to control the way a pattern is found; for example, the regular expression @/^[Gg]reen/@ consists of a caret and a set of square brackets.
+* These metacharacters control the search so that the regular expression matches only strings starting with an upper- or lowercase letter "g".
+* The possibilities of fine-tuning your search with regular expressions and their metacharacters are endless.
+* PHP regular expressions are used primarily to verify data on the server side. When a user fills out a form and presses the submit button, the form is sent to a server, and then to a PHP script for further processing.
+* Although it is more efficient to handle form validation on the client side with programs like Javascript or JScript, these programs might be disabled, or might not be programmed to verify form data.
+* Checking the form on the client side allows for instant feedback, and less travelling back and forth between the browser and server, but to ensure that the data has been verified, PHP can recheck it.
+* Once the user has filled out a form and submitted it, PHP can check to see if all the boxes have been filled out correctly, and if not, the user is told to reenter the data before the form data is processed.
+* With the power provided by regular expressions, the ability to check for any type of input, such as e-mail addresses, passwords, social security numbers, birthdates, and so on, is greatly simplified.
+* You can also use regular expressions to complete complex search and replace operations in text files, processes that would be difficult, if not impossible, with PHP's standard string functions.
+* PHP supports two types of regular expressions: POSIX and Perl style regular expressions. Each type has a set of functions to implement regular expressions.
+* The first set of functions (POSIX style) are those prefixed with ereg_ . They behave much like the traditional UNIX egrep command. The advantage of the ereg functions is that they are supported by the oldest versions of PHP. The disadvantages are that they tend to be slow, work only with text data, and be less flexible than the Perl style.
+* The second set of regular expression functions (Perl style) start with preg_ . These functions mimic Perl regular expressions and support the newer features, such as backreferences, capturing, lookahead, and lookbehind, as discussed later in this unit.
+* These functions are only available if your version of PHP was compiled with support for the PCRE (Perl Compatible Regular Expression) library, and the PCRE library is installed on your Web server.
+* Check the *@phpinfo()@* output to see if PCRE is enabled. Your instructor will run a *@phpinfo()@* script to demonstrate how to check for PCRE support.
+
+h3. Why Perl style regular expressions? 
+
+* Perl is a popular powerful scripting language known for its ability to manipulate and extract text. It supports regular expressions and regular expression metacharacters to make pattern matching relatively easy and quick.
+* PHP has mimicked Perl by providing special functions to handle pattern matching and included Perl's metacharacters for pattern matching.
+* We discuss each of the pattern-matching functions before delving into regular expression metacharacters.
+* Table: Regular Expression Functions - Perl5 Compatible Functions
+ 
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Function*|{background:#ccc}.*What_It_Does*|
+|*@preg_grep()@* (PHP 4, PHP 5)  |Returns an array of patterns that were matched.                                  |
+|*@preg_match()@*                |Performs a regular expression pattern match.                                     |
+|*@preg_match_all()@*            |Performs a global regular expression match.                                      |
+|*@preg_quote()@*                |Puts a backslash in front of regular expression characters found within a string.|
+|*@preg_replace()@*              |Searches for a pattern and replaces it with another.                             |
+|*@preg_replace_callback()@*     |Like *@preg_replace()@*, but uses a function for the replacement argument.           |
+|*@preg_split()@*                |Splits up a string into substrings using a regular expression as the delimiter.  |
+
+h3. Pattern-Matching Functions
+
+* The table above lists the PHP built-in functions that will be used for performing searches with regular expressions, performing searches and replacements, splitting up strings based on a regular expression delimiter, and so on.
+* Both the Perl style and POSIX style functions are listed in the following two tables, but this unit focuses on the Perl style functions.
+* Table: Regular Expression Functions - POSIX Style
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Function*|{background:#ccc}.*What It Does*|
+|*@ereg()@*           |Performs a regular expression pattern match.                                  |
+|*@eregi()@*          |Performs a case-insensitive regular expression pattern match.                 |
+|*@ereg_replace()@*   |Searches for a pattern and replaces it with another.                          |
+|*@eregi_replace()@*  |Searches for a pattern and replaces it with another, case insensitive.        |
+|*@split()@*          |Splits a string into an array by using a regular expression as the delimiter. |
+|*@spliti()@*         |Splits a string into an array by a regular expression and is case insensitive.|
+
+h3. Finding a Pattern
+
+* The *@preg_match()@* and *@preg_match_all()@* functions are both used to find a pattern (regular expression) within a string of text.
+* The real difference between these two functions is that *@preg_match()@* stops searching after the first match, whereas *@preg_match_all()@* will continue searching until the end of the string, saving what it finds in an array.
+
+h3. The *@preg_match()@* Function
+
+* The *@preg_match()@* function matches for the first pattern it finds in a string (called the subject). Because the *@preg_match()@* function stops searching after it finds the first match, the returned value will be 1 if the pattern was found, and 0 if it was not.
+* The first argument is the regular expression search pattern, the second argument is the string being searched, and the third argument is an array.
+* The only flag that can be specified is PREG_OFFSET_CAPTURE, which causes the array returned to also list the offset in the string where the pattern was found.
+* If an offset value is specified as an argument, then *@preg_match()@* will start searching from that place in the string, rather than from the beginning.
+* The first matched pattern will be assigned to the first element of the array, and if capturing is done, then the next element of the array will contain the first captured pattern.
+* Format:
+<br /><pre>
+int n = preg_match('/regular expression/', 'subject_for_search'[,
+                   array_of_matches[ flags [, offset]]]);
+</pre>
+* Example:
+<br /><pre>
+// $result is 1; $matches contains needle
+$result = preg_match("/needle/", "looking for a needle in a
+                     haystack", $matches);
+</pre>
+* Filename: *match.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax10">$</span><span class="syntax10">string</span> <span class="syntax18">=</span> <span class="syntax13">'</span><span class="syntax13">My</span><span class="syntax13"> </span><span class="syntax13">gloves</span><span class="syntax13"> </span><span class="syntax13">are</span><span class="syntax13"> </span><span class="syntax13">worse</span><span class="syntax13"> </span><span class="syntax13">for</span><span class="syntax13"> </span><span class="syntax13">wear.</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   3:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Returns</span><span class="syntax2"> </span><span class="syntax2">1</span><span class="syntax2"> </span><span class="syntax2">if</span><span class="syntax2"> </span><span class="syntax2">true</span>
+<span class="gutter">   4:</span>  <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax9">preg_match</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">/love/</span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">string</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">matches</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutterH">   5:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">Pattern</span><span class="syntax13"> </span><span class="syntax13">/love/</span><span class="syntax13"> </span><span class="syntax13">was</span><span class="syntax13"> </span><span class="syntax13">matched.&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   6:</span>  <span class="syntax18">}</span>
+<span class="gutter">   7:</span>  <span class="syntax8">else</span> <span class="syntax18">{</span>
+<span class="gutter">   8:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">Pattern</span><span class="syntax13"> </span><span class="syntax13">was</span><span class="syntax13"> </span><span class="syntax13">not</span><span class="syntax13"> </span><span class="syntax13">matched.&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   9:</span>  <span class="syntax18">}</span>
+<span class="gutterH">  10:</span>  <span class="syntax9">print_r</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">matches</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+* The variable $string is assigned "My gloves are worse for wear." on line 2.
+* On line 3 we ask, does $string contain the pattern @/love/@ ? The *@preg_match()@* function searches for the first occurrence of @/love/@ in $string and returns 1 if it matched, and 0 if it did not.
+* *@preg_match()@* also creates an array, the third argument, called $matches, containing the pattern it found in the search string.
+
+h3. Case Sensitivity
+
+* The "i" modifier turns off case sensitivity in the search pattern so that any combination of upper- or lowercase letters can be used and not affect the search.
+* Filename: *imodifier.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax10">$</span><span class="syntax10">string</span> <span class="syntax18">=</span> <span class="syntax13">'</span><span class="syntax13">My</span><span class="syntax13"> </span><span class="syntax13">lovely</span><span class="syntax13"> </span><span class="syntax13">gloves</span><span class="syntax13"> </span><span class="syntax13">are</span><span class="syntax13"> </span><span class="syntax13">worse</span><span class="syntax13"> </span><span class="syntax13">for</span><span class="syntax13"> </span><span class="syntax13">wear,</span><span class="syntax13"> </span><span class="syntax13">Love.</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   3:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Turn</span><span class="syntax2"> </span><span class="syntax2">off</span><span class="syntax2"> </span><span class="syntax2">case</span><span class="syntax2"> </span><span class="syntax2">sensitivity</span>
+<span class="gutter">   4:</span>  <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax9">preg_match</span><span class="syntax18">(</span><span class="syntax14">&quot;</span><span class="syntax14">/</span><span class="syntax14">LOVE</span><span class="syntax14">/</span><span class="syntax14">i</span><span class="syntax14">&quot;</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">string</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">matches</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutterH">   5:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">Pattern</span><span class="syntax13"> </span><span class="syntax13">/LOVE/</span><span class="syntax13"> </span><span class="syntax13">was</span><span class="syntax13"> </span><span class="syntax13">found.&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   6:</span>  <span class="syntax18">}</span>
+<span class="gutter">   7:</span>  <span class="syntax8">else</span> <span class="syntax18">{</span>
+<span class="gutter">   8:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">Match</span><span class="syntax13"> </span><span class="syntax13">was</span><span class="syntax13"> </span><span class="syntax13">not</span><span class="syntax13"> </span><span class="syntax13">found.&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   9:</span>  <span class="syntax18">}</span>
+<span class="gutterH">  10:</span>  <span class="syntax9">print_r</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">matches</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+* The "i" modifier turns off the case sensitivity in the pattern. Now when preg_match() searches for the pattern /LOVE/ in $string, it will find love in lovely, regardless of case.
+
+h3. Captured Patterns
+
+* If patterns within the regular expression are enclosed in parentheses, the preg_match() function saves these subpatterns as an array, the third argument.
+* The first element of the array is the matched pattern, and each subsequent element, the subpatterns, in the order in which they were found.
+* Filename: *capture.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>preg_match() with Capture<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">lavender</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;font</span><span class="syntax17"> </span><span class="syntax17">size</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">+</span><span class="syntax14">1</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">   8:</span>    <span class="syntax10">$</span><span class="syntax10">string</span> <span class="syntax18">=</span> <span class="syntax13">'</span><span class="syntax13">Looking</span><span class="syntax13"> </span><span class="syntax13">for</span><span class="syntax13"> </span><span class="syntax13">a</span><span class="syntax13"> </span><span class="syntax13">fun</span><span class="syntax13"> </span><span class="syntax13">and</span><span class="syntax13"> </span><span class="syntax13">games</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   9:</span>    <span class="syntax10">$</span><span class="syntax10">result</span> <span class="syntax18">=</span> <span class="syntax9">preg_match</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">/(fun)</span><span class="syntax13"> </span><span class="syntax13">and</span><span class="syntax13"> </span><span class="syntax13">(games)/</span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">string</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">matches</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>    <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">result</span> <span class="syntax18">=</span><span class="syntax18">=</span> <span class="syntax5">1</span><span class="syntax18">)</span><span class="syntax18">{</span>
+<span class="gutter">  11:</span>      <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">Pattern</span><span class="syntax13"> </span><span class="syntax13">was</span><span class="syntax13"> </span><span class="syntax13">matched.&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>      <span class="syntax9">print_r</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">matches</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>    <span class="syntax18">}</span>
+<span class="gutter">  14:</span>    <span class="syntax8">else</span> <span class="syntax18">{</span>
+<span class="gutterH">  15:</span>      <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">Pattern</span><span class="syntax13"> </span><span class="syntax13">was</span><span class="syntax13"> </span><span class="syntax13">not</span><span class="syntax13"> </span><span class="syntax13">matched.&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  16:</span>    <span class="syntax18">}</span>
+<span class="gutter">  17:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  18:</span>  <span class="syntax17">&lt;/font</span><span class="syntax17">&gt;</span>
+<span class="gutter">  19:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  20:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* The regular expression is /fun and games/ . The subpatterns "fun" and "games" are enclosed in parentheses.
+* The preg_match() function saves each of the subpatterns in $matches as an array. If the first argument of the array, $matches[0], contains the pattern, $matches[1] will contain the first subpattern "fun", and $matches[2] will contain "games", the second subpattern.
+* The print_r() function prints the contents of $matches .
+* The preg_match_all() Function
+* The preg_match_all() function is like the preg_match() function, but creates an array of all of the patterns matched in the string, not just the first one, and returns the number of times it matched the pattern.
+* Format:
+<br /><pre>
+int number_found = preg_match_all('/regular expression/','string',
+                                  $matches);
+</pre>
+* Example:
+<br /><pre>
+$num=preg_match_all('/ring/',"Don't string me along, just bring me the
+                    goods!", $matches);
+</pre>
+* Filename: *matchAll.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax10">$</span><span class="syntax10">string</span> <span class="syntax18">=</span> <span class="syntax13">'</span><span class="syntax13">My</span><span class="syntax13"> </span><span class="syntax13">lovely</span><span class="syntax13"> </span><span class="syntax13">gloves</span><span class="syntax13"> </span><span class="syntax13">are</span><span class="syntax13"> </span><span class="syntax13">lost</span><span class="syntax13"> </span><span class="syntax13">in</span><span class="syntax13"> </span><span class="syntax13">the</span><span class="syntax13"> </span><span class="syntax13">clover,</span><span class="syntax13"> </span><span class="syntax13">Love.</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   3:</span>  <span class="syntax10">$</span><span class="syntax10">result</span> <span class="syntax18">=</span> <span class="syntax9">preg_match_all</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">/love/</span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">string</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">matches</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   4:</span>  <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">result</span> <span class="syntax18">=</span><span class="syntax18">=</span> <span class="syntax8">true</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutterH">   5:</span>    <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax14">Found</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">result</span><span class="syntax14"> </span><span class="syntax14">matches</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">   6:</span>  <span class="syntax18">}</span>
+<span class="gutter">   7:</span>  <span class="syntax8">else</span> <span class="syntax18">{</span>
+<span class="gutter">   8:</span>    <span class="syntax8">print</span> <span class="syntax13">'</span><span class="syntax13">Didn\'t</span><span class="syntax13"> </span><span class="syntax13">find</span><span class="syntax13"> </span><span class="syntax13">a</span><span class="syntax13"> </span><span class="syntax13">match&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   9:</span>  <span class="syntax18">}</span>
+<span class="gutterH">  10:</span>  <span class="syntax9">print_r</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">matches</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+* The preg_match_all function searches for regular expression @/love/@ in $string and returns an array of matches. The pattern love is case sensitive.
+* The PHP print_r function lists all elements of the $matches array. Three matches were found.
+* Filename: matchAll2.php
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax10">$</span><span class="syntax10">string</span> <span class="syntax18">=</span> <span class="syntax13">'</span><span class="syntax13">My</span><span class="syntax13"> </span><span class="syntax13">lovely</span><span class="syntax13"> </span><span class="syntax13">gloves</span><span class="syntax13"> </span><span class="syntax13">are</span><span class="syntax13"> </span><span class="syntax13">lost</span><span class="syntax13"> </span><span class="syntax13">in</span><span class="syntax13"> </span><span class="syntax13">the</span><span class="syntax13"> </span><span class="syntax13">clover,</span><span class="syntax13"> </span><span class="syntax13">Love.</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   3:</span>  <span class="syntax10">$</span><span class="syntax10">result</span> <span class="syntax18">=</span> <span class="syntax9">preg_match_all</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">/love/i</span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">string</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">matches</span><span class="syntax18">,</span>
+<span class="gutter">   4:</span>                           PREG_OFFSET_CAPTURE<span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">   5:</span>  <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">result</span> <span class="syntax18">&gt;</span> <span class="syntax5">0</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   6:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">The</span><span class="syntax14"> </span><span class="syntax14">pattern</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">love</span><span class="syntax14">/</span><span class="syntax14"> </span><span class="syntax14">was</span><span class="syntax14"> </span><span class="syntax14">matched</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">result</span><span class="syntax14"> </span><span class="syntax14">times</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">   7:</span>  <span class="syntax18">}</span>
+<span class="gutter">   8:</span>  <span class="syntax8">else</span> <span class="syntax18">{</span>
+<span class="gutter">   9:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">Match</span><span class="syntax13"> </span><span class="syntax13">was</span><span class="syntax13"> </span><span class="syntax13">not</span><span class="syntax13"> </span><span class="syntax13">found.&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>  <span class="syntax18">}</span>
+<span class="gutter">  11:</span>  <span class="syntax8">print</span> <span class="syntax13">'</span><span class="syntax13">PREG_OFFSET_CAPTURE</span><span class="syntax13"> </span><span class="syntax13">shows</span><span class="syntax13"> </span><span class="syntax13">the</span><span class="syntax13"> </span><span class="syntax13">offset</span><span class="syntax13"> </span><span class="syntax13">position</span><span class="syntax13"> </span><span class="syntax13">of</span><span class="syntax13"> </span><span class="syntax13">each</span>
+<span class="gutter">  12:</span><span class="syntax13"> </span><span class="syntax13"> </span><span class="syntax13"> </span><span class="syntax13"> </span><span class="syntax13"> </span><span class="syntax13"> </span><span class="syntax13"> </span><span class="syntax13"> </span><span class="syntax13"> </span><span class="syntax13">pattern</span><span class="syntax13"> </span><span class="syntax13">found.&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>  <span class="syntax9">print_r</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">matches</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+* The string contains the pattern "love" and "Love", which preg_match_all() will search for.
+* The preg_match_all() function performs case-insensitive match using the regular expression @/love/i@ in $string and will return an array $matches of all matches found.
+* The PREG_OFFSET_CAPTURE flag shows the offset position where each pattern was found in the string.
+
+h3. Pattern-Matching Modifiers
+
+* A pattern modifier allows you to control the way a pattern match is handled. For example, if you want to search for a pattern and turn off the case sensitivity, you can use the "i" modifier: @/pattern/i@ The table below lists the possible pattern modifiers.
+* Table: Pattern-Matching Modifiers
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Modifier*|{background:#ccc}.*What_It_Does*|
+|A         |Matches only to the beginning of a string even if newlines are embedded and the "m" modifier is used.                                                                                                                        |
+|D         |Matches only at the end of the string. Without this modifier, a dollar sign is ignored if the "m" modifier is set. (There is no equivalent to this modifier in Perl.)                                                        |
+|e         |When performing replacements with preg_replace(), the replacement side is evaluated as an expression.                                                                                                                        |
+|i         |Turns off case sensitivity.                                                                                                                                                                                                  |
+|m         |If a string has embedded newlines, each newline within the string marks the end of that string. The beginning and end of line metacharacters (^ and $) apply to each of the nested strings rather than to the entire string. |
+|S         |Studying a pattern if it is used often to optimize the search time.                                                                                                                                                          |
+|s         |Allows the dot metacharacter to match on any newlines within a string. Normally the dot does not match on the newline character.                                                                                             |
+|X         |Any backslash in a pattern followed by a letter that has no special meaning causes an error.                                                                                                                                 |
+|x         |Ignores whitespace in the pattern except when escaped with a backslash or within brackets; good for commenting regular expressions to make them easier to read.                                                              |
+|U         |This modifier turns off the default "greediness" of the quantifiers, but greediness can be temporarily turned on if the U is followed by a question mark.                                                                    |
+
+h3. Searching and Replacing
+
+h3. The preg_replace() Function
+
+* The preg_replace() function searches for a pattern in a subject that is either a string or an array, and replaces the subject with something else.
+* If the subject being searched is a string and a match is found, then the new subject string will be returned; otherwise the old string is returned.
+* If the subject being searched is an array, then the search and replace is performed on every entry of the subject, and the returned value is an array.
+* The first argument to preg_replace() is the regular expression used for the search, the second argument is the replacement value, and the third argument is the subject that is being searched and where the replacement will occur.
+* Capturing subpatterns and replacing the subpatterns with something else can also be performed.
+* Using the "e" modifier causes preg_replace() to evaluate the replacement value as a valid PHP expression; for example: 4 + 3 becomes 7
+* See the third example below for a demonstration on how the "e" modifier affects substitution.
+* The "i" modifier turns off case sensitivity in the search pattern.
+* The parameters used with preg_replace are listed in the following table.
+* Table: The preg_replace() Parameters
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Parameter*|{background:#ccc}.*Description*|
+|count        |The number of replacements that were performed.                                                     |
+|limit        |The limit of replacements for each pattern in each subject string. Defaults to -1 (no limit).       |
+|pattern      |The regular expression or search pattern; that is, what is being searched for in a string or array. |
+|replacement  |The string or an array of strings to replace what was found in the string or array.                 |
+|subject      |The subject string where the search and replacement are being performed.                            |
+
+* These examples demonstrate use of the preg_replace() function.
+* Format:
+<br /><pre>
+mixed preg_replace ( mixed pattern, mixed replacement,
+                     mixed subject [, int limit [, int &count]] )
+</pre>
+* Examples:
+<br /><pre>
+$new_string = preg_replace("/blue/", "upbeat",
+                           "I am feeling blue, blue, blue.");
+$new_string: "I am feeling upbeat, upbeat, upbeat."
+
+$new_string = preg_replace("/blue/", "upbeat",
+                           "I am feeling blue, blue, blue.", 1);
+$new_string: "I am feeling upbeat, blue, blue"
+
+$new_string = preg_replace("/blue/i", "upbeat",
+                           "I am feeling BLue, BLUE.");
+$new_string: "I am feeling upbeat, upbeat.
+
+$new_string=preg_replace("/(Peace) and (War)/i",
+                         "$2 and $1","Peace and War");
+$new_string: "War and Peace"
+
+$new_string=preg_replace("/5/e", "6*7", "He gave me 5 dollars.")e;
+$new_string: "He gave me 42 dollars."
+</pre>
+* Filename: replace.php
+<br /><pre>
+1:<?php
+2:  $old_string = 'I live in New Orleans.';
+3:  print "Original string: <em>$old_string</em><br />";
+4:  $new_string = preg_replace('/New Orleans/','Philadelphia',
+5:                             $old_string);
+6:  print "New string: <em>$new_string</em><br />";
+7:?>
+</pre>
+* The preg_replace() function takes a regular expression as its first argument. Note that the regular expression is enclosed in quotes. The second argument is the replacement string.
+* The subject string, the one where the replacement will be made, is the original string $old_string. If "New Orleans" is found in the subject string, it will be replaced with "Philadelphia".
+* The new string is now "I live in Philadelphia.".
+* Filename: replace2.php
+<br /><pre>
+1:<?php
+2:   $subject = 'The flag was <em>red, white, </em>and <em>blue</em>.';
+3:   $search = array('/red/','/white/','/blue/');
+4:   $replace = array('yellow','orange','green');
+5:
+6:   echo "Before replacement: $subject<br />";
+7:   $subject = preg_replace($search, $replace, $subject);
+8:   echo "After replacement: $subject";
+9:?>
+</pre>
+* The variable $search contains an array of three regular expressions that will be used in the search.
+* The variable $replace contains an array of strings that will be replaced in the subject string.
+* If in the search, the pattern /red/ is found, it will be replaced with "yellow"; if /white/ is found, it will be replaced with "orange"; and if /blue/ is found, it will be replaced with "green".
+* If there are fewer items in the search string than in the replacement string, then the excess items are ignored. If, on the other hand, there are more items in the search string than in the replacement string, the extra elements will be replaced with the null string.
+* The preg_replace() function takes an array as its search string, and an array as its replacement string, and performs the operations on the subject string.
+* Be careful not to quote either the variables, $search or $replace, or they will not be interpreted as arrays.
+
+h3. Evaluating the Replacement Side with the e Modifier
+
+* Normally, once a pattern is matched, the replacement value is a string. The search string is replaced with the replacement string.
+* With the "e" modifier, the preg_replace() function treats the replacement side as an expression to evaluate, such as a function, arithmetic, or string operation.
+* Filename: replace3.php
+<br /><pre>
+1:<?php
+2:  $subject_string = 'He ate 5 pies.';
+3:  echo preg_replace('/5 pies/e',"(5*3) .' cupcakes'",
+4:                    $subject_string);
+5:?>
+</pre>
+* The search string contains a regular expression and the "e" modifier. This tells PHP to evaluate the replacement argument as an expression and substitute the result of that evaluation into the subject string.
+* If the pattern "5 pies" is found in the subject string, it will be replaced with the result of the evalutaion of "@(5 * 3) .' cupcakes'@"; that is, multiply 5 by 3 and concatenate the string ' cupcakes'.
+
+h3. The preg_split() Function-Splitting Strings
+
+* The preg_split() function splits up a string by some delimiter that marks the separation between the words in the string, such as a space or a colon or a combination of such characters.
+* The function returns an array of substrings. If a limit is specified, then only that many substrings are returned. This function also has a number of flags that are described in a table that follows the next example.
+* Note: If you are using a single character or simple string as the delimiter, the explode() function is faster.
+* The preg_split() function is useful when you have more than one delimiter that can only be expressed as a regular expression, such as a string that is separated by a colon, tab, or space.
+* Format:
+<br /><pre>
+array preg_split ( string pattern, string subject [, int limit [,
+                   int flags]] )
+</pre>
+* Example:
+<br /><pre>
+$array_of_animals = preg_split('/:/','dogs:cats:birds:fish');
+</pre>
+* Filename: split.php
+<br /><pre>
+1:<?php
+2:  $myString = 'apples#oranges#peaches';
+3:  // Split by #
+4:  $myArray = preg_split('/#/', $myString);
+5:  echo '<pre>';
+6:  print_r($myArray);
+7:  echo '</pre>';
+8:?>
+</pre>
+* The words in $string are delimited by the "#" character.
+* The preg_split() function will split up the string by the "#" delimiter and return an array of substrings.
+* Table: Flags for preg_split()
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Flag*|{background:#ccc}.*What_It_Does*|
+|PREG_SPLIT_DELIM_CAPTURE   |The captured pattern in the delimiter pattern will be saved and returned as well.                |
+|PREG_SPLIT_NO_EMPTY        |Returns only nonempty pieces.                                                                    |
+|PREG_SPLIT_OFFSET_CAPTURE  |For every occurring match, an offset will be returned where the match occurred within the string.|
+
+* Splitting on Multiple Alternative Delimiters
+* Because the delimiter is a regular expression, you can place a list of delimiters within square brackets "[ ]" to create a regular expression "character class", which means any one character within the set will be considered a valid delimiter of the string.
+* Filename: split2.php
+<br /><pre>
+ 1:<?php
+ 2:  $colors = 'Primary:red,yellow,blue;'
+ 3:           .'Secondary:violet,orange,green';
+ 4:  $myArray = preg_split('/[:,;]/', $colors);
+ 5:
+ 6:  echo '<h2>Splitting Colors</h2><pre>';
+ 7:  print_r($myArray);
+ 8:  echo '</pre><hr width="50%" />';
+ 9:
+10:  foreach ($myArray as $key => $value) {
+11:    if ($value == "Primary" || $value == "Secondary") {
+12:      print "$value<br />";
+13:    }
+14:    else {
+15:      print "&nbsp;&nbsp;$key: $value<br />";
+16:    }
+17:  }
+18:?>
+</pre>
+* The subject string is $colors. The words in this string are separated by colons, commas, and semicolons.
+* The PHP preg_split() function uses a regular expression with square brackets to define the possible delimiters used for splitting up the string.
+* The square brackets, called a "character class", contain the list of possible delimiters. Any one character within the set is a delimiter, in this example the colon, comma, and semicolon.
+* The print_r() function displays the resulting array created by splitting up the subject string.
+* The foreach loop is used to cycle through the array that was created by the preg_split() function, and print the key-value pairs in the array in a readable format.
+* Filename: split3.php
+<br /><pre>
+1:<?php
+2:  $myCity = 'SAN FRANCISCO';
+3:  $myArray = preg_split('//', $myCity, -1, PREG_SPLIT_NO_EMPTY);
+4:
+5:  echo '<h2>Splitting A Word into Letters</h2>';
+6:  echo '<pre>';
+7:  print_r($myArray);
+8:  echo '</pre>';
+9:?>
+</pre>
+* By using an empty delimiter, preg_split() will split up the string by its individual characters. The PREG_SPLIT_NO_EMPTY flag causes the function to return an array without any empty elements.
+* The array of letters created by splitting on an empty delimiter is displayed as an array by the print_r() function.
+* Filename: split4.php
+<br /><pre>
+1:<?php
+2:  $myStr = 'PORT OF SAN FRANCISCO';
+3:  $myArray = preg_split('/\s/', $myStr, -1,
+4:                        PREG_SPLIT_OFFSET_CAPTURE);
+5:  echo '<h2>Splitting a Phrase into Words</h2>';
+6:  echo '<pre>';
+7:  print_r($myArray);
+8:  echo '</pre>';
+9:?>
+</pre>
+* The preg_split() function takes a number of arguments. In this example, the first argument is the delimiter. "\s" represents a whitespace character.
+* The second argument is the string that is being split. The third argument (normally omitted) is -1, stating that there is no limit to the number of array elements that can be created when splitting up this string.
+* The PREG_SPLIT_OFFSET_CAPTURE flag says that for every array element created, the offset of where it occurred within the string will also be returned.
+* You can see in the output of this example that each substring generates an array element with a numeric key, whose value is another array consisting of two elements: element [0], the substring and element [1], the offset position of where that substring was found in the original string.
+* Other related PHP functions are: spliti() , split() , implode() , and explode()
+
+h3. The preg_grep() Function
+
+* Similar to the UNIX grep command, the preg_grep() function returns an array of values that match a pattern found in an array instead of a search string.
+* You can also invert the search and get an array of all elements that do not contain the pattern being searched for (like UNIX "grep -v") by using the PREG_GREP_INVERT flag.
+* Format:
+<br /><pre>
+array preg_grep ( string pattern, array input [, int flags] )
+</pre>
+* Example:
+<br /><pre>
+$new_array = preg_grep("/ma/", array("normal", "mama", "man","plan"));
+// $new_array contains: normal, mama, man
+
+$new_array=preg_grep("/ma/",array("normal","mama","man",
+                     "plan"),PREG_GREP_INVERT);
+// $new_array contains: plan
+</pre>
+* Filename: *grep.php*
+<br /><pre>
+ 1:<html>
+ 2: <head>
+ 3:  <title>The preg_grep() Function</title>
+ 4: </head>
+ 5: <body bgcolor="lavender">
+ 6:  <font face="verdana" size="+1">
+ 7:  <h2>The preg_grep() Function</h2>
+ 8:  <?php
+ 9:    $regex = '/Pat/';
+10:    $search_array = array('Margaret','Patsy','Patrick',
+11:                          'Patricia','Jim');
+12:    sort($search_array);
+13:
+14:    $newArray = preg_grep($regex, $search_array );
+15:    print '<pre>Found '. count($newArray)." matches\n";
+16:    print_r($newArray);
+17:
+18:    $newArray = preg_grep($regex, $search_array, PREG_GREP_INVERT);
+19:    print 'Found '. count($newArray)." that didn't match\n";
+20:    print_r($newArray);
+21:    print '</pre>';
+22:  ?>
+23:  </font>
+24: </body>
+25:</html>
+</pre>
+* The variable $regex is assigned the regular expression /Pat/ , that will be used later by preg_grep() as the search pattern.
+* The $search_array variable will be used as the subject for the search with the preg_grep() function.
+* After the array has been sorted, the preg_grep() function will search for the pattern, /Pat/, in each element of the array, and return and assign the matched array elements to another array called $newArray.
+* The count() function returns the number of elements in the new array; that is, the number of elements where the pattern /Pat/ was found.
+* The found elements are displayed. Note that the index values from the sorted $search_array have been preserved.
+* When the PREG_GREP_INVERT flag is specified, the preg_grep() function will match and return any elements not found in the original array.
+
+h3. Getting Control - The RegEx Metacharacters
+
+* Regular expression metacharacters are characters that do not represent themselves. They are endowed with special powers to allow you to control the search pattern in some way.
+* For example, you may need to find a pattern only at the beginning of the line, or at the end of the line, or if it starts with an upper- or lowercase letter.
+* Metacharacters will lose their special meaning if preceded with a backslash. For example, the dot metacharacter represents any single character, but when preceded with a backslash is just a dot or period.
+* If you see a backslash preceding a metacharacter, the backslash turns off the meaning of the metacharacter, but if you see a backslash preceding an alphanumeric character in a regular expression, then the backslash is used to create a metasymbol.
+* A metasymbol provides a simpler form to represent some of regular expression metacharacters. For example, [0-9] represents numbers in the range between 0 and 9, and "\d" represents the same thing.
+* [0-9] uses the bracketed character class, whereas "\d" is a metasymbol.
+* Table: Metacharacters
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Character Class*|{background:#ccc}.*What_It_Matches*|{background:#ccc}.*Metacharacter*|
+|Single characters and digits|Matches any character except a newline.<br />Matches any single character in a set.<br />Matches any single character not in a set.|.<br />[a-z0-9]<br />[^a-z0-9]|
+|Single characters and digits<br />- Metasymbols|Matches one digit.<br />Matches a nondigit, same as @[^0-9]@.<br />Matches an alphanumeric (word) character.<br />Matches a nonalphanumeric (nonword) character.|\d<br />\D<br />\w<br />\W|
+|Whitespace characters|Matches whitespace character, spaces, tabs, and newlines.<br /> Matches a nonwhitespace character.<br /> Matches a newline.<br />Matches a return.<br />Matches a tab.<br />Matches a form feed.<br />Matches a null character.|\s<br />\S<br />\n<br />\r<br />\t<br />\f<br />\0|
+|Anchored characters|Matches a word boundary.<br />Matches a nonword boundary.<br />Matches to beginning of line.<br />Matches to end of line.<br />Matches the beginning of the string only.<br />Matches the end of the string or line.|\b<br />\B<br />@^@<br />$<br />\A<br />\D|
+|Repeated characters|Matches 0 or 1 occurrences of the letter x.<br />Matches 0 or more occurrences of the letter x.<br />Matches 1 or more occurrences of the letter x.|x?<br />x*<br />@x+@|
+|Grouped characters|Matches one or more patterns of xyz (e.g., xyxxyzxyz).<br />Matches at least m occurrences of the letter x, and no<br />more than n occurrences of the letter x.|@(xyz)+@<br />x{m,n}|
+|Alternative characters|Matches_one_of_was,_were,_or_will.|&#124;was&#124;were&#124;will|
+|Remembered characters|Used for backreferencing.<br />Matches first set of parentheses.<br />Matches second set of parentheses.<br />Matches third set of parentheses.|(string)<br />\1 or $1<br />\2 or $2<br />\3 or $3|
+|Positive lookahead and lookbehind|Matches x but does not remember the match. These are<br />called noncapturing parentheses.<br />Matches x only if x is followed by y.For example,<br />/Jack(?=Sprat)/ matches Jack only if it is followed by<br />Sprat. /Jack(?=Sprat&#124;Frost)/ matches Jack only if it is<br />followed by Sprat or Frost. Neither Sprat nor Frost is<br />kept as part of what was matched.<br />Matches x only if x is not followed by y. For example,<br />/\d+(?!\.)/ matches one or more numbers only if they are<br />not followed by a decimal point.|(?:x)<br /><br />x(?=y)<br /><br /><br /><br /><br />x(?!y)|
+
+*The following regular expression contains metacharacters:
+<br /><pre>
+/^a...c/
+</pre>
+* The first metacharacter is a caret (^). The caret metacharacter matches for a string only if it is at the beginning of the line.
+* The period (.) is used to match for any single character, including a space. This expression contains three periods, representing any three characters.
+* To find a literal period or any other character that does not represent itself, the character must be preceded by a backslash to prevent interpolation.
+* The expression reads: Search at the beginning of the line for a letter "a", followed by any three single characters, followed by a letter "c".
+* It will match, for example: "abbbc", "a123c", "a   c", "aAx3c", and so on, only if those patterns were found at the beginning of the line.
+* In the following examples, we perform pattern matches, searches, and replacements based on the data from a text file called data10.txt.
+* In the PHP program, the file will be opened and, in a while loop, each line will be read.
+* The functions discussed in the previous section will be used to find patterns within each line of the file. The regular expressions will contain metacharacters, described in the table above.
+
+h3. Anchoring Metacharacters
+
+* Often it is necessary to find a pattern only if it is found at the beginning or end of a line, word, or string.
+* The "anchoring" metacharacters are based on a position just to the left or to the right of the character that is being matched.
+* Anchors are technically called zero-width assertions because they correspond to positions, not actual characters in a string.
+* For example, @/^abc/@ means find "abc" at the beginning of the line, where the "@^@" represents a position, not an actual character.
+* Table 12.7. Anchors (Assertions)
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Metacharacter*|{background:#ccc}.*What It Matches*|
+|^              |Matches to beginning of line or beginning of string.|
+|$              |Matches to end of line or end of string.            |
+|\A             |Matches the beginning of a string.                  |
+|\b             |Matches a word boundary.                            |
+|\B             |Matches a nonword boundary.                         |
+|\D             |Matches the end of a string.                        |
+
+h3. Beginning-of-Line Anchor
+
+* The "@^@" metacharacter is called the beginning-of-line anchor. It is the first character in the regular expression and matches a pattern found at the beginning of a line or string.
+* Filename: *data10.txt* - Contents of data file
+<br /><pre>
+1:Mama Bear 702
+2:Steve Blenheim 100
+3:Betty Boop 200
+4:Igor Chevsky 300
+5:Norma Cord 400
+6:Jon DeLoach 500
+7:Karen Evich 600
+8:BB Kingson 803
+</pre>
+* Filename: *anchor.php* - The PHP Program
+<br /><pre>
+ 1:<?php
+ 2:  $fh = fopen('data10.txt','r');
+ 3:  if (!$fh)
+ 4:    exit('File not found.');
+ 5:  $text = fgets($fh);
+ 6:  while (!feof($fh)) {
+ 7:    if (preg_match('/^B/', $text)) {
+ 8:      echo 'Matched: ', $text,'<br />';
+ 9:    }
+10:    else {
+11:      echo 'No Match: ', $text,'<br />';
+12:    }
+13:    $text = fgets($fh);
+14:  }
+15:?>
+</pre>
+* The file data10.txt is opened for reading.
+* As long as the end of file has not been reached, the while loop will continue to execute. For each iteration of the loop, the fgets() function reads in a line of text.
+* The preg_match() function will return TRUE if a pattern consisting of a string beginning with a B is matched.
+
+h3. End-of-Line Anchor
+
+* The end-of-line anchor, a dollar sign, is used to indicate the ending position in a line. The dollar sign must be the last character in the pattern, just before the closing forward slash delimiter of the regular expression, or it no longer means "end-of-line anchor."
+* If moving files between Windows and UNIX, the end-of-line anchor might not work, due to differences in the end-of-line characters between Windows (\r\n) and UNIX (\n). You can use programs such as dos2unix to address this problem.
+* Filename: *anchor2.php*
+<br /><pre>
+ 1:<?php
+ 2:  $fh = fopen('data10.txt','r');
+ 3:  if (!$fh)
+ 4:    exit('File not found.');
+ 5:  $text = fgets($fh);
+ 6:  while (!feof($fh)) {
+ 7:    if (preg_match('/0$/', $text)) {
+ 8:      echo $text,'<br />';
+ 9:    }
+10:    $text = fgets($fh);
+11:  }
+12:?>
+</pre>
+* As long as the end of file hasn't been reached, the while loop will continue to execute, and for each iteration of the loop, the fgets() function reads in a line of text.
+* The preg_match() function will return TRUE if a pattern consisting of a line ending with a "0" is matched. The "$" metacharacter indicates that "0" must be followed by a newline.
+
+h3. Word Boundaries
+
+A word boundary is represented in a regular expression by the metasymbol "\b".
+* You can search for the word that begins with a pattern, ends with a pattern, or both begins and ends with a pattern.
+* For example, /\blove/ matches a word beginning with the pattern love, and would match lover, loveable, or lovely, but would not find glove.
+* /love\b/ matches a word ending with the pattern love, and would match glove, clove, or love, but not clover.
+* /\blove\b matches a word beginning and ending with the pattern love, and would match only the word love.
+* Filename: wordAnchors.php
+<br /><pre>
+ 1:<?php
+ 2:  $fh = fopen('data10.txt','r');
+ 3:  if (!$fh)
+ 4:    exit('File not found.');
+ 5:  $text = fgets($fh);
+ 6:  while (!feof($fh)) {
+ 7:    if (preg_match('/\bbear\b/i', $text)) {
+ 8:      echo $text,'<br />';
+ 9:    }
+10:    $text = fgets($fh);
+11:  }
+12:?>
+</pre>
+* The preg_match() function will return TRUE if a pattern consisting of the word "bear" is matched, and it is insensitive to case.
+* Because the regular expression is anchored on both ends of the word with the word boundary metasymbol, "\b", only bear is matched in $test, not "unbearable", "beard", or "bears".
+
+h3. Matching Single Characters and Digits
+
+* There are metacharacters to match single characters or digits, and single noncharacters or nondigits, whether in or not in a set.
+
+h3. The Dot Metacharacter
+
+* The dot metacharacter matches any single character with exception to the newline character.
+* For example, the regular expression /a.b/ is matched if the string contains a letter "a", followed by any one single character (except the "\n"), followed by a letter "b", whereas the expression /.../ matches any string containing at least three characters.
+* To match on a literal period, the dot metacharacter must be preceded by a backslash; for example, /love\./ matches on "love." and not "lover".
+* Filename: *dotMatch.php*
+<br /><pre>
+ 1:<?php
+ 2:  $fh = fopen('data10.txt','r');
+ 3:  if (!$fh)
+ 4:    exit('File not found.');
+ 5:  $text = fgets($fh);
+ 6:  while (!feof($fh)) {
+ 7:    if (preg_match('/^... /', $text )) {
+ 8:      echo $text,'<br />';
+ 9:    }
+10:    $text = fgets($fh);
+11:  }
+12:?>
+</pre>
+* As long as the end of file has not been reached, the while loop will continue to read in lines of text with the fgets() function.
+* The regular expression /^... / contains the dot metacharacter. The regular expression means: go to the beginning (^) of the line and find any three characters, followed by a space.
+* Filename: *dotReplace.php*
+<br /><pre>
+ 1:<?php
+ 2:  $fh = fopen('data10.txt','r');
+ 3:  if (!$fh)
+ 4:    exit('File not found.');
+ 5:  $text = fgets($fh);
+ 6:  while (!feof($fh)) {
+ 7:    $newtext = preg_replace('/J../','Daniel', $text);
+ 8:    echo $newtext,'<br />';
+ 9:
+10:    $text = fgets($fh);
+11:  }
+12:?>
+</pre>
+* Until the end of the file is reached, the while loop will continue looping, reading in one line at a time from the file.
+* The first argument to the preg_replace() function is a regular expression containing the dot metacharacter. If the regular expression (a capital "J" followed by at least two characters) is matched in $text, the found pattern will be replaced with "Daniel".
+
+h3. The Character Class
+
+* A character class represents one character from a set of characters.
+* For example, @[abc]@ matches either an "a", "b", or "c"; @[a-z]@ matches one character from a set of characters in the range from "a" to "z"; and @[0-9]@ matches one character in the range of digits between "0" to "9".
+* If the character class contains a leading caret (@^@), then the class represents any one character not in the set.
+* For example, @[^a-zA-Z]@ matches a single character not in the range from "a" to "z" or "A" to "Z", and @[^0-9]@ matches a single digit not in the range between "0" and "9".
+* Table: Character Classes
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Metacharacter*|{background:#ccc}.*What_It_Matches*|
+|@[abc]@          |Matches an a or b or c.                   |
+|@[a-z0-9_]@      |Matches any single character in a set.    |
+|@[^a-z0-9_]@     |Matches any single character not in a set.|
+
+* PHP provides additional metasymbols to represent a character class. The symbols "\d" and "\D" represent a single digit and a single nondigit, respectively (the same as @[0-9]@ and @[^0-9]@).
+* "\w" and "\W" represent a single word character and a single nonword character, respectively (the same as @[A-Za-z_0-9]@ and @[^A-Za-z_0-9]@).
+* If you are searching for a particular character within a regular expression, you can use the dot metacharacter to represent a single character, or a character class that matches on one character from a set of characters.
+* In addition to the dot and character class, PHP supports some backslashed symbols (called metasymbols) to represent single characters.
+
+h3. Matching One Character from a Set
+
+* A regular expression character class represents one character out of a set of characters.
+* Filename: *beginMatch.php*
+<br /><pre>
+ 1:<?php
+ 2:  $fh = fopen('data10.txt','r');
+ 3:  if (!$fh)
+ 4:    exit('File not found.');
+ 5:  $text = fgets($fh);
+ 6:  while (!feof($fh)) {
+ 7:    if (preg_match('/^[BKI]/', $text)) {
+ 8:      echo $text,'<br />';
+ 9:    }
+10:    $text = fgets($fh);
+11:  }
+12:?>
+</pre>
+* The regular expression @/^[BKI]/@ contains a character class matching a string that contains a single uppercase character from the set @[BKI]@ . The preg_match() function will return TRUE if the pattern is matched.
+
+h3. Matching One Character in a Range
+
+* A character class can also be represented as a range of characters by placing a dash between two characters, the first being the start of the range and the second the end of the range; for example, @[0-9]@ represents one character in the range between "0" and "9" and @[A-Za-z0-9]@ represents one alphanumeric character.
+* If you want to represent a range between 10 and 13, the regular expression would be @/1[0-3]/@ , not @/[10-13]/@ because only one character can be matched in a character class.
+* Filename: *charClass.php*
+<br /><pre>
+ 1:<?php
+ 2:  $fh = fopen('data10.txt','r');
+ 3:  if (!$fh)
+ 4:    exit('File not found.');
+ 5:  $text = fgets($fh);
+ 6:  while (!feof($fh)) {
+ 7:    if (preg_match('/[E-M]/', $text)) {
+ 8:      echo $text,'<br />';
+ 9:    }
+10:    $text = fgets($fh);
+11:  }
+12:?>
+</pre>
+* The regular expression @/[E-M]/@ contains a character class matching a string that contains a single character from the range of characters between "E" and "M". The preg_match() function will return TRUE if the pattern is matched.
+* Filename: *charClass2.php*
+<br /><pre>
+ 1:<?php
+ 2:  $fh = fopen('data10.txt','r');
+ 3:  if (!$fh)
+ 4:    exit('File not found.');
+ 5:  $text = fgets($fh);
+ 6:  while (!feof($fh)) {
+ 7:    if (preg_match('/[a-z] [0-5]/', $text)) {
+ 8:      echo $text,'<br />';
+ 9:    }
+10:    $text = fgets($fh);
+11:  }
+12:?>
+</pre>
+* The first argument to the preg_match() function is a regular expression containing character classes using ranges, @[a-z]@ and @[0-5]@.
+* The function will return TRUE if the pattern is matched in $text; that is, one lowercase letter in the range from "a" to "z", a space, and a digit between "0" and "5".
+
+h3. Matching One Character Not in a Set
+
+* When a character set contains a caret right after the opening square bracket, then the search is inversed; that is, the regular expression represents one character not in the set or in the range.
+* For example, @[^a-z]@ represents one character that is not in the range between "a" and "z".
+* Filename: *charClass3.php*
+<br /><pre>
+ 1:<?php
+ 2:  $fh = fopen('data10.txt','r');
+ 3:  if (!$fh)
+ 4:    exit('File not found.');
+ 5:  $text = fgets($fh);
+ 6:  while (!feof($fh)) {
+ 7:    if (preg_match('/^[^BKI]/', $text)) {
+ 8:      echo $text,'<br />';
+ 9:    }
+10:    $text = fgets($fh);
+11:  }
+12:?>
+</pre>
+* The first argument to the preg_match() function is a regular expression containing a character class using a "@^@", @[^BKI]]@.
+* The function will return TRUE if the pattern is matched in $text; that is, the line begins with one character that is not a "B" or "K" or "I". The "^" means "not" when enclosed in square brackets as part of a character set.
+
+h3. Metasymbols
+
+* Metasymbols offer an alternative way to represent a character class or whitespace characters.
+* For example, instead of representing a number as @[0-9]@, it can be represented as "\d", and the alternative for representing a nonnumber @[^0-9]@ is "\D". Metasymbols are easier to use and and to type.
+* Table: Metasymbols
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Symbol*|{background:#ccc}.*What_It_Matches*|{background:#ccc}.*Character_Class*|
+|\d      |One digit                 |@[0-9]@                                                           |
+|\D      |One nondigit              |@[^0-9]@                                                          |
+|\w      |One word character        |@[A-Za-z0-9_]@                                                    |
+|\W      |One nonword character     |@[^A-Za-z0-9]@                                                    |
+|\s      |One whitespace character  |(tab, space, newline, carriage return, form feed, vertical tab) |
+|\S      |One nonspace character    |                                                                |
+
+
+h3. Metasymbols Representing Digits and Spaces
+
+* The character class @[0-9]@ represents one digit in the range between "0" and "9", as does the metasymbol "\d".
+* To create a regular expression that matches on three digits, you could write: @/[0-9][0-9][0-9]/@ or simply @/\d\d\d/@.
+* To represent a space, you can either insert a blank space, or use the metasymbol "\s".
+* Filename: *metaSymbols.php*
+<br /><pre>
+ 1:<?php
+ 2:  $fh = fopen('data10.txt','r');
+ 3:  if (!$fh)
+ 4:    exit('File not found.');
+ 5:  $text = fgets($fh);
+ 6:  while (!feof($fh)) {
+ 7:    if (preg_match('/h\s\d\d\d/', $text)) {
+ 8:      echo $text,'<br />';
+ 9:    }
+10:    $text = fgets($fh);
+11:  }
+12:?>
+</pre>
+* The first argument to the preg_match() function is a regular expression containing the metasymbol "\s" representing a space, and "\d" representing a digit.
+* The function will return TRUE if the pattern is matched in $text; that is, the line contains an "h", followed by a space, and three digits.
+
+h3. Metasymbols Representing Alphanumeric Word Characters
+
+* The metasymbol to represent one alphanumeric word character is "\w", much easier to write than @[a-zA-Z0-9_]@.
+* To represent one nonalphanumeric character, you simply capitalize the metasymbol, "\W", which is the same as @[^a-zA-Z0-9_]@.
+* Filename: *metaSymbols2.php*
+<br /><pre>
+ 1:<?php
+ 2:  $fh = fopen('data10.txt','r');
+ 3:  if (!$fh)
+ 4:    exit('File not found.');
+ 5:  $text = fgets($fh);
+ 6:  while (!feof($fh)) {
+ 7:    if (preg_match('/^\w\w\w\W/', $text)) {
+ 8:      echo $text,'<br />';
+ 9:    }
+10:    $text = fgets($fh);
+11:  }
+12:?>
+</pre>
+* The first argument to the preg_match() function is a regular expression containing three alphanumeric word characters, "\w\w\w".
+* The metasymbol "\W" represents the character class @[^A-Za-z0-9_]@.
+* Filename: *metaSymbols3.php*
+<br /><pre>
+ 1:<?php
+ 2:  $fh = fopen('data10.txt','r');
+ 3:  if (!$fh)
+ 4:    exit('File not found.');
+ 5:  $text = fgets($fh);
+ 6:  while (!feof($fh)) {
+ 7:    $newtext = preg_replace('/\W\D/','XX', $text);
+ 8:    echo $newtext,'<br />';
+ 9:
+10:    $text = fgets($fh);
+11:  }
+12:?>
+</pre>
+* The first argument to the preg_replace() function is the search value, a regular expression containing one nonalphanumeric "\W" and one nondigit "\D".
+* The second argument "XX" is the replacement value. The function will replace "\W\D" with "XX" in $text if the regular expression is matched.
+
+<br />
+
+---
+
+[[Unit Ten => 152-166 Unit Ten Index]]

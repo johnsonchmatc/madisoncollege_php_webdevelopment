@@ -1,0 +1,86 @@
+h2. In-class Lab 2.1
+
+
+h3. NOTE:  
+
+In the MATC classrooms and labs we will be using VMWare Workstation 6 to run our Linux virtual machines (VMs). However our Linux VMs are set up to also be used with VMWare Player, Fusion (for Apple OSX) and Server. Any of these may be downloaded free from the VMWare site.
+
+
+
+h3. Exercise 1
+
+# Copy the Linux virtual machine (VM) from the DVD given to you by your instructor to your lab machine. The VM will be in directory *UbuntuJavaPHPStudents* on the CD, so you can just drag that folder to your desktop.
+# Start up VMWare Workstation on your lab machine by double-clicking on the desktop icon.
+# At the VMWare Console, select File=>Open. In the dialog box select Browse, and locate the UbuntuJavaPHPStudents VM on your external drive. Select the file "UubntuRailsPHP.vmx" in the UbuntuJavaPHPStudents directory.
+# Start up the Ubuntu VM by clicking on the green arrow next to the word Start. A dialog box will appear asking whether you want to create a new unique ID number (UUID) for your VM. Set the radio button to Create and click OK . NOTE: When you copy or move a VM to a different location, VMWare "notices" and asks this question. The purpose is to assure that each VM has a unique internal ID. Using multiple VMs with the same internal ID may cause a malfunction, potentially corrupting a VM!
+# The Ubuntu VM will take some time to start up. You may get a dialog box asking whether the VM should check for the existence of a floppy drive. We recommend you answer Yes, so a floppy drive will be used if available on the host.
+# When the GUI login screen appears, use the following user name and password to log in:
+<br /><pre>
+User:        student
+Password:    student
+</pre>
+
+h3. Exercise 2
+
+# Open a terminal window and navigate to the /var/www directory:
+<br /><pre>student@student:~$ cd /var/www/</pre>
+# Create the *labs* directory with this command. The *sudo* part of the command allows you to perform a task in your VMWare image as the "superuser". When asked for a password enter "student".
+<br /><pre>student@student:/var/www$ sudo mkdir labs
+[sudo] password for student:</pre>
+# Confirm that you created the directory with this command:
+<br /><pre>student@student:/var/www$ ls -l
+total 8
+drwxr-xr-x 2 root root 4096 2008-01-07 13:25 apache2-default
+drwxr-xr-x 2 root root 4096 2008-01-22 22:12 labs
+lrwxrwxrwx 1 root root   21 2007-09-18 13:57 phpmyadmin -> /usr/share/phpmyadmin
+</pre>
+# You now need to make yourself the owner of the *labs* directory. From the /var/www directory, enter this command:
+<br /><pre>$ sudo chown student:student labs</pre>
+# Run the "ls -l" command again and see the results of the chown.
+# Open jEdit by double clicking the icon on your Linux desktop. In jEdit, navigate to the directory /var/www/labs.
+# Create a PHP script named hello.php containing the following text:
+<br /><pre>
+<html>
+<head>
+  <title>PHP Hello World!</title>
+</head>
+<body>
+  <?php echo 'Look out world, here is another PHP script!' ?>
+</body>
+</html></pre>
+and save it into your labs directory.
+# Create a second PHP script named phpinfo.php containing the following text:
+<br /><pre>
+<html>
+<head>
+  <title>phpinfo()</title>
+</head>
+<body>
+  <?php phpinfo() ?>
+</body>
+</html></pre>
+and save it into your labs directory.
+# Test your two scripts by opening Firefox and loading the following URLs:
+<br /><pre>
+http://localhost/labs/hello.php
+
+http://localhost/labs/phpinfo.php
+</pre>
+# Note that PHP scripts must be placed in a directory under the web server's document root and accessed through the document root for the PHP code to be executed. What happens if you load your hello.php script using the following URL?
+<br /><pre>
+file://var/www/labs/hello.php
+</pre>
+# Show your scripts and the results of loading the above URLs to your instructor.
+
+h3. Exercise 3
+
+# When done showing your code to the instructor, close jEdit, Firefox and any other applications you have open.
+# Log out of the student account (by selecting System=>Quit and then Shutdown to shut down the Ubuntu VM, returning to the VMWare console.
+# The Ubuntu VM will automatically "power down" after completing the Shutdown process. It is still important to WAIT until you see the VMWare configuration screen. Until that screen re-appears, VMWare is flushing the disk buffers to your hard disk, and that can take a minute or two. DO NOT interrupt that process.
+# *THIS IS VERY IMPORTANT*: Do not ever just detach your USB drive, without first using the Windows "Safely Remove Hardware" system tray icon, or dismounting the USB drive on Linux or Apple OSX. This will corrupt your VM, causing you to lose all PHP scripts and other data saved on it!
+
+<br />
+
+---
+
+[[Unit Two => 152-166 Unit Two Index]]

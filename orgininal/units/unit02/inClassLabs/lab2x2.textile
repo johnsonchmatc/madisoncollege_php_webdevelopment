@@ -1,0 +1,31 @@
+h2. In-class Lab 2.2
+
+
+h3. Exercise 1
+
+ 
+# Download the following HTML form file:
+** myform.html ("download":/attachment/unit02/myform.html.txt or "view":/attachment/unit02/myform-view.html)
+** Save the file as myform.html in the labs directory under your document root directory.
+# Open myform.html in a text editor and inspect it to determine what fields it contains.
+# Open myform.html in a browser to see how it works.
+
+h3.  Exercise 2
+
+# Create a script named myscript.php and save it into your labs directory.
+# Add PHP variables to hold the values of the fields from the HTML form.
+# PHP uses the $_POST[ ] array to hold form field values after the form is posted.
+# For example, if there is a form field called "name", your variable assignment statement will look like:
+<br /><pre>
+$name = $_POST['name'];
+</pre>
+# Add PHP code blocks embedded in HTML to print the descriptions and values of all fields entered in the myform.html HTML form.
+# If a form field is empty, print a "no value submitted" message instead of the field value.
+# Test your code and show it to your instructor.
+
+
+<br />
+
+---
+
+[[Unit Two => 152-166 Unit Two Index]]

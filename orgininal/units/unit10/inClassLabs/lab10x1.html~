@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta name="generator" content="HTML Tidy, see www.w3.org" />
+  <title>In-class Lab 10.1</title>
+  <link href="../../../css/basic.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" language="JavaScript">
+<!--
+function putSemester() {
+    var today=new Date();
+    var thisMonth=today.getMonth()+1;
+    var thisYear=today.getFullYear();
+    if(thisMonth <=6) {
+        return "Spring, " + thisYear;
+    }
+    else {
+       return "Fall, " + thisYear;
+    }
+}//-->
+  </script>
+  <style type="text/css">
+<!--
+    .bgStripes {
+        background-image:url(../../../images/Xstripes.gif);
+        background-attachment: fixed;
+    }
+    body {
+        background-color:white;
+    }
+    strong {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+-->
+  </style>
+</head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
+<table class="bgStripes" border="0" width="100%">
+  <tbody>
+    <tr name="firstRow">
+      <td valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+      <script type="text/javascript">
+          <!--
+            document.write(putSemester());
+            -->
+      </script>
+      </span> <br />
+</td>
+<td style="text-align: center;"><span style="color: darkblue; font-size: medium; font-weight: bold;">
+PHP Web Development with MySQL</span> </td>
+<td align="right" valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+3 Credits</span> </td>
+</tr>
+<tr>
+<td colspan="3" style="text-align: center;"><span style="font-size: xx-small; font-weight: bold;">
+152-166</span> </td>
+</tr>
+</tbody>
+</table>
+<h2>In-class Lab 10.1</h2>
+<ol type="I">
+<li class="row0">
+<p>Exercise 1</p>
+<ol type="1">
+<li class="row1">
+<p>
+If using your Linux VM, create directory <b>lab10</b> under your
+<b>/var/www/labs</b> directory. Otherwise create directory <b>lab10</b> under
+the document root of whatever web server you are using.
+On the MATC Windows lab computers that will be: <b>C:\xampp\htdocs</b>
+If using XAMPP on your external USB drive it will probably be: <b>E:\xampp\htdocs</b>
+</p>
+</li>
+<li class="row1">
+<p>
+In <b>jEdit</b> or another text editor, create a PHP script file named
+<b>lab10x1e1.php</b>
+that uses the <b>preg_match()</b> function to find patterns in a string.
+</p>
+</li>
+<li class="row1">
+<p>
+Declare a string variable and assign it the value:
+</p>
+<code>
+"The dog's not the turkey, the turkey's the turkey, you turkey!"
+</code>
+</li>
+<li class="row1">
+<p>
+Use <b>preg_match()</b> to search your string for the word "turkey".
+</p></li>
+<li class="row1">
+<p>
+If the word is found print an appropriate message, such as:
+"I found the turkey", otherwise print out a message such as:
+"I did not find the turkey".
+</p>
+</li>
+<li class="row1">
+<p>
+Also, print out the contents of the optional third argument to preg_match(),
+an array of matched paterns, using the built-in function <b>print_r</b>.
+</p>
+</li>
+</ol>
+</li>
+<li class="row1">
+<p>Exercise 2</p>
+<ol type="1">
+<li class="row1">
+<p>Create a PHP script named <b>lab10x1e2.php</b> and save it into your lab10
+directory.
+</p>
+</li>
+<li class="row1">
+<p>
+Again, declare a string variable and assign it the value:
+</p>
+<code>
+"The dog's not the turkey, the turkey's the turkey, you turkey!"
+</code>
+</li>
+<li class="row1">
+<p>
+This time use <b>preg_match_all()</b> to search your string for the word "turkey".
+</p></li>
+<li class="row1">
+<p>
+If the word is found print an appropriate message, such as:
+"I found the turkey", otherwise print out a message such as:
+"I did not find the turkey".
+</p>
+</li>
+<li class="row1">
+<p>
+Also, print out the contents of the optional third argument to preg_match_all(),
+an array of matched paterns, using the built-in function <b>print_r</b>.
+</p>
+</li>
+<li class="row1">
+<p>Test your code and show it to your instructor.</p>
+</li>
+</ol>
+</ol>
+</body>
+</html>

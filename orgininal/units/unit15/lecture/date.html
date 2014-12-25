@@ -1,0 +1,1007 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>Date &amp; Time</title>
+<link href="../../../css/basic.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" language="JavaScript">
+<!--
+function putSemester() {
+    var today=new Date();
+    var thisMonth=today.getMonth()+1;
+    var thisYear=today.getFullYear();
+    if(thisMonth <=6) {
+        return "Spring, " + thisYear;
+    }
+    else {
+       return "Fall, " + thisYear;
+    }
+}//-->
+</script>
+<style type="text/css">
+<!--
+    .bgStripes {
+        background-image:url(../../../images/Xstripes.gif);
+        background-attachment: fixed;
+    }
+    body {
+        background-color:white;
+    }
+    strong {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+-->
+</style>
+</head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
+<table class="bgStripes" border="0" width="100%">
+<tbody>
+<tr name="firstRow">
+<td valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+<script type="text/javascript">
+<!--
+    document.write(putSemester());
+-->
+</script>
+</span> <br>
+</td>
+<td style="text-align: center;"><span style="font-weight: bold; font-size: medium; color: darkblue;">
+PHP Web Development with MySQL
+</span> </td>
+<td align="right" valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+3 Credits</span> </td>
+</tr>
+<tr>
+<td colspan="3" style="text-align: center;"><span style="font-size: xx-small; font-weight: bold;">
+152-166</span> </td>
+</tr>
+</tbody>
+</table>
+<!--The heading for the slides --> <br>
+<table class="headTable1" border="0">
+<tbody>
+<tr>
+<td width="100"><a href="index.html"><img alt="" src="../../../images/btn_lArrow.gif" border="0"></a><a href="index.html"><img alt="" src="../../../images/btn_upArrow.gif" border="0"></a><a href="email.html"><img alt="" src="../../../images/btn_rArrow.gif" border="0"></a></td>
+<td>Date &amp; Time Functions</td>
+</tr>
+</tbody>
+</table>
+<br>
+<div class="disp1">
+<ul class="slidesUl1">
+<li><p>
+Working with dates and time is reasonably easy, but can be quite complex when
+dealing with different time zones, Daylight Saving Time, and so on.
+</p><p>
+PHP offers a range of functions to handle date and time, and many of these
+functions use the UNIX timestamp, the number of seconds since July 1, 1970,
+00:00:00 GMT (also called the epoch).
+</p><p>
+In  this unit we cover some of the functions that deal with the timestamps and those that
+are used to format the date and time.
+
+If you are just interested in formatting the date and time, the easiest way to
+get formatted date strings is with the <b>date()</b> and the <b>strftime()</b>
+functions.
+</p></li>
+<li><p>
+Formatting Dates and Times
+</p></li>
+<li><p>
+The date() Function
+</p><p>
+The <b>date()</b> function is used to format a local time, date, or both.
+</p><p>
+It returns a formatted string based on formatting options. The time is the
+timestamp on your computer and defaults to the value of <b>time()</b> , a
+function that returns the number of seconds since January 1, 1970, GMT.
+</p><p>
+The options for date() are shown in the Table below.
+</p><p>
+Table: Date and Time Formatting Options
+</p>
+<table>
+<tr>
+<td><code><b><u>
+Option</u></b>&nbsp;</code></td>
+<td><code><b><u>
+Description</u></b></code></td>
+</tr><tr>
+<td><code>
+a</code></td>
+<td><code>
+am or pm</code></td>
+</tr><tr>
+<td><code>
+A</code></td>
+<td><code>
+AM or PM</code></td>
+</tr><tr>
+<td><code>
+B</code></td>
+<td><code>
+Swatch Internet time</code></td>
+</tr><tr>
+<td><code>
+d</code></td>
+<td><code>
+Day of the month, two digits with leading zeros (i.e., 01 to 31)</code></td>
+</tr><tr>
+<td><code>
+D</code></td>
+<td><code>
+Day of the week in text, three letters (e.g., Mon for Monday)</code></td>
+</tr><tr>
+<td><code>
+F</code></td>
+<td><code>
+Month in text (e.g., January)</code></td>
+</tr><tr>
+<td><code>
+g</code></td>
+<td><code>
+Hour, 12-hour format without leading zeros (i.e., 1 to 12)</code></td>
+</tr><tr>
+<td><code>
+G</code></td>
+<td><code>
+Hour, 24-hour format without leading zeros (i.e., 0 to 23)</code></td>
+</tr><tr>
+<td><code>
+h</code></td>
+<td><code>
+Hour, 12-hour format with leading zeros (i.e., 01 to 12)</code></td>
+</tr><tr>
+<td><code>
+H</code></td>
+<td><code>
+Hour, 24-hour format (i.e., 00 to 23)</code></td>
+</tr><tr>
+<td><code>
+i</code></td>
+<td><code>
+Minutes with leading zeros (e.g., 00 to 59)</code></td>
+</tr><tr>
+<td><code>
+I</code></td>
+<td><code>
+1 if Daylight Savings Time, 0 if not</code></td>
+</tr><tr>
+<td><code>
+j</code></td>
+<td><code>
+Day of the month without leading zeros (i.e., 1 to 31)</code></td>
+</tr><tr>
+<td><code>
+l</code></td>
+<td><code>
+Day of the week in text (e.g., Friday)</code></td>
+</tr><tr>
+<td><code>
+L</code></td>
+<td><code>
+1 if it is a leap year, 0 if not</code></td>
+</tr><tr>
+<td><code>
+m</code></td>
+<td><code>
+Month with leading zeros (i.e., 04 to 11)</code></td>
+</tr><tr>
+<td><code>
+M</code></td>
+<td><code>
+Month in text, three letters (e.g., Jul)</code></td>
+</tr><tr>
+<td><code>
+n</code></td>
+<td><code>
+Month without leading zeros (e.g., 1 to 12)</code></td>
+</tr><tr>
+<td><code>
+r</code></td>
+<td><code>
+RFC 822 formatted date (i.e., Thu, 21 Dec 2000 16:01:07 +0200)</code></td>
+</tr><tr>
+<td><code>
+s</code></td>
+<td><code>
+Seconds with leading zeros (e.g., 00 to 59)</code></td>
+</tr><tr>
+<td><code>
+S</code></td>
+<td><code>
+English ordinal suffix, textual, two characters (e.g., th, nd)</code></td>
+</tr><tr>
+<td><code>
+t</code></td>
+<td><code>
+Number of days in the given month (i.e., 28 to 31)</code></td>
+</tr><tr>
+<td><code>
+T</code></td>
+<td><code>
+Time zone setting of this machine (i.e., MDT)</code></td>
+</tr><tr>
+<td><code>
+U</code></td>
+<td><code>
+Seconds since the epoch, January 1 1970 00:00:00 GMT</code></td>
+</tr><tr>
+<td><code>
+w</code></td>
+<td><code>
+Day of the week, numeric (i.e., 0 [Sunday] to 6 [Saturday])</code></td>
+</tr><tr>
+<td><code>
+Y</code></td>
+<td><code>
+Year, four digits (i.e., 2007)</code></td>
+</tr><tr>
+<td><code>
+y</code></td>
+<td><code>
+Year, two digits (i.e., 07)</code></td>
+</tr><tr>
+<td><code>
+z</code></td>
+<td><code>
+Day of the year (i.e., 0 to 365)</code></td>
+</tr><tr>
+<td><code>
+Z</code></td>
+<td><code>
+Time zone offset in seconds (i.e., -43200 to 43200). The offset for time zones
+west of UTC is always negative, and for those east of UTC is always positive.</code></td>
+</tr>
+</table>
+<p>
+Format:
+</p>
+<blockquote><code><small>
+string date ( string format [, int timestamp] )<br>
+</small></code></blockquote>
+</p><p>
+Example:
+</p>
+<blockquote><code><small>
+date("M d, Y"); // Outputs: July 04, 2006<br>
+</small></code></blockquote>
+<h4>
+Filename: date.php
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Using the date() Function<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">lavender</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;font</span><span class="syntax17"> </span><span class="syntax17">size</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">+</span><span class="syntax14">1</span><span class="syntax14">&quot;</span><span class="syntax17"> </span><span class="syntax17">face</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">verdana</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">   8:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">date()</span><span class="syntax2"> </span><span class="syntax2">function</span><span class="syntax2"> </span><span class="syntax2">examples</span>
+<span class="gutter">   9:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">1.</span><span class="syntax13"> </span><span class="syntax13">&lt;b&gt;date(\'d-M-Y\')&lt;/b&gt;</span><span class="syntax13"> </span><span class="syntax13">returns=&gt;</span><span class="syntax13"> </span><span class="syntax13">&lt;b&gt;&lt;i&gt;</span><span class="syntax13">'</span><span class="syntax18">,</span>
+<span class="gutterH">  10:</span>         <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">d-M-Y</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">&lt;/i&gt;&lt;/b&gt;&lt;br&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">2.</span><span class="syntax13"> </span><span class="syntax13">&lt;b&gt;date(\'M/d/Y\')&lt;/b&gt;</span><span class="syntax13"> </span><span class="syntax13">returns=&gt;</span><span class="syntax13"> </span><span class="syntax13">&lt;b&gt;&lt;i&gt;</span><span class="syntax13">'</span><span class="syntax18">,</span>
+<span class="gutter">  12:</span>         <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">M/d/Y</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">&lt;/i&gt;&lt;/b&gt;&lt;br&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">3.</span><span class="syntax13"> </span><span class="syntax13">&lt;b&gt;date(\'D</span><span class="syntax13"> </span><span class="syntax13">dS</span><span class="syntax13"> </span><span class="syntax13">M,</span><span class="syntax13"> </span><span class="syntax13">Y</span><span class="syntax13"> </span><span class="syntax13">h:i</span><span class="syntax13"> </span><span class="syntax13">a\')&lt;/b&gt;</span><span class="syntax13"> </span><span class="syntax13">returns=&gt;</span><span class="syntax13"> </span><span class="syntax13">&lt;b&gt;&lt;i&gt;</span><span class="syntax13">'</span><span class="syntax18">,</span>
+<span class="gutter">  14:</span>         <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">D</span><span class="syntax13"> </span><span class="syntax13">dS</span><span class="syntax13"> </span><span class="syntax13">M,</span><span class="syntax13"> </span><span class="syntax13">Y</span><span class="syntax13"> </span><span class="syntax13">h:i</span><span class="syntax13"> </span><span class="syntax13">a</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">&lt;/i&gt;&lt;/b&gt;&lt;br&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutterH">  15:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">4.</span><span class="syntax13"> </span><span class="syntax13">&lt;b&gt;date(\'\T\h\e</span><span class="syntax13"> </span><span class="syntax13">\\t\i\m\e</span><span class="syntax13"> </span><span class="syntax13">\i\s:</span><span class="syntax13"> </span><span class="syntax13">h:m</span><span class="syntax13"> </span><span class="syntax13">a\')&lt;/b&gt;</span><span class="syntax13"> </span><span class="syntax13">returns=&gt;</span><span class="syntax13"> </span><span class="syntax13">&lt;b&gt;&lt;i&gt;</span><span class="syntax13">'</span><span class="syntax18">,</span>
+<span class="gutter">  16:</span>         <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">\T\h\e</span><span class="syntax13"> </span><span class="syntax13">\\t\i\m\e</span><span class="syntax13"> </span><span class="syntax13">\i\s:</span><span class="syntax13"> </span><span class="syntax13">h:m</span><span class="syntax13"> </span><span class="syntax13">a</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">&lt;/i&gt;&lt;/b&gt;&lt;br&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  17:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">5.</span><span class="syntax13"> </span><span class="syntax13">&lt;b&gt;date(\'\T\o\d\a\y</span><span class="syntax13"> </span><span class="syntax13">\i\s:</span><span class="syntax13"> </span><span class="syntax13">l\')&lt;/b&gt;</span><span class="syntax13"> </span><span class="syntax13">returns=&gt;</span><span class="syntax13"> </span><span class="syntax13">&lt;b&gt;&lt;i&gt;</span><span class="syntax13">'</span><span class="syntax18">,</span>
+<span class="gutter">  18:</span>         <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">\T\o\d\a\y</span><span class="syntax13"> </span><span class="syntax13">\i\s:</span><span class="syntax13"> </span><span class="syntax13">l</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">&lt;/i&gt;&lt;/b&gt;&lt;br&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  19:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutterH">  20:</span>  <span class="syntax17">&lt;/font</span><span class="syntax17">&gt;</span>
+<span class="gutter">  21:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  22:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+</li>
+<li><p>
+The strftime() Function
+</p><p>
+The <b>strftime()</b> function is also used to format the date and time
+(based on the locale settings), similar to the date() function but with
+different options.
+</p><p>
+To get information on how to see and set the locale settings see:
+<a href="http://us2.php.net/manual/en/function.setlocale.php">http://us2.php.net/manual/en/function.setlocale.php</a>
+</p><p>
+Format:
+</p>
+<code><small>
+string strftime ( string format [, int timestamp] )<br>
+</small></code>
+<p>
+Example:
+</p>
+<code><small>
+echo "Today is ", strftime("%A"),".\n"; // Today is Friday.<br>
+</small></code>
+<p>
+The conversion specifiers shown in the table below are based on the current
+locale; for example, France, Japan, and so on.
+</p><p>
+Table: Arguments for the strftime() Function
+</p>
+<table>
+<tr>
+<td><code><b>
+Format<br>
+<u>Character</u></b>&nbsp;</code></td>
+<td><code><b><u>
+What It Means</u></b></code></td>
+</tr><tr>
+<td><code>
+%a</code></td>
+<td><code>
+Abbreviated weekday name</code></td>
+</tr><tr>
+<td><code>
+%A</code></td>
+<td><code>
+Full weekday name</code></td>
+</tr><tr>
+<td><code>
+%b</code></td>
+<td><code>
+Abbreviated month name</code></td>
+</tr><tr>
+<td><code>
+%B</code></td>
+<td><code>
+Full month name</code></td>
+</tr><tr>
+<td><code>
+%c</code></td>
+<td><code>
+Preferred date and time representation</code></td>
+</tr><tr>
+<td><code>
+%C</code></td>
+<td><code>
+Century number</code></td>
+</tr><tr>
+<td><code>
+%d</code></td>
+<td><code>
+Day of the month as a decimal number (range 01 to 31)</code></td>
+</tr><tr>
+<td><code>
+%D</code></td>
+<td><code>
+Same as %m/%d/%y</code></td>
+</tr><tr>
+<td><code>
+%e</code></td>
+<td><code>
+Day of the month as a decimal number, a single digit is preceded by a space
+(range "1" to "31")</code></td>
+</tr><tr>
+<td><code>
+%g</code></td>
+<td><code>
+Like %G, but without the century</code></td>
+</tr><tr>
+<td><code>
+%G</code></td>
+<td><code>
+The four-digit year corresponding to the ISO week number (see %V)</code></td>
+</tr><tr>
+<td><code>
+%h</code></td>
+<td><code>
+Same as %b</code></td>
+</tr><tr>
+<td><code>
+%H</code></td>
+<td><code>
+Hour as a decimal number using a 24-hour clock (range 00 to 23)</code></td>
+</tr><tr>
+<td><code>
+%I</code></td>
+<td><code>
+Hour as a decimal number using a 12-hour clock (range 01 to 12)</code></td>
+</tr><tr>
+<td><code>
+%j</code></td>
+<td><code>
+Day of the year as a decimal number (range 001 to 366)</code></td>
+</tr><tr>
+<td><code>
+%m</code></td>
+<td><code>
+Month as a decimal number (range 01 to 12)</code></td>
+</tr><tr>
+<td><code>
+%M</code></td>
+<td><code>
+Minute as a decimal number</code></td>
+</tr><tr>
+<td><code>
+%n</code></td>
+<td><code>
+Newline character</code></td>
+</tr><tr>
+<td><code>
+%p</code></td>
+<td><code>
+Either am or pm according to the current locale</code></td>
+</tr><tr>
+<td><code>
+%r</code></td>
+<td><code>
+Time in a.m. and p.m. notation</code></td>
+</tr><tr>
+<td><code>
+%R</code></td>
+<td><code>
+Time in 24-hour notation</code></td>
+</tr><tr>
+<td><code>
+%S</code></td>
+<td><code>
+Second as a decimal number</code></td>
+</tr><tr>
+<td><code>
+%t</code></td>
+<td><code>
+Tab character</code></td>
+</tr><tr>
+<td><code>
+%T</code></td>
+<td><code>
+Current time, equal to %H:%M:%S</code></td>
+</tr><tr>
+<td><code>
+%u</code></td>
+<td><code>
+Weekday as a decimal number ( 1 to 7), with 1 representing Monday</code></td>
+</tr><tr>
+<td><code>
+%U</code></td>
+<td><code>
+Week number of the current year as a decimal number, starting with the first
+Sunday as the first day of the first week</code></td>
+</tr><tr>
+<td><code>
+%V</code></td>
+<td><code>
+The ISO 8601:1988 week number of the current year as a decimal number
+(range 01 to 53), where week 1 is the first week that has at least four days
+in the current year, and with Monday as the first day of the week</code></td>
+</tr><tr>
+<td><code>
+%W</code></td>
+<td><code>
+Week number of the current year as a decimal number, starting with the first
+Monday as the first day of the first week</code></td>
+</tr><tr>
+<td><code>
+%w</code></td>
+<td><code>
+Day of the week as a decimal, Sunday being 0</code></td>
+</tr><tr>
+<td><code>
+%x</code></td>
+<td><code>
+Preferred date representation for the current locale without the time</code></td>
+</tr><tr>
+<td><code>
+%X</code></td>
+<td><code>
+Preferred time representation for the current locale without the date</code></td>
+</tr><tr>
+<td><code>
+%y</code></td>
+<td><code>
+Year as a decimal number without a century (range 00 to 99)</code></td>
+</tr><tr>
+<td><code>
+%Y</code></td>
+<td><code>
+Year as a decimal number including the century</code></td>
+</tr><tr>
+<td><code>
+%Z or %z</code></td>
+<td><code>
+Time zone or name or abbreviation</code></td>
+</tr><tr>
+<td><code>
+%%</code></td>
+<td><code>
+A literal % character</code></td>
+</tr>
+</table>
+<h4>
+Filename: strftime.php
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">Today</span><span class="syntax13"> </span><span class="syntax13">in</span><span class="syntax13"> </span><span class="syntax13">San</span><span class="syntax13"> </span><span class="syntax13">Francisco</span><span class="syntax13"> </span><span class="syntax13">it</span><span class="syntax13"> </span><span class="syntax13">is:</span><span class="syntax13"> </span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax9">strftime</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">%A,</span><span class="syntax13"> </span><span class="syntax13">%x</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">,</span>
+<span class="gutter">   3:</span>       <span class="syntax13">'</span><span class="syntax13">,</span><span class="syntax13"> </span><span class="syntax13">and</span><span class="syntax13"> </span><span class="syntax13">the</span><span class="syntax13"> </span><span class="syntax13">time</span><span class="syntax13"> </span><span class="syntax13">is:</span><span class="syntax13"> </span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax9">strftime</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">%X</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   4:</span>       
+<span class="gutterH">   5:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Set</span><span class="syntax2"> </span><span class="syntax2">locale</span><span class="syntax2"> </span><span class="syntax2">to</span><span class="syntax2"> </span><span class="syntax2">Dutch</span>
+<span class="gutter">   6:</span>  <span class="syntax10">$</span><span class="syntax10">dutch</span> <span class="syntax18">=</span> <span class="syntax8">array</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">nl_NL</span><span class="syntax13">'</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">nld_nld</span><span class="syntax13">'</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">nld_NL</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   7:</span>  <span class="syntax10">$</span><span class="syntax10">NLloc</span> <span class="syntax18">=</span> <span class="syntax9">setlocale</span><span class="syntax18">(</span>LC_ALL<span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">dutch</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   8:</span>  <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">Prefered</span><span class="syntax13"> </span><span class="syntax13">locale</span><span class="syntax13"> </span><span class="syntax13">for</span><span class="syntax13"> </span><span class="syntax13">the</span><span class="syntax13"> </span><span class="syntax13">Netherlands</span><span class="syntax13"> </span><span class="syntax13">is:</span><span class="syntax13"> </span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">NLloc</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   9:</span>  <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">In</span><span class="syntax13"> </span><span class="syntax13">Amsterdam</span><span class="syntax13"> </span><span class="syntax13">the</span><span class="syntax13"> </span><span class="syntax13">current</span><span class="syntax13"> </span><span class="syntax13">date</span><span class="syntax13"> </span><span class="syntax13">is:</span><span class="syntax13"> </span><span class="syntax13">'</span><span class="syntax18">,</span>
+<span class="gutterH">  10:</span>       <span class="syntax9">strftime</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">%A</span><span class="syntax13"> </span><span class="syntax13">%d</span><span class="syntax13"> </span><span class="syntax13">%B</span><span class="syntax13"> </span><span class="syntax13">%Y</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span>
+<span class="gutter">  12:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Set</span><span class="syntax2"> </span><span class="syntax2">locale</span><span class="syntax2"> </span><span class="syntax2">to</span><span class="syntax2"> </span><span class="syntax2">France</span>
+<span class="gutter">  13:</span>  <span class="syntax10">$</span><span class="syntax10">france</span> <span class="syntax18">=</span> <span class="syntax8">array</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">fr_FR</span><span class="syntax13">'</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">fra_FR</span><span class="syntax13">'</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">fre_FR</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>  <span class="syntax10">$</span><span class="syntax10">FRloc</span> <span class="syntax18">=</span> <span class="syntax9">setlocale</span><span class="syntax18">(</span>LC_ALL<span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">france</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  15:</span>  <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">Prefered</span><span class="syntax13"> </span><span class="syntax13">locale</span><span class="syntax13"> </span><span class="syntax13">for</span><span class="syntax13"> </span><span class="syntax13">France</span><span class="syntax13"> </span><span class="syntax13">is:</span><span class="syntax13"> </span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">FRloc</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  16:</span>  <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">In</span><span class="syntax13"> </span><span class="syntax13">Paris</span><span class="syntax13"> </span><span class="syntax13">the</span><span class="syntax13"> </span><span class="syntax13">current</span><span class="syntax13"> </span><span class="syntax13">date</span><span class="syntax13"> </span><span class="syntax13">is:</span><span class="syntax13"> </span><span class="syntax13">'</span><span class="syntax18">,</span>
+<span class="gutter">  17:</span>       <span class="syntax9">strftime</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">%A</span><span class="syntax13"> </span><span class="syntax13">%d</span><span class="syntax13"> </span><span class="syntax13">%B</span><span class="syntax13"> </span><span class="syntax13">%Y</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  18:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+</li>
+<li><p>
+Getting the Timestamp
+</p><p>
+How many days until Christmas? How long ago was your last birthday?
+When will the mortgage be paid off? You can use the timestamp functions to get
+the date and time for now, next month, last month, yesterday, and so on,
+and then convert the output (seconds) to a readable format with the <b>date()</b>
+and <b>strftime()</b> functions.
+</p></li>
+<li><p>
+The time() Function
+</p><p>
+The <b>time()</b> function returns the current timestamp in seconds.
+For a more accurate time you can use the <b>microtime()</b> function.
+</p><p>
+By adding or subtracting the number of seconds from the output of the time()
+function, you find the amount of time from now until some future or past time.
+</p><p>
+The formulas in the following table are used to convert seconds to minutes,
+hours, days, and so on.
+</p><p>
+Table: Units of Time in Seconds
+</p>
+<table>
+<tr>
+<td><code><u><b>Unit of Time</b></u>&nbsp;</code></td>
+<td><code><u><b>Seconds
+</b></u></code></td>
+</tr><tr>
+<td><code>Minute</code></td>
+<td><code>60</code></td>
+</tr><tr>
+<td><code>Hour</code></td>
+<td><code>60 * 60</code></td>
+</tr><tr>
+<td><code>Day</code></td>
+<td><code>60 * 60 * 24</code></td>
+</tr><tr>
+<td><code>Week</code></td>
+<td><code>60 * 60 * 24 * 7</code></td>
+</tr><tr>
+<td><code>Month</code></td>
+<td><code>60 * 60 * 24 * 30</code></td>
+</tr><tr>
+<td><code>Year</code></td>
+<td><code>60 * 60 * 24 * 365</code></td>
+</tr>
+</table>
+<p>
+Format:
+</p>
+<blockquote><code><small>
+int time ( void )<br>
+</small></code></blockquote>
+<p>
+Example:
+</p>
+<blockquote><code><small>
+echo time(),'&lt;br /&gt;;<br>
+1153267124<br>
+</small></code></blockquote>
+<h4>
+Filename: time.php
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax8">echo</span> <span class="syntax9">time</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>     <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Now</span><span class="syntax2"> </span><span class="syntax2">in</span><span class="syntax2"> </span><span class="syntax2">seconds</span>
+<span class="gutter">   3:</span>  <span class="syntax8">print</span> <span class="syntax9">time</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">+</span><span class="syntax18"> (</span><span class="syntax5">7</span> <span class="syntax18">*</span> <span class="syntax5">24</span> <span class="syntax18">*</span> <span class="syntax5">60</span> <span class="syntax18">*</span> <span class="syntax5">60</span><span class="syntax18">)</span><span class="syntax18">;</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Next</span><span class="syntax2"> </span><span class="syntax2">week</span><span class="syntax2"> </span><span class="syntax2">in</span><span class="syntax2"> </span><span class="syntax2">seconds</span>
+<span class="gutter">   4:</span>  <span class="syntax8">print</span> <span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutterH">   5:</span>  <span class="syntax8">echo</span> <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax14">&quot;</span><span class="syntax14">M</span><span class="syntax14">-</span><span class="syntax14">d</span><span class="syntax14">-</span><span class="syntax14">Y</span><span class="syntax14">&quot;</span><span class="syntax18">,</span> <span class="syntax9">time</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>   <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Today</span>
+<span class="gutter">   6:</span>  <span class="syntax8">echo</span> <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax14">&quot;</span><span class="syntax14">M</span><span class="syntax14">-</span><span class="syntax14">d</span><span class="syntax14">-</span><span class="syntax14">Y</span><span class="syntax14">&quot;</span><span class="syntax18">,</span> <span class="syntax9">time</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">+</span><span class="syntax18"> (</span><span class="syntax5">7</span> <span class="syntax18">*</span> <span class="syntax5">24</span> <span class="syntax18">*</span> <span class="syntax5">60</span> <span class="syntax18">*</span> <span class="syntax5">60</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>   <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Next</span><span class="syntax2"> </span><span class="syntax2">week</span>
+<span class="gutter">   7:</span>  <span class="syntax8">echo</span> <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax14">&quot;</span><span class="syntax14">M</span><span class="syntax14">-</span><span class="syntax14">d</span><span class="syntax14">-</span><span class="syntax14">Y</span><span class="syntax14">&quot;</span><span class="syntax18">,</span> <span class="syntax9">time</span><span class="syntax18">(</span><span class="syntax18">)</span> <span class="syntax18">-</span><span class="syntax18"> (</span><span class="syntax5">7</span> <span class="syntax18">*</span> <span class="syntax5">24</span> <span class="syntax18">*</span> <span class="syntax5">60</span> <span class="syntax18">*</span> <span class="syntax5">60</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>   <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Last</span><span class="syntax2"> </span><span class="syntax2">week</span>
+<span class="gutter">   8:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+</li>
+<li><p>
+The mktime() Function
+</p><p>
+The <b>mktime()</b> function returns the timestamp for a particular date.
+This timestamp is an integer containing the number of seconds between the
+UNIX epoch (January 1 1970 00:00:00 GMT) and the time specified in the argument list.
+</p><p>
+This function is useful for calculating future and past dates and will
+automatically calculate the correct value for dates given to it that are out of
+range; for example, if you call mktime() with the invalid date: 7/32/2006, it
+will be converted to the valid date: 08/01/2006.
+</p><p>
+Format:
+</p>
+<code><small>
+int mktime ( [int hour [, int minute [, int second [, int month [,<br>
+&nbsp;&nbsp;&nbsp;int day [, int year [, int is_dst]]]]]]] )<br>
+</small></code>
+<p>
+Example:
+</p>
+<code><small>
+&lt;?php<br>
+&nbsp;&nbsp;$seconds = mktime(0, 0, 0, 7, 19, 2007);<br>
+&nbsp;&nbsp;print $seconds .'&lt;br /&gt;'; // 1184828400<br>
+&nbsp;&nbsp;echo date("M-d-Y", $seconds),'&lt;br/&gt;';&nbsp;&nbsp;// Jul-19-2007<br>
+?&gt;<br>
+</small></code>
+<p>
+The arguments can be omitted in any order from right to left, and the ones that
+are left out will be set to the value of the local date and time for that setting.
+The arguments are shown in the following table.
+</p><p>
+Table: Arguments for the mktime() Function
+</p>
+<table>
+<tr>
+<td><code><b><u>
+Argument</u></b></code></td>
+<td><code><b><u>
+Meaning</u></b></code></td>
+</tr><tr>
+<td><code>
+hour</code></td>
+<td><code>
+Number of the hour</code></td>
+</tr><tr>
+<td><code>
+minute</code></td>
+<td><code>
+Number of the minute</code></td>
+</tr><tr>
+<td><code>
+second</code></td>
+<td><code>
+Number of seconds past the minute</code></td>
+</tr><tr>
+<td><code>
+month</code></td>
+<td><code>
+Number of the month</code></td>
+</tr><tr>
+<td><code>
+day</code></td>
+<td><code>
+Number of the day</code></td>
+</tr><tr>
+<td><code>
+year</code></td>
+<td><code>
+Number of the year, can be a two- or four-digit value</code></td>
+</tr><tr>
+<td><code>
+is_dst</code></td>
+<td><code>
+Daylight Saving Time; 0 if it is; 1 if not; -1 is the default</code></td>
+</tr>
+</table>
+<p>
+Example:
+</p>
+<code><small>
+&lt;?php<br>
+&nbsp;&nbsp;echo date("M-d-Y", mktime(0, 0, 0, 7, 18, 2007)),'&lt;br /&gt;';<br>
+&nbsp;&nbsp;echo date("M-d-Y", mktime(0, 0, 0, 1, 1, 07)),'&lt;br /&gt;';<br>
+&nbsp;&nbsp;echo date("M-d-Y", mktime(0, 0, 0, 7, 32, 7)),'&lt;br /&gt;';<br>
+?&gt;<br>
+</small></code>
+<p>
+Output:
+</p>
+<blockquote><code><small>
+Jul-18-2007<br>
+Jan-01-2007<br>
+Aug-01-2007<br>
+</small></code></blockquote>
+<h4>
+Filename: mktime.php
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Using the date() Function with mktime()<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax13">'</span><span class="syntax13">lavender</span><span class="syntax13">'</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;font</span><span class="syntax17"> </span><span class="syntax17">size</span><span class="syntax18">=</span><span class="syntax13">'</span><span class="syntax13">+</span><span class="syntax13">2</span><span class="syntax13">'</span><span class="syntax17"> </span><span class="syntax17">face</span><span class="syntax18">=</span><span class="syntax13">'</span><span class="syntax13">verdana</span><span class="syntax13">'</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   8:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Your</span><span class="syntax2"> </span><span class="syntax2">instructor</span><span class="syntax2"> </span><span class="syntax2">will</span><span class="syntax2"> </span><span class="syntax2">show</span><span class="syntax2"> </span><span class="syntax2">you</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">output</span>
+<span class="gutter">   9:</span>  <span class="syntax10">$today</span> <span class="syntax18">=</span> <span class="syntax9">mktime</span><span class="syntax18">(</span><span class="syntax5">0</span><span class="syntax18">,</span><span class="syntax5">0</span><span class="syntax18">,</span><span class="syntax5">0</span><span class="syntax18">,</span> <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">m</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">d</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">Y</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>  <span class="syntax8">echo</span> <span class="syntax9">strftime</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">Today</span><span class="syntax13"> </span><span class="syntax13">is</span><span class="syntax13"> </span><span class="syntax13">%m/%d/%Y</span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax10">$today</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">.&lt;br&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span>  <span class="syntax10">$tomorrow</span> <span class="syntax18">=</span> <span class="syntax9">mktime</span><span class="syntax18">(</span><span class="syntax5">0</span><span class="syntax18">,</span> <span class="syntax5">0</span><span class="syntax18">,</span> <span class="syntax5">0</span><span class="syntax18">,</span> <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">m</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">d</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">+</span><span class="syntax5">1</span><span class="syntax18">,</span> <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">Y</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>  <span class="syntax8">echo</span> <span class="syntax9">strftime</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">Tomorrow</span><span class="syntax13"> </span><span class="syntax13">is</span><span class="syntax13"> </span><span class="syntax13">%A</span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax10">$tomorrow</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">.&lt;br&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>  <span class="syntax10">$yesterday</span> <span class="syntax18">=</span> <span class="syntax9">mktime</span><span class="syntax18">(</span><span class="syntax5">0</span><span class="syntax18">,</span> <span class="syntax5">0</span><span class="syntax18">,</span> <span class="syntax5">0</span><span class="syntax18">,</span> <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">m</span><span class="syntax13">'</span><span class="syntax18">)</span> <span class="syntax18">,</span> <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">d</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">-</span><span class="syntax5">1</span><span class="syntax18">,</span> <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">Y</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>  <span class="syntax8">echo</span> <span class="syntax9">strftime</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">Yesterday</span><span class="syntax13"> </span><span class="syntax13">was</span><span class="syntax13"> </span><span class="syntax13">%A</span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax10">$yesterday</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">.&lt;br&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutterH">  15:</span>  <span class="syntax10">$nextmonth</span> <span class="syntax18">=</span> <span class="syntax9">mktime</span><span class="syntax18">(</span><span class="syntax5">0</span><span class="syntax18">,</span> <span class="syntax5">0</span><span class="syntax18">,</span> <span class="syntax5">0</span><span class="syntax18">,</span> <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">m</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">+</span><span class="syntax5">1</span><span class="syntax18">,</span> <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">d</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">,</span> <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">Y</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  16:</span>  <span class="syntax8">echo</span> <span class="syntax9">strftime</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">Next</span><span class="syntax13"> </span><span class="syntax13">month</span><span class="syntax13"> </span><span class="syntax13">is</span><span class="syntax13"> </span><span class="syntax13">%B</span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax10">$nextmonth</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">.&lt;br&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  17:</span>  <span class="syntax10">$lastmonth</span> <span class="syntax18">=</span> <span class="syntax9">mktime</span><span class="syntax18">(</span><span class="syntax5">0</span><span class="syntax18">,</span> <span class="syntax5">0</span><span class="syntax18">,</span> <span class="syntax5">0</span><span class="syntax18">,</span> <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">m</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">-</span><span class="syntax5">1</span><span class="syntax18">,</span> <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">d</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">,</span> <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">Y</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  18:</span>  <span class="syntax8">echo</span> <span class="syntax9">strftime</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">Last</span><span class="syntax13"> </span><span class="syntax13">month</span><span class="syntax13"> </span><span class="syntax13">was</span><span class="syntax13"> </span><span class="syntax13">%B</span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax10">$lastmonth</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">.&lt;br&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  19:</span>  <span class="syntax10">$nextyear</span> <span class="syntax18">=</span> <span class="syntax9">mktime</span><span class="syntax18">(</span><span class="syntax5">0</span><span class="syntax18">,</span> <span class="syntax5">0</span><span class="syntax18">,</span> <span class="syntax5">0</span><span class="syntax18">,</span> <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">m</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">,</span> <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">d</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">,</span> <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">Y</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">+</span><span class="syntax5">1</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  20:</span>  <span class="syntax8">echo</span> <span class="syntax9">strftime</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">Next</span><span class="syntax13"> </span><span class="syntax13">year</span><span class="syntax13"> </span><span class="syntax13">is</span><span class="syntax13"> </span><span class="syntax13">%Y</span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax10">$nextyear</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">.&lt;br&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  21:</span>  <span class="syntax10">$lastyear</span> <span class="syntax18">=</span> <span class="syntax9">mktime</span><span class="syntax18">(</span><span class="syntax5">0</span><span class="syntax18">,</span> <span class="syntax5">0</span><span class="syntax18">,</span> <span class="syntax5">0</span><span class="syntax18">,</span> <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">m</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">,</span> <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">d</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">,</span> <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">Y</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">-</span><span class="syntax5">1</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  22:</span>  <span class="syntax8">echo</span> <span class="syntax9">strftime</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">Last</span><span class="syntax13"> </span><span class="syntax13">year</span><span class="syntax13"> </span><span class="syntax13">was</span><span class="syntax13"> </span><span class="syntax13">%Y</span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax10">$lastyear</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">.&lt;br&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  23:</span><span class="syntax17">?&gt;</span>
+<span class="gutter">  24:</span>  <span class="syntax17">&lt;/font</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  25:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  26:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+</li>
+<li><p>
+Creating a UNIX Timestamp from a String
+</p><p>
+The <b>strtotime()</b> function returns a timestamp from a string consisting of
+any U.S. English-style date and time description.
+</p><p>
+With an argument, it returns the timestamp relative to that time, and without
+an argument, it returns the timestamp for the current date and time.
+</p><p>
+You can format the timestamp value returned from strtotime() with other PHP date
+functions such as <b>getdate()</b>, <b>strftime()</b>, and <b>date()</b>.
+</p><p>
+If the number of the year is specified in a two-digit format, values between
+0 and 69 will become 2000 to 2069, and 80 to 100 will become 1980 to 2000.
+</p><p>
+Format:
+</p>
+<blockquote><code><small>
+int strtotime ( string time [, int now] )<br>
+</small></code></blockquote>
+<p>
+Example:
+</p>
+<blockquote><code><small>
+echo strtotime("now"),'&lt;br /&gt;';<br>
+echo strtotime("10 September 2006"),'&lt;br /&gt;';<br>
+echo strtotime("+1 day"),'&lt;br /&gt;';<br>
+</small></code></blockquote>
+<h4>
+Filename: strtotime.php
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Getting</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">timestamp</span><span class="syntax2"> </span><span class="syntax2">from</span><span class="syntax2"> </span><span class="syntax2">strings</span>
+<span class="gutter">   3:</span>  <span class="syntax8">echo</span> <span class="syntax9">strtotime</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">last</span><span class="syntax13"> </span><span class="syntax13">month</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   4:</span>  <span class="syntax8">echo</span> <span class="syntax9">strtotime</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">02</span><span class="syntax13"> </span><span class="syntax13">September</span><span class="syntax13"> </span><span class="syntax13">2006</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutterH">   5:</span>  <span class="syntax8">echo</span> <span class="syntax9">strtotime</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">+2</span><span class="syntax13"> </span><span class="syntax13">days</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   6:</span>  <span class="syntax8">echo</span> <span class="syntax9">strtotime</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">+1</span><span class="syntax13"> </span><span class="syntax13">week</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   7:</span>  <span class="syntax8">echo</span> <span class="syntax9">strtotime</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">+1</span><span class="syntax13"> </span><span class="syntax13">week</span><span class="syntax13"> </span><span class="syntax13">2</span><span class="syntax13"> </span><span class="syntax13">days</span><span class="syntax13"> </span><span class="syntax13">4</span><span class="syntax13"> </span><span class="syntax13">hours</span><span class="syntax13"> </span><span class="syntax13">2</span><span class="syntax13"> </span><span class="syntax13">seconds</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   8:</span>  <span class="syntax8">echo</span> <span class="syntax9">strtotime</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">next</span><span class="syntax13"> </span><span class="syntax13">Thursday</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   9:</span>
+<span class="gutterH">  10:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Using</span><span class="syntax2"> </span><span class="syntax2">getdate()</span><span class="syntax2"> </span><span class="syntax2">and</span><span class="syntax2"> </span><span class="syntax2">strtotime()</span>
+<span class="gutter">  11:</span>  <span class="syntax10">$tomorrow</span> <span class="syntax18">=</span> <span class="syntax9">strtotime</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">+1</span><span class="syntax13"> </span><span class="syntax13">day</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Convert</span><span class="syntax2"> </span><span class="syntax2">string</span><span class="syntax2"> </span><span class="syntax2">to</span><span class="syntax2"> </span><span class="syntax2">timestamp</span>
+<span class="gutter">  12:</span>  <span class="syntax10">$tomorrow</span> <span class="syntax18">=</span> <span class="syntax9">getdate</span><span class="syntax18">(</span><span class="syntax10">$tomorrow</span><span class="syntax18">)</span><span class="syntax18">;</span>   <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Use</span><span class="syntax2"> </span><span class="syntax2">timestamp</span><span class="syntax2"> </span><span class="syntax2">to</span><span class="syntax2"> </span><span class="syntax2">get</span><span class="syntax2"> </span><span class="syntax2">readable</span><span class="syntax2"> </span><span class="syntax2">date</span>
+<span class="gutter">  13:</span>  <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">Tomorrow</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax10">$tomorrow</span><span class="syntax14">[</span><span class="syntax14">month</span><span class="syntax14">]</span><span class="syntax14"> </span><span class="syntax10">$tomorrow</span><span class="syntax14">[</span><span class="syntax14">mday</span><span class="syntax14">]</span><span class="syntax14">,</span><span class="syntax14"> </span><span class="syntax10">$tomorrow</span><span class="syntax14">[</span><span class="syntax14">year</span><span class="syntax14">]</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>
+<span class="gutterH">  15:</span>  <span class="syntax10">$next_week</span> <span class="syntax18">=</span> <span class="syntax9">strtotime</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">next</span><span class="syntax13"> </span><span class="syntax13">week</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  16:</span>  <span class="syntax10">$next_week</span> <span class="syntax18">=</span> <span class="syntax9">getdate</span><span class="syntax18">(</span><span class="syntax10">$next_week</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  17:</span>  <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">I</span><span class="syntax14"> </span><span class="syntax14">go</span><span class="syntax14"> </span><span class="syntax14">on</span><span class="syntax14"> </span><span class="syntax14">vacation</span><span class="syntax14"> </span><span class="syntax14">next</span><span class="syntax14"> </span><span class="syntax10">$next_week</span><span class="syntax14">[</span><span class="syntax14">weekday</span><span class="syntax14">]</span><span class="syntax14">.</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  18:</span>
+<span class="gutter">  19:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Using</span><span class="syntax2"> </span><span class="syntax2">strftime()</span><span class="syntax2"> </span><span class="syntax2">and</span><span class="syntax2"> </span><span class="syntax2">strtotime()</span>
+<span class="gutterH">  20:</span>  <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">Last</span><span class="syntax14"> </span><span class="syntax14">Monday</span><span class="syntax14"> </span><span class="syntax14">was</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">,</span> <span class="syntax9">strftime</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">%m/%d/%y</span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax9">strtotime</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">last</span><span class="syntax13"> </span><span class="syntax13">Monday</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">.&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  21:</span>  <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">Last</span><span class="syntax14"> </span><span class="syntax14">month</span><span class="syntax14"> </span><span class="syntax14">was</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">,</span> <span class="syntax9">strftime</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">%B</span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax9">strtotime</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">last</span><span class="syntax13"> </span><span class="syntax13">month</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">.&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  22:</span>  <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">Next</span><span class="syntax14"> </span><span class="syntax14">month</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">,</span> <span class="syntax9">strftime</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">%B</span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax9">strtotime</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">+1</span><span class="syntax13"> </span><span class="syntax13">month</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">.&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  23:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+</li>
+<li><p>	  
+Getting the Date and Time
+</p><p>
+The <b>getdate()</b> function returns an associative array containing date and
+time values for the local time, and if a timestamp is given as an argument,
+the date and time for that timestamp.
+</p><p>
+The key or index of the associative array is a string representing the time and
+date value. This function can be used with <b>mktime()</b> or <b>date()</b>
+to retrieve dates and times.
+</p><p>
+Table: The getdate() Function Key–Value Pairs
+</p>
+<table>
+<tr>
+<td><code><b><u>
+Key</u></b></code></td>
+<td><code><b><u>
+Value</u></b></code></td>
+</tr><tr>
+<td><code>
+seconds&nbsp;</code></td>
+<td><code>
+Seconds, range 0 to 59</code></td>
+</tr><tr>
+<td><code>
+minutes</code></td>
+<td><code>
+Minutes, range 0 to 59</code></td>
+</tr><tr>
+<td><code>
+hours</code></td>
+<td><code>
+Hours, range 0 to 23</code></td>
+</tr><tr>
+<td><code>
+mday</code></td>
+<td><code>
+Day of the month, range 1 to 31</code></td>
+</tr><tr>
+<td><code>
+wday</code></td>
+<td><code>
+Day of the the week, range 0 (Sunday), through 6(Saturday)</code></td>
+</tr><tr>
+<td><code>
+mon</code></td>
+<td><code>
+A month, range 1 through 12</code></td>
+</tr><tr>
+<td><code>
+year</code></td>
+<td><code>
+A year in four-digit format, such as 1999 or 2006</code></td>
+</tr><tr>
+<td><code>
+yday</code></td>
+<td><code>
+Day of the year, range 0 through 365</code></td>
+</tr><tr>
+<td><code>
+weekday</code></td>
+<td><code>
+The day of the week, range Sunday through Saturday</code></td>
+</tr><tr>
+<td><code>
+month</code></td>
+<td><code>
+The month, such as January or December</code></td>
+</tr><tr>
+<td><code>
+0</code></td>
+<td><code>
+Seconds since the UNIX epoch, similar to the values returned by time() and used by date()
+</code></td>
+</tr>
+</table>
+<p>
+Format:
+</p>
+<blockquote><code><small>
+array getdate ( [int timestamp] )<br>
+</small></code></blockquote>
+<p>
+Example:
+</p>
+<blockquote><code><small>
+// Returns an associative array of date/time values<br>
+$now = getdate();<br>
+</small></code></blockquote>
+<h4>
+Filename: getdate.php
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>   <span class="syntax10">$now</span> <span class="syntax18">=</span> <span class="syntax9">getdate</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   3:</span>   <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;pre&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   4:</span>   <span class="syntax9">print_r</span><span class="syntax18">(</span><span class="syntax10">$now</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">   5:</span>   <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;/pre&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   6:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<h4>
+Filename: holiday.php
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Christmas</span><span class="syntax2"> </span><span class="syntax2">2006</span>
+<span class="gutter">   3:</span>  <span class="syntax10">$date</span> <span class="syntax18">=</span> <span class="syntax9">mktime</span><span class="syntax18">(</span><span class="syntax5">0</span><span class="syntax18">,</span> <span class="syntax5">0</span><span class="syntax18">,</span> <span class="syntax5">0</span><span class="syntax18">,</span> <span class="syntax5">12</span><span class="syntax18">,</span> <span class="syntax5">25</span><span class="syntax18">,</span> <span class="syntax5">2006</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   4:</span>  <span class="syntax10">$holiday</span> <span class="syntax18">=</span> <span class="syntax9">getdate</span><span class="syntax18">(</span><span class="syntax10">$date</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">   5:</span>  <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;pre&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   6:</span>  <span class="syntax9">print_r</span><span class="syntax18">(</span><span class="syntax10">$holiday</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   7:</span>  <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;/pre&gt;&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   8:</span>  <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax10">$holiday</span><span class="syntax14">[</span><span class="syntax14">month</span><span class="syntax14">]</span><span class="syntax14"> </span><span class="syntax10">$holiday</span><span class="syntax14">[</span><span class="syntax14">mday</span><span class="syntax14">]</span><span class="syntax14">,</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">,</span>
+<span class="gutter">   9:</span>       <span class="syntax14">&quot;</span><span class="syntax10">$holiday</span><span class="syntax14">[</span><span class="syntax14">year</span><span class="syntax14">]</span><span class="syntax14"> </span><span class="syntax14">is</span><span class="syntax14"> </span><span class="syntax14">on</span><span class="syntax14"> </span><span class="syntax14">a</span><span class="syntax14"> </span><span class="syntax14">&quot;</span><span class="syntax18">,</span>
+<span class="gutterH">  10:</span>       <span class="syntax10">$holiday</span><span class="syntax18">[</span><span class="syntax14">&quot;</span><span class="syntax14">weekday</span><span class="syntax14">&quot;</span><span class="syntax18">]</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">.&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+</li><li>
+<p>
+Validating Dates
+</p><p>
+The <b>checkdate()</b> function checks whether the arguments it receives are
+valid date values. It returns TRUE if the date is valid, and FALSE if not.
+Valid date values are:
+</p>
+<ul>
+<li>
+The month must be between 1 and 12 inclusive.</li>
+<li>
+The day must be within the allowed number of days for the given month,
+and leap years are allowed.</li>
+<li>
+The year must be between 1 and 32767 inclusive.</li>
+</ul
+<p>
+Format:
+</p>
+<code><small>
+bool checkdate ( int month, int day, int year )<br>
+</small></code>
+<p>
+Example:
+</p>
+<code><small>
+&lt;?php<br>
+&nbsp;&nbsp;var_dump(checkdate(12, 31, 2000)); // Retuns true<br>
+&nbsp;&nbsp;var_dump(checkdate(2, 30, 2001)); // Returns false<br>
+?&gt;<br>
+</small></code>
+<h4>
+Filename: checkdate.php
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;Is</span><span class="syntax13"> </span><span class="syntax13">12/31/2006</span><span class="syntax13"> </span><span class="syntax13">a</span><span class="syntax13"> </span><span class="syntax13">valid</span><span class="syntax13"> </span><span class="syntax13">date?</span><span class="syntax13"> </span><span class="syntax13"> </span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   3:</span>  <span class="syntax9">var_dump</span><span class="syntax18">(</span><span class="syntax9">checkdate</span><span class="syntax18">(</span><span class="syntax5">12</span><span class="syntax18">,</span> <span class="syntax5">31</span><span class="syntax18">,</span> <span class="syntax5">2006</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   4:</span>
+<span class="gutterH">   5:</span>  <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;Is</span><span class="syntax13"> </span><span class="syntax13">12/32/2006</span><span class="syntax13"> </span><span class="syntax13">a</span><span class="syntax13"> </span><span class="syntax13">valid</span><span class="syntax13"> </span><span class="syntax13">date?</span><span class="syntax13"> </span><span class="syntax13"> </span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   6:</span>  <span class="syntax9">var_dump</span><span class="syntax18">(</span><span class="syntax9">checkdate</span><span class="syntax18">(</span><span class="syntax5">12</span><span class="syntax18">,</span><span class="syntax5">32</span><span class="syntax18">,</span> <span class="syntax5">2006</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   7:</span>    
+<span class="gutter">   8:</span>  <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;Is</span><span class="syntax13"> </span><span class="syntax13">this</span><span class="syntax13"> </span><span class="syntax13">better?</span><span class="syntax13"> </span><span class="syntax13"> </span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   9:</span>  <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Let</span><span class="syntax2"> </span><span class="syntax2">mktime()</span><span class="syntax2"> </span><span class="syntax2">adjust</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">date</span><span class="syntax2"> </span><span class="syntax2">to</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">correct</span><span class="syntax2"> </span><span class="syntax2">date</span>
+<span class="gutterH">  10:</span>  <span class="syntax8">echo</span> <span class="syntax9">date</span><span class="syntax18">(</span><span class="syntax13">'</span><span class="syntax13">m/d/Y</span><span class="syntax13">'</span><span class="syntax18">,</span> <span class="syntax9">mktime</span><span class="syntax18">(</span><span class="syntax5">0</span><span class="syntax18">,</span><span class="syntax5">0</span><span class="syntax18">,</span><span class="syntax5">0</span><span class="syntax18">,</span> <span class="syntax5">12</span><span class="syntax18">,</span><span class="syntax5">32</span><span class="syntax18">,</span><span class="syntax5">2006</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span>
+<span class="gutter">  12:</span>  <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;Is</span><span class="syntax13"> </span><span class="syntax13">2/29/2008</span><span class="syntax13"> </span><span class="syntax13">a</span><span class="syntax13"> </span><span class="syntax13">leap</span><span class="syntax13"> </span><span class="syntax13">year?</span><span class="syntax13"> </span><span class="syntax13"> </span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>  <span class="syntax9">var_dump</span><span class="syntax18">(</span><span class="syntax9">checkdate</span><span class="syntax18">(</span><span class="syntax5">2</span><span class="syntax18">,</span> <span class="syntax5">29</span><span class="syntax18">,</span> <span class="syntax5">2008</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>
+<span class="gutterH">  15:</span>  <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;Is</span><span class="syntax13"> </span><span class="syntax13">2/29/2006</span><span class="syntax13"> </span><span class="syntax13">a</span><span class="syntax13"> </span><span class="syntax13">leap</span><span class="syntax13"> </span><span class="syntax13">year?</span><span class="syntax13"> </span><span class="syntax13"> </span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  16:</span>  <span class="syntax9">var_dump</span><span class="syntax18">(</span><span class="syntax9">checkdate</span><span class="syntax18">(</span><span class="syntax5">2</span><span class="syntax18">,</span> <span class="syntax5">29</span><span class="syntax18">,</span> <span class="syntax5">2006</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  17:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+Your instructor will run the example and show you the results.
+</p>
+</li>
+</ul>
+</div>
+</body>
+</html>

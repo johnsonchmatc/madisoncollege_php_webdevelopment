@@ -1,0 +1,673 @@
+h2. Files and Direcories
+
+<hr />
+
+h3. Overview
+
+* After the browser sends data to the server and PHP processes the information, a database management system such as MySQL or Oracle will normally store or retrieve the data.
+* But PHP might also exchange data from simple text files (also called flat files), such as HTML templates, spreadsheet (csv) data, the contents of remote Web pages, or files that contain text that does not need to be stored in a database.
+* This unit focuses on creating directories and text files for storing and retrieving data.
+
+h3. File Permissions and Ownership
+
+* To open an external file in a PHP program, you first need to determine where the file is, who owns it, and whether or not you have the proper permission to open it.
+* If you are opening the file simply to view it, you will need read permission and if you want to modify it in any way, you will need write permission.
+* Granting permissions to directories gives users access to the files stored there, and granting permission to files allows users to read, write, or execute the individual files.
+* For obvious security reasons, it is important to be able to control who has permission to access the files and directories on your Web site.
+* Because operating systems differ in how they handle permissions, we look at UNIX/Linux and Windows in the following sections.
+
+h3. UNIX/Linux Permissions
+
+h4.  Ownership and Groups
+
+* Users are categorized into three classes of users: (1) you, the owner; (2) the group, a special group of users who can share files without making them public to everyone; and (3) the others (also called "the world"), everyone who has an account on the system.
+* When you create a file, it is automatically owned by you and the group to which you belong. You can change the owner of a file with the chown command; that is, if you own it or you are root, the superuser.
+* Changing the group to which a file belongs is done with the chgrp command. PHP provides built-in functions of the same name as the UNIX/Linux commands allowing you to mimic these operating system commands from a PHP script.
+
+h4.  Permissions
+
+* Permissions are assigned to the three classes of users discussed in the last section. Each class can be assigned a combination of three types of permissions:
+## Read
+## Write
+## Execute
+
+h4. Permission Groups
+
+* The three groups of permissions are set for each of the three classes of users:
+## You, the user.
+## The group (the group to which you belong).
+## The others (anyone else on the system).
+
+h4. File and Directory Permissions
+
+* Because a directory is simply a place where files are stored (similar to drawers in a file cabinet), and a plain file contains the actual text (similar to the files in the cabinet), the permissions affect directories and plain files somewhat differently.
+* For example, if a directory has execute permission, it means you can enter the directory with the cd command, but if a file has execute permission, the file can be executed as a script or program.
+* A directory needs read permission so that you can view the contents of the directory with ls, whereas read permission on a file allows you to view it or copy it.
+* Write permission on a directory allows you to create, move, or remove files from within the directory (whether or not you own the files), whereas on a file it means that you can modify it or remove it.
+* The table below provides a list of how permissions affect files and directories.
+* Table: Permissions on Files and Directories
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Permission*|{background:#ccc}.*What_It_Allows_on_a_Directory*|{background:#ccc}.*What_It_Allows_on_a_File*|
+|read       |View its contents (ls).       |View, copy, print it, and so on.      |
+|write      |Create or remove files in it. |Modify, rename, or remove it.         |
+|execute    |cd into it.                   |Execute the file as script or program.|
+
+
+h4. Changing Permissions at the Command Line
+
+* Changing permissions of files and directories can be done at the command line or from inside a PHP script.
+* We start with the *chmod* command at the command line. Keep in mind that if the PHP script is being executed by the server, the permissions are limited to what a server can do, whereas if you are running the script at the command line, the program, permissions will apply to what you, the user, can do.
+* Because ownership and permissions are different for the server than for the user, *chmod* and *chgrp* might behave differently depending on what process is running the script.
+* There are two different ways to assign permissions to a file at the command line - one is text-based and the other numeric-based.
+* Because PHP does not provide functions to mimic the behavior of the text-based method, we use the numeric-based method in the following examples.
+* The UNIX/Linux *chmod* command takes two arguments: the mode (a number between 0 and 7) for each permission level (owner, group, others) followed by the name of the directory or files that will have their permissions changed.
+* Format:
+<br /><pre>
+chmod mode file(s)
+chmod mode directory
+</pre>
+* Example:
+<br /><pre>
+chmod 755 fileX
+</pre>
+* The three sets of permissions for all classes of users (owner, group, others) can be represented by different numeric values. The three numeric values combined represent the complete numeric permission mode.
+* If a user is assigned 7, a group is assigned 5, and the others are assigned 5, the combined value is 755.
+* The table below displays the numeric values that will represent each class of users. By adding the values for the owner, group, and others, the resulting number is the permission mode.
+* Read is represented by 4, write by 2, execute by 1, and none of the permissions is 0. If you want the user to have read, write, and execute, add up the first column in The table, and you get 700.
+* Now if you only want the group to have read and execute, then add up @040 + 010@ in the second column, and you get 050, and if you want the same for everybody else, add up the numbers in the third column, @004 + 001@, to get 005.
+* Table: Numeric Values for File Permissions for a Class of Users
+
+table{text-align:left; margin-left: 4em;}.
+|&nbsp;|{background:#ccc}.*Owner*|{background:#ccc}.*Group*|{background:#ccc}.*Others*|
+|Read     |400    |040    |004   |
+|Write    |200    |020    |002   |
+|Execute  |100    |010    |001   |
+
+* Now combine all three sets of permissions: @700 + 050 + 005@ and, presto! you get @755@ as your permission mode.
+* Some common permission modes are:
+<br /><pre>
+777 Owner, group, and others have read, write, or execute (-rwxrwxrwx)
+755 Owner has read, write, and execute; others have only read and execute (-rwxr-xr-x)
+711 Owner has read, write, and execute; others have only execute (-rwx--x--x)
+700 Owner has read, write, and execute; others have nothing (-rwx------)
+644 Owner has read and write; others have only read (-rw-r--r--)
+</pre>
+* If you type: @ls -l@ at the UNIX prompt, file permissions are represented as three groups. A leading dash means you are looking at a file, any other dashes between the rwx means the permission is turned off.
+* For example: @r-x@ means @w@ is turned off.
+* Example:
+<br /><pre>
+$ chmod 755 myfolder
+
+$ chmod 777 
+
+$ chmod 644 fileX
+</pre>
+* First line, grant read, write, and execute to the owner, read and execute to the group and the others (world).
+* Second line, grant everybody read, write, and execute on all files and in the current working directory.
+* Third line, user gets read and write, group and others get read.
+
+h3.  Windows Permissions
+
+* Originally, DOS was not intended to be a multiuser, networked operating system, whereas UNIX was. Consequently, the way that file permissions are handled is quite different between UNIX and Windows.
+* To see the permissions on a Windows file, you can right-click the file and choose the Properties menu item.
+* Windows has four attributes to describe a file (see table below):
+## Read-only
+## System
+## Hidden
+## Archive
+* Table: File Attributes for Windows
+
+table{text-align:left; margin-left: 4em;}.
+|*Attribute*|*What It Means*|
+|Read-only  |The file's contents can be read by a user but cannot be written to.                                             |
+|System     |This file has a specific purpose required by the operating system.                                              |
+|Hidden     |This file has been marked to be invisible to the user, unless the operating system is explicitly set to show it.|
+|Archive    |This file has been touched since the last DOS backup was performed on it.                                       |
+
+* There is no attribute to specify that a file is executable. DOS and Windows NT file systems identify executable files by giving them the extensions: .exe, .com, .cmd, or .bat
+* You can also display and change the attributes of a file from the command line with the DOS attrib command by going to the Start menu and clicking Run.
+* In the cmd.exe window type the following and you will see a window displaying the file attributes.
+<br /><pre>
+help attrib
+</pre>
+
+h3.  The Web Server, PHP, and Permissions
+
+* Like all processes running in a UNIX environment, PHP programs run on behalf of a particular user. If you run a PHP script from the command line (for instance, as a shell script), it will run with the permissions set for you, the user, who started the script.
+* More typically, however, PHP scripts will be executed by your Web server. Under most system configurations, Web servers run as a user (such as nobody) that, for security reasons, has minimal permissions to access the file system (usually read and execute, but not write permission).
+* The reason for limiting access is to keep potential hackers from using your server as a gateway to write whatever they please into an open directory.
+* Because PHP is being executed by the server, it too will have the same limited permissions, thereby restricting its ability to work with files and directories.
+* The solution is to create directories outside the Web directory and put the files PHP will be working with there. If the directory has the same group permissions as the locally running PHP program, others will not have access to those files.
+* Example:
+<br /><pre>
+$ ps -ef | grep apache
+
+nobody 27874   352  0   Aug 12 ?       0:00 /usr/apache/bin/httpd
+root     352     1  0   Jun 07 ?       0:02 /usr/apache/bin/httpd
+nobody 29038   352  0   Aug 12 ?       0:00 /usr/apache/bin/httpd
+nobody 28987   352  0   Aug 12 ?       0:00 /usr/apache/bin/httpd
+nobody 27877   352  0   Aug 12 ?       0:00 /usr/apache/bin/httpd
+nobody 27876   352  0   Aug 12 ?       0:00 /usr/apache/bin/httpd
+nobody 27873   352  0   Aug 12 ?       0:00 /usr/apache/bin/httpd
+nobody 27875   352  0   Aug 12 ?       0:00 /usr/apache/bin/httpd
+</pre>
+* When Apache (httpd) is started as root, it opens the privileged ports (80, 443 (SSL)), opens the log files, and then stops acting as the potentially dangerous root and becomes nobody (or another nonprivileged user as specified in httpd.conf).
+* This example shows that user nobody is running the Apache server daemon. (The system is a UNIX system.)
+
+h3.  PHP Built-In Functions
+
+* PHP provides three functions that correspond to the UNIX commands discussed in the previous section. They are the *@chown()@*, *@chgrp()@*, and *@chmod()@* functions.
+
+h3. The @chown()@ Function
+
+* Just like the chown command, the *@chown()@* function changes the ownership of a file, provided the PHP script performing this operation is run by the owner or by the superuser root.
+* Format:
+<br /><pre>
+bool chown(filename, newuser);
+</pre>
+* Example:
+<br /><pre>
+$success = chown ("myfile", "john");
+</pre>
+* "filename" (above) refers to the file that is being modified, and "newuser" is the username of the new owner. When executed, this function returns a boolean value, true or false, which indicates whether PHP was successful in changing the owner of the file.
+
+h3. The *@chgrp()@* Function
+
+* The PHP *@chgrp()@* function, like the chgrp command, is used to change group membership.
+* To change the group to which a file belongs, the user must be a member of the new group and the file must reside locally.
+* The function takes two arguments: the name of a file, and the group to which it will be assigned. The group can be represented either by its name or by its group ID, a numeric value.
+* Format:
+<br /><pre>
+bool chgrp(filename, newgroup);
+</pre>
+* Example:
+<br /><pre>
+$result=chgrp("myfile", admin);
+$result=chgrp("myfile", 0502);
+</pre>
+
+h3. The *@chmod()@* Function
+
+* PHP scripts are often embedded in HTML documents and these files are placed on the Web server and executed by the serverside software.
+* The *@chmod()@* function changes file permissions to allow the serverside software to read, write, and execute data in the file.
+* The owner of the currently running PHP process must also be the owner of the file to change permissions and the file cannot be on a remote system.
+* The *@chmod()@* function takes the filename or full path and filename as its first argument and the octal value for the permission mode as its second value. It returns TRUE if successful in making the change; otherwise, it returns FALSE.
+* Format:
+<br /><pre>
+bool chmod("file", octal_mode );
+</pre>
+* Example:
+<br /><pre>
+bool chmod("/dir/filex", 0755);
+</pre>
+* Notice that the mode is set as an octal value, a number with a leading zero. If you are prone to forgetting the leading zero, you can use the PHP built-in function *@octdec()@* to assure the number you select is converted from octal to decimal as shown here:
+<br /><pre>
+chmod("some_filename.ext", octdec($mode));
+chmod("filex", octdec(644));
+</pre>
+
+h3. The Filehandle
+
+* In a PHP script, you cannot access a file directly by the name it was given when it was created (i.e., the name that your operating system uses to identify it).
+* Instead you have to use a filehandle. A filehandle, also called a file pointer, binds the named file to a "stream."
+* Streams were introduced with PHP 4.3.0 to represent a way in which to abstractly deal with all kinds of files (local, compressed, and remote) and the functions they all share, such as reading, writing, appending, or seeking to a certain location within the file. For a complete discussion on streams, see: http://us3.php.net/streams
+* Once the file is opened, the filehandle is used to perform a number of operations on the file. Of course, to access a file, the PHP program must have permission to do so.
+
+h3. Opening a File
+
+h4. The *@fopen()@* Function
+
+* To create the filehandle, PHP provides the *@fopen()@* function. This function opens a file and returns a filehandle, and if it fails, returns false.
+* It normally takes two arguments: a filename and a mode, the mode being how you want to deal with the file; that is, do you want to open it for reading, writing, appending, and so on?
+* A third optional argument, if set to TRUE, tells PHP to check the PHP include path (a list of directories where the *@require()@* and *@include()@* functions look for files, defined in the php.ini file).
+* The filename argument is either a file or a URL and can be referenced by a full path name, a relative path name, or simply by the name of the file if it resides in the same directory or folder as the PHP script that is trying to open it.
+* If specifying a path, forward slashes can be used as the separator between path elements with both UNIX and Windows. If, however, you are using Windows and want to use backslashes in the path, then the backslash must be escaped, such as: \\dir\\file.txt
+* It is also possible to bind the filehandle to a URL by prefixing the name of the file with either: http:// or ftp://
+* Note: You might experience problems using PHP with URLs on some versions of Red Hat Linux.
+* Format:
+<br /><pre>
+filehandle=fopen("filename", mode, [ 1 or TRUE]));
+</pre>
+* Example:
+<br /><pre>
+$fh=fopen("../myfile", 'a'); // Open for append
+$fh=fopen("http://www.index.php/, 'r'); // Open for read
+$handle=fopen("/Documents and Setting/Owner/Desktop/stuff/myfile", "r");
+$handle=fopen("myfile", "r+"); // Read and write
+$handle=fopen("myfile", "w"); // Write
+$handle=fopen("../myfile", "rb"); // Read binary
+$handle=fopen("http://www.hostname.com/" );
+$handle=fopen("ftp://www.hostname.com/" );
+</pre>
+
+h4.  The Mode and Permissions
+
+* The mode specifies what kind of operation you want to perform on the file; for example, do you want to read its contents, write to it, read and write, and so on, and this depends on who owns the file and what permissions are assigned to the file. The modes are shown in the table.
+* Table: Modes for *@fopen()@*
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Mode*|{background:#ccc}.*Name*|{background:#ccc}.*Description*|
+|r     |Read      |Opens only for reading; starts at the beginning of the file.                                                                                                                                                                       |
+|r+    |Read      |Opens for reading and writing; starts from the beginning of the file.                                                                                                                                                              |
+|w     |Write     |Opens only for writing; starts at the beginning of the file. If the file exists, truncates it; if not, creates it.                                                                                                                 |
+|w+    |Write     |Opens for reading and writing; starts at the beginning of the file. If the file exists, truncates it. If the file does not exist, attempts to create it.                                                                           |
+|a     |Append    |Opens for writing only; appends at the end of the file. If the file does not exist, attempts to create it.                                                                                                                         |
+|a+    |Append    |Opens for reading and writing; appends at the end of the file. If the file does not exist, attempts to create it.                                                                                                                  |
+|x     |Cautious write  |Creates and opens a local file for writing only; starts at the beginning of the file. If the file already exists, *@fopen()@* returns false, and PHP sends a warning. If the file does not exist, attempts to create it (PHP 4.3.2+).  |
+|x+    |Cautious write |Creates and opens local files for both reading and writing; starts at the beginning of the file. If the file already exists, *@fopen()@* returns false and PHP sends a warning. If the file does not exist, attempts to create it.     |
+|b     |&nbsp;          |The default mode, used with one of the other modes for file systems that differentiate between binary and text files. Necessary with Windows, but not with UNIX or Macintosh.                                                      |
+|t     |&nbsp;          |Used with one of the other modes to represent Windows text files. Translates end of line character \n to \r\n. Used with the b mode for portability.                                                                               |
+
+* The table below lists some of the most useful PHP built-in functions provided to work with files. We cover most of these functions in this unit.
+* Table: Some Useful File Functions
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Function_Name*|{background:#ccc}.*What_It_Does*|{background:#ccc}.*Prototype*|
+|*@fclose()@*             |Closes a file or URL                        |*@fclose(fh);@*                  |
+|*@feof()@*               |Tests for end-of-file on a file pointer     |*@bool feof(fh);@*               |
+|*@fflush()@*             |Flushes output to a file                    |*@fflush(fh);@*                  |
+|*@fgetc()@*              |Gets a character from a file                |*@string fgetc(fh);@*            |
+|*@fgets()@*              |Gets a line from a file                     |*@string fgets(fh);@*            |
+|*@fgetscsv()@*           |Gets a line from a file, parses for CSV fields (comma-separated value file format)    |*@array fgetscsv(fh);@*          |
+|*@fgetss()@*             |Gets a line from a file, strips out HTML and PHP tags   |*@string fgetss(fh);@*           |
+|*@file()@*               |Reads entire file into an array             |*@array file(filename);@*        |
+|*@file_exists()@*        |Checks if a file (or directory) exists      |*@bool file_exists(filename);@*  |
+|*@file_get_contents()@*  |Reads an entire file into a string          |*@string file_get_contents(fh)@* |
+|*@fopen()@*              |Opens a file or URL                         |*@fh = fopen(mode, filename);@*  |
+
+h3. Opening a File for Reading
+
+* Four PHP functions are used for reading text from a file: *@fgets()@*, *@fgetc()@*, *@fread()@*, and *@file_get_contents()@*
+* Before opening a file you need to determine whether or not the file exists and is accessible for reading. The *@file_exists()@* function checks to see if the file exists, and the *@is_readable()@* function will return true if a file exists and has read permission.
+* When a file is initially opened for reading, the internal file pointer is placed at the beginning of the file.
+* When a read operation is performed on a file, the program keeps track of where it is in the file, by repositioning the file pointer to the next byte after the last read.
+* For example, if using the *@fgets()@* function, after a line is read from the file, the file pointer positioned at the beginning of the next line, unless the end-of-file has already been reached.
+* The *@feof()@* function can be used to determine when the end of the file has been reached.
+* If you do not have read permission on the file, you will get an error.
+
+h3.  The *@fgets()@* Function-Reading Lines from a File
+
+* The *@fgets()@* function takes a filehandle as its argument and returns a line of text from the file. It can take a third optional argument, the length that will read up to (length – 1) bytes (characters) from the file, the default being 1042 bytes.
+* As of PHP 4.3, omitting the length will cause the function to keep reading from the file stream until it reaches the end of the line. If the majority of the lines in the file are all larger than 8 KB, it is more resource efficient for your script to specify the maximum line length (PHP manual).
+* Remember, the end of line is different on Windows and UNIX.
+* Format:
+<br /><pre>
+string = fgets(filehandle, [ length ] );
+</pre>
+* Example:
+<br /><pre> 
+$line = fgets("myfile");
+$line = fgets("myfile", 4096);
+</pre>
+* Filename: *openFile.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Open a File<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">lavender</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;pre</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">   8:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">$filename</span><span class="syntax2"> </span><span class="syntax2">=</span><span class="syntax2"> </span><span class="syntax2">&quot;data.txt&quot;;</span>
+<span class="gutter">   9:</span>    <span class="syntax10">$</span><span class="syntax10">filename</span> <span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax10">$</span><span class="syntax10">_SERVER</span><span class="syntax14">[</span><span class="syntax14">DOCUMENT_ROOT</span><span class="syntax14">]</span><span class="syntax14">/</span><span class="syntax14">files</span><span class="syntax14">/</span><span class="syntax14">data</span><span class="syntax14">.</span><span class="syntax14">txt</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Check</span><span class="syntax2"> </span><span class="syntax2">for</span><span class="syntax2"> </span><span class="syntax2">file</span><span class="syntax2"> </span><span class="syntax2">existence</span>
+<span class="gutter">  11:</span>    <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax18">!</span><span class="syntax9">file_exists</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">filename</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>  
+<span class="gutter">  12:</span>        <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax14">No</span><span class="syntax14"> </span><span class="syntax14">such</span><span class="syntax14"> </span><span class="syntax14">file</span><span class="syntax14"> </span><span class="syntax14">as</span><span class="syntax14">:</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">filename</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>      <span class="syntax8">exit</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>    <span class="syntax18">}</span>
+<span class="gutterH">  15:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Open</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">file</span><span class="syntax2"> </span><span class="syntax2">for</span><span class="syntax2"> </span><span class="syntax2">reading</span>
+<span class="gutter">  16:</span>    <span class="syntax10">$</span><span class="syntax10">fh</span> <span class="syntax18">=</span> <span class="syntax9">fopen</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">filename</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">r</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  17:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Get</span><span class="syntax2"> </span><span class="syntax2">text</span><span class="syntax2"> </span><span class="syntax2">from</span><span class="syntax2"> </span><span class="syntax2">file,</span><span class="syntax2"> </span><span class="syntax2">line</span><span class="syntax2"> </span><span class="syntax2">by</span><span class="syntax2"> </span><span class="syntax2">line</span>
+<span class="gutter">  18:</span>    <span class="syntax8">while</span><span class="syntax18">(</span><span class="syntax18">!</span><span class="syntax9">feof</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">fh</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  19:</span>      <span class="syntax10">$</span><span class="syntax10">line_of_text</span> <span class="syntax18">=</span> <span class="syntax9">fgets</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">fh</span><span class="syntax18">)</span><span class="syntax18">;</span>   
+<span class="gutterH">  20:</span>      <span class="syntax8">print</span> <span class="syntax10">$</span><span class="syntax10">line_of_text</span><span class="syntax18">;</span>
+<span class="gutter">  21:</span>    <span class="syntax18">}</span>
+<span class="gutter">  22:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Close</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">file</span>
+<span class="gutter">  23:</span>    <span class="syntax9">fclose</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">fh</span><span class="syntax18">)</span><span class="syntax18">;</span>  
+<span class="gutter">  24:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutterH">  25:</span>  <span class="syntax17">&lt;/pre</span><span class="syntax17">&gt;</span>
+<span class="gutter">  26:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  27:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* The variable, *@$filename@*, on line 8 is assigned the path to the file /files/data.txt under the server's document root (*@$_SERVER[DOCUMENT]@*).
+* The *@file_exists()@* function on line 11 will return true if *@$filename@* exists, and the program exits if the file does not exist.
+* The *@fopen()@* function on line 16 will open the file for reading and return a filehandle, assigned to *@$fh@*. From this point on, we will access the file through this handle.
+* The while loop is entered on line 18. The expression tests to see if the end of file (*@feof()@*) has not been reached. The loop will not end until we have reached the end of the file; that is, read in all the lines.
+* The *@fgets()@* function on line 19 reads one line from the file using the newline character as the end of line marker. As soon as a line is read, the file pointer will move to the next line.
+* Each time a line is read, it will be assigned to the variable *@$line_of_text@*.
+* A line is printed to the browser on line 20.
+* After all the lines have been read, and we are finished using the file, it will be closed on line 23.
+
+h3. The *@fgetss()@* Function-Stripping HTML Tags from a File
+
+* The *@fgetss()@* function is just like *@fgets()@* but strips out HTML and PHP tags from a file as it reads from the file. The optional third parameter can be used to specify tags that should not be stripped.
+* This is the same as *@strip_tags()@* except strip_tags removes tags from a string rather than a file.
+* Format:
+<br /><pre>
+string fgetss ( resource handle [, int length [, string allowable_tags]] )
+</pre>
+* Example:
+<br /><pre>
+fopen($fh,"myfile.html");
+$line = fgetss($fh);
+</pre>
+* Filename: *fgetss.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Read HTML File<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">lavender</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;pre</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">   8:</span>    <span class="syntax10">$</span><span class="syntax10">filename</span> <span class="syntax18">=</span> <span class="syntax13">'</span><span class="syntax13">myForm.html</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   9:</span>    <span class="syntax10">$</span><span class="syntax10">fh</span> <span class="syntax18">=</span> <span class="syntax9">fopen</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">filename</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">r</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>    <span class="syntax8">while</span><span class="syntax18"> (</span><span class="syntax18">!</span><span class="syntax9">feof</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">fh</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  11:</span>      <span class="syntax10">$</span><span class="syntax10">content</span> <span class="syntax18">=</span> <span class="syntax9">fgetss</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">fh</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>      <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax10">content</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>    <span class="syntax18">}</span>
+<span class="gutter">  14:</span>    <span class="syntax9">fclose</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">fh</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  15:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  16:</span>  <span class="syntax17">&lt;/pre</span><span class="syntax17">&gt;</span>
+<span class="gutter">  17:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  18:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* Filename: *myForm.html* - The HTML File Before *@fgetss()@*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;</span><span class="syntax17">html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span><span class="syntax17">&lt;</span><span class="syntax17">head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span><span class="syntax17">&lt;</span><span class="syntax17">title</span><span class="syntax17">&gt;</span>My HTML Form<span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span><span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span><span class="syntax17">&lt;</span><span class="syntax17">body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">lightblue</span><span class="syntax13">&quot;</span><span class="syntax17">&gt;</span><span class="syntax17">&lt;</span><span class="syntax17">font</span><span class="syntax17"> </span><span class="syntax17">size</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">+1</span><span class="syntax13">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span><span class="syntax17">&lt;</span><span class="syntax17">form</span><span class="syntax17"> </span><span class="syntax17">action</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">myScript.php</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">method</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">GET</span><span class="syntax13">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span><span class="syntax17">&lt;</span><span class="syntax17">p</span><span class="syntax17">&gt;</span>
+<span class="gutter">   8:</span>Please enter your salary: <span class="syntax17">&lt;</span><span class="syntax17">br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">   9:</span><span class="syntax17">&lt;</span><span class="syntax17">input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">text</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">size</span><span class="syntax18">=</span><span class="syntax17">30</span><span class="syntax17"> </span><span class="syntax17">name</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">salary</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  10:</span><span class="syntax17">&lt;</span><span class="syntax17">p</span><span class="syntax17">&gt;</span>
+<span class="gutter">  11:</span>Please enter your age: <span class="syntax17">&lt;</span><span class="syntax17">br</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  12:</span><span class="syntax17">&lt;</span><span class="syntax17">input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">text</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">size</span><span class="syntax18">=</span><span class="syntax17">10</span><span class="syntax17"> </span><span class="syntax17">name</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">age</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  13:</span><span class="syntax17">&lt;</span><span class="syntax17">p</span><span class="syntax17">&gt;</span>
+<span class="gutter">  14:</span><span class="syntax17">&lt;</span><span class="syntax17">input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax17">submit</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">submit</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutterH">  15:</span><span class="syntax17">&lt;</span><span class="syntax17">input</span><span class="syntax17"> </span><span class="syntax17">type</span><span class="syntax18">=</span><span class="syntax17">reset</span><span class="syntax17"> </span><span class="syntax17">value</span><span class="syntax18">=</span><span class="syntax13">&quot;</span><span class="syntax13">clear</span><span class="syntax13">&quot;</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  16:</span><span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">form</span><span class="syntax17">&gt;</span>
+<span class="gutter">  17:</span><span class="syntax17">&lt;</span><span class="syntax17">hr</span><span class="syntax17"> </span><span class="syntax17">/</span><span class="syntax17">&gt;</span>
+<span class="gutter">  18:</span><span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  19:</span><span class="syntax17">&lt;</span><span class="syntax17">/</span><span class="syntax17">html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* The *@fgetss()@* function strips out all HTML and PHP tags from the file before storing each line in *@$content@*.
+
+h3. The *@fgetc()@* Function-Reading Characters from a File
+
+* The *@fgetc()@* function reads and returns one character at a time from an open file. It returns FALSE when the end of file is reached.
+* Format:
+<br /><pre>
+character = fgetc(filehandle);
+</pre>
+* Example:
+<br /><pre>
+$char = fgetc($fh);
+</pre>
+* Filename: *fgetc.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Read a Character at a Time<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">lavender</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">   7:</span>    <span class="syntax10">$</span><span class="syntax10">filename</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">_SERVER</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">DOCUMENT_ROOT</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">.</span><span class="syntax13">'</span><span class="syntax13">/files/data.txt</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   8:</span>    <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax18">!</span><span class="syntax9">file_exists</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">filename</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">   9:</span>      <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax14">No</span><span class="syntax14"> </span><span class="syntax14">such</span><span class="syntax14"> </span><span class="syntax14">file</span><span class="syntax14"> </span><span class="syntax14">as</span><span class="syntax14">:</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">filename</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>      <span class="syntax8">exit</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span>    <span class="syntax18">}</span>
+<span class="gutter">  12:</span>    <span class="syntax10">$</span><span class="syntax10">fh</span> <span class="syntax18">=</span> <span class="syntax9">fopen</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">filename</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">r</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>    <span class="syntax8">while</span><span class="syntax18">(</span><span class="syntax18">!</span><span class="syntax9">feof</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">fh</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  14:</span>      <span class="syntax10">$</span><span class="syntax10">char</span> <span class="syntax18">=</span> <span class="syntax9">fgetc</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">fh</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  15:</span>      <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax10">$</span><span class="syntax10">char</span> <span class="syntax18">=</span><span class="syntax18">=</span> <span class="syntax14">&quot;</span><span class="syntax14">\n</span><span class="syntax14">&quot;</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  16:</span>        <span class="syntax10">$</span><span class="syntax10">char</span> <span class="syntax18">=</span> <span class="syntax13">'</span><span class="syntax13">&lt;br</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  17:</span>      <span class="syntax18">}</span>
+<span class="gutter">  18:</span>      <span class="syntax8">print</span> <span class="syntax10">$</span><span class="syntax10">char</span><span class="syntax18">;</span>
+<span class="gutter">  19:</span>    <span class="syntax18">}</span>
+<span class="gutterH">  20:</span>    <span class="syntax9">fclose</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">fh</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  21:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  22:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  23:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* The path and filename assigned to *@$filename@* are relative to the document root of the server. If the specified file does not exist, the program will exit on line 10.
+* The file is opened for reading and a filehandle is returned to *@$fh@* on line 12.
+* For each pass through the loop, the *@fgetc()@* function reads one character from the file specified by *@$fh@*, and assigns that character to *@$char@*. The function will return false when the end of file has been reached.
+* If the character read by *@fgetc()@* is a newline, it is replaced by a string containing an HTML linebreak.
+
+h3. The *@fread()@* Function-Reading Chunks from a File
+
+* The *@fread()@* function reads from a file a specified number of characters, treating the file as a simple binary file consisting of bytes without concern for end of line or other special characters.
+* On systems that differentiate between binary and text files such as Windows, the file should be opened with "b" mode by *@fopen()@*).
+* If you are reading the entire file, the *@filesize()@* function returns the number of bytes (characters) in the file.
+* In the following example, a chunk of text will be read from a file.
+* Format:
+<br /><pre>
+bytes_read = fread(filehandle, number_of_bytes);
+</pre>
+* Example:
+<br /><pre>
+$contents = fread($myFile, 4096);
+</pre>
+* Filename: *fread.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Read a File<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">lavender</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">   7:</span>    <span class="syntax10">$</span><span class="syntax10">filename</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">_SERVER</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">DOCUMENT_ROOT</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">.</span><span class="syntax13">'</span><span class="syntax13">/files/data.txt</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   8:</span>    <span class="syntax10">$</span><span class="syntax10">filehandle</span> <span class="syntax18">=</span> <span class="syntax9">fopen</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">filename</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">rb</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   9:</span>    <span class="syntax10">$</span><span class="syntax10">contents</span> <span class="syntax18">=</span> <span class="syntax9">fread</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">filehandle</span><span class="syntax18">,</span> <span class="syntax9">filesize</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">filename</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>    <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">pre</span><span class="syntax14">&gt;</span><span class="syntax10">$</span><span class="syntax10">contents</span><span class="syntax14">&lt;</span><span class="syntax14">/</span><span class="syntax14">pre</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span>    <span class="syntax9">fclose</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">filehandle</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  13:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  14:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* The *@fread()@* function reads the number of bytes from a file (returned by *@filesize()@*) and stores the bytes in *@$contents@*.
+* The *@fread()@* function reads the specified number of bytes, if it can, and does not concern itself with the end-of-line character. All characters are just bytes.
+* It will stop reading when it reaches the specified file size or end of file, whichever come first.
+* The contents of the file are printed using &lt;pre&gt; tags so the line feeds work. That is, the number of bytes selected when the file was opened are printed.
+* In the following example a chunk of binary data is read from a file, in this example, an image file.
+* Filename: *freadImage.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;?php</span>
+<span class="gutter">   2:</span>  <span class="syntax10">$</span><span class="syntax10">filename</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">_SERVER</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">DOCUMENT_ROOT</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">.</span><span class="syntax13">'</span><span class="syntax13">/pictures/pizza-chef.jpg</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   3:</span>  <span class="syntax10">$</span><span class="syntax10">handle</span> <span class="syntax18">=</span> <span class="syntax9">fopen</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">filename</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">rb</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   4:</span>  <span class="syntax10">$</span><span class="syntax10">contents</span> <span class="syntax18">=</span> <span class="syntax9">fread</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">handle</span><span class="syntax18">,</span> <span class="syntax9">filesize</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">filename</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">   5:</span>
+<span class="gutter">   6:</span>  <span class="syntax9">header</span><span class="syntax18">(</span><span class="syntax14">&quot;</span><span class="syntax14">Content</span><span class="syntax14">-</span><span class="syntax14">type</span><span class="syntax14">:</span><span class="syntax14"> </span><span class="syntax14">image</span><span class="syntax14">/</span><span class="syntax14">jpeg</span><span class="syntax14">&quot;</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   7:</span>  <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax10">contents</span><span class="syntax18">;</span>
+<span class="gutter">   8:</span>
+<span class="gutter">   9:</span>  <span class="syntax9">fclose</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">handle</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span><span class="syntax17">?&gt;</span></span>
+</PRE>
+* The variable *@$filename@* is assigned the full path of an image file, "pizza-chef.jpg".
+* Because the file is an image file, it is a binary file and we must specify the "b" (for binary) mode on Windows.
+* The entire contents from the image file, specified by *@filesize()@*, are assigned to *@$contents@*. This data is binary and not human readable.
+* To view the image in a browser, we need to send the *@header()@* function with the "Content-type: image/jpeg" as an HTTP header to the browser.
+* Make sure the *@header()@* function is called before any other output is displayed to the browser or it will fail.
+* The image is displayed on the browser and the filehandle is closed.
+
+h3. Positioning the File Pointer
+
+* If you have already read all the lines from a file, you are at the end of the file, meaning the file pointer is at the end of the file.
+* If you want to go back to the beginning of the file, one way is to close the file and then reopen it. Another way is to use the *@fseek()@* function.
+* The *@fseek()@* function allows you to randomly access a file by moving to a specified byte (not line) position within the file. On success, seek returns 0; otherwise, it returns –1. (Seeking past EOF is not considered an error.)
+
+h3. The *@fseek()@* Function
+
+* The *@seek()@* function sets a postion in a file, where the first byte is position 0. Positions are:
+<br /><pre>
+SEEK_SET = Beginning of the file, the default position.
+
+SEEK_CUR = Current position in the file; use a negative or positive offset.
+
+SEEK_END = End of the file; use a negative offset.
+</pre>
+* Format:
+<br /><pre>
+int fseek(filehandle, byteoffset, position);
+</pre>
+* Example:
+<br /><pre>
+fseek(fh, 0, SEEK_SET); // Start at the beginning of the file, byte 0
+</pre>
+* The "byteoffset" is the number of bytes from the file "position". A positive byteoffset moves the position forward in the file; a negative byteoffset moves the position backwards in the file.
+* If using a negative byteoffset, you would not want to start at the beginning of the file, but somewhere in the middle or from the end of the file.
+
+h3. The *@rewind()@* Function
+
+* The *@rewind()@* function moves the file back to the beginning of the file, the same as fseek(filehandle, 0, SEEK_SET).
+* It takes a filehandle as its argument and returns true on success and false on failure.
+* Format:
+<br /><pre>
+bool rewind ( resource handle )
+</pre>
+* Example:
+<br /><pre>
+rewind($filehandle) ; // Go back to the beginning of the file
+</pre>
+* Filename: *fseek.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>fseek and fread<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">lavender</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">   7:</span>    <span class="syntax10">$</span><span class="syntax10">filename</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">_SERVER</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">DOCUMENT_ROOT</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">.</span><span class="syntax13">'</span><span class="syntax13">/files/data.txt</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   8:</span>    <span class="syntax10">$</span><span class="syntax10">filehandle</span> <span class="syntax18">=</span> <span class="syntax9">fopen</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">filename</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">r</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   9:</span>    <span class="syntax10">$</span><span class="syntax10">total_bytes</span> <span class="syntax18">=</span> <span class="syntax9">filesize</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">filename</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>    <span class="syntax10">$</span><span class="syntax10">contents</span> <span class="syntax18">=</span> <span class="syntax9">fread</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">filehandle</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">total_bytes</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span>    <span class="syntax2">//</span><span class="syntax2"> </span><span class="syntax2">Go</span><span class="syntax2"> </span><span class="syntax2">back</span><span class="syntax2"> </span><span class="syntax2">to</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">beginning</span><span class="syntax2"> </span><span class="syntax2">of</span><span class="syntax2"> </span><span class="syntax2">the</span><span class="syntax2"> </span><span class="syntax2">file</span>
+<span class="gutter">  12:</span>    <span class="syntax9">fseek</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">filehandle</span><span class="syntax18">,</span> <span class="syntax5">0</span><span class="syntax18">)</span><span class="syntax18">;</span> 
+<span class="gutter">  13:</span>    <span class="syntax10">$</span><span class="syntax10">contents</span> <span class="syntax18">=</span> <span class="syntax9">fread</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">filehandle</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">total_bytes</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">Reading</span><span class="syntax14"> </span><span class="syntax14">from</span><span class="syntax14"> </span><span class="syntax14">the</span><span class="syntax14"> </span><span class="syntax14">beginning</span><span class="syntax14"> </span><span class="syntax14">of</span><span class="syntax14"> </span><span class="syntax14">the</span><span class="syntax14"> </span><span class="syntax14">file</span><span class="syntax14">:</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span>
+<span class="gutterH">  15:</span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14">&lt;</span><span class="syntax14">pre</span><span class="syntax14">&gt;</span><span class="syntax10">$</span><span class="syntax10">contents</span><span class="syntax14">&lt;</span><span class="syntax14">/</span><span class="syntax14">pre</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  16:</span>    <span class="syntax9">fseek</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">filehandle</span><span class="syntax18">,</span> <span class="syntax18">-</span><span class="syntax5">10</span><span class="syntax18">,</span> SEEK_END<span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  17:</span>    <span class="syntax10">$</span><span class="syntax10">contents</span> <span class="syntax18">=</span> <span class="syntax9">fread</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">filehandle</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">total_bytes</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  18:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">Reading</span><span class="syntax14"> </span><span class="syntax14">from</span><span class="syntax14"> </span><span class="syntax14">the</span><span class="syntax14"> </span><span class="syntax14">end</span><span class="syntax14"> </span><span class="syntax14">of</span><span class="syntax14"> </span><span class="syntax14">the</span><span class="syntax14"> </span><span class="syntax14">file</span><span class="syntax14">:</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span>
+<span class="gutter">  19:</span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14">&lt;</span><span class="syntax14">pre</span><span class="syntax14">&gt;</span><span class="syntax10">$</span><span class="syntax10">contents</span><span class="syntax14">&lt;</span><span class="syntax14">/</span><span class="syntax14">pre</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  20:</span>    <span class="syntax9">fclose</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">filehandle</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  21:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  22:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  23:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* The *@filesize()@* function returns the number of bytes in the entire file. The *@fread()@* function will read *@$total_bytes@* from the filehandle and return the data to *@$contents@*. After this read operation, the internal read pointer will be at the end of the file.
+* The first *@fseek()@* positions the read pointer at the beginning of the file (the default position), at byte 0, the first character. You can can also use the built-in *@rewind()@* function to start back at the beginning of the file.
+* The *@fread()@* function will again read in the whole file, specified by *@$total_bytes@*, and return the the data and store it in *@$contents@*.
+* The second time the *@fseek()@* function will go to the end of the file, SEEK_END, and back up 10 bytes. The next read operation will start at that position.
+* The last *@fread()@* function will read until it reaches *@$total_bytes@* or end of file, starting at the position set by *@fseek()@* on line 16; that is, –10 bytes from the end of the file.
+
+h3. The *@ftell()@* Function-Finding the Current Position in a File
+
+* If you have read some data from a file and want to keep track of where you were in the file when you stopped reading, the *@ftell()@* function will return the current byte position, the number of bytes from the beginning of the file, and where the next read operation will start.
+* This can be used in conjunction with the *@seek()@* function to return to the correct position in the file.
+* Note: If you are using text mode, the carriage return and linefeed translation will be part of the byte count.
+* Format:
+<br /><pre>
+int ftell ( resource handle )
+</pre>
+* Example:
+<br /><pre>
+$filehandle("myfile", "r");
+$contents=fgets($filehandle, 1024);
+// Current read postion in bytes, starting at byte 1024
+echo ftell( $filehandle);
+</pre>
+* Filename: *ftell.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>The ftell() Function<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">lavender</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;h3</span><span class="syntax17">&gt;</span>Marking a Position in a File<span class="syntax17">&lt;/h3</span><span class="syntax17">&gt;</span>
+<span class="gutter">   7:</span>  <span class="syntax17">&lt;pre</span><span class="syntax17">&gt;</span>
+<span class="gutter">   8:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">   9:</span>    <span class="syntax10">$</span><span class="syntax10">filename</span> <span class="syntax18">=</span> <span class="syntax10">$</span><span class="syntax10">_SERVER</span><span class="syntax18">[</span><span class="syntax13">'</span><span class="syntax13">DOCUMENT_ROOT</span><span class="syntax13">'</span><span class="syntax18">]</span> <span class="syntax18">.</span><span class="syntax13">'</span><span class="syntax13">/files/data.txt</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutterH">  10:</span>    <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax18">!</span><span class="syntax9">file_exists</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">filename</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  11:</span>      <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax14">No</span><span class="syntax14"> </span><span class="syntax14">such</span><span class="syntax14"> </span><span class="syntax14">file</span><span class="syntax14"> </span><span class="syntax14">as</span><span class="syntax14">:</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">filename</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>      <span class="syntax8">exit</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  13:</span>    <span class="syntax18">}</span>
+<span class="gutter">  14:</span>    <span class="syntax10">$</span><span class="syntax10">fh</span> <span class="syntax18">=</span> <span class="syntax9">fopen</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">filename</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">r</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutterH">  15:</span>    <span class="syntax10">$</span><span class="syntax10">substring</span> <span class="syntax18">=</span> <span class="syntax13">'</span><span class="syntax13">Line</span><span class="syntax13"> </span><span class="syntax13">1</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  16:</span>    <span class="syntax8">while</span><span class="syntax18">(</span><span class="syntax18">!</span><span class="syntax9">feof</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">fh</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  17:</span>      <span class="syntax10">$</span><span class="syntax10">line_of_text</span> <span class="syntax18">=</span> <span class="syntax9">fgets</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">fh</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  18:</span>      <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax10">line_of_text</span><span class="syntax18">;</span>
+<span class="gutter">  19:</span>      <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax9">substr_count</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">line_of_text</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">substring</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutterH">  20:</span>        <span class="syntax10">$</span><span class="syntax10">bytes</span> <span class="syntax18">=</span> <span class="syntax9">ftell</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">fh</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  21:</span>      <span class="syntax18">}</span>
+<span class="gutter">  22:</span>    <span class="syntax18">}</span>
+<span class="gutter">  23:</span>    <span class="syntax8">if</span><span class="syntax18"> (</span><span class="syntax18">!</span><span class="syntax8">isset</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">bytes</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  24:</span>      <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax10">$</span><span class="syntax10">substring</span><span class="syntax14"> </span><span class="syntax14">not</span><span class="syntax14"> </span><span class="syntax14">found</span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutterH">  25:</span>      <span class="syntax8">exit</span><span class="syntax18">(</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  26:</span>    <span class="syntax18">}</span>
+<span class="gutter">  27:</span>    <span class="syntax9">fseek</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">fh</span><span class="syntax18">,</span> <span class="syntax10">$</span><span class="syntax10">bytes</span><span class="syntax18">,</span> SEEK_SET<span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  28:</span>    <span class="syntax8">echo</span> <span class="syntax13">'</span><span class="syntax13">&lt;hr</span><span class="syntax13"> </span><span class="syntax13">/&gt;</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">  29:</span>    <span class="syntax8">echo</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">b</span><span class="syntax14">&gt;</span><span class="syntax14">Start</span><span class="syntax14"> </span><span class="syntax14">reading</span><span class="syntax14"> </span><span class="syntax14">again</span><span class="syntax14"> </span><span class="syntax14">from</span><span class="syntax14"> </span><span class="syntax14">byte</span><span class="syntax14"> </span><span class="syntax14">position</span><span class="syntax14"> </span><span class="syntax10">$</span><span class="syntax10">bytes</span><span class="syntax14">&lt;</span><span class="syntax14">/</span><span class="syntax14">b</span><span class="syntax14">&gt;</span>
+<span class="gutterH">  30:</span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14"> </span><span class="syntax14">&lt;</span><span class="syntax14">br</span><span class="syntax14"> </span><span class="syntax14">/</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  31:</span>    <span class="syntax8">while</span><span class="syntax18">(</span><span class="syntax18">!</span><span class="syntax9">feof</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">fh</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutter">  32:</span>      <span class="syntax10">$</span><span class="syntax10">line_of_text</span> <span class="syntax18">=</span> <span class="syntax9">fgets</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">fh</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  33:</span>      <span class="syntax8">echo</span> <span class="syntax10">$</span><span class="syntax10">line_of_text</span><span class="syntax18">;</span>
+<span class="gutter">  34:</span>    <span class="syntax18">}</span>
+<span class="gutterH">  35:</span>    <span class="syntax9">fclose</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">fh</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  36:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutter">  37:</span>  <span class="syntax17">&lt;/pre</span><span class="syntax17">&gt;</span>
+<span class="gutter">  38:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  39:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* The variable, *@$substring@*, is assigned the string "Line 1", a string that will be searched for in the file that was just opened.
+* As each line is read from the file, the *@substr_count()@* function will search for the string *@$substring@* in a line and return the number of times it was found. Each time this function returns 1 or more, the next line will be executed.
+* The *@ftell()@* function will return the byte position of where the next read operation will take place. The line containing *@$substring@* has already been read. The byte position is the number of characters from the beginning of the file. This value is saved in *@$bytes@*, to be used later with the *@fseek()@* function.
+* The *@fseek()@* function will start at the beginning of the file, byte 0, and move to the position returned from *@ftell()@*.
+* When *@fgets()@* starts reading lines from the file it picks up right after the line where the substring was found.
+
+h3. Opening a URL for Reading
+
+* You can open files with FTP or HTTP with the *@fopen()@* function.
+* Note: If opening the URL fails, check if the allow_url_fopen directive in the php.ini file is disabled.
+* Format:
+<br /><pre>
+resource fopen ( string filename, string mode [,
+                 bool use_include_path [, resource zcontext]] )
+</pre>
+* Example:
+<br /><pre>
+$filehandle=fopen('http://www.site.com/');
+$filehandle=fopen('ftp://username:password@ftp.wherever.com/pub/index','r');
+</pre>
+* Filename: *openURL.php*
+<br /><PRE>
+<span class="syntax0"><span class="gutter">   1:</span><span class="syntax17">&lt;html</span><span class="syntax17">&gt;</span>
+<span class="gutter">   2:</span> <span class="syntax17">&lt;head</span><span class="syntax17">&gt;</span>
+<span class="gutter">   3:</span>  <span class="syntax17">&lt;title</span><span class="syntax17">&gt;</span>Open URL<span class="syntax17">&lt;/title</span><span class="syntax17">&gt;</span>
+<span class="gutter">   4:</span> <span class="syntax17">&lt;/head</span><span class="syntax17">&gt;</span>
+<span class="gutterH">   5:</span> <span class="syntax17">&lt;body</span><span class="syntax17"> </span><span class="syntax17">bgcolor</span><span class="syntax18">=</span><span class="syntax14">&quot;</span><span class="syntax14">lavender</span><span class="syntax14">&quot;</span><span class="syntax17">&gt;</span>
+<span class="gutter">   6:</span>  <span class="syntax17">&lt;?php</span>
+<span class="gutter">   7:</span>    <span class="syntax10">$</span><span class="syntax10">filename</span> <span class="syntax18">=</span> <span class="syntax13">'</span><span class="syntax13">http://www.ellieq.com/</span><span class="syntax13">'</span><span class="syntax18">;</span>
+<span class="gutter">   8:</span>    <span class="syntax10">$</span><span class="syntax10">fh</span> <span class="syntax18">=</span> <span class="syntax9">fopen</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">filename</span><span class="syntax18">,</span><span class="syntax13">'</span><span class="syntax13">r</span><span class="syntax13">'</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">   9:</span>    <span class="syntax8">while</span><span class="syntax18"> (</span><span class="syntax18">!</span><span class="syntax9">feof</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">fh</span><span class="syntax18">)</span><span class="syntax18">)</span> <span class="syntax18">{</span>
+<span class="gutterH">  10:</span>      <span class="syntax10">$</span><span class="syntax10">contents</span> <span class="syntax18">=</span> <span class="syntax9">htmlspecialchars</span><span class="syntax18">(</span><span class="syntax9">fgets</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">fh</span><span class="syntax18">,</span> <span class="syntax5">1024</span><span class="syntax18">)</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  11:</span>      <span class="syntax8">print</span> <span class="syntax14">&quot;</span><span class="syntax14">&lt;</span><span class="syntax14">pre</span><span class="syntax14">&gt;</span><span class="syntax10">$</span><span class="syntax10">contents</span><span class="syntax14">&lt;</span><span class="syntax14">/</span><span class="syntax14">pre</span><span class="syntax14">&gt;</span><span class="syntax14">&quot;</span><span class="syntax18">;</span>
+<span class="gutter">  12:</span>    <span class="syntax18">}</span>
+<span class="gutter">  13:</span>    <span class="syntax9">fclose</span><span class="syntax18">(</span><span class="syntax10">$</span><span class="syntax10">fh</span><span class="syntax18">)</span><span class="syntax18">;</span>
+<span class="gutter">  14:</span>  <span class="syntax17">?&gt;</span>
+<span class="gutterH">  15:</span> <span class="syntax17">&lt;/body</span><span class="syntax17">&gt;</span>
+<span class="gutter">  16:</span><span class="syntax17">&lt;/html</span><span class="syntax17">&gt;</span></span>
+</PRE>
+* The file name in this case is the URL of a Web site. The Web page is opened for reading and a filehandle is returned, called *@$fh@*.
+* The *@fgets()@* function reads 1024 bytes at a time from the page. The *@htmlspecialchars()@* function converts any special characters to HTML entities; for example, an "&" would become "&amp;" and a "<" would become "&lt;", and so on.
+
+<br />
+
+---
+
+[[Unit Nine => 152-166 Unit Nine Index]]

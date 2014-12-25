@@ -1,0 +1,356 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>HTML Forms</title>
+<link href="../../../css/basic.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" language="JavaScript">
+<!--
+function putSemester() {
+    var today=new Date();
+    var thisMonth=today.getMonth()+1;
+    var thisYear=today.getFullYear();
+    if(thisMonth <=6) {
+        return "Spring, " + thisYear;
+    }
+    else {
+       return "Fall, " + thisYear;
+    }
+}//-->
+</script>
+<style type="text/css">
+<!--
+    .bgStripes {
+        background-image:url(../../../images/Xstripes.gif);
+        background-attachment: fixed;
+    }
+    body {
+        background-color:white;
+    }
+    strong {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+-->
+</style>
+</head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
+<table class="bgStripes" border="0" width="100%">
+<tbody>
+<tr name="firstRow">
+<td valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+<script type="text/javascript">
+<!--
+    document.write(putSemester());
+-->
+</script>
+</span> <br>
+</td>
+<td style="text-align: center;"><span style="font-weight: bold; font-size: medium; color: darkblue;">
+PHP Web Development with MySQL
+</span> </td>
+<td align="right" valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+3 Credits</span> </td>
+</tr>
+<tr>
+<td colspan="3" style="text-align: center;"><span style="font-size: xx-small; font-weight: bold;">
+152-166</span> </td>
+</tr>
+</tbody>
+</table>
+<!--The heading for the slides --> <br>
+<table class="headTable1" border="0">
+<tbody>
+<tr>
+<td width="100"><a href="variables.html"><img alt="" src="../../../images/btn_lArrow.gif" border="0"></a><a href="index.html"><img alt="" src="../../../images/btn_upArrow.gif" border="0"></a><a href="index.html"><img alt="" src="../../../images/btn_rArrow.gif" border="0"></a></td>
+<td>HTML Forms and  Form Variables</td>
+</tr>
+</tbody>
+</table>
+<br>
+<div class="disp1">
+<ul class="slidesUl1">
+<li><p>
+Now we are starting to get into what makes PHP so popular.
+As we mentioned in the introduction to this course,
+PHP was designed as a Web-based programming language to create dynamic Web content,
+to gather and manipulate information submitted by HTML forms.
+</p><p>
+For now we will examine a simple form and how PHP collects and stores the form
+information in variables.
+</p><p>
+Later in the course we will provide a comprehensive discussion on HTML forms
+and introduce the special global arrays used to process them in your PHP scripts.
+</p></li>
+<li><p>
+The php.ini File and register_globals
+</p><p>
+Before getting started, there are some issues to be aware of based on the
+version of PHP you are using.
+</p><p>
+The PHP initialization file, called <b>php.ini</b> , contains a directive
+called: <b>register_globals</b> Older versions of PHP (prior to 4.2.0) had
+this directive turned to "On" as the default, allowing PHP to create simple
+variables from form data.
+</p><p>
+In newer versions of PHP, register_globals has been set to "Off" to avoid
+potential security breaches. If using PHP 5, you would have to turn this
+feature on before PHP would directly assign form input automatically to local
+variables.
+</p><p>
+Shortly, we discuss an alternative that will simplify form variable processing
+for us until later in the course when we learn more secure ways to do this.
+</p><p>
+The next excerpt is taken from the PHP 5 php.ini file,
+showing the line where register_globals is set. The default is "Off" and you
+should really try to adhere to this setting.
+</p><p>
+From the php.ini file:
+</p>
+<code><small>
+; You should do your best to write your scripts so that they do not require<br>
+; register_globals to be on; Using form variables as globals can easily lead<br>
+; to possible security problems, if the code is not very well thought of.<br>
+register_globals = Off<br>
+</small></code>
+<p>
+If you choose not set register_globals to "On", add the following line to your
+PHP programs that process form data:
+</p>
+<blockquote><code>
+extract($_REQUEST);
+</code></blockquote>
+<p>
+The <b>$_REQUEST</b> superglobal array contains the information submitted to
+the server from the HTML form. After extracting this information,
+PHP will create simple variables corresponding to the form data as shown in
+the example below.
+</p><p>
+For my lecture examples, I will assume that the <b>register_globals</b>
+directive is set to "Off". Note that this differs from the assumption made in
+the Quigley text, for their examples!
+</p></li>
+<li><p>
+How PHP Handles Form Input
+</p><p>
+For each HTML form parameter, we will use <code>extract($_REQUEST)</code> to
+cause PHP to create a local variable by the same name and make it available in
+our script. For example, consider this HTML input type for two text fields:
+</p>
+<blockquote><code><small>
+&lt;input type="text" name="your_name"&gt;<br>
+&lt;input type="text" name ="your_phone"&gt;<br>
+</small></code></blockquote>
+<p>
+If you have a text field named "your_name", PHP will create a variable called
+$your_name. And if you have another text field named "your_phone",
+PHP will in turn, create a variable called $your_phone.
+</p><p>
+The values assigned to the PHP variables are the same values the user entered
+in the HTML text fields when filling out the form.
+</p><p>
+Example 1 below illustrates a simple HTML form consisting of two fields.
+The form starts with the opening <b>&lt;form&gt;</b> tag.
+</p><p>
+The ACTION attribute of the form tag is assigned the name of the PHP script
+that will handle the form input:
+</p>
+<blockquote><code>
+&lt;form ACTION="php script"&gt;<br>
+</code></blockquote>
+<p>
+After the user fills out the form and presses the submit button,
+the values that he or she typed in the text boxes will be sent to the PHP script.
+</p><p>
+The browser knows where to send the data based on the ACTION attribute of the
+<b>&lt;form&gt;</b> tag, but it also needs to know how to send the form data
+to the server.
+</p><p>
+The how, or method, is also an attribute of the <b>&lt;form&gt;</b> tag,
+called the METHOD atribute.
+</p><p>
+There are two popular HTTP methods used to send the form information to the
+server - the GET method (default) and the POST method.
+</p><p>
+Because the GET method is the default, you don't have to explicitly assign
+it as an attribute. The browser just assumes that is the method you are using.
+</p><p>
+The GET method tells the browser to send a URL-encoded string, called the
+query string, to the server. It attaches this encoded query string to the end
+of the URL in the browser's location box,
+prepended with a "?". It is the method used when doing searches or handling
+static pages and GET query strings are limited in size.
+</p><p>
+If using the POST method, the METHOD attribute must be added to the HTML
+&lt;form&gt; tag METHOD="POST" (case insensitive). With the POST method,
+the browser sends an encoded message body in the HTTP header to the server
+so that it doesn't appear in the URL.
+</p><p>
+It is not limited in size, but it can't be bookmarked or reloaded,
+and does not appear in the browser's history.
+</p><p>
+When PHP gets the form input from the server, it takes care of decoding
+the query string or message body and assigning the respective input values
+to PHP variables.
+</p>
+<h4>
+Example 1 - Filename: simple.html
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Simple HTML Form<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">lightblue</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">+1</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">form</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">action</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">processform.php</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">p</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>   please enter your name: <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">br</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">input</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">type</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">text</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax17">30</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">name</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">your_name</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">br</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN>   please enter your phone number: <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">br</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  12:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">input</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">type</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">text</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax17">30</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">name</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">your_phone</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  13:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">br</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  14:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">input</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">type</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax17">submit</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">value</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">submit</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">  15:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">form</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  16:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  17:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+</div>
+</small></blockquote>
+<h4>
+Example 2 - Filename: processform.php
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN>  <SPAN CLASS="syntax9">extract</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">_REQUEST</SPAN>)<SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN>  print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">Your</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">name</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">is</SPAN><SPAN CLASS="syntax13">:</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">your_name</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN>  print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">Your</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">phone</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">number</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">is</SPAN><SPAN CLASS="syntax13">:</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">your_phone</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN><SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+An alternate style is to embed PHP in an HTML document.
+Here we use the PHP shortcut tags:
+</p>
+<h4>
+Filename: processform2.php (uses HTML form in simple2.html)
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Test Form Variables<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN> <SPAN CLASS="syntax17">&lt;?</SPAN> <SPAN CLASS="syntax9">extract</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">_REQUEST</SPAN>)<SPAN CLASS="syntax18">;</SPAN> <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN> Your name is: <SPAN CLASS="syntax17">&lt;?</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">your_name</SPAN><SPAN CLASS="syntax17">?&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">br</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN> and your phone number is: <SPAN CLASS="syntax17">&lt;?</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">your_phone</SPAN><SPAN CLASS="syntax17">?&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">br</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+Your instructor will demonstrate output from the PHP script in Example 2.
+The input data is appended to the URL after the "?".
+</p></li>
+<li><p>
+Extracting the Data by Request
+</p><p>
+In the previous example, we used the default GET method to send form input
+to the server. We also assumed the register_globals directive in the php.ini
+file was turned "On," allowing PHP to create local variables with the form data.
+</p><p>
+In the following example, we assume that register_globals is turned "Off"
+(the recommended and default setting) and that the method is POST,
+the more commonly used method when working with form input.
+</p><p>
+This method sends the form input as a message body in the HTTP header to the
+server and does not append the data to the URL in the browser.
+Even though the input data is sent using a different method,
+it is received in the same URL-encoded format.
+</p><p>
+When register_globals is turned off, we must use built-in PHP special variables,
+called "super-global arrays", to access the form information.
+</p><p>
+Because we do not cover arrays until later in the course, we will use the PHP
+<b>extract()</b> function and the super-global array <b>$_REQUEST</b> to
+create local variables to hold input data from the form.
+</p><p>
+The <b>$_REQUEST</b> array contains all of the input data for both GET and POST
+methods. Once <b>extract($_REQUEST)</b> is executed the HTML
+form's parameters will be assigned to PHP variables of the same names.
+</p>
+<h4>
+Example 3 - Filename: postform.html
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>HTML Form using POST<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">lightblue</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">+1</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">form</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">action</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">procpostform.php</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">method</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">POST</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">p</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>   Please enter your name: <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">br</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">input</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">type</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">text</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax17">50</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">name</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">your_name</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">p</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN>   Please enter your phone: <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">br</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  12:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">input</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">type</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">text</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax17">50</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">name</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">your_phone</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  13:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">p</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  14:</SPAN>   Please enter your email address:<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">br</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">  15:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">input</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">type</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">text</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax17">50</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">name</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">your_email_addr</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  16:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">p</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  17:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">input</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">type</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax17">submit</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">value</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">submit</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  18:</SPAN>   <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">input</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">type</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax17">reset</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">value</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">clear</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  19:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">form</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">  20:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">hr</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  21:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">  22:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+</div>
+</small></blockquote>
+<h4>
+Example 4 - Filename: procpostform.php
+</h4>
+<blockquote><small>
+<div class="disp2">
+<PRE>
+<SPAN CLASS="gutter">   1:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   2:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   3:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Process Form using POST<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">title</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   4:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">head</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">   5:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">bgcolor</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">lightgreen</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">font</SPAN><SPAN CLASS="syntax17"> </SPAN><SPAN CLASS="syntax17">size</SPAN><SPAN CLASS="syntax18">=</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">+</SPAN><SPAN CLASS="syntax13">1</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   6:</SPAN>  <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">h2</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>Here is the form input:<SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">h2</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutter">   7:</SPAN>  <SPAN CLASS="syntax17">&lt;?php</SPAN>
+<SPAN CLASS="gutter">   8:</SPAN>    <SPAN CLASS="syntax2">//</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">Extracting</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">the</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">form</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">input</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">when</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">register_globals</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">is</SPAN><SPAN CLASS="syntax2"> </SPAN><SPAN CLASS="syntax2">off</SPAN>
+<SPAN CLASS="gutter">   9:</SPAN>    <SPAN CLASS="syntax9">extract</SPAN>(<SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">_REQUEST</SPAN><SPAN CLASS="syntax18">,</SPAN> EXTR_SKIP)<SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutterH">  10:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">Welcome</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">to</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">PHP</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">your_name</SPAN><SPAN CLASS="syntax13">!</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  11:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">Can</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">I</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">call</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">you</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">at</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">your_phone</SPAN><SPAN CLASS="syntax13">?</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  12:</SPAN>    print <SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax13">Is</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">it</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">ok</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">to</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">send</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">you</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">email</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">at</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax10">$</SPAN><SPAN CLASS="syntax10">your_email_addr</SPAN><SPAN CLASS="syntax13">?</SPAN><SPAN CLASS="syntax13">&lt;</SPAN><SPAN CLASS="syntax13">br</SPAN><SPAN CLASS="syntax13"> </SPAN><SPAN CLASS="syntax13">/</SPAN><SPAN CLASS="syntax13">&gt;</SPAN><SPAN CLASS="syntax13">&quot;</SPAN><SPAN CLASS="syntax18">;</SPAN>
+<SPAN CLASS="gutter">  13:</SPAN>  <SPAN CLASS="syntax17">?&gt;</SPAN>
+<SPAN CLASS="gutter">  14:</SPAN> <SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">body</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+<SPAN CLASS="gutterH">  15:</SPAN><SPAN CLASS="syntax17">&lt;</SPAN><SPAN CLASS="syntax17">/</SPAN><SPAN CLASS="syntax17">html</SPAN><SPAN CLASS="syntax17">&gt;</SPAN>
+</PRE>
+</div>
+</small></blockquote>
+<p>
+Note the use of the <b>EXTR_SKIP</b> parameter to the extract() function in the
+above script. EXTR_SKIP is a flag that causes extract() to <b>not</b> overwrite
+any existing PHP variable with the same name as an HTML form parameter.
+</p><p>
+Your instructor will demonstrate the form in Example 3 and how the PHP script
+in Example 4 processes the input data from the form.
+</p>
+</li>
+</ul>
+</div>
+</body>
+</html>
+

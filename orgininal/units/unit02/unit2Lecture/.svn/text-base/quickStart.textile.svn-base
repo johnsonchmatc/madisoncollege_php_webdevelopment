@@ -1,0 +1,435 @@
+h2. Getting Started with PHP
+
+
+h3. How a Dynamic Web Page is Processed
+  
+The applications involved in the processing of a Web page are:
+
+<div style="text-align: center;">
+  !/attachment/unit02/life-cycle.png!
+</div>
+
+* a browser such as Firefox or Internet Explorer
+* a network (HTTP)
+* a web server such as Apache or Windows IIS
+* a server module (PHP, ASP, ColdFusion)
+* external files or a database (MySQL, Oracle, Sybase)
+
+The steps to process a page are:
+
+# The user makes a request for a Web site by typing the address of the Web site in the browser's URL location box. The browser attempts to transmit the "request" to the server indicated by the URL using the HTTP protocol.
+# The network can be a very large network such as the Internet, an intranet within an organization, or a wireless network on a personal desktop computer. The HTTP protocol is used to transfer documents to and from the server.
+# Web servers are generic programs capable of accepting Web-based requests and providing the response to them. In most cases, this response is simply retrieving the file from server's local file system. With dynamic Web sites, Web servers turn over the request for a specific file to an appropriate helper application.
+# PHP is a module that resides within the Web server. The server opens the file (script) and reads it line by line. It hands over any PHP instructions to the PHP module for processing and replaces the PHP code with the output it generated back into the page.
+# If the Web page consists of PHP with MySQL (or any other database) statements, then PHP may make further requests to the database to retrieve, send, or update information on the fly.
+
+
+h3.  The Anatomy of a PHP Script
+  
+* A PHP script is a file (ending with a .php extension) consisting of text, HTML, and PHP instructions interspersed throughout the file. The PHP instructions are contained within two HTML style tags:
+** @<?php@ is the opening tag
+** @?>@ is the closing tag
+* Everything between these two tags is interpreted by the PHP module (also called interpreter) and converted to regular text and HTML before being sent back to the requesting browser.
+* If, for example, one of the PHP instructions is to get today's date from the server, PHP will get the date and replace the PHP instruction with the current date. When the browser gets the file, it will not see the PHP tags or any of the PHP instructions; it will get only what PHP generated as a result of its processing.
+* Consider the following simple PHP instruction consisting of an echo statement containing the string "Hello, world.<br />", some plain text, and an HTML break tag.
+* What the PHP interpreter gets:
+<br />
+<pre><?php
+  echo "Hello, world.<br />";
+?<
+</pre>
+* What the Web browser gets:
+<br /><pre>
+Hello, world.
+</pre>
+
+h3.  The Steps of Writing a PHP Script
+
+* Because PHP is a scripting language designed to be integrated with other text documents, most commonly HTML, you will write your scripts in a text editor.
+* Some popular text editors are BBEdit (Macintosh), Wordpad, Notepad (Windows), pico, vi, emacs (Linux/UNIX), and so on.
+* Also available are third-party editors, such as jEdit, TextPad and WinEdit, as well as integrated development environments (IDEs) such as Dreamweaver and Eclipse.
+
+h3.  Naming the PHP File -- The .php Extension
+
+* When you name the file, be sure to add the PHP extension to its name. Normally the extension is .php, but this depends on how your server was configured. The following lines were taken from the Apache server's httpd.conf file. This server accepts .php, .php3, and .phtml as valid extensions to PHP script names.
+* From the Apache httpd.conf file:
+<br /><pre>
+AddType application/x-httpd-php .php
+AddType application/x-httpd-php .php3
+AddType application/x-httpd-php .phtml
+</pre>
+
+h3.  PHP Tags
+
+* The script file may contain HTML, XHTML, XML, and so on, but PHP will consider the file as just plain text and leave it alone, unless you explicitly embed the PHP statements between its own special tags:
+<br /><pre>
+<?php
+ statement;
+ statement;
+?></pre>
+* Each statement must be terminated with a semicolon (unless it is the last line of the script). If you forget the semicolon PHP will produce an error message similar to this:
+<br /><pre>
+Parse error: syntax error, unexpected T_PRINT in c:
+\wamp\www\exemples\first.php on line 4
+</pre>
+
+h3. Additional PHP Tags
+
+* To promote flexibility, PHP supports three other types of tags, but the full PHP tags just described are really the most reliable, and your particular PHP configuration may not support all of those listed below.
+
+h3. Table: Additional PHP Tags
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Tag*|{background:#ccc}.*Description*|
+|PHP tags|@<?php php code ?>@|
+|HTML style tags|@<script language="php"> php code </script>@|
+|ASP-style|@<% php code %>@|
+|PHP short tags|@<?= php code ?>@|
+
+* The special shortcut tags, <?= and ?> are used to evaluate PHP expressions embedded in HTML. These tags are discussed in more depth later in this Unit. They are used as follows:
+<br /><pre>
+<html>
+This is a line of html <?= php code here ?> more html
+</html></pre>
+* To use short tags, you may have to change a setting in the PHP initialialization file, php.ini . Search for "short_open_tag" and change the setting to "On". Excerpt from the php.ini file:
+<br /><pre>
+; Allow the <? tag. Otherwise, only <?php and <script> tags are recognized.
+; NOTE: Using short tags should be avoided when developing applications or
+; libraries that are meant for redistribution, or deployment on PHP
+; servers which are not under your control, because short tags may not
+; be supported on the target server. For portable, redistributable code,
+; be sure not to use short tags. short_open_tag = On
+</pre>
+
+h3. Where to Save the Script
+
+* When you have completed writing the script, it will normally be saved in a file under the server's document root, as we discussed in Unit 1.
+
+h3. The Script Content
+
+* Developers often prefer to seperate the presentation code (HTML, XML) from business logic (program instructions) and PHP offers the best of both worlds.
+* A PHP script can be an independent file consisting of PHP tags and instructions, or it can be embedded in an HTML document.
+* The PHP tags are often inserted between the <body> tags of an HTML document, although they can be inserted anywhere on the page.
+* To format your output, HTML tags can be embedded in PHP statements as well, but cannot stand alone in a PHP script.
+* You can have multiple PHP scripts within an HTML page.
+* The following script demonstrates how blocks of PHP code may be inserted in a Web page:
+<br /><pre>
+Filename: first.php
+
+<html>
+<head>
+ <title>Hello World</title>
+</head>
+<body>
+ <h1>Hello World example</h1>
+ <?php
+   print "It's such a perfect day!<br />";
+ ?>
+</body>
+</html>
+</pre>
+* Before sending the page to the browser, the Web server will send any PHP instructions to the PHP module for preprocessing.
+* The PHP module starts interpreting code when it finds the first <?php opening tag, and continues until it reaches the closing tag ?> , executing the code between the tags.
+* Any other text in the file is left as is. If there is output, this output replaces the original PHP code between the tags.
+* PHP tags and code are removed. HTML tags are left alone.
+* The Web server will send the resulting page, consisting of plain HTML and text, back to the browser that requested the page.
+* To see the source code received by the browser, go to the browser's "View" menu option and select "Page Source" or "Source".
+* Your instructor will show you the output of the above PHP script in a browser, and the HTML that is returned to the browser.
+
+h3. Quoting in Strings
+
+* Many statements you write in PHP will contain text strings, such as "Have a good day!". Chapter 6 of the text is all about strings, but as you start learning PHP, you should be aware of PHP's basic rules concerning strings.
+# All strings must be enclosed in a pair of either single or double quotes. The quotes must be matched: "@Hello there@" or '@Hello there@'
+# To join two strings together, use the concatenation operator, a dot:
+<br /><pre>
+"Hello, " . "world"
+</pre>
+# If you need to print out a quote mark, precede it with a backslash or enclose it in the other type of quotes:
+<br /><pre>
+"\"Ouch\"" or
+"I don't care" or
+'Jane said "Run Spot, run!"'
+</pre>
+
+
+
+h3.  Printing Strings
+  
+* PHP displays output using the echo and print language constructs.
+* The print construct let's us display a string. You may use parentheses, but they are not required.
+* To print more than one string with print, you can use the dot to concatenate the strings into a single string.
+<br /><pre>
+<?php
+  print "Hello, " . "world!" . "<br />";  // Concatenation
+  print "Hello to world again!<br />";  // Don't need parens
+  print ("It's such a perfect day!<br />");  // Parens okay
+?></pre>
+* Echo is like print but allows you to print more than one string by separating the strings with commas.
+<br /><pre>
+<?php
+  echo "Hello, ", "world!", "<br />";  // Don't use parentheses
+  echo ("It's such a perfect day!<br />");  // Parens okay
+?></pre>
+* These constructs are quite simple and do not do any fancy formatting. If you need to format the output, PHP provides a number of functions, including the printf(), sprintf(), and fprintf() .
+
+h3. Executing the Script
+
+* To execute a script, go to your browser and in the address bar, type the URL of the PHP script you want to execute.
+* If running locally, for example, it might be: http://localhost/file.php or http:127.0.0.1/file.php
+* If you are working with an ISP, you will have to upload the file to its site. Ask your ISP for the correct method for uploading your file, and the correct URL to execute it.
+* To run a PHP script placed in the public_html folder of user "astudent" on our class server, use: @http://itins3.matcmadison.edu/~astudent/file.php@
+* If you are running on a UNIX or Linux system, you may have permission issues. To turn on execute permission for the script, go to a shell prompt and type: chmod +x file.php
+
+h3.  Some Things to Consider
+  
+* Although PHP statements consist of text, terminated by a semicolon, there are a number of issues to consider before we really get started on specific language constructs, such as numbers, strings, operators, variables, loops, and so on.
+
+h3.  PHP and HTML Are Different Languages
+  
+* It is important to keep in mind that HTML and PHP are two very different languages used for different purposes and executed by totally different processes.
+* HTML is called a markup language. It combines text with tags to define the structure and describe the way a document will be displayed.
+* PHP is a programming language that consists of data and instructions and procedures that tell the computer what operations to perform on the data.
+* A common mistake is to place HTML tags directly in a PHP block and vice versa. Notice the placement of the HTML tags in the following example.
+<br /><pre>
+Filename: badmix.php
+
+<html>
+  <head><title>Mixing HTML and PHP</title></head>
+  <body>
+   <?php
+     <font size="+2">   // Wrong!!! Cannot place HTML directly
+                        // into PHP script
+     print "It's such a perfect day!<br />";   // Okay here within
+                                               // the statement
+   ?>
+  </body>
+</html>
+</pre>
+* Your instructor will show you the error message output by this script.
+* See the correct placement of the HTML tags below. Your instructor will demonstrate its corresponding output.
+<br /><pre>
+Filename: goodmix.php
+
+<html>
+  <head><title>Mixing HTML and PHP</title></head>
+  <body>
+   <font size="+2"> <!--OK. Moved font tag here -->
+     <?php
+       print "It's such a perfect day!<br />";
+     ?>
+   </font>
+  </body>
+</html>
+</pre>
+
+h3. Statements, Whitespace, and Line Breaks
+  
+* A PHP statement is somewhat like an English sentence, but is terminated with a semicolon instead of a period.
+* PHP is called a free form language, meaning you can place statements anywhere on a line, and statements may span multiple lines.
+* Whitespace refers to spaces, tabs, and newlines. Whitespace is used to delimit words and does not have other significance.
+* Any number of blank spaces are allowed between symbols and words. Both of the following PHP statements are correct:
+<br /><pre>
+print "This is a PHP statement.";
+
+print "This
+  is
+  also
+  a PHP
+  statement.";
+</pre>
+* The table below lists whitespace characters and how they are represented in PHP. Note the characters preceded by a backslash and enclosed in quotes.
+* Table: Whitespace Characters
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Description*|{background:#ccc}.*ASCII Code*|{background:#ccc}.*Written As*|
+|An ordinary space|32 (0x20)|" "|
+|A tab|9 (0x09)|"\t"|
+|A newline (line feed)|10 (0x0A)|"\n"|
+|A carriage return|13 (0x0D)|"\r"|
+|The NUL-byte|0 (0x00)|"\0"|
+|A vertical tab|11 (0x0B)|"\x0B"|
+
+* Even though you have a lot of freedom when formatting a PHP script, it is good practice to make the program readable to yourself and others by providing indentation and putting each statement on its own line, with comments describing what you are doing.
+* Certainly a clean style makes it easier to read as well as debug programs, especially when they become more complex.
+* The script below, although correct, is obviously not in a very readable style.
+<br /><pre>
+<?php
+ print "It's
+     such    a perfect
+ day! ";
+?></pre>
+* The entire script could be written more cleanly on a single line!
+<br /><pre>
+<?php
+ print "It's such a perfect day!";
+?>
+</pre>
+
+h3.  Comments
+  
+* You may write a very clever PHP script this afternoon, and in two weeks have no idea what your script was supposed to do.
+* If you pass the script on to someone else, the confusion magnifies. Hence, comments.
+* Comments are plain English text inserted into a script to explain what is going on; they are annotations written for anyone who reads your script, including you.
+* They are extremely important when working with a team of people to help communicate your intentions.
+* Comments are ignored by the PHP interpreter. If the user views the source file in his or her browser, the comments will not be there, because once the PHP code is preprocessed, the comments are removed from the output.
+* PHP comments can be written on a single line or cover multiple lines. The style PHP uses comes from other languages such as C, C++, and UNIX shells, and Perl.
+* The style you use depends on how much you want to say. A single-line comment starts with either a hash mark # (like Shell and Perl comments) or double slashes // (like C++ comments).
+* The /* */ (C style) comment can be used as a single-line comment as well, but it is also useful if you want your comments to cover multiple lines.
+<br /><pre>
+<?php
+ // This is a single-line comment.
+ # This is also a single-line comment
+ print 5 + 2;  // Another single-line comment
+ /* This style of comment allows you to write comments to span
+    over multiple lines
+ */
+?>
+</pre>
+Note that HTML has a different syntax for the comments. HTML comments consist of text inserted between @<!-- open tag and -->@ close tag. These comments are visible when you view the source of a web page.
+<br /><pre>
+Filename: comments.php
+
+<?php
+/*
+Author: Marko Gargenta
+Date: 12/11/2006
+Description:
+This is a simple PHP script that output Hello World text
+*/
+?>
+<html>
+<head>
+ <title>Hello World</title>
+</head>
+<body>
+ <h1>Hello World example</h1>
+ <?php
+   //This is a comment line (C++ style)
+   print "It's such a perfect day!";  # Another comment here
+ ?>
+ <!--this is an HTML comment -->
+</body>
+</html>
+</pre>
+Your instructor will run the script above, and then view the HTML source in a browser.
+None of the comments are visible in the web page displayed. When we view the source, PHP comments are not visible, but HTML comments are.
+
+h3.  Using PHP Functions
+  
+* A big part of any programming language is the set of functions that are built into the language or packaged in special libraries.
+* Later in the course you will learn how create your own functions, but for now, we concentrate on the "built-in" functions that are part of the PHP language.
+
+h3.  So what is a function?
+  
+* A function is an independent piece of program code that is created to make your life easier.
+* You don't see what's going on inside the function. You just have to know what it is supposed to do, and then when you need it, call it by its name.
+* You can send a value (or values) to a function and the function can send back a result. Perhaps the function just performs some operation such as getting today's date or printing a formatted string of text.
+* If you want to round a number, you can call the built-in round() function. For example, round(4.5) will return 5 and round(4.2) will return 4.
+* The values you send to the function are called arguments, a comma-separated list of words enclosed in the parentheses after the function name.
+* Different functions have different numbers of arguments and some have none at all. What the function sends back is called the return value.
+* If you wanted to save the return value, you would ordinarily print it or save it in a variable; for example: $rounded_number = round(4.5)
+* PHP comes with many useful functions, all of which are well documented at the PHP Web site: http://www.php.net/
+* For example, if you didn't know how to get get the current date from PHP, go to *php.net* and type "date" in the top right corner search box. Make sure you select to search in the "function list".
+* Your instructor will demonstrate searching *php.net*. You will find the PHP Web site an invaluable reference for everything that has to do with PHP.
+* Although it is customary to use lower case for function names, they are not case sensitive: *date()* and *Date()* and *DATE()* are all valid and all call the same built-in function!
+* The sample code below demonstrates how to use the date() function to print out the current date.
+<br /><pre>
+Filename: getdate.php
+
+<html>
+ <head><title>Current Date and Time</title></head>
+ <body>
+  <h1>Current Date and Time</h1>
+  <?php
+    print "Today is ";
+    print date("D M j G:i:s T Y");  // Function names are NOT case
+                                    // sensitive
+    print "<br />";
+    print "Current time is ";
+    print Date( "g:i a" ); // Function names are not case
+                           // sensitive
+  ?>
+ </body>
+</html>
+</pre>
+* Your instructor will demonstrate the web output and browser page source for getdate.php . The script below is an example of using the special short tags to return part of a date string.
+<br /><pre>
+Filename: getdate2.php
+
+<html>
+ <head><title>short tags and functions</title></head>
+ <body bgcolor="lightgreen">
+  <h1>Current Date and Time</h1>
+  <font size="+2">
+  You are looking at this page on <strong><?=date("l")?></strong>
+  and life is good!<br />
+  </font>
+ </body>
+</html>
+</pre>
+* The *date()* function is embedded in PHP short tags right in the HTML document. Its output is inserted into the text and sent to the browser. Your instructor will run the script.
+* Appendix C of the text contains more information on the date() function.
+
+h3. PHP on the Command Line
+
+* UNIX and Linux users are normally more familiar with working at the command line than Windows or Mac users.
+* Executing PHP at the command line requires that you know where PHP is installed and that the PHP executable is included in your search path.
+* On some operating systems, such as Linux and MacOS, PHP comes preloaded, but on Windows, after you have installed PHP, you might have to set the PATH environment variable to execute PHP at the command line.
+* In this course we will not further discuss running PHP at the command line, but some information on this subject is presented in Chapter 2 of the text.
+
+
+h3. The php.ini File
+
+* Many of the operations you perform will depend on how the PHP initialization directives have been set in the php.ini file. For the most part, you should go with the default configuration, because the PHP developers selected default settings they determined to be the best for security, performance, and so on.
+* Occasionally you might want to change a setting, especially if you are developing PHP scripts for your own use, not part of a Web project that will be used on the Internet. Because the php.ini file is a text file, it is easy to modify it. You might have to restart your Web server once you have changed the php.ini file.
+* You might have several copies of the php.ini file. If making a change doesn't seem to work, look in the following locations. This is typically where the Web server will look for the php.ini file:
+## The directory from which the PHP script was called.
+## The server's document root.
+## The Web server's default php.ini.
+
+h3. You can use the phpinfo() function in a script to find the path to your php.ini file.
+
+* Common settings you might want to change are:
+** register_globals
+** display_errors
+** error_reporting
+** magic_quotes_gpc
+* This is an excerpt from the php.ini file:
+<br /><pre>
+;;;;;;;;;;;
+; WARNING ;
+;;;;;;;;;;;
+; This is the default settings file for new PHP installations.
+; By default, PHP installs itself with a configuration suitable for
+; development purposes, and *NOT* for production purposes.
+; For several security-oriented considerations that should be taken
+; before going online with your site, please consult php.ini-recommended
+; and http://php.net/manual/en/security.php.
+;;;;;;;;;;;;;;;;;;;
+; About this file ;
+;;;;;;;;;;;;;;;;;;;
+; This file controls many aspects of PHP's behavior. In order for PHP to
+; read it, it must be named 'php.ini'. PHP looks for it in the current
+; working directory, in the path designated by the environment variable
+; PHPRC, and in the path that was defined in compile time (in that order).
+; Under Windows, the compile-time path is the Windows directory. The
+; path in which the php.ini file is looked for can be overridden using
+; the -c argument in command line mode.
+;
+; The syntax of the file is extremely simple. Whitespace and Lines
+; beginning with a semicolon are silently ignored (as you probably guessed).
+; Section headers (e.g. [Foo]) are also silently ignored, even though
+; they might mean something in the future.
+;
+; Directives are specified using the following syntax:
+; directive = value
+; Directive names are *case sensitive* - foo=bar is different from FOO=bar.
+;
+</pre>
+* Again, make these changes to this file with caution.
+
+<br />
+
+---
+
+[[Unit Two => 152-166 Unit Two Index]]

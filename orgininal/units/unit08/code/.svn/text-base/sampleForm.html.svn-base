@@ -1,0 +1,43 @@
+<html>
+ <head>
+  <title>first html form</title>
+ </head>
+ <body bgcolor=yellow>
+  <hr />
+  <form action="sample.php" method="GET">
+   <b>Type your name here: </b>
+   <input type="text" name="namestring" size=50>
+   <p />
+   <b>Talk about yourself here: </b><br />
+   <textarea name="comments" rows=5
+             cols=50>i was born... </textarea>
+   <p />
+   <b> Choose your food: </b>
+   <input type="radio" name="choice" value="burger" />Hamburger
+   <input type="radio" name="choice" value="fish" />Fish
+   <input type="radio" name="choice" value="steak" />Steak
+   <input type="radio" name="choice" value="yogurt" />Yogurt
+   <p />
+   <b>Choose a work place:</b> <br />
+   <input type="checkbox" name="place1" value="LA" />Los Angeles
+   <br />
+   <input type="checkbox" name="place2" value="SJ" />San Jose
+   <br />
+   <input type="checkbox" name="place3"
+          value="SF" Checked>San Francisco
+   <p />
+   <b>Choose a vacation spot: </b>
+   <select name="location">
+     <option selected value="hawaii" /> Hawaii
+     <option value="bali" />Bali
+     <option value="maine" />Maine
+     <option value="paris" />Paris
+   </select>
+   <p />
+   <input type="submit" value="submit">
+   </p>
+   <input type="reset" value="clear">
+  </form>
+  <hr />
+ </body>
+</html>

@@ -1,0 +1,415 @@
+h2.  The MySQL Privilege System
+
+<hr />
+
+h3. Authentication
+
+* With a drivers' license, "authentication" means verifying that it is really you who owns the license by checking your picture and expiration date, and "authorization" means validating what type of vehicle you are authorized to drive, such as a car, a large truck, or a school bus.
+* Similarly, the primary purpose of the MySQL privilege system is to authenticate that the user and password are valid to connect to the specified host, as demonstrated in the previous examples in both the command-line and graphical client.
+* The second purpose of the privilege system is to specify what the user, once connected to the database, is authorized to do.
+* For example, some users might be authorized to only select and view the data from a specific database, but not make any changes to it. Some might be able to delete records, but not tables.
+* Once you have installed MySQL, it is time to understand some basic guidelines of how to administer a MySQL database server, such as setting up the users and the privileges they have on certain databases.
+* You can use either the mysql command-line tool or the mysqladmin tool for performing administrative tasks.
+* Although there are some graphical administrative tools avaialable, we use the command-line tools because they are always available and work the same way regardless of your operating system whether it is Windows, Macintosh, or Linux.
+* The next section assumes you have basic SQL skills, such as familiarity with INSERT, UPDATE, DELETE, and SELECT statements. If not, the SQL language is summarized in Chapter 14 of the text.
+
+h3. Logging into the Database Server
+
+* When MySQL is installed, the mysql database is created with tables, called grant tables that define the initial user accounts and privileges.
+* The first account is that of a user named "root," also called the superuser. The superuser can do anything, meaning anyone logging onto the database as root is granted all privileges.
+* Initially the root account has no password, making it easy for anyone to log on as the superuser.
+* Another type of account that may be created is an anonymous user account, having neither a user name nor a password!
+* To avoid security problems, you should remove the anonymous account, if it exists, and set a password on the root account. We will discuss how to find out what user accounts exist on your MySQL installation, and fix them, later in the course.
+* MySQL keeps track of its own users and passwords separate from the operating system where it is running. All the privileges for the MySQL database server are stored in the "mysql" database schema (the database with name "mysql").
+* For administration purposes, you should have root access rights to your server. The mysqladmin utility is useful for creating passwords as well as performing other MySQL administrative tasks. In the example below it is used to set the password for the root user.
+* When working with MySQL, a number of like-name terms are used. The following table is provided to help clarify the use of these terms.
+* Table: MySQL Terminology
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Term*|{background:#ccc}.*Description*|
+|MySQL          |The actual software for the database management system                |
+|mysqld         |The mySQL daemon or server process                                    |
+|mysql monitor  |The monitor where MySQL commands are issued (command-line interpreter)|
+|mysql          |The name of the database MySQL uses to manage access privileges       |
+|mysqladmin     |A MySQL utility program for administering the database                |
+
+* This example demonstrates how to set a password for root.
+<br /><pre>
+$ mysqladmin -u root -h localhost password quigley1
+
+$ mysql -uroot -hlocalhost -pquigley1
+Welcome to the MySQL monitor. Commands end with ; or \g.
+Your MySQL connection id is 29 to server version:
+5.0.21-community-nt
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+</pre>
+* The mysqladmin program is used to set a password for the root user on the localhost.
+* This mysql command logs the root user into the database server. The "-u" switch is followed by the user or login name (a space between "-u" and the username is optional).
+* This user is logging in as root. Similarly, the "-p" switch is followed by the actual password, in this case "quigley1".
+* If a password is not provided on the command-line, you will be prompted to enter one.
+
+h3.  Finding the Databases
+
+* The database server keeps a list of available databases that can be displayed as a table by issuing the show command at the mysql prompt, as shown below.
+* Typically when you install MySQL it comes with two databases: "test" and "mysql".
+* The "test" database is used for testing various features or creating sample databases. You normally do not need to have any special permissions to be able to do anything in that database.
+* The "mysql" database is a special database where the MySQL server stores various access permissions. We look at the contents of the "mysql" database in the next section.
+<br /><pre>
+C:\>mysql -u root -p password
+Welcome to the MySQL monitor. Commands end with ; or \g.
+Your MySQL connection id is 5 to server version: 4.1.11-nt
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+
+mysql> show databases;
+
+ +--------------+
+ | Database     |
+ +--------------+
+ | authority    |
+ | best         |
+ | jsf          |
+ | marakana_cms |
+ | mysql        |
+ | northwind    |
+ | test         |
+ +--------------+
+ 7 rows in set (0.69 sec)
+
+mysql>
+</pre>
+* The show databases command gives us the list of all the databases on this server. Typically, when you install MySQL, you will be given the "mysql" database and the "test" database.
+* The "test" database is just for testing purposes and is empty. The "mysql" database contains all the MySQL server privilege information.
+* This example shows the tables in the mysql schema.
+<br /><pre>
+mysql> use mysql
+Database changed
+mysql> show tables;
++---------------------------+
+| Tables_in_mysql           |
++---------------------------+
+| columns_priv              |
+| db                        |
+| func                      |
+| help_category             |
+| help_keyword              |
+| help_relation             |
+| help_topic                |
+| host                      |
+| tables_priv               |
+| time_zone                 |
+| time_zone_leap_second     |
+| time_zone_name            |
+| time_zone_transition      |
+| time_zone_transition_type |
+| user                      |
++---------------------------+
+15 rows in set (0.19 sec)
+</pre>
+* The "use mysql" command tells the server to switch to the "mysql" database and make that the current database.
+* The show tables command displays all the database tables in the current "mysql" database. This database contains 15 tables. The tables we are concerned with now are "host," "user," and "db."
+
+
+h3. The "user" Table
+
+* The "user" table specifies the users who are allowed to log into the database server and from what host. It also holds their passwords and global access privileges.
+* Let's look at the fields of the "user" table:
+<br /><pre>
+mysql> describe user;
++-----------------------+-----------------------------------+
+| Field                 |  Type                             |
++-----------------------+-----------------------------------+
+| Host                  | varchar(60)                       |
+| User                  | varchar(16)                       |
+| Password              | varchar(41)                       |
+| Select_priv           | enum('N','Y')                     |
+| Insert_priv           | enum('N','Y')                     |
+| Update_priv           | enum('N','Y')                     |
+| Delete_priv           | enum('N','Y')                     |
+| Create_priv           | enum('N','Y')                     |
+| Drop_priv             | enum('N','Y')                     |
+| Reload_priv           | enum('N','Y')                     |
+| Shutdown_priv         | enum('N','Y')                     |
+| Process_priv          | enum('N','Y')                     |
+| File_priv             | enum('N','Y')                     |
+| Grant_priv            | enum('N','Y')                     |
+| References_priv       | enum('N','Y')                     |
+| Index_priv            | enum('N','Y')                     |
+| Alter_priv            | enum('N','Y')                     |
+| Show_db_priv          | enum('N','Y')                     |
+| Super_priv            | enum('N','Y')                     |
+| Create_tmp_table_priv | enum('N','Y')                     |
+| Lock_tables_priv      | enum('N','Y')                     |
+| Execute_priv          | enum('N','Y')                     |
+| Repl_slave_priv       | enum('N','Y')                     |
+| Repl_client_priv      | enum('N','Y')                     |
+| ssl_type              | enum('','ANY','X509','SPECIFIED') |
+| ssl_cipher            | blob                              |
+| x509_issuer           | blob                              |
+| x509_subject          | blob                              |
+| max_questions         | int(11) unsigned                  |
+| max_updates           | int(11) unsigned                  |
+| max_connections       | int(11) unsigned                  |
++-----------------------+-----------------------------------+
+31 rows in set (0.00 sec)
+</pre>
+* The key fields are Host, User, and Password. All the other fields are used to fine-tune the privileges. To log in, the user and password must match and the user must be from the given host.
+* The password field should be encoded so that it is not easily readable by someone looking over your shoulder. MySQL provides a function called password() to do just that. We see how to use it in the next example.
+
+h3. The "db" Table
+
+* The "db" table determines which databases a user is permitted to read, edit, and delete, limiting access to a certain host and user. Its contents are described in the following query:
+<br /><pre>
+mysql> describe db;
++-----------------------+---------------+
+| Field                 |  Type         |
++-----------------------+---------------+
+| Host                  | char(60)      |
+| Db                    | char(64)      |
+| User                  | char(16)      |
+| Select_priv           | enum('N','Y') |
+| Insert_priv           | enum('N','Y') |
+| Update_priv           | enum('N','Y') |
+| Delete_priv           | enum('N','Y') |
+| Create_priv           | enum('N','Y') |
+| Drop_priv             | enum('N','Y') |
+| Grant_priv            | enum('N','Y') |
+| References_priv       | enum('N','Y') |
+| Index_priv            | enum('N','Y') |
+| Alter_priv            | enum('N','Y') |
+| Create_tmp_table_priv | enum('N','Y') |
+| Lock_tables_priv      | enum('N','Y') |
++-----------------------+---------------+
+</pre>
+* The key fields are the Host, Db, and User fields. The other fields are used for fine-tuning the access rights.
+* The default value is always "No" for the privileges, meaning that access rights must be explicitly granted. ('N' is no/false and 'Y' is yes/true.)
+
+h3. The "host" Table
+
+* The "host" table is an extension of the "db" table. If the "db" table does not have a host entry. It contains the hosts (IP addresses), databases, and privileges that can connect to the MySQL database server.
+* Often, your PHP script is running on the same host computer as your database server. The host is called "localhost," which is simply an alias for the current host machine located at IP address 127.0.0.1.
+* For example, if you are on the server myserver.com , you can refer to it as the localhost. If later you change the name of the server to yourhost.com , your database connection will still be available because localhost always refers to the current host computer.
+* The fields in the "host" table are shown in the following query:
+<br /><pre>
+mysql> describe host;
++-----------------------+---------------+------+-----+---------+-------+
+| Field                 | Type          | Null | Key | Default | Extra |
++-----------------------+---------------+------+-----+---------+-------+
+| Host                  | char(60)      |      | PRI |         |       |
+| Db                    | char(64)      |      | PRI |         |       |
+| Select_priv           | enum('N','Y') |      |     | N       |       |
+| Insert_priv           | enum('N','Y') |      |     | N       |       |
+| Update_priv           | enum('N','Y') |      |     | N       |       |
+| Delete_priv           | enum('N','Y') |      |     | N       |       |
+| Create_priv           | enum('N','Y') |      |     | N       |       |
+| Drop_priv             | enum('N','Y') |      |     | N       |       |
+| Grant_priv            | enum('N','Y') |      |     | N       |       |
+| References_priv       | enum('N','Y') |      |     | N       |       |
+| Index_priv            | enum('N','Y') |      |     | N       |       |
+| Alter_priv            | enum('N','Y') |      |     | N       |       |
+| Create_tmp_table_priv | enum('N','Y') |      |     | N       |       |
+| Lock_tables_priv      | enum('N','Y') |      |     | N       |       |
++-----------------------+---------------+------+-----+---------+-------+
+14 rows in set (0.31 sec)
+</pre>
+* The Db field contains all the users, databases, and hostnames for this MySQL server. The other fields are switches with Yes/No options to grant or revoke certain privileges and specify the level of that access right.
+* The following INSERT command grants access to the Northwind database from localhost.
+<br /><pre>
+mysql> insert into host (host, db, Select_priv, Insert_priv,
+    ->        Update_priv, Delete_priv, Create_priv, Drop_priv)
+    ->        values ('localhost','northwind','Y','Y','Y','Y','Y','Y');
+Query OK, 1 row affected (0.53 sec)
+</pre>
+* The "insert into host" command grants Select/Insert/Update/Delete/Create/Drop access to the northwind database from localhost, setting certain switches to Y for yes. The ones that are not set will default to N for no.
+
+h3. A Real-World Example
+
+The following steps set privileges so that user "bob" can log into a MySQL database called "northwind" from the localhost using the password guess. After entering the mysql database with the use mysql command, the steps are:
+
+
+# Create the host record:
+<br /><pre>
+mysql> insert into host(host, db, Select_priv, Insert_priv,
+    ->        Update_priv, Delete_priv, Create_priv, Drop_priv)
+    ->        values ('localhost','northwind','Y','Y','Y','Y','Y','Y');
+</pre>
+# Create the user:
+<br /><pre>
+mysql> insert into user(host,user,password)
+    ->        values('localhost','bob',password('guess'));
+</pre>
+# Update the "db" table:
+<br /><pre>
+mysql> insert into db
+(host,db,user,Select_priv,Insert_priv,Update_priv,
+    ->        Delete_priv,Create_priv,Drop_priv)
+    ->        values
+('localhost','northwind','bob','Y','Y','Y','Y','Y','Y');
+</pre>
+# Issue the "flush privileges" command to make the changes take affect:
+<br /><pre>
+mysql> flush privileges;
+</pre>
+# Finally, to test whether everything is set up properly, you can log out of the mysql server and try to reconnect using the user "bob", password "guess", and host "localhost" to the database northwind :
+<br /><pre>
+C:\>mysql -ubob -pguess -hlocalhost northwind
+Welcome to the MySQL monitor. Commands end with ; or \g.
+Your MySQL connection id is 8 to server version: 4.1.11-nt
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+</pre>
+
+
+h3.  The Grant and Revoke Commands
+
+* MySQL access control involves two stages when you try to connect to the mysql server. First the server checks to see if you are allowed to connect, and second, if you can connect, the server checks each statement you issue to determine whether or not you have sufficient privileges to execute the command.
+* For example, if you try to create or drop a table in the database, or try to update a record, the server verifies that you have the correct privileges to execute those commands.
+* To simplify all the steps required to set up the privileges on a database or a table, MySQL provides two commands: GRANT and REVOKE.
+* The best way to illustrate how to use them is to see the following examples.
+<br /><pre>
+GRANT ALL ON *.*
+REVOKE ALL ON *.*
+</pre>
+* This GRANT command grants all the privileges to all databases on the current server.
+* This REVOKE command revokes all the privileges to all databases on the current server.
+<br /><pre>
+GRANT ALL ON db_name.*
+REVOKE ALL ON db_name.*
+</pre>
+* This GRANT command grants all the privileges to all the tables in the database db_name.
+* This REVOKE command revokes all the privileges to all the tables of the database identified by db_name .
+<br /><pre>
+GRANT ALL ON db_name.tbl_name
+REVOKE ALL ON db_name.tbl_name
+</pre>
+* This GRANT command grants all the privileges to a specific table "tbl_name" in the database db_name.
+* This REVOKE command revokes the privileges on the table "tbl_name" in the database db_name.
+* You can also specify the user for which you are granting or revoking the privileges by adding the "TO 'user'@'host'" and "IDENTIFIED BY 'password'" clauses to the statement.
+<br /><pre>
+GRANT ALL PRIVILEGES ON db_name.tbl_name TO 'bob'@'localhost'
+IDENTIFIED BY 'guess'
+</pre>
+* This command will give user "bob" all the privileges when he logs in from localhost and tries to access database db_name and table tbl_name.
+
+h3.  Creating and Dropping a Database
+
+* Creating a database is simple. Designing it is another story and depends on your requirements and the model you will use to organize your data.
+* With the smallest database, you will have to create at least one table. Later in the course we discuss how to create and drop both databases and tables.
+* Assuming you have been granted permission to create a database, you can do it at the mysql command line or with the mysqladmin tool as illustrated below.
+<br /><pre>
+mysql> create database my_sample_db;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use my_sample_db;
+Database changed
+
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> create table test(
+   -> field1 INTEGER,
+   -> field2 VARCHAR(50)
+   -> );
+Query OK, 0 rows affected (0.36 sec)
+
+mysql> show tables;
++------------------------+
+| Tables_in_my_sample_db |
++------------------------+
+| test                   |
++------------------------+
+1 row in set (0.00 sec)
+
+mysql> drop table test;
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> drop database my_sample_db;
+Query OK, 0 rows affected (0.01 sec)
+</pre>
+* We use the "create database" statement to create a database called my_sample_db.
+* Just because the database has been created does not mean you are in it. To enter the new database, the "use" command is executed.
+* The show command lists all the tables in the database.
+* To create a table, the table columns are defined with the data types for each column. In this table the two columns "field1" and "field2" are defined.
+* The first field will be assigned integer values and the second field will be assigned up to 50 characters.
+* After creating the table, the show command displays the fact that a table exists in the database.
+* The drop table command destroys the table "test" and its contents.
+* The drop database command destroys the "my_sample_db" database and its contents.
+
+h3. Some Useful MySQL Functions
+
+* MySQL comes with a number of built-in functions that provide information about the server, the user, connection, version, how to encrypt and encode strings, display date and time, and so on. Examples follow the table.
+* Table: MySQL Functions
+
+table{text-align:left; margin-left: 4em;}.
+|{background:#ccc}.*Function*|{background:#ccc}.*What_It_Returns*|{background:#ccc}.*Example*|
+|*@database()@*  |Name of the current database             |*@select database();@*             |
+|*@version()@*   |Version of MySQL software                |*@select version();@*              |
+|*@user()@*      |Name of current MySQL user               |*@select user();@*                 |
+|*@password()@*  |Encrypts a string passed as an argument  |*@select password("mypassword");@* |
+|*@now()@*       |The current date and time                |*@select now();@*                  |
+|*@curdate()@*   |The current year, month, day             |*@select curdate();@*              |
+
+* The following examples illustrate the usage of many of the MySQL built-in functions.
+<br /><pre>
+mysql> use northwind;
+Database changed
+
+mysql> select database();
++------------+
+| database() |
++------------+
+| northwind  |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select version();
++---------------------+
+| version()           |
++---------------------+
+| 5.0.21-community-nt |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select user();
++----------------+
+| user()         |
++----------------+
+| root@localhost |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> set password for root@localhost = password('ellieq');
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select password("ellieq");
++-------------------------------------------+
+| password("ellieq")                        |
++-------------------------------------------+
+| *5313CC84288581F3B15B0ECBBFA2E9AF6AE4FD5A |
++-------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select now();
++---------------------+
+| now()               |
++---------------------+
+| 2006-06-07 15:09:16 |
++---------------------+
+1 row in set (0.02 sec)
+
+mysql> select curdate();
++------------+
+| curdate()  |
++------------+
+| 2006-06-07 |
++------------+
+1 row in set (0.00 sec)
+</pre>
+
+<br />
+
+<hr />
+
+[[Unit Eleven => 152-166 Unit Eleven Index]]
+

@@ -1,0 +1,31 @@
+h2. In-class Lab 4.1
+
+
+h3. Exercise 1 - The strcmp() function
+
+# Create a directory named *lab04* under your labs directory, which is under your webserver's document root, if it does not already exist.
+# Create a script named *lab4x1ex1.php* and save it into your *lab04* directory.
+# Create the following 2 string variables:
+<br /><pre>
+$string1 = 'Pear';
+$string2 = 'Pearson';
+</pre>
+# First compare the 2 string variables using the equality operator (*@==@*). Use the *if/else* construct and echo statements to display the result of the comparison.
+# Next compare the 2 string variables using the *@strcmp()@* function. This time also display the value returned by *@strcmp()@* in your echo statements.
+<br />Note: Try the comparison both ways, first with *@$string1@* as the first argument to the function, and then with *@$string2@* as the first argument. Does *@strcmp()@* return different values?
+# Finally, compare *@$string1@* to itself using the *@strcmp()@* function. What value is returned by the function this time?
+# Show your instructor the working *lab4x1ex1.php* file and demonstrate it in a browser.
+
+h3. Exercise 2 - Using the @number_format()@ function
+
+# Create a script named *lab4x1ex2.php* and save it into your *lab04* directory.
+# Create a scalar variable to contain a money amount of 155000000. Use the *@number_format()@* function to display the number as U.S. dollars with a comma as the thousands separator and a decimal point. Print some text with it similar to: "The amount in US dollars is: $"
+# Now display the same number in Euros as it would be formated in Western Europe, with a space for the thousands separator and a comma to indicate decimal places. Place the Euro symbol (@&#8364;@) before the number.
+# Show your instructor the working *lab4x1ex2.php* file and demonstrate it in a browser.
+
+<br />
+
+---
+
+[[Unit Four => 152-166 Unit Four Index]]
+

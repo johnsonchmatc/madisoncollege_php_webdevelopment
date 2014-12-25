@@ -1,0 +1,29 @@
+h2. VMWare Download Information
+
+
+
+* This course uses one or more virtual machines (VMs). In MATC labs you will use VMWare Workstation to run your VMs, but to run them at home you need to download either Player or Workstation from the VMWare website.
+* You may download an evaluation copy of VMware Player (for Windows or Linux) from this website:
+<br /><PRE>
+"http://www.vmware.com/download/player/download.html":http://www.vmware.com/download/player/download.html
+</PRE>
+  Player will allow you to run VMs, but not create your own VMs.
+* If you also want to create VMs, you should download an evaluation copy of VMWare Workstation 6 (for Windows or Linux) from this website:
+<br /><PRE>
+"http://www.vmware.com/download/ws/":http://www.vmware.com/download/ws/
+</PRE>
+* If you want to run your VMs on Apple OSX, you should download an evaluation copy of VMWare Fusion from this website:
+<br /><PRE>
+"http://www.vmware.com/download/fusion/":http://www.vmware.com/download/fusion/
+</PRE>
+* You will be required to register with VMware in order to download Player, Workstation or Fusion. If you download Workstation or Fusion, VMware will send you a 30-day license key to the email address you provide them.
+* MATC has an academic licensing agreement with VMWare that allows us to give students a different key that is good for 180 days. The keys (serial numbers) for MATC students to use change every semester. Here are the current ones:
+<br /><pre>
+Windows,    Spring '08:  ADM1D-2AKW4-W3N93-435JJ (180 days)
+
+Linux,      Spring '08:  A6495-2HLPU-YE664-487HJ (180 days)
+
+Apple OSX,  Spring '08:  AA33L-7XNTA-N2CCX-2ZJVM (30 days)
+</pre>
+
+

@@ -1,0 +1,58 @@
+h2. HTTP Lecture
+
+---
+
+h3. HTTP Basics
+
+* HTTP is a simple, stateless protocol.
+* A browser makes a request.
+* The server answers.
+* The transaction is done. That's it!
+
+<br />
+
+---
+
+h3. The HTTP Request
+
+* The browser makes a socket connection.
+* The browser sends an HTTP command.
+** <code>GET /index.html HTTP/1.1</code>
+* The browser sends a list of headers.
+<br />
+<pre>Host: localhost:4444
+User-Agent: Mozilla/5.0 (Macintosh; U; PPC Mac OS X Mach-O; en-US; rv:1.7.5) Gecko/20041107 Firefox/1.0
+Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+Accept-Language: en-us,en;q=0.5
+Accept-Encoding: gzip,deflate
+Accept-Charset: ISO-8859-1,utf-8;q=0.7,;q=0.7
+Keep-Alive: 300
+Connection: keep-alive
+</pre>
+* Demo: TestHTTPServer
+
+
+<br />
+
+---
+
+h3. The HTTP Response
+
+* The server processes the request and creates a response
+* The server sends a status line
+<br /><pre>HTTP/1.1 200 OK</pre>
+* The server sends a list of response headers.
+<pre>Cache-Control: private
+Content-Type: text/html
+Set-Cookie: PREF=ID=90e800f2df2e6829:TM=1107121286:LM=1107121286:S=CipcgR1fQvNKlcCn; expires=Sun, 17-Jan-2038 19:14:07 GMT; path=/; domain=.google.com
+Server: GWS/2.1
+Transfer-Encoding: chunked
+Date: Sun, 30 Jan 2005 21:41:26 GMT
+</pre>
+* Demo:  Using telnet to access a web site.
+
+<br />
+
+---
+
+[[Unit One => 152-166 Unit One Index]]

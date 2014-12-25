@@ -1,0 +1,36 @@
+Sign on to the MySQL server by executing: 
+
+ssh 198.150.221.235 -l jwhite 
+
+(only your username) 
+
+Run the MySQL interpreter by executing: 
+
+mysql -u jwhite -p 
+
+Set the database to your private one: 
+
+use jwhite; 
+
+Create the authorized_users table from the class notes, or use the SQL in the 
+createauthdb.sql file provided in this folder. 
+
+Then use the PHP code provided in the secretdb.php file in this folder and use 
+your new table to validate users. 
+
+Modify the code in secretdb.php so that it tests the password entered by the 
+user against an encrypted password in your authorized_users table. 
+
+Note: Use the MySQL sha1() function to encrypt the password. 
+
+Save your modified PHP code as lab13.php and submit it via Blackboard. 
+  
+  
+Files required: 
+
+createauthdb.sql ( 568 Bytes )
+
+secretdb.php ( 1847 Bytes )
+
+  
+  

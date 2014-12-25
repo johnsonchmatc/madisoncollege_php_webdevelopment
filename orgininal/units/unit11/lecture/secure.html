@@ -1,0 +1,646 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta name="generator" content="HTML Tidy, see www.w3.org">
+  <title>Secure Transactions</title>
+  <link href="../../../css/basic.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" language="JavaScript">
+<!--
+function putSemester() {
+var today=new Date();
+var thisMonth=today.getMonth()+1;
+var thisYear=today.getFullYear();
+if(thisMonth <=6) {
+return "Spring, " + thisYear;
+}
+else {
+return "Fall, " + thisYear;
+}
+}//-->
+  </script>
+  <style type="text/css">
+<!--
+.bgStripes {
+background-image:url(../../../images/Xstripes.gif);
+background-attachment: fixed;
+}
+body {
+background-color:white;
+}
+strong {
+font-family: Arial, Helvetica, sans-serif;
+}
+.table1 {
+font-family:Arial, Helvetica, sans-serif;
+font-size: small;
+}
+.table2 {
+font-family:Arial, Helvetica, sans-serif;
+font-size: small;
+text-align:center;
+}
+td.cen {
+text-align:center;
+}
+.small_title {
+font-family: Arial, Helvetica, sans-serif;
+font-size:x-small;
+font-weight:bold;
+}
+.med_title {
+font-family: Arial, Helvetica, sans-serif;
+font-size:medium;
+font-weight:bold;
+text-align:center;
+color:darkblue;
+}
+-->
+  </style>
+</head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
+<table class="bgStripes" border="0" width="100%">
+  <tbody>
+    <tr name="firstRow">
+      <td valign="top" width="80">
+      <p class="small_title">
+      <script type="text/javascript">
+<!--
+document.write(putSemester());
+-->
+      </script></p>
+      </td>
+      <td>
+      <p class="med_title"><span
+ style="color: darkblue; font-size: medium; font-weight: bold;">PHP
+and
+MySQL Development</span></p>
+      </td>
+      <td align="right" valign="top" width="80">
+      <p class="small_title">3
+Credits</p>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" height="10">
+      <p class="small_title" align="center">152-166</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!--The heading for the slides --> <br>
+<table class="headTable1" border="0">
+  <tbody>
+    <tr>
+      <td width="100"><a href="authent.html"><img alt=""
+ src="../../../images/btn_lArrow.gif" border="0"></a><a
+ href="index.html"><img alt="" src="../../../images/btn_upArrow.gif"
+ border="0"></a><a href="encrypt.html"><img alt=""
+ src="../../../images/btn_rArrow.gif" border="0"></a></td>
+<td>
+<p>
+Secure Transactions
+</p>
+</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<div class="disp1">
+<ul class="slidesUl1">
+<li>
+<p>
+In this section we discuss how to deal with user data securely from input,
+through transmission, and in storage. This way, you can implement a transaction
+between your site and a user securely from end to end.</p>
+<p>
+Providing secure transactions using the Internet is a matter of examining the flow of
+information in your system and ensuring that, at each point, your information is secure.
+In the context of network security, there are no absolutes. No system is ever going to be
+impenetrable. By secure,we mean that the level of effort required to compromise a
+system or transmission is high compared to the value of the information involved.</p>
+<p>
+If you are to direct your security efforts effectively, you need to examine the flow of
+information through all parts of your system. The flow of user information in a typical
+application, written using PHP and MySQL, includes:</p>
+</ul>
+<blockquote>
+<ol type="1">
+<li class="row1">
+Data being exchanged between the user's <b>browser</b> and a <b>web server</b>
+over the <b>internet</b></li>
+<li class="row1">
+Data being exchanged between the <b>web server</b> and the <b>PHP engine</b></li>
+<li class="row1">
+Data in the form of stored web pages and scripts being read from disk by both the
+<b>web server</b> and the <b>PHP engine</b></li>
+<li class="row1">
+Data files being read and written on disk by the <b>PHP engine</b></li>
+<li class="row1">
+Data being exchanged between the <b>PHP engine</b> and the <b>MySQL engine</b></li>
+<li class="row1">
+Database data being read and written on disk by the <b>MySQL engine</b></li>
+</ol>
+</blockquote>
+<ul class="slidesUl1">
+<li>
+<p>
+The details of each transaction occurring in your system will vary, depending both on
+your system design and on the user data and actions that triggered the transaction.
+You can examine all of them in a similar way. Each transaction between a web application
+and a user begins with the user's browser sending a request through the Internet to the
+web server. If the page is a PHP script, the web server will delegate processing of the
+page to the PHP engine.</p>
+<p>
+The PHP script might read or write data to disk. It might also use the <code>include()</code>
+or <code>require()</code> constructs to include other PHP or HTML files.
+It also sends SQL queries to the MySQL daemon and receives responses.
+The MySQL engine is responsible for reading and writing its own data on disk.</p>
+<p>
+This system has three main parts:</p>
+<ul>
+<li>The user's machine</li>
+<li>The Internet</li>
+<li>Your system</li>
+</ul>
+<p>
+The following sections describe security considerations for each separately, but obviously
+the user's machine and the Internet are largely out of your control.</p>
+</li>
+<li>
+<p>
+The User's Machine</p>
+<p>
+From your point of view, the user's machine is running a web browser.
+You have no control over other factors such as how securely the machine is set up.
+You need to bear in mind that the machine might be very insecure or even a shared
+terminal at a library, school, or cafe.</p>
+<p>
+Many different browsers are available, each having slightly different capabilities.
+If you consider only recent versions of the most popular two browsers,
+most of the differences between them affect only how HTML will be rendered and
+displayed, but you also need to consider security or functionality issues.</p>
+<p>
+Note that some people disable features that they consider a security or privacy risk,
+such as Java, cookies, or JavaScript. If you use these features, you should either
+test that your application degrades gracefully for people without these features
+or consider providing a less feature-rich interface that allows these people to
+use your site.</p>
+<p>
+Users outside the United States and Canada might have web browsers that support
+only 40-bit encryption. Although the U.S. Government changed the law in January 2000
+to allow export of strong encryption (to nonembargoed countries) and 128-bit versions
+are now available to most users, some of them will not have upgraded. Unless you are
+making guarantees of security to users in the text of your site, this issue need not overly
+concern you as a web developer. SSL automatically negotiates for you to enable your
+server and the user's browser to communicate at the most secure level they both
+understand.</p>
+<p>
+You cannot be sure that you are dealing with a web browser connecting to your site
+through your intended interface. Requests to your site might be coming from another
+site stealing images or content, or from a person using software such as <b>cURL</b>
+to bypass safety measures.</p>
+<p>
+We look at the cURL library, which can be used to simulate connections from a
+browser, later in the course. This tool is useful to you, as a developer,
+but can also be used maliciously.</p>
+<p>
+Although you cannot change or control the way users' machines are set up, you do
+need to bear these issues in mind. The variability of user machines might be
+a factor in how much functionality you provide via server-side scripting
+(such as PHP) and how much you provide via client-side scripting
+(such as JavaScript).</p>
+<p>
+Functionality provided by PHP can be compatible with every user's browser because
+the result is merely an HTML page. Using anything but very basic JavaScript involves
+taking into account the different capabilities of individual browser versions.</p>
+<p>
+From a security perspective, you are better off using server-side scripting for such
+things as data validation because, that way, your source code is not visible to the user.
+If you validate data only in JavaScript, users can see the code and perhaps circumvent it.</p>
+<p>
+Data that needs to be retained can be stored on your own machines, as files or
+database records, or on your users' machines as cookies. We look at using cookies
+for storing some limited data (a session key) later in the course.</p>
+<p>
+The majority of data you store should reside on the web server or in your database.
+There are a number of good reasons to store as little information as possible on a user's
+machine. If the information is outside your system, you have no control over how
+securely it is stored, you cannot be sure that the user will not delete it,
+and you cannot stop the user from modifying it in an attempt to confuse your system.</p>
+</li>
+<li>
+<p>
+The Internet</p>
+<p>
+As with the user's machine, you have very little control over the characteristics of the
+Internet, but this does not mean you can ignore these characteristics when designing
+your system.</p>
+<p>
+The Internet has many fine features, but it is an inherently insecure network.
+When sending information from one point to another, you need to bear in mind
+that others could view or alter the information you are transmitting,
+as discussed in the previous unit on e-commerce security issues.
+With this point in mind, you can decide what action to take.</p>
+<p>
+Your response might be to:</p>
+<ul>
+<li>
+Transmit the information anyway, knowing that it might not be private and might
+not arrive unaltered.</li>
+<li>
+Digitally sign the information before transmitting it to protect it from tampering.</li>
+<li>
+Encrypt the information before transmitting it to keep it private and protect it
+from tampering.</li>
+<li>
+Decide that your information is too sensitive to risk any chance of interception
+and find another way to distribute your information.</li>
+</ul>
+<p>
+The Internet is also a fairly anonymous medium. It is difficult to be certain whether the
+person you are dealing with is who (s)he claims to be. Even if you can assure yourself
+about a user to your own satisfaction, proving this beyond a sufficient level of
+doubt in a forum such as a court might be difficult. This causes problems with
+repudiation, which we discussed previously.</p>
+<p>
+In summary, privacy and repudiation are important issues when conducting
+transactions over the Internet.</p>
+<p>
+You can secure information flowing to and from your web server through the
+Internet in at least two different ways:</p>
+<ul>
+<li>
+Secure Sockets Layer (SSL)</li>
+<li>
+Secure Hypertext Transfer Protocol (S-HTTP)</li>
+</ul>
+<p>
+Both these technologies offer private, tamper-resistant messages and authentication,
+but SSL is readily available and widely used, whereas S-HTTP has not really taken off.
+We look at SSL in detail later in this section.</p>
+</li>
+<li>
+<p>
+Your System</p>
+<p>
+The part of the universe that you do have control over is your system.
+Your system is the set of components within your web application. That is, your
+PHP, MySQL and Apache installations and the hardware and operating system that
+support them. These components might be physically separated on a network
+or all exist on the one physical machine.</p>
+<p>
+You are fairly safe in not worrying about the security of information while the
+various third-party products that you use to deliver your web content are handling it.
+The authors of those particular pieces of software have probably given them more thought
+than you have time to give them. As long as you are using an up-to-date version of a
+well-known product, you can find any well-known problems by judicious application of
+Google or your favorite web search engine. You should make it a priority to keep up to
+date on this information.</p>
+<p>
+If installation and configuration are part of your role, you do need to worry about the
+way software is installed and configured. Many mistakes made in security are a result of
+not following the warnings in the documentation or involve general system administration
+issues that are topics for another book. We suggest you buy a good book on administering
+the operating system you intend to use or hire an expert system administrator.</p>
+<p>
+One specific issue to consider when installing PHP is that installing PHP as a SAPI
+module for your web server is generally more secure, as well as much more efficient,
+than running it via the CGI interface.</p>
+<p>
+The primary point you need to worry about as a web application developer is what
+your own scripts do or do not do. What potentially sensitive data does your application
+transmit to the user over the Internet? What sensitive data do you ask users to transmit
+to you? If you are transmitting information that should be a private transaction between
+you and your users or that should be difficult for an intermediary to modify, you should
+consider using SSL.</p>
+<p>
+We already discussed using SSL between the user's computer and the server. You
+should also think about the situation in which you are transmitting data from one
+component of your system to another over a network. A typical example arises when your
+MySQL database resides on a different machine from your web server. PHP connects to
+your MySQL server via TCP/IP, and this connection is unencrypted. If these machines
+are both on a private local area network, you need to ensure that the network is secure.
+If the machines are communicating via the Internet, your system will probably run
+slowly, and you need to treat this connection in the same way as other connections
+over the Internet.</p>
+<p>
+It is important that when your users think they are dealing with you, they are,
+in fact, dealing with you. Registering for a digital certificate protects your
+visitors from spoofing (someone else impersonating your site), allows you to use
+SSL without users seeing a warning message, and provides an air of respectability
+to your online venture.</p>
+<p>
+Do your scripts carefully check the data that users enter? Are you careful about
+storing information securely? We answer these questions in the next few sections
+of this unit.</p>
+</li>
+<li>
+<p>
+Using Secure Sockets Layer (SSL)</p>
+<p>
+The Secure Sockets Layer protocol suite was originally designed by Netscape to
+facilitate secure communication between web servers and web browsers.
+It has since been adopted as the unofficial standard method for browsers and
+servers to exchange sensitive information.</p>
+<p>
+Both SSL versions 2 and 3 are well supported. Most web servers either include SSL
+functionality or can accept it as an add-on module. Internet Explorer and Netscape
+Navigator have both supported SSL from version 3.</p>
+<p>
+Networking protocols and the software that implements them are usually arranged as
+a stack of layers. Each layer can pass data to the layer above or below and request services
+of the layer above or below. Below is an illustration of the protocol stack used
+by an application layer protocol such as Hypertext Transfer Protocol (HTTP).</p>
+<blockquote>
+<table border=1>
+<tr>
+<td>HTTP</td><td>FTP</td><td>SMTP</td><td>(others)</td><td><i>Application Layer</i></td>
+</tr>
+<tr>
+<td></td><td>TCP/UDP</td><td></td><td></td><td><i>Transport Layer</i></td>
+</tr>
+<tr>
+<td></td><td>IP</td><td></td><td></td><td><i>Network Layer</i></td>
+</tr>
+<tr>
+<td></td><td>Various</td><td></td><td></td><td><i>Host to Network Layer</i></td>
+</tr>
+</table>
+</blockquote>
+<p>
+When you use HTTP to transfer information, the HTTP protocol calls on the
+Transmission Control Protocol (TCP), which in turn relies on the Internet Protocol
+(IP). This protocol in turn needs an appropriate protocol for the network hardware
+being used to take packets of data and send them as an electrical signal to
+the destination.</p>
+<p>
+HTTP is called an application layer protocol. There are many other application
+layer protocols such as FTP, SMTP, Telnet, and others such as POP and IMAP.
+TCP is one of two transport layer protocols used in TCP/IP networks. IP is
+the protocol at the network layer. The host to network layer is responsible
+for connecting the host (computer) to a network. The TCP/IP protocol stack
+does not specify the protocols used for this layer because you need different
+protocols for different types of networks.</p>
+<p>
+When you send data, the data is sent down through the stack from an application to
+the physical network media. When you receive data, it travels up from the physical
+network, through the stack, to the application.</p>
+<p>
+Using SSL adds an additional transparent layer to this model. The SSL exists between
+the transport layer and the application layer. This configuration is shown below.
+The SSL modifies the data from the HTTP application before giving it to the
+transport layer to send it to its destination.</p>
+<blockquote>
+<table border=1>
+<tr>
+<td>HTTP w SSL</td><td>SFTP</td><td>SMTP w SSL</td><td>(other SSL)</td><td><i>Application Layer</i></td>
+</tr>
+<tr>
+<td align=right>SSL</td><td>Record</td><td>Protocol</td><td></td><td><i>SSL Layer</i></td>
+</tr>
+<tr>
+<td></td><td>TCP</td><td></td><td></td><td><i>Transport Layer</i></td>
+</tr>
+
+<tr>
+<td></td><td>IP</td><td></td><td></td><td><i>Network Layer</i></td>
+</tr>
+<tr>
+<td></td><td>Various</td><td></td><td></td><td><i>Host to Network Layer</i></td>
+</tr>
+</table>
+</blockquote>
+<p>
+SSL adds an additional layer to the protocol stack as well as
+application layer protocols for controlling its own operation.
+SSL is capable of providing a secure transmission environment for protocols other than
+HTTP. Other protocols can be used because SSL is essentially transparent.
+The SSL provides the same interface to protocols above it as the underlying
+transport layer. It then  transparently deals with handshaking, encryption,
+and decryption.</p>
+<p>
+When a web browser connects to a secure web server via HTTP, the two need to follow
+a handshaking protocol to agree on what they will use for items such as
+authentication and encryption.</p>
+<p>
+The handshake sequence involves the following steps:</p>
+</ul>
+<blockquote>
+<ol type="1">
+<li class="row1">
+The browser connects to an SSL-enabled server and asks the server to authenticate
+itself.</li>
+<li class="row1">
+The server sends its digital certificate.</li>
+<li class="row1">
+The server might optionally (and rarely) request that the browser authenticate
+itself.</li>
+<li class="row1">
+The browser presents a list of the encryption algorithms and hash functions it sup-
+ports.The server selects the strongest encryption that it also supports.</li>
+<li class="row1">
+The browser and server generate session keys:<br>
+<ol type="a">
+<li class="row1">
+The browser obtains the server's public key from its digital certificate and
+uses it to encrypt a randomly generated number.</li>
+<li class="row1">
+The server responds with more random data sent in plaintext (unless the
+browser has provided a digital certificate at the server's request, in which
+case the server will use the browser's public key).</li>
+<li class="row1">
+The encryption keys for the session are generated from this random data
+using hash functions.</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<ul class="slidesUl1">
+<li>
+<p>
+Generating good quality random data, decrypting digital certificates,
+generating keys, and using public key cryptography take time, so this
+handshake procedure takes time. Fortunately, the results are cached,
+so if the same browser and server want to exchange multiple secure messages,
+the handshake process and the required processing time occur only once.</p>
+<p>
+When data is sent over an SSL connection, the following steps occur:</p>
+</li>
+</ul>
+<blockquote>
+<ol type="1">
+<li class="row1">
+It is broken into manageable packets.</li>
+<li class="row1">
+Each packet is (optionally) compressed.</li>
+<li class="row1">
+Each packet has a message authentication code (MAC) calculated using a hashing
+algorithm.</li>
+<li class="row1">
+The MAC and compressed data are combined and encrypted.</li>
+<li class="row1">
+The encrypted packets are combined with header information and sent to the network.</li>
+</ol>
+</blockquote>
+<ul class="slidesUl1">
+<li>
+<p>
+SSL breaks up, compresses, hashes, and encrypts data before sending it.
+The TCP header is added after the data is encrypted.
+This means that routing information could still potentially be tampered
+with, and although snoopers cannot tell what information you are exchanging,
+they can see who is exchanging it.</p>
+<p>
+The reason that SSL includes compression before encryption is that although most
+network traffic can be (and often is) compressed before being transmitted across
+a network, encrypted data does not compress well. Compression schemes rely on identifying
+repetition or patterns within data. Trying to apply a compression algorithm after data has
+been turned into an effectively random arrangement of bits via encryption is usually
+pointless. It would be unfortunate if SSL, which was designed to increase network
+security, had the side effect of dramatically increasing network traffic.</p>
+<p>
+Although SSL is relatively complex, users and developers are shielded from most of
+what occurs because its external interfaces mimic existing protocols.</p>
+<p>
+In the future, SSL 3.0 may be replaced by Transport Layer Security (TLS) 1.0, but
+currently, TLS is a draft standard and not supported by any servers or
+browsers. TLS is intended to be a truly open standard, rather than a standard defined by
+one organization but made available for others. It is based directly on SSL 3.0 but
+contains improvements intended to overcome weaknesses of SSL and offer further
+flexibility.</p>
+</li>
+<li>
+<p>
+Screening User Input</p>
+<p>
+One of the principles of building a safe web application is that you should never trust
+user input. Always screen user data before putting it in a file or database
+or passing it through a system execution command.</p>
+<p>
+In several places throughout this course, we have described techniques you can use to
+screen user input. We list them briefly here as a reference:</p>
+<ul>
+<li>
+You should use the <code>addslashes()</code> function to filter user data before
+it is passed to a database. This function escapes out characters that might be
+troublesome to a database. You can use the <code>stripslashes()</code>
+function to return the data to its original form.</li>
+<li>
+You can switch on the <code>magic_quotes_gpc</code> and <code>magic_quotes_runtime</code>
+directives in your <b>php.ini</b> file. These directives automatically add and
+strip slashes for you. The <code>magic_quotes_gpc</code> applies this formatting
+to incoming GET, POST, and cookie variables, and the <code>magic_quote_runtime</code>
+applies it to data going to and from databases.</li>
+<li>
+You should use the <code>escapeshellcmd()</code> function when you are passing
+user data to a <code>system()</code> or <code>exec()</code> call or to backticks.
+This function escapes out any metacharacters that can be used to force your
+system to run arbitrary commands entered by a malicious user.</li>
+<li>
+You can use the <code>strip_tags()</code> function to strip out HTML and PHP
+tags from a string. This function prevents users from planting malicious scripts
+in user data that you might echo back to the browser.</li>
+<li>
+You can use the <code>htmlspecialchars()</code> function, which converts
+characters to their HTML entity equivalents. For example "&lt;" , is converted
+to "&amp;lt;". This function converts any script tags to harmless characters.</li>
+</ul>
+</li>
+<li>
+<p>
+Providing Secure Storage</p>
+<p>
+The three different types of stored data (HTML or PHP files, script-related data,
+and MySQL data) are often stored in different areas on the same disk drive
+but are listed separately because each type of storage requires different
+precautions and therefore must be examined separately.</p>
+<p>
+The most dangerous type of data you store is executable content. On a website, this
+usually means scripts. You need to be very careful that your file permissions are set
+correctly within your web hierarchy. By this, we mean the directory tree starting from
+<code>htdocs</code> on an Apache server or <code>inetpub</code> on an IIS server.
+Others need to have permission to read your scripts to see their output,
+but they should not be able to write over or edit them.</p>
+<p>
+The same proviso applies to directories within the web hierarchy. Only you should be
+able to write to these directories. Other users, including the user who the web server
+runs as, should not have permission to write or create new files in directories that can be
+loaded from the web server. If you allow others to write files here, they could write a
+malicious script and execute it by loading it through the web server.</p>
+<p>
+If your scripts need permission to write to files, make a directory outside the web
+tree for this purpose. This is particularly true for file upload scripts.
+Scripts and the data that they write should not mix.</p>
+<p>
+When writing sensitive data, you might be tempted to encrypt it first. This approach,
+however, usually provides little value. Let's put it this way: If you have a file
+called <b>creditcardnumbers.txt</b> on your web server and a cracker obtains
+access to your server and can read the file, what else can (s)he read?
+To encrypt and decrypt data, you need a program to encrypt data, a program
+to decrypt data, and one or more key files. If the cracker can read your data,
+there is probably nothing stopping him/her from reading your key and other files.</p>
+<p>
+Encrypting data could be valuable on a web server, but only if the software and key
+to decrypt the data were not stored on the web server, but were stored on another
+machine instead. One way of securely dealing with sensitive data would be to
+encrypt it on the server and then transmit it to another machine, perhaps via email.</p>
+<p>
+Database data is similar to data files. If you set up MySQL correctly, only MySQL can
+write to its data files. This means that you need to worry only about accesses
+from users within MySQL. We already discussed MySQL's own permission system,
+which assigns particular rights to particular usernames at particular hosts.</p>
+<p>
+One issue that needs special mention is that you will often need to store a MySQL
+password in a PHP script. Your PHP scripts are generally publicly loadable.
+This issue is not as much of a disaster as it might seem at first.
+Unless your web server configuration is broken, your PHP source is not visible
+from outside.</p>
+<p>
+If your web server is configured to parse files with the extension ".php"
+using the PHP interpreter, outsiders will not be able to view the uninterpreted
+source. However, you should be careful when using other extensions.
+If you place ".inc"  files in your web directories, anybody requesting them
+will receive the unparsed source.  You either need to place include files
+outside the web tree, configure your server not to deliver files with
+this extension, or use ".php" as the extension on these files as well.</p>
+<p>
+If you are sharing a web server with others, your MySQL password might be visible
+to other users on the same machine who can also run scripts via the same web server.
+Depending on how your system is set up, this situation might be unavoidable.
+You can avoid this problem by having a web server set up to run scripts as
+individual users or by having each user run his/her own instance of the web server.
+If you are not the administrator for your web server (as is likely the case
+if you are sharing a server), discussing this issue with your administrator
+and exploring security options might be worthwhile.</p>
+</li>
+<li>
+<p>
+Determining Whether to Store Credit Card Numbers</p>
+<p>
+Now that we have discussed secure storage for sensitive data,
+one type of sensitive data deserves special mention.
+Internet users are paranoid about their credit card numbers.
+If you are going to store them, you need to be very careful.
+You also need to ask yourself why you are storing them and whether it is
+really necessary.</p>
+<p>
+What are you going to do with a card number? If you have a one-off transaction to
+process real-time card processing, you will be better off accepting the card
+number from your customer and sending it straight to your transaction processing
+gateway without storing it at all.</p>
+<p>
+If you have periodic charges to make, such as the authority to charge a monthly fee
+to the same card for an ongoing subscription, this approach might not be an option.
+In this case, you should think about storing the numbers somewhere other than
+the web server.</p>
+<p>
+If you are going to store large numbers of your customers' card information,
+make sure that you have a skilled and somewhat paranoid system administrator
+who has enough time to check up-to-date sources of security information for
+the operating system and other products you use.
+</p>
+</li>
+</ul>
+</div>
+</body>
+</html>

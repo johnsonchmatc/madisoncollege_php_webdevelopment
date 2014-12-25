@@ -1,0 +1,296 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta name="generator" content="HTML Tidy, see www.w3.org">
+  <title>In-class Lab 7.2</title>
+  <link href="../../../css/basic.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" language="JavaScript">
+
+<!--
+
+function putSemester() {
+
+    var today=new Date();
+
+    var thisMonth=today.getMonth()+1;
+
+    var thisYear=today.getFullYear();
+
+    if(thisMonth <=6) {
+
+        return "Spring, " + thisYear;
+
+    }
+
+    else {
+
+       return "Fall, " + thisYear;
+
+    }
+
+}//-->
+
+  </script>
+  <style type="text/css">
+
+<!--
+
+    .bgStripes {
+
+        background-image:url(../../../images/Xstripes.gif);
+
+        background-attachment: fixed;
+
+    }
+
+    
+
+    body {
+
+        background-color:white;
+
+    }
+
+    
+
+    strong {
+
+        font-family: Arial, Helvetica, sans-serif;
+
+    }
+
+    
+
+ 
+
+-->
+
+  </style>
+</head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
+<table class="bgStripes" border="0" width="100%">
+  <tbody>
+    <tr name="firstRow">
+      <td valign="top" width="80"><span
+ style="font-size: x-small; font-weight: bold;">
+      <script type="text/javascript">
+
+          <!--
+
+            document.write(putSemester());
+
+            -->
+
+      </script>
+      </span> <br>
+      </td>
+<td style="text-align: center;"><span
+ style="color: darkblue; font-size: medium; font-weight: bold;">
+PHP Web Development with MySQL</span> </td>
+<td align="right" valign="top" width="80"><span
+ style="font-size: x-small; font-weight: bold;">
+3 Credits</span> </td>
+</tr>
+<tr>
+<td colspan="3" style="text-align: center;"><span
+ style="font-size: xx-small; font-weight: bold;">
+152-166</span> </td>
+</tr>
+</tbody>
+</table>
+<h2>In-class Lab 7.2<br>
+</h2>
+<ol type="I">
+<li class="row0"><p>
+Exercise 1 - Create custom exceptions that extend the PHP 5 Exception class
+</p>
+<ol type="1">
+<li class="row1"><p>
+Create a directory named <b>lab07</b> under your <b>labs</b> directory,
+which is under your webserver's document root, if it does not already exist.
+</p>
+</li>
+<li class="row0">
+<p>
+Create a script named <b>exceptions.inc.php</b> and save it into your <b>lab07</b> directory.
+</p>
+</li>
+<li class="row1"><p>
+Create the following custom exception classes that extend the built-in
+Exception class in PHP 5:</p>
+<code><small>
+&lt;?php<br>
+&nbsp;&nbsp;class notArrayException extends Exception {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function __toString() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 'notArrayException '. $this-&gt;getCode()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+.': '. $this-&gt;getMessage() .'&lt;br /&gt;'.' in '<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+. $this-&gt;getFile() .' on line '<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+. $this-&gt;getLine() .'&lt;br /&gt;';<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;class emptyArrayException extends Exception {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function __toString() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 'emptyArrayException '. $this-&gt;getCode()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+.': '. $this-&gt;getMessage() .'&lt;br /&gt;'.' in '<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+. $this-&gt;getFile() .' on line '<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+. $this-&gt;getLine() .'&lt;br /&gt;';<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;class notNumericException extends Exception {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;function __toString() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 'notNumericException '. $this-&gt;getCode()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+.': '. $this-&gt;getMessage() .'&lt;br /&gt;'.' in '<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+. $this-&gt;getFile() .' on line '<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+. $this-&gt;getLine() .'&lt;br /&gt;';<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+?&gt;<br>
+</small></code>
+</li>
+<p><hr width="50%" /></p>
+</ol>
+</li>
+<li class="row1">
+<p>Exercise 2 - Create a function that throws your custom exceptions
+</p>
+<ol type="1">
+<li class="row1"><p>
+Create a script named <b>functions.inc.php</b> and save it into your <b>lab07</b> directory.
+</p>
+</li>
+<li class="row1"><p>
+Use the <b>require_once</b> directive to include the file <b>exceptions.inc.php</b> .
+</p></li>
+<li class="row1"><p>
+Create a function named <b>average</b> that accepts an array as an input
+parameter and returns the average of the numbers in the array.
+Here is a template to use when creating your <b>average()</b> function:</p>
+<blockquote><code><small>
+function average($numArray) {<br>
+&nbsp;&nbsp;// test if $numArray is an array, throw exception otherwise<br>
+&nbsp;&nbsp;$total = 0;<br>
+&nbsp;&nbsp;$itemCount = count($numArray);<br>
+&nbsp;&nbsp;// test for empty array, throw exception if empty<br>
+&nbsp;&nbsp;foreach ($numArray as $i) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// test if array element is numeric, throw exception if not<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$total += $i;<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;return $total / $itemCount;<br>
+}<br>
+</small></code></blockquote>
+</li>
+<li class="row1">
+<p>If the input parameter to your <b>average</b> function is not an array,
+the function should throw an exception of the <b>notArrayException</b>
+class with a message such as: "Input parameter not an array".</p>
+</li>
+<li class="row1">
+<p>If the input parameter to your <b>average</b> function is an empty array
+- that is if the element count is zero - the function should
+throw an exception of the <b>emptyArrayException</b> class with a message
+such as: "Number of items to average = 0".
+</p>
+</li>
+<li class="row1">
+<p>If the input parameter to your <b>average</b> function is a non-empty array,
+but one or more of the array elements are not numeric, the function should
+throw an exception of the <b>notNumericException</b> class with a message
+such as: "Array element not numeric".
+</p>
+</li>
+<p><b>Hint:</b> PHP built-in functions such as gettype(), is_array(), is_int(),
+and is_float() can be used to test the array and its elements.
+</p>
+</ol>
+</li>
+<li class="row1">
+<p>Exercise 3 - Use a <b>try...catch</b> block to test the function
+</p>
+<ol type="1">
+<li class="row1"><p>
+Create a script named <b>lab7x2.php</b> and save it into your <b>lab07</b> directory.
+</p>
+</li>
+<li class="row1"><p>
+Use the <b>require_once</b> directive to include the file <b>functions.inc.php</b> .
+</p></li>
+
+<li class="row1"><p>
+Add code to the <b>lab7x2.php</b> script to test your <b>average()</b>
+function. Note that the function definition that "throws" the exceptions
+does not need to be inside the <b>try</b> part of the block. Only the calls
+to the <b>average()</b> function must be!
+</p>
+</li>
+<li class="row1"><p>
+Because your custom exceptions implement the <code>__toString()</code>
+function, the <b>catch</b> parts of your block just need to print out the
+exception that occurred:
+</p>
+<blockquote><code>
+catch (notArrayException $ex) {<br>
+&nbsp;&nbsp;echo $ex;<br>
+}<br>
+</code></blockquote>
+</li>
+<li class="row1"><p>
+You should include 3 <b>catch</b> blocks, one for each custom exception.
+Is there another way to catch exceptions of these classes because they inherit
+from a common parent, the Exception class?
+</p>
+<p><hr width="50%" /></p>
+</li>
+<li class="row1">
+<p>Define 4 variables:</p>
+<ul>
+<li>An array variable containing the list of numbers: <b>(10, 15, 17, 23, 9, 11, 13)</b>
+</li>
+<li>
+A string variable containing the string: <b>"I am not an array"</b>
+</li>
+<li>
+An empty array variable
+</li>
+<li>
+An array variable containing the list of elements: <b>(1, 2, 'three', 4, 5, 'sick')</b>
+</li>
+</ul>
+</li>
+<li class="row1"><p>
+Test your <b>average()</b> function by calling it with each of the 4
+variables as input. Be sure to include a statement similar to:
+</p>
+<blockquote><code>
+echo "The average is $myAverage &lt;br&gt;";<br>
+</code></blockquote>
+<p>
+so you can verify that your function works correctly with the "good" array.
+(You may temporarily comment out 3 of the 4 calls to <b>average()</b>
+for each test run.)
+</p>
+</li>
+<li class="row1"><p>
+The second, third and fourth variables should cause your <b>average()</b>
+function to throw exceptions.
+</p>
+</li>
+<li class="row1">
+<p>
+Show your instructor your code and demonstrate how it works in a browser.
+</p>
+</li>
+</ol>
+<p><hr width="75%" /></p>
+</li>
+</ol>
+</body>
+</html>

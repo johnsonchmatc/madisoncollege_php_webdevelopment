@@ -1,0 +1,1006 @@
+<!DOCTYPE html PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html>
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>Intro. to MySQL</title>
+<link href="../../../css/basic.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" language="JavaScript">
+<!--
+function putSemester() {
+    var today=new Date();
+    var thisMonth=today.getMonth()+1;
+    var thisYear=today.getFullYear();
+    if(thisMonth <=6) {
+        return "Spring, " + thisYear;
+    }
+    else {
+       return "Fall, " + thisYear;
+    }
+}//-->
+</script>
+<style type="text/css">
+<!--
+    .bgStripes {
+        background-image:url(../../../images/Xstripes.gif);
+        background-attachment: fixed;
+    }
+    body {
+        background-color:white;
+    }
+    strong {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+-->
+</style>
+</head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
+<table class="bgStripes" border="0" width="100%">
+<tbody>
+<tr name="firstRow">
+<td valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+<script type="text/javascript">
+<!--
+    document.write(putSemester());
+-->
+</script>
+</span> <br>
+</td>
+<td style="text-align: center;"><span style="font-weight: bold; font-size: medium; color: darkblue;">
+PHP Web Development with MySQL
+</span> </td>
+<td align="right" valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+3 Credits</span> </td>
+</tr>
+<tr>
+<td colspan="3" style="text-align: center;"><span style="font-size: xx-small; font-weight: bold;">
+152-166</span> </td>
+</tr>
+</tbody>
+</table>
+<!--The heading for the slides --> <br>
+<table class="headTable1" border="0">
+<tbody>
+<tr>
+<td width="100"><a href="index.html.html"><img alt="" src="../../../images/btn_lArrow.gif" border="0"></a><a href="index.html"><img alt="" src="../../../images/btn_upArrow.gif" border="0"></a><a href="mysql2.html"><img alt="" src="../../../images/btn_rArrow.gif" border="0"></a></td>
+<td>Introduction to the MySQL DBMS</td>
+</tr>
+</tbody>
+</table>
+<br>
+<div class="disp1">
+<ul class="slidesUl1">
+<li><p>
+About Databases
+</p><p>
+Whether you are running a bank, a hospital, a gas station, or a Web store,
+good record keeping and organized data are crucial to the success of any business.
+</p><p>
+One way to store data might be in a text file, but as the amount of data increases,
+a database might be a better choice for storing and managing your data.
+</p><p>
+Different types of databases determine what kind of structure will be used to
+store and retrieve the data. The most basic type uses a flat file structure,
+storing the data in a big table, but this type is difficult to modify and
+really best suited for simple applications.
+</p><p>
+Another type of database is one in which the data is organized in a hierarchy
+or network, much like the structure of a directory tree, a parent–child model,
+but these kinds of databases are hard for end users to grasp.
+</p><p>
+Then in the 1980s relational databases became the "in" thing because the
+relational model made data manipulation easier and faster for the end user and
+easier to maintain by the administrator.
+</p><p>
+At the core of this model is the concept of a table (also called a relation)
+in which all data is stored. Each table is made up of records consisting of
+horizontal rows and vertical columns or fields, like a two-dimensional array.
+</p><p>
+Unlike the hierarchical model, the relational model made it easy for the user
+to retrieve, insert, update, and delete data without having to understand the
+underlying structure of the data in the database.
+</p><p>
+Due to the popularity of relational databases, known as relational database
+management systems (RDBMS), a number of relational databases are used today,
+among them, Oracle, Sybase, PostgreSQL Informix, DB2, SQL Server, and MySQL.
+</p><p>
+MySQL is the most commonly used database program for developing database-driven
+Web sites with PHP.
+</p><p>
+MySQL is an open source database that runs on a majority of operating systems,
+such as UNIX, Linux, Macintosh, and Windows. Although maintained by MySQL AB,
+a commercial company, MySQL comes with a GPL (GNU Public License) open source
+license as well as a commercial license.
+</p><p>
+PHP and MySQL fit very well together. They are both reasonably easy to use,
+fairly scalable and reliable and have a good set of features for small- and
+medium-sized Web applications.
+</p><p>
+Although PHP can be used with any database through its set of ODBC functions,
+it comes loaded with MySQL specific functions. This set of specific functions
+makes for a tight integration between the PHP language and the MySQL database.
+</p></li>
+<li><p>
+Client/Server Databases
+</p><p>
+If your Web site is to be up and available to customers around the world, and
+you are using a database management system to manage the data, the type of
+relational database best suited for the task is a client/server database,
+where the database server runs around the clock to handle client requests as
+they come in, no matter what the time zone.
+</p><p>
+Today MySQL is one of the most popular client/server database systems in the
+open source community for serving Web pages.
+</p><p>
+The model for a client/server architecture is as follows. The user requests a
+page from the browser (e.g., Internet Explorer, Netscape, Firefox), and an
+HTTP connection is made to the Web server (Apache, ISS) where the request is
+received and handled.
+</p><p>
+If the action is to start up a PHP program, the Web server starts up the PHP
+interpreter and PHP starts processing the script. If the PHP script contains
+an instruction to connect to a database, in this case MySQL, then once the
+connection is made and a database selected, the PHP program has access to
+the database through the MySQL server.
+</p><p>
+The MySQL server receives requests, called queries, from the PHP program
+and sends back information collected from the database. Once PHP gets the
+information from the MySQL server, it can then format it into nice tables
+using HTML tags, and send it back to the Web server where it is then relayed
+to the browser where the whole process started.
+</p></li>
+<li><p>
+Talking to the Database
+</p><p>
+To communicate with the MySQL server, you will need a language, and SQL
+(Structured Query Language) is the language of choice for most modern multiuser,
+relational databases.
+</p><p>
+SQL provides the syntax and language constructs needed to talk to relational
+databases in a standardized, cross-platform structured way.
+</p><p>
+Like the English language with a variety of dialects (British, American,
+Australian, etc.), there are many different versions of the SQL language.
+</p><p>
+The version of SQL used by MySQL follows the ANSI (American National Standards
+Institute) standard, meaning that it must support the major keywords (e.g.
+SELECT, UPDATE, DELETE, INSERT, WHERE) as defined in the standard.
+</p><p>
+As you can see by the names of these keywords, SQL is the language that makes
+it possible to manipulate the data in a database.
+</p><p>
+MySQL Strengths and Weaknesses
+</p><p>
+The MySQL® database has become the world's most popular open source database
+because of its consistent fast performance, high reliability, and ease of use.
+</p><p>
+It's used in more than 8 million installations ranging from large corporations
+to specialized embedded applications on every continent in the world.
+(Yes, even Antarctica!)
+</p><p>
+Not only is MySQL the world's most popular open source database, it's also
+become the database of choice for a new generation of applications built on 
+the LAMP stack (Linux, Apache, MySQL, PHP/Perl/Python).
+</p><p>
+MySQL runs on more than 20 platforms including Linux, Windows, OS/X, HP-UX, AIX,
+Netware, giving you the kind of flexibility that puts you in control.
+</p><p>
+Having said that, like any tool, MySQL is right for certain types of applications
+and not as suitable for others.
+Let's look at what the strengths and weaknesses of MySQL are.
+</p></li>
+<li><p>
+Easy to Use
+</p><p>
+MySQL is a relatively easy to use and administer database system.
+Large database systems with all the bells and whistles often require a
+knowledgable database administrator (DBA) to set up and administer it.
+</p><p>
+MySQL is a database built for programmers with very little overhead in terms
+of maintenance.
+</p></li>
+<li><p>
+Large Community of Developers
+</p><p>
+What makes MySQL so appealing is the large community of other developers who
+are building applications around it. This makes it a relatively safe choice.
+</p><p>
+If you ever need anything, chances are that someone already experienced that
+issue and has it resolved. You can often find the solutions with a little
+searching online.
+</p></li>
+<li><p>
+Open Source License
+</p><p>
+MySQL is free to use as long as you do not bundle it with your commercial
+product. As an application provider, you can always tell your customers to
+download and set up their own MySQL database to which your application will connect.
+</p><p>
+This is a fairly easy procedure and there is no license cost involved, making
+it an attractive choice for application developers.
+</p></li>
+<li><p>
+Commercial License
+</p><p>
+When in fact you want to ship your application with a copy of the MySQL
+database server built into it, then you must purchase the license from MySQL AB.
+</p><p>
+This might not be an attractive feature for true believers in open source
+and General Public License models, but for most of us, obtaining a license
+will not be an issue.
+</p><p>
+For Web applications, the database is rarely shipped as part of the application.
+Because customers who install server-side applications usually have sufficient
+skills to perform the tasks of downloading and setting up databases, it is
+sufficient to document the setup process with your application and leave the
+rest to them.
+</p></li>
+<li><p>
+Scalability
+</p><p>
+Scalability refers to how well an application can support larger or smaller
+volumes of data and more or fewer users without degrading performance and
+costing more.
+</p><p>
+MySQL used to be regarded as a small database for small systems. Over time,
+MySQL has become a serious RDBMS with its own way of managing scalability,
+claiming that it can handle from small (a megabyte) to large (several terabytes)
+volumes of data with ultimate scalability.
+</p><p>
+For example, there are currently some very large sites in production with
+multiclusters of MySQL database servers. Scalability is beyond the scope of
+this book but it is good to know that MySQL can handle your application as it
+grows in size.
+</p></li>
+<li><p>
+The Anatomy of a Relational Database
+</p><p>
+What makes up a database? The main components of an RDBMS are:
+</p>
+<ul>
+<li>
+The database server</li>
+<li>
+The database</li>
+<li>
+Tables</li>
+<li>
+Records and fields</li>
+<li>
+Primary key</li>
+<li>
+Schema</li>
+</ul>
+<p>
+We discuss each of these concepts in the next sections of this unit.
+</p></li>
+<li><p>
+The Database Server
+</p><p>
+The database server is the actual server process running the databases.
+It controls the storage of the data, grants access to users, updates and
+deletes records, and communicates with other servers.
+</p><p>
+The database server is normally on a dedicated host computer, serving and
+managing multiple clients over a network, but can also be used as a standalone
+server on the local host machine to serve a single client.
+</p><p>
+For example, you might bethe single client using MySQL on your local machine,
+often referred to as "localhost" without any network connection at all.
+This is probably the best way to learn how to use MySQL.
+</p><p>
+If you are using MySQL, the server process is the MySQL service on Windows
+or the <b>mysqld</b> process on Linux/UNIX operating systems.
+</p><p>
+The database server typically follows the client/server model where the front
+end is the client, a user sitting at his or her workstation making database
+requests and waiting for results, and the back end is the database server
+that grants access to users, stores and manipulates the data, performs backups,
+even talks to other servers.
+</p><p>
+The requests to the database server can also be made from a program that acts on
+behalf of a user making requests from a Web page.
+</p><p>
+In the following units, you will learn how to make requests from the MySQL
+command line first, and then to connect to the database server from a PHP
+program using PHP built-in functions to make requests to the MySQL database server.
+</p></li>
+<li><p>
+The Database
+</p><p>
+A database is a collection of related data elements, usually corresponding to
+a specific application. A company might have one database for all its human
+resource needs, perhaps another one for its sales staff, a third one for
+e-commerce applications, and so on.
+
+Below are listed the MySQL databases or schemas installed on a particular
+instance of the MySQL server. The databases are listed as "mysql", "northwind",
+"phpmyadmin", and "test".
+</p><p>
+Figure: Databases in an Instance of MySQL
+</p>
+<blockquote><code><pre>
++------------+
+| Database   |
++------------+
+| mysql      |
+| northwind  |
+| phpmyadmin |
+| test       |
++------------+
+</pre></code></blockquote>
+</li>
+<li><p>
+Tables
+</p><p>
+Each database consists of two-dimensional tables. In fact, a relational database
+stores all of its data in tables, and nothing more.
+</p><p>
+All operations are performed on the table, which can then produce other tables,
+and so on.
+</p><p>
+One of the first decisions you will make when designing a database is what tables
+it will contain. A typical database for an organization might consist of tables
+for customers, orders, and products.
+</p><p>
+All these tables are related to one another in some way. For example, customers
+have orders, and orders have items. Although each table exists on its own,
+collectively the tables comprise a database or schema.
+</p><p>
+The figure below lists the tables in the database called Northwind, a fictional
+database provided by Microsoft to serve as a model for learning how to manipulate
+a database.
+</p><p>
+The Northwind Traders sample database typically comes as a free sample with
+Microsoft Access, but is available for MySQL at:
+<a href="http://www.flash-remoting.com/examples/">http://www.flash-remoting.com/examples/</a>
+</p><p>
+Figure: Tables in the northwind database.
+</p>
+<blockquote><code><pre>
++----------------------+
+| Tables_in_northwind  |
++----------------------+
+| Categories           | 
+| CustomerCustomerDemo | 
+| CustomerDemographics | 
+| Customers            | 
+| EmployeeTerritories  | 
+| Employees            | 
+| Order_Details        | 
+| Orders               | 
+| Products             | 
+| Region               | 
+| Shippers             | 
+| Suppliers            | 
+| Territories          | 
+| USStates             | 
++----------------------+
+</pre></code></blockquote>
+</li>
+<li><p>
+Rows and Columns (Records and Fields)
+</p><p>
+A table has a name and consists of a set of rows and columns. It resembles a
+spreadsheet where each row, also called a record, is comprised of vertical
+columns, also called fields.
+</p><p>
+All rows from the same table have the same set of columns. The "shippers" table
+from the Northwind database has three columns and three rows, as shown in the
+figure.
+</p><p>
+Figure: The rows (records) and columns (fields) from the "shippers" table in the
+Northwind database.
+</p>
+<blockquote><code><pre>
++-----------+------------------+----------------+
+| ShipperID | CompanyName      | Phone          |
++-----------+------------------+----------------+
+|         1 | Speedy Express   | (503) 555-9831 | 
+|         2 | United Package   | (503) 555-3199 | 
+|         3 | Federal Shipping | (503) 555-9931 | 
++-----------+------------------+----------------+
+</pre></code></blockquote>
+<p>
+There are two basic operations you can perform on a relational table.
+You can retrieve a subset of its columns and you can retrieve a subset of its rows.
+The following figures are samples of the two operations.
+</p><p>
+Figure: Retrieving a subset of columns.
+</p>
+<blockquote><code><pre>
+mysql> select companyname from shippers;
++------------------+
+| companyname      |
++------------------+
+| Speedy Express   | 
+| United Package   | 
+| Federal Shipping | 
++------------------+
+</pre></code></blockquote>
+<p>
+Figure: Retrieving a subset of rows.
+</p>
+<blockquote><code><pre>
+mysql> select * from shippers
+    -> where companyname = 'Federal Shipping';
++-----------+------------------+----------------+
+| ShipperID | CompanyName      | Phone          |
++-----------+------------------+----------------+
+|         3 | Federal Shipping | (503) 555-9931 | 
++-----------+------------------+----------------+
+</pre></code></blockquote>
+<p>
+Remember, a relational database manipulates only tables and the result of all
+operations are also tables.
+</p><p>
+The tables are sets, which are themselves sets of rows and columns. You can
+view the database itself as a set of tables.
+</p><p>
+You can also perform a number of other operations between two tables,
+treating them as sets.
+</p><p>
+You can join information from two tables, make cartesian products of the tables,
+get the intersection between two tables, add one table to another, and so on.
+</p><p>
+Later we will discuss how to perform operations on tables using the SQL language.
+SQL allows you to "talk" to a database. The two figures above use SQL commands to
+retrieve data.
+</p></li>
+<li><p>
+Columns/Fields
+</p><p>
+When discussing tables, we must talk about columns because they are an integral
+part of the table. Columns are also known as fields or attributes.
+</p><p>
+Fields describe the data. Each field has a name. For example, the "shippers"
+table has fields named "ShipperID," "CompanyName," and "Phone".
+</p><p>
+The field or column also describes the type of data it contains. A data type can
+be a number, a character, a date, a time stamp, and so on.
+</p><p>
+In the following figure "ShipperID" is the name of a field and the data type
+is integer. The shipper's ID will not exceed 11 digits in length.
+</p><p>
+There are many data types and sometimes they are specific to a particular vendor's
+database management system. For example, MySQL might have different data types
+available than Oracle.
+</p><p>
+Figure: Each field has a name and a description of the data that can be stored there.
+</p>
+<code><small><pre>
++-------------+-------------+------+-----+---------+----------------+
+| Field       | Type        | Null | Key | Default | Extra          |
++-------------+-------------+------+-----+---------+----------------+
+| ShipperID   | int(11)     | NO   | PRI | NULL    | auto_increment | 
+| CompanyName | varchar(40) | NO   |     |         |                | 
+| Phone       | varchar(24) | YES  |     | NULL    |                | 
++-------------+-------------+------+-----+---------+----------------+
+</pre></small></code>
+</li>
+<li><p>
+Rows/Records
+</p><p>
+A record is a row in the table. It could be a product in the product table, an
+employee record in the employee table, and so on. Each table in a database
+contains zero or more records. The following query shows us that there are
+four records in the "region" table.
+</p>
+<blockquote><code><pre>
+mysql> select * from region;
++----------+-------------------+
+| RegionID | RegionDescription |
++----------+-------------------+
+|        1 | Eastern           | 
+|        2 | Western           | 
+|        3 | Northern          | 
+|        4 | Southern          | 
++----------+-------------------+
+4 rows in set (0.00 sec)
+</pre></code></blockquote>
+</li>
+<li><p>
+Primary Key and Indexes
+</p><p>
+A primary key is a unique identifier for each record. For example, every employee
+in the United States has a Social Security number, every driver has a driver's
+license, and every car has a license plate.
+</p><p>
+These identifiers are unique. In the world of database tables, we call the
+unique identifier a primary key. Although it is a good idea to have a primary key,
+not every table has one.
+</p><p>
+The primary key is determined when the table is created and is more in keeping
+with a discussion on database design. In the query below, the "CategoryID" is the
+primary key for the "categories" table in the Northwest database.
+</p><p>
+It is a unique ID that consists of a number that will automatically be
+incremented every time a new category (record) is added to the list of categories.
+</p>
+<code><small><pre>
+mysql> describe categories;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| CategoryID   | int(11)     | NO   | PRI | NULL    | auto_increment | 
+| CategoryName | varchar(15) | NO   | MUL |         |                | 
+| Description  | longtext    | YES  |     | NULL    |                | 
+| Picture      | longblob    | YES  |     | NULL    |                | 
++--------------+-------------+------+-----+---------+----------------+
+</pre></small></code>
+<p>
+In addition to a primary key, one or more indexes are often used to enhance
+performance for finding rows in tables that are frequently accessed.
+</p><p>
+Indexes are like the indexes in the back of a book that help you find a
+specific topic more quickly than searching through the entire book.
+</p><p>
+When searching for a particular record in a table, MySQL must load all the
+records before it can execute the query. An index, like the index of a book,
+is a reference to a particular record in a table.
+</p></li>
+<li><p>
+The Database Schema
+</p><p>
+Designing a very small database is not difficult, but designing one for a
+large Web-based application can be daunting.
+</p><p>
+Database design is both an art and a science and requires understanding how
+the relational model is implemented, a topic beyond the scope of this book.
+</p><p>
+When discussing the design of the database, you will encounter the term
+"database schema", which refers to the structure of the database. It describes
+the design of the database similar to a template or blueprint.
+</p><p>
+It describes all the tables, and their layout, but does not contain the actual
+data in the database. In MySQL, we use the "show tables" command to list all the
+tables in a particular schema. Note that MySQL uses the term database to refer
+to what other database vendors may call a schema.
+</p>
+<blockquote><code><pre>
+mysql> show tables;
++----------------------+
+| Tables_in_northwind  |
++----------------------+
+| Categories           | 
+| CustomerCustomerDemo | 
+| CustomerDemographics | 
+| Customers            | 
+| EmployeeTerritories  | 
+| Employees            | 
+| Order_Details        | 
+| Orders               | 
+| Products             | 
+| Region               | 
+| Shippers             | 
+| Suppliers            | 
+| Territories          | 
+| USStates             | 
++----------------------+
+14 rows in set (0.00 sec)
+</pre></code></blockquote>
+<p>
+You could then use the "describe" command with each table name (as was done with
+the "categories" table above) to view the structure of each of the tables in the
+Northwind schema or database.
+</p></li>
+<li><p>
+Connecting to the Database
+</p><p>
+Here we assume you have installed a database server and it is running.
+Downloading and installing MySQL is usually a straightforward process.
+Appendix E of the textbook discusses installation of the MySQL database system
+(DBMS).
+</p><p>
+The MySQL DBMS uses the client/server model. There are a number of client
+applications available to connect to the database server, the most popular
+and most widely available being the mysql command-line client shown below.
+</p>
+<code><small>
+$ mysql<br>
+Welcome to the MySQL monitor.  Commands end with ; or \g.<br>
+Your MySQL connection id is 3 to server version: 4.1.8-nt-log<br><br>
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.<br><br>
+mysql><br>
+</small></code>
+<p>
+Regardless of the type of client you choose, you will always need to specify
+the username, and the host you are connecting to (unless it is "localhost").
+</p><p>
+Most configurations expect you to have a password, although MySQL accounts may
+be configured to not require one. You have the option to specify a database to
+use as well.
+</p></li>
+<li><p>
+MySQL Command-Line Options
+</p><p>
+The mysql command-line client ships with the MySQL installation and is
+universally available. It is the <b>mysql</b> (UNIX/Linux) or <b>mysql.exe</b>
+(Windows) program located in the <b>bin</b> folder of your MySQL installation.
+</p><p>
+To run this command-line application, you must open a terminal window or
+command-line prompt.
+</p>
+<ul>
+<li>
+In Windows, you may go to the Start menu and choose the
+Run option, then type "cmd" in the Run window.
+</li><li>
+In Mac OS X, you may go to the Applications folder in your Finder and then navigate
+to Utilities. You will find the Terminal application there. You should
+navigate to the location where you installed MySQL and find the bin folder.
+</li><li>
+In Linux or UNIX, you may type commands at the shell prompt in a terminal window.
+</li>
+</ul>
+<p>
+To connect to a database using this client, you will enter information similar
+to the following lines:
+</p>
+<code><small>
+mysql --user=root --password=my_password --host=localhost<br>
+</small></code>
+<p>or
+</p>
+<code><small>
+mysql -u root -p my_password -h localhost<br>
+</small></code>
+<p>
+Once you are successfully connected, you will get the <b>mysql></b> prompt
+instead of your standard DOS/UNIX prompt. This means you are now sending
+commands to the MySQL database server and not to your local computer's
+operating system.
+</p><p>
+There are many command-line options for the MySQL client. The most common are
+shown in this table.
+</p><p>
+Table: MySQL Command-Line Options
+</p>
+<table>
+<tr>
+<td><code><b>
+Short<br>
+<u>Format</u></b>&nbsp;</code></td>
+<td><code><b><u>
+Long Format</u></b></code></td>
+<td><code><b><u>
+Description</u></b></code></td>
+</tr><tr>
+<td><code>
+-?</code></td>
+<td><code>
+--help</code></td>
+<td><code>
+Display this help and exit.</code></td>
+</tr><tr>
+<td><code>
+-I</code></td>
+<td><code>
+--help</code></td>
+<td><code>
+Synonym for -?.</code></td>
+</tr><tr>
+<td><code>
+-B</code></td>
+<td><code>
+--batch</code></td>
+<td><code>
+Do not use history file. Disable interactive behavior. (Enables --silent.)</code></td>
+</tr><tr>
+<td><code>
+-C</code></td>
+<td><code>
+--compress</code></td>
+<td><code>
+Use compression in server/client protocol.</code></td>
+</tr><tr>
+<td><code>
+-#</code></td>
+<td><code>
+--debug[=#]</code></td>
+<td><code>
+This is a nondebug version. Catch this and exit.</code></td>
+</tr><tr>
+<td><code>
+-D</code></td>
+<td><code>
+--database=name</code></td>
+<td><code>
+Database to be used.</code></td>
+</tr><tr>
+<td><code>
+&nbsp;</code></td>
+<td><code>
+--delimiter=name</code></td>
+<td><code>
+Delimiter to be used.</code></td>
+</tr><tr>
+<td><code>
+-e</code></td>
+<td><code>
+--execute=name</code></td>
+<td><code>
+Execute command and quit. (Disables --force and history file.)</code></td>
+</tr><tr>
+<td><code>
+-E</code></td>
+<td><code>
+--vertical</code></td>
+<td><code>
+Print the output of a query (rows) vertically.</code></td>
+</tr><tr>
+<td><code>
+-f</code></td>
+<td><code>
+--force</code></td>
+<td><code>
+Continue even if we get an sql error.</code></td>
+</tr><tr>
+<td><code>
+-i</code></td>
+<td><code>
+--ignore-spaces</code></td>
+<td><code>
+Ignore space after function names.</code></td>
+</tr><tr>
+<td><code>
+&nbsp;</code></td>
+<td><code>
+--local-infile</code></td>
+<td><code>
+Enable or disable LOAD DATA LOCAL INFILE.</code></td>
+</tr><tr>
+<td><code>
+-b</code></td>
+<td><code>
+--no-beep</code></td>
+<td><code>
+Turn off beep on error.</code></td>
+</tr><tr>
+<td><code>
+-h</code></td>
+<td><code>
+--host=name</code></td>
+<td><code>
+Connect to host.</code></td>
+</tr><tr>
+<td><code>
+-H</code></td>
+<td><code>
+--html</code></td>
+<td><code>
+Produce HTML output.</code></td>
+</tr><tr>
+<td><code>
+-X</code></td>
+<td><code>
+--xml</code></td>
+<td><code>
+Produce XML output</code></td>
+</tr><tr>
+<td><code>
+&nbsp;</code></td>
+<td><code>
+--line-numbers</code></td>
+<td><code>
+Write line numbers for errors.</code></td>
+</tr><tr>
+<td><code>
+-L</code></td>
+<td><code>
+--skip-line-numbers</code></td>
+<td><code>
+Do not write line number for errors. WARNING: -L is deprecated, so use long
+version of this option instead.</code></td>
+</tr><tr>
+<td><code>
+&nbsp;</code></td>
+<td><code>
+--no-tee</code></td>
+<td><code>
+Disable outfile. See interactive help (\h) also.<br>
+WARNING: Option deprecated; use --disable-tee instead.</code></td>
+</tr><tr>
+<td><code>
+-n</code></td>
+<td><code>
+--unbuffered</code></td>
+<td><code>
+Flush buffer after each query.</code></td>
+</tr><tr>
+<td><code>
+&nbsp;</code></td>
+<td><code>
+--column-names</code></td>
+<td><code>
+Write column names in results.</code></td>
+</tr><tr>
+<td><code>
+-N</code></td>
+<td><code>
+--skip-column-names&nbsp;</code></td>
+<td><code>
+Do not write column names in results.<br>
+WARNING: -N is deprecated, use long version of this option instead.</code></td>
+</tr><tr>
+<td><code>
+-o</code></td>
+<td><code>
+--one-database
+<td><code>
+Only update the default database. This is useful for skipping updates to other
+databases in the update log.</code></td>
+</tr><tr>
+<td><code>
+-p</code></td>
+<td><code>
+--password[=name]</code></td>
+<td><code>
+Password to use when connecting to server. If password is not given, it is
+asked from the tty.</code></td>
+</tr><tr>
+<td><code>
+-W</code></td>
+<td><code>
+--pipe</code></td>
+<td><code>
+Use named pipes to connect to server.</code></td>
+</tr><tr>
+<td><code>
+-P</code></td>
+<td><code>
+--port=#</code></td>
+<td><code>
+Port number to use for connection.</code></td>
+</tr><tr>
+<td><code>
+&nbsp;</code></td>
+<td><code>
+--prompt=name</code></td>
+<td><code>
+Set the mysql prompt to this value.</code></td>
+</tr><tr>
+<td><code>
+-q</code></td>
+<td><code>
+--quick
+<td><code>
+Do not cache result, print it row by row. This might slow down the server if
+the output is suspended. Does not use history file.</code></td>
+</tr><tr>
+<td><code>
+-r</code></td>
+<td><code>
+--raw</code></td>
+<td><code>
+Write fields without conversion. Used with --batch.</code></td>
+</tr><tr>
+<td><code>
+&nbsp;</code></td>
+<td><code>
+--reconnect</code></td>
+<td><code>
+Reconnect if the connection is lost. Disable with --disable-reconnect.
+This option is enabled by default.</code></td>
+</tr><tr>
+<td><code>
+-s</code></td>
+<td><code>
+--silent
+<td><code>
+Be more silent. Print results with a tab as separator, each row on a new line.</code></td>
+</tr><tr>
+<td><code>
+-t</code></td>
+<td><code>
+--table</code></td>
+<td><code>
+Output in table format.</code></td>
+</tr><tr>
+<td><code>
+-T</code></td>
+<td><code>
+--debug-info</code></td>
+<td><code>
+Print some debug info at exit.</code></td>
+</tr><tr>
+<td><code>
+&nbsp;</code></td>
+<td><code>
+--tee=name</code></td>
+<td><code>
+Append everything into outfile. See interactive help (\h) also. Does not work
+in batch mode.</code></td>
+</tr><tr>
+<td><code>
+-u</code></td>
+<td><code>
+--user=name</code></td>
+<td><code>
+User for login if not current user.</code></td>
+</tr><tr>
+<td><code>
+-U</code></td>
+<td><code>
+--safe-updates</code></td>
+<td><code>
+Only allow UPDATE and DELETE that uses keys.</code></td>
+</tr><tr>
+<td><code>
+-U</code></td>
+<td><code>
+--i-am-a-dummy</code></td>
+<td><code>
+Synonym for option --safe-updates.</code></td>
+</tr><tr>
+<td><code>
+-v</code></td>
+<td><code>
+--verbose</code></td>
+<td><code>
+Write more (-v -v -v gives the table output format).</code></td>
+</tr><tr>
+<td><code>
+-V</code></td>
+<td><code>
+--version
+<td><code>
+Output version information and exit.</code></td>
+</tr>
+</table>
+</li>
+<li><p>
+Graphical User Tools
+</p></li>
+<li><p>
+The phpMyAdmin Tool
+</p><p>
+The <b>phpMyAdmin</b> tool is written in PHP to handle the administration of
+MySQL servers over the Web.
+</p><p>
+It is used to create and drop databases, manipulate tables and fields, execute
+SQL statements, manage keys on fields, manage privileges, and export data into
+various formats.
+</p><p>
+Your instructor will demonstrate using phpMyAdmin to connect to MySQL on the
+class server. phpMyAdmin is maintained by an open source project. For more
+information see:
+<a href="http://www.phpmyadmin.net/home_page/index.php">http://www.phpmyadmin.net/home_page/index.php</a>
+</p></li>
+<li><p>
+The MySQL Query Browser
+</p><p>
+The MySQL Query Browser is a graphical user interface (GUI) client available
+from MySQL AB used to connect to the MySQL database server.
+</p><p>
+Versions are available for Windows and Linux. You may download it from
+<b>mysql.com</b> .
+</p><p>
+On startup, the MySQL Query Browser displays a connection dialog box.
+You must specify the MySQL server where you want to connect, the credentials
+needed for authorization on that server, which machine that server runs on
+(plus which port it listens to), and the default database (called the "Schema")
+you will be using.
+</p><p>
+You must choose a default database to issue queries against. Although it is
+possible to choose a default database after connecting to the server,
+setting the default from the connection dialog box can save time on subsequent
+connections.
+</p><p>
+The information to enter is very similar to the command-line client: username,
+password, and the server host where the database server is running.
+</p><p>
+You can optionally enter the database name and port number (3306 is the default
+for MySQL) and save the connection information as a bookmark under the Stored
+Connection section.
+</p><p>
+Your instructor will demonstrate connecting to MySQL using the MySQL Query Browser.
+</p><p>
+By using the familiar tree-like navigation structure on the right side of the
+application window, you can also navigate through the various databases in the
+MySQL Query Browser.
+</p>
+</li>
+</ul>
+</div>
+</body>
+</html>

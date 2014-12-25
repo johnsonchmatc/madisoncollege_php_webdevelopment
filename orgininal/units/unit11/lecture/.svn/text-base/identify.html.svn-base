@@ -1,0 +1,394 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta name="generator" content="HTML Tidy, see www.w3.org">
+  <title>Identification and Access Control</title>
+  <link href="../../../css/basic.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" language="JavaScript">
+<!--
+function putSemester() {
+var today=new Date();
+var thisMonth=today.getMonth()+1;
+var thisYear=today.getFullYear();
+if(thisMonth <=6) {
+return "Spring, " + thisYear;
+}
+else {
+return "Fall, " + thisYear;
+}
+}//-->
+  </script>
+  <style type="text/css">
+<!--
+.bgStripes {
+background-image:url(../../../images/Xstripes.gif);
+background-attachment: fixed;
+}
+body {
+background-color:white;
+}
+strong {
+font-family: Arial, Helvetica, sans-serif;
+}
+.table1 {
+font-family:Arial, Helvetica, sans-serif;
+font-size: small;
+}
+.table2 {
+font-family:Arial, Helvetica, sans-serif;
+font-size: small;
+text-align:center;
+}
+td.cen {
+text-align:center;
+}
+.small_title {
+font-family: Arial, Helvetica, sans-serif;
+font-size:x-small;
+font-weight:bold;
+}
+.med_title {
+font-family: Arial, Helvetica, sans-serif;
+font-size:medium;
+font-weight:bold;
+text-align:center;
+color:darkblue;
+}
+-->
+  </style>
+</head>
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
+<table class="bgStripes" border="0" width="100%">
+  <tbody>
+    <tr name="firstRow">
+      <td valign="top" width="80">
+      <p class="small_title">
+      <script type="text/javascript">
+<!--
+document.write(putSemester());
+-->
+</script></p>
+</td>
+<td>
+<p class="med_title"><span
+ style="color: darkblue; font-size: medium; font-weight: bold;">
+PHP Web Development with MySQL</span></p>
+</td>
+<td align="right" valign="top" width="80">
+<p class="small_title">
+3 Credits</p>
+</td>
+</tr>
+<tr>
+<td colspan="3" height="10">
+<p class="small_title" align="center">152-166</p>
+</td>
+</tr>
+</tbody>
+</table>
+<!--The heading for the slides --> <br>
+<table class="headTable1" border="0">
+<tbody>
+<tr>
+<td width="100"><a href="index.html"><img alt=""
+ src="../../../images/btn_lArrow.gif" border="0"></a><a
+ href="index.html"><img alt="" src="../../../images/btn_upArrow.gif"
+ border="0"></a><a href="authent.html"><img alt=""
+ src="../../../images/btn_rArrow.gif" border="0"></a></td>
+<td>
+<p>
+Identification and Access Control
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<br>
+<div class="disp1">
+<ul class="slidesUl1">
+<li>
+<p>
+The Web is a fairly anonymous medium, but it is often useful to know who is
+visiting your site. Fortunately for visitors' privacy, you can
+find out very little about them without their assistance. With a little
+work, servers can find out quite a lot about the computers and networks
+that connect to them, however. A web browser usually identifies itself,
+telling the server what browser, browser version, and operating system
+a user is running. You can often determine what resolution and color
+depth visitors' screens are set to and how large their web browser
+windows are by using JavaScript.
+</p>
+<p>
+Each computer connected to the Internet has a unique IP address.
+From a visitor's IP address, you might be able to deduce a little about him/her.
+You can find out who owns an IP and sometimes make a reasonable guess as to a
+visitor's geographic location. Some addresses are more useful than others.
+Generally, people with permanent Internet connections have a permanent
+address. Customers dialing into an ISP usually get only the temporary
+use of one of the ISP's addresses. The next time you see that address,
+it might be used by a different computer, and the next time you see
+that visitor, she will likely be using a different IP address. IP
+addresses are not as useful for identifying people as they might at
+first glance seem.</p>
+<p>
+Fortunately for web users, none of the information that their browsers give
+out identifies them. If you want to know a visitor's name or other information,
+you will have to ask her/him.</p>
+<p>
+Many websites provide compelling reasons to get users to provide
+their details. The New York Times newspaper (<code>http://www.nytimes.com</code>)
+provides its content free, but only to people willing to provide
+details such as name, sex, and total household income. Nerd news and
+discussion site Slashdot (<code>http://www.slashdot.org</code>) allows registered
+users to participate in discussions under a nickname and customize the
+interface they see. Most e-commerce sites record their customers'
+address when they make their first order. This means that a customer is
+not required to type her/his address information every time.</p>
+<p>
+Having asked for and received information from your visitor, you
+need a way to associate the information with the same user the next
+time (s)he visits. If you are willing to make the assumption that only
+one person visits your site from a particular account on a particular
+machine and that each visitor uses only one machine, you could store a
+cookie on the user's machine to identify the user.</p>
+<p>
+This arrangement is certainly not true for all users. Many
+people share a computer, and many people use more than one computer. At
+least some of the time, you need to ask a visitor who (s)he is again. In
+addition to asking who a user is, you also need to ask her/him to provide
+some level of proof that (s)he is who (s)he claims to be.</p>
+<p>
+Asking a user to prove his/her identity is called authentication.
+The usual method of authentication used on websites is asking visitors to
+provide a unique login name and a password. Authentication is usually used to
+allow or disallow access to particular pages or resources, but can be
+optional, or used for other purposes such as personalization.</p>
+</li><li>
+<p>
+Implementing Access Control</p>
+<p>
+Simple access control is not difficult to implement. The code shown in example
+<a href="../examples/secret_php.html">secret.php</a>
+delivers one of three possible outputs. If the file is loaded without
+parameters, it will display an HTML form requesting a username and
+password. This type of form will be demonstrated by the instructor.</p>
+<p>
+This HTML form requests that visitors enter a username and password for access.
+If the parameters are present but not correct, it will display an error
+message. The error message condition will be demonstrated by your
+instructor. When users enter incorrect information, you need to give them
+an error message. On a real site, you might want to give a
+somewhat friendlier message than the one provided here!</p>
+<p>
+If these parameters are present and correct, it will display the "secret" content.
+The sample test content will be demonstrated by your instructor.
+Below is the code to create the functionality shown.</p>
+<p>
+The code from the <b>secret.php</b> example provides a simple authentication
+mechanism to allow authorized users to see a page, but it has some
+significant problems. This script:</p>
+<ul>
+<li>
+Has one username and  password hard-coded into the  script</li>
+<li>
+Stores the password as plain text</li>
+<li>
+Protects only one page</li>
+<li>
+Transmits the password as plain text</li>
+</ul>
+<p>
+These issues can all be addressed with varying degrees of effort and success.</p>
+</li>
+<li>
+<p>
+Storing Passwords</p>
+<p>
+There are many better places to store usernames and passwords than inside the
+script. Inside the script, modifying the data is difficult. It
+is possible, but a bad idea, to write a script to modify
+itself. Doing so would mean having a script on your server that is
+executed on your server but that can be written or modified by others.
+Storing the data in another file on the server lets you more easily
+write a program to add and remove users and to alter passwords.</p>
+<p>
+Inside a script or another data file, you are limited to the number of users
+you can handle without seriously affecting the speed of the script.
+If you are considering storing and searching through a large number of items
+in a file, you should consider using a database instead, as previously discussed.
+As a rule of thumb, if you want to store and search through a list of more
+than 100 items, they should be in a database rather than a flat file.</p>
+<p>
+Using a database to store usernames and passwords would not make the script
+much more complex but would allow you to authenticate many different users quickly.
+It would also allow you to easily write a script to add new users, delete users,
+and allow users to change their passwords. A script to authenticate
+visitors to a page against a database is shown in listing
+<a href="../examples/secretdb_php.html">secretdb.php</a>
+</p>
+<p>
+You can create the database used here by connecting to MySQL as the MySQL
+root user and running the following code:</p>
+<p>
+Listing: createauthdb.sql<br>
+These MySQL statements create the <code>auth</code> database,
+the <code>authorized_users</code> table, and two sample users</p>
+<blockquote><code>
+create database auth;<br>
+use auth;<br>
+create table authorized_users (<br>
+&nbsp;&nbsp;name varchar(20),<br>
+&nbsp;&nbsp;password varchar(40),<br>
+&nbsp;&nbsp;primary key (name)<br>
+);<br><br>
+insert into authorized_users (name, password)<br>
+&nbsp;&nbsp;values ('username','password');<br>
+insert into authorized_users (name, password)<br>
+&nbsp;&nbsp;values ('testuser', sha1('password'));<br><br>
+grant select on auth.*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+to 'webauth'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+identified by 'webauth';<br>
+flush privileges;<br>
+</code></blockquote>
+</li>
+<li>
+<p>
+Encrypting Passwords</p>
+<p>
+Regardless of whether you store your data in a database or a file,
+storing the passwords as plain text is an unnecessary risk.
+A one-way hashing algorithm can provide better security with very little extra effort.</p>
+<p>
+PHP provides a number of one-way hash functions.
+The oldest and least secure is the Unix Crypt algorithm, provided by the function
+<code>crypt()</code> . The Message Digest 5 (MD5)
+algorithm, implemented in the function <code>md5()</code> ,
+is stronger and available in most versions of PHP.
+If you do not require compatibility with old PHP versions, use
+Secure Hash Algorithm 1 (SHA-1).</p>
+<p>
+The PHP function <code>sha1()</code>
+provides a strong, one-way cryptographic hash function.
+The prototype for this function is:</p>
+<blockquote><code>
+string sha1 ( string str [, bool raw_output])<br>
+</code></blockquote>
+<p>
+Given the string "str", the function will return a pseudo-random
+40-character string. If you set "raw_output" to be true, you will instead
+get a 20-byte string of binary data. For example, given the
+string "password", <code>sha1()</code>
+returns "5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8". This string cannot be
+decrypted and turned back into "password" even by its creator, so it
+might not seem very useful at first glance. The property that makes <code>sha1()</code>
+useful is that the output is deterministic. Given the same string, <code>sha1()</code>
+will return the same result every time it is run.</p>
+<p>
+Rather than having PHP code  like:</p>
+<blockquote><code><small>
+if ($name == 'username' &amp;&amp; $password == 'password')<br>
+{<br>
+&nbsp;&nbsp;// code to be run when passwords match<br>
+}<br>
+</small></code></blockquote>
+<p>
+you can have code like:</p>
+<blockquote><code><small>
+if ($name == 'username' &amp;&amp; sha1($password) ==<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8')<br>
+{<br>
+&nbsp;&nbsp;// code to be run when passwords match<br>
+}<br>
+</small></code></blockquote>
+<p>
+You do not need to know what the password looked like before you used
+<code>sha1()</code> on it. You need to know only if the password
+typed in is the same as the one that was originally run through
+<code>sha1()</code>.</p>
+<p>
+As already mentioned, hard-coding acceptable usernames and passwords into a
+script is a bad idea. You should use a separate file or a
+database to store them.</p>
+<p>
+If you are using a MySQL database to store your authentication data, you could
+either use the PHP function <code>sha1()</code> or the MySQL function
+<code>SHA1()</code>. MySQL provides an even wider range of hashing
+algorithms than PHP, but they are all intended for the same purpose.</p>
+<p>
+To use <code>SHA1()</code>, you could
+rewrite the SQL query in <b>secretdb.php</b> as:</p>
+<blockquote><code>
+select count(*) from authorized_users where<br>
+&nbsp;&nbsp;name = '{$username}' and<br>
+&nbsp;&nbsp;password = sha1('{$password}')<br>
+</code></blockquote>
+<p>
+This query counts the number of rows in the table named <code>authorized_users</code>
+that have a "name" value equal to the contents of <code>$name</code> and a
+"password" value equal to the output given by <code>SHA1()</code>
+applied to the contents of <code>$password</code>.
+Assuming that you force people to have unique usernames,
+the result of this query is either 0 or 1.</p>
+<p>
+Keep in mind that the hash
+functions generally return data of a fixed size. In the case of SHA1,
+it is 40 characters when represented as a string. Make sure that your
+database column is this width.</p>
+<p>
+Looking back at the MySQL listing <b>createauthdb.sql</b>,
+you can see that we created one user (<code>'username'</code>)
+with an unencrypted password and another user with an encrypted one
+(<code>'testuser'</code>) to illustrate the two possible approaches.</p>
+</li>
+<li>
+<p>
+Protecting Multiple Pages</p>
+<p>
+Making a script like <b>secret.php</b> and <b>secretdb.php</b>
+protect more than one page is a little harder. Because HTTP is
+stateless, there is no automatic link or association between subsequent
+requests from the same person. This makes it harder to have data, such
+as authentication information that a user has entered, carry across
+from page to page.</p>
+<p>
+The easiest way to protect multiple pages is to use the access control
+mechanisms provided by your web server. We look at these mechanisms shortly.</p>
+<p>
+To create this functionality yourself, you could include parts of a script such as
+<b>secret.php</b> in every page that you want to protect.
+Using <code>auto_prepend_file</code> and <code>auto_append_file</code>,
+you can automatically prepend and append the code required to every file in
+particular directories. Or you could use the <code>require</code> directive
+to include the code in every script in which it is needed.</p>
+<p>
+If you use this approach, what happens when your visitors go to multiple pages
+within your site? Requiring them to re-enter their names and passwords for
+every page they want to view would not be acceptable.</p>
+<p>
+You could append the details the users entered to every hyperlink on the page.
+Because they might have spaces or other characters that are not allowed in URLs,
+you should use the function <code>urlencode()</code>
+to safely encode these characters.</p>
+<p>
+This approach still has a few problems, though. Because the data would be
+included in web pages sent to the users and the URLs they visit,
+the protected pages they visit will be visible to anybody who uses the same
+computer and steps back through cached pages or looks at the browser's history list.
+Because you are sending the password back and forth to the browser with
+every page requested or delivered, this sensitive information is being
+transmitted more often than necessary.</p>
+<p>
+There are two good ways to tackle these problems: HTTP basic authentication
+and sessions. Basic authentication overcomes the caching problem, but the
+browser still sends the password to the server with every request. Session
+control overcomes both of these problems. We look at HTTP basic authentication
+now and examine session control in Unit 14, "Using Session Control in
+PHP".
+</p>
+</li>
+</ul>
+</div>
+</body>
+</html>
