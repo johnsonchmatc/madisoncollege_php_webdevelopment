@@ -1,123 +1,0 @@
-10
-
-dir
-617
-svn+ssh://djefferson@itins1.matcmadison.edu/opt/svn-repos/php166/trunk/php166
-svn+ssh://djefferson@itins1.matcmadison.edu/opt/svn-repos
-
-
-
-2010-05-03T16:50:24.140448Z
-614
-djefferson
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-a700a29a-b82d-0410-bc4c-9c038c35b239
-
-PHP_w_MySQL_166_Outline.html
-file
-
-
-
-
-2008-09-05T20:45:36.000000Z
-7dd439770ba7796156c61bdf04907c50
-2008-09-06T15:12:17.571539Z
-472
-djefferson
-has-props
-
-instructor-EJK.textile
-file
-
-
-
-
-2008-01-14T15:06:39.000000Z
-43a9e3adf54777b84769679460c0541f
-2008-01-14T04:50:57.609206Z
-188
-eknapp
-
-make_teams.pl
-file
-
-
-
-
-2008-01-09T21:48:38.000000Z
-6e0799ea86f0bfb8c0455f4183d5eb0a
-2008-01-08T02:21:14.272041Z
-153
-eknapp
-has-props
-
-units
-dir
-
-HomePage.textile
-file
-
-
-
-
-2008-05-05T14:52:40.000000Z
-e48d5a19ac6a1cd9af5f343520042bb5
-2008-05-05T04:37:22.367298Z
-407
-eknapp
-
-change-files.txt
-file
-
-
-
-
-2008-05-01T14:36:11.000000Z
-5909fba84793b18c91c07ab2b47145b5
-2008-04-30T16:10:25.307282Z
-405
-eknapp
-
-images
-dir
-
-css
-dir
-
-attachment
-dir
-
-exams
-dir
-
-syllabus
-dir
-
-templates
-dir
-
-php166.tmproj
-file
-
-
-
-
-2008-05-05T14:52:40.000000Z
-713f27c7f5154dccaac50dbeebe4bdbe
-2008-05-05T04:37:22.367298Z
-407
-eknapp
-
