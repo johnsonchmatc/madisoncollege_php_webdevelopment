@@ -20,56 +20,31 @@ Catalog #152 10152166-0002
 ##Class Information
 ###Course Description
 
-This course provides the opportunity for the learner to develop the knowledge
-skills process and understanding of Ruby the programming language,
-and Ruby on Rails the web development framework.
-
-The course will also use the popular git revision control system, as well as
-open source database management systems. Topics will include installing Ruby,
-and Ruby on Rails, an extended tutorial, deployment, an overview of the
-components of the Rails framework, ActiveRecord basics, ActionController coding,
-Action view, REST, AJAX, Web 2.0. Students will develop very modern web applications 
-that can be adapted to many professional web development needs.
+This course introduces the student to dynamic web page development using the PHP programming language and the popular MySQL open source database management software (DBMS). Students will gain LAMP development experience using the Linux operating system, and the Apache web server platform. Students will learn how PHP works, how to effectively use many of its powerful extensions, and how to design and build their own PHP web applications
 
 ###Pre-requisites:
-* Grade of C or better in Advanced PHP and MySQL Web Development, 10-152-167,
-* or grade of C or better in Advanced Java Programming, 10-152-112,
-* or consent of instructor
+* Grade of C or better in 10-152-119, Introduction to Programming with JavaScript, and grade of C or better in 10-152-120, Website Development - XHTML, or consent of instructor.
 
 ###Textbook
-We will be using the following books for the course. These are available in both paper and/or PDF formats.
-
 ####Required
-
-* *Ruby on Rails Tutorial* by Michael Hartl (3rd ED.). The book is available online at
-[http://railstutorial.org/ruby-on-rails-tutorial-book](http://railstutorial.org/ruby-on-rails-tutorial-book)
-, as a PDF from [http://railstutorial.org/](http://railstutorial.org/) ,
-or as a traditional hard copy from book stores and amazon.com .
+* PHP and MySQL by Example Ellie Quigley with Marko Gargenta, Prentice Hall
 
 ####Optional
-
-* *Programming Ruby 1.9 & 2.0 (4th edition): The Pragmatic Programmers' Guide* by Dave Thomas, with Chad Fowler and Andy Hunt
-[http://pragprog.com/book/ruby4/programming-ruby-1-9-2-0](http://pragprog.com/book/ruby4/programming-ruby-1-9-2-0)
-
-* *Agile Web Development with Rails (4th edition)* 
-by Sam Ruby
-This is the definitive reference book on version 4 of Rails. Available as paperback or PDF at
-[http://pragprog.com/book/rails4/agile-web-development-with-rails](http://pragprog.com/book/rails4/agile-web-development-with-rails)
-
-* *Cooking with Rails 4, A Ruby on Rails Crash Course* by Brian Hogan.  
-The PDF is available at [http://napcs.com/resources/rails/cookbook/](http://napcs.com/resources/rails/cookbook/)
-
+* A recommended book is: PHP and MySQL Web Development, 4th Edition, Luke Welling & Laura Thompson, Sams
 
 ###Course Competencies:
-During this course students will:
-
-*   Complete a large Ruby on Rails tutorial application
-*   Create a new Ruby on Rails project
-*   Create a rich web-application database schema
-*   Adapt a web design to a Rails web application
-*   Download and analyze a significant Ruby on Rails application
-*   Complete the design and coding of a significant new web application
-*   Present their new web application to classmates
+* Upon successful completion of this course, the student will be able to :
+  * Set up a basic PHP and MySQL development environment on Linux and Windows.
+  * Write PHP scripts using the basic functionality of the language.
+  * Write PHP scripts that use strings, arrays and associative arrays
+  * Write PHP scripts that use regular expressions to search and modify data.
+  * Use the object-oriented features of PHP 5.
+  * Write PHP scripts that read and write to files.
+  * Write PHP scripts that query and update a MySQL database.
+  * Use cookies and sessions for authentication in PHP.
+  * Implement security and use debugging features of PHP.
+  * Use data and time functions of PHP.
+  * Send email using a PHP function and PHP extensions.
 
 ##Environment 
 Students will attend lectures, use blackboard and participate in lab exercises to support the lecture material. Students will participate in discussions about lecture material. Exams will be taken in a classroom setting.
@@ -78,7 +53,7 @@ Students will attend lectures, use blackboard and participate in lab exercises t
 Madison College Core Abilities are eight key life and success skills that contribute to the development of students as life-long learners on the job, at home, and in the community. The Core Abilities are skills and abilities taught and assessed in classes, labs, and field experiences at Madison College. For more information on Core Abilities, please visit [http://madisoncollege.edu/core-abilities](http://madisoncollege.edu/core-abilities). This class addresses the following core abilities: Ethics
 
 #Responsibilities and Policies
-**Student Responsibilities:*ß* Students are expected to be familiar with Madison College policies and procedures. Many of the important policies and procedures are on the Madison College website, located at [http://madisoncollege.edu/student-rights-responsibilities](http://madisoncollege.edu/student-rights-responsibilities).
+**Student Responsibilities:** Students are expected to be familiar with Madison College policies and procedures. Many of the important policies and procedures are on the Madison College website, located at [http://madisoncollege.edu/student-rights-responsibilities](http://madisoncollege.edu/student-rights-responsibilities).
 
 **Academic Integrity** is an expectation in all Madison College classes. Plagiarism, cheating and collusion are prohibited at Madison College. Plagiarism is defined as passing of another person's work as your own. Students who fail to observe these standards are subject to disciplinary action. Madison College has a strong policy on Academic Misconduct which is published on the Madison College website. Please refer to this page on the Madison College Website to review all Academic Integrity and Misconduct policies located at [http://madisoncollege.edu/academic-integrity](http://madisoncollege.edu/academic-integrity).
 
@@ -94,7 +69,7 @@ Stop payment of a check does not constitute a formal cancellation. Registrants w
 
 **Backup Data:** You are expected to develop good computer use habits that minimize the impact of failure. I expect that you know to save your work frequently, after every major change, and to back up your work regularly. You should be able to backup your data to a cd or dvd. Remember failure is a matter of when ... not if.
 
-**Student Email:** Madison College offers a student e-mail account for all students. You are responsible for monitoring your student e-mail account. Student e-mail can be accessed at: [https://mail.madisoncollege.edu/owa](https://mail.madisoncollege.edu/owa%20) .
+**Student Email:** Madison College offers a student e-mail account for all students. You are responsible for monitoring your student e-mail account. Student e-mail can be accessed at: [https://mail.madisoncollege.edu/owa](https://mail.madisoncollege.edu/owa) .
 
 **Use of Electronic Devices:** Silence cell phones, mobile devices, etc during class sessions. Students must avoid non course related activities such as checking email or social networking sites, web surfing, or playing games because these diminish their—and their classmates'—engagement with instructional activities. Exceptions to this policy may be granted at the discretion of the instructor.
 
@@ -147,7 +122,7 @@ Phone the student help desk: (608) 243-4444; toll-free at (866) 277-4445. They c
 Syllabus Changes: As your instructor, I retain the right to make changes based on the timeline of the class, feedback from learners and/or logistical issues and will inform you as soon as a change is made.
 
 #Grading Policy
-* All work that is to be graded must be accomplished by your own effort. Points will be deducted for not submitting assigned work by the due date. Projects to be graded may be submitted only once. 
+* All work that is to be graded must be accomplished by your own effort. Points will be deducted for not submitting assigned work by the due date. 
 * Ten percent of the points will be taken off for each day that the assignment is late.
 * Assignments will NOT be accepted if they are more than 10 DAYS late.
 * Assignments will NOT be accepted after the START of the class period in which the final exam is administered.
@@ -156,7 +131,7 @@ Syllabus Changes: As your instructor, I retain the right to make changes based o
 * It is the responsibility of the student to make up any missed work and/or pick up any missed materials. Missing a class is NOT an excuse for failure to hand in work due.
 * There is no extension of assignment due dates without prior notification of circumstance. All work that is to be graded must be accomplished by your own effort.
 
-**Grades Posted in Blackboard: ** All assignment grades are posted in Blackboard. Your instructor needs to manually grade the assignments. Sometimes this happens very quickly and sometimes it takes a week. When you've posted a quiz or lab answers, it will show up in the gradebook as a green box with a white ! in it. This means that your instructor has received your work, but has not graded it yet. Discussion boards show up in the gradebook as a green box with a white ! in it until your instructor has graded the assignment, then it will have a score in it. 
+**Grades Posted in Blackboard:** All assignment grades are posted in Blackboard. Your instructor needs to manually grade the assignments. Sometimes this happens very quickly and sometimes it takes a week. When you've posted a quiz or lab answers, it will show up in the gradebook as a green box with a white ! in it. This means that your instructor has received your work, but has not graded it yet. Discussion boards show up in the gradebook as a green box with a white ! in it until your instructor has graded the assignment, then it will have a score in it. 
 
 ### **Evaluation**
 
