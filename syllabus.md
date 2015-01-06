@@ -135,25 +135,10 @@ Syllabus Changes: As your instructor, I retain the right to make changes based o
 
 ### **Evaluation**
 
-| **Points Possible** | **Assignment** |
-| --- | --- |
-| 10  | Lab 1 |
-| 10  | Lab 2 |
-| 10  | Lab 3 |
-| 10  | Lab 4 |
-| 10  | Lab 5 |
-| 10  | Lab 6 |
-| 10  | Lab 7 |
-| 10  | Lab 8 |
-| 10  | Lab 9 |
-| 10  | Lab 10 |
-| 20  | Project Check-in 1 |
-| 20  | Project Check-in 2 |
-| 50  | Exam 1 |
-| 50  | Exam 2 |
-| 50  | Courxe Project |
-| 10  | Participation |
-| 300 | TOTAL POINTS |
+| **Course Itemse** | **Total Possible Points** |
+| Projects	        | 280 |
+| Exams	            | 100 |
+| Total             |	380 |
 
 
 
@@ -171,24 +156,24 @@ Syllabus Changes: As your instructor, I retain the right to make changes based o
 
 #Course Calendar 
 
-Revision B 12/23/2014
+Revision C 01/01/2015
 
-| **Week** | **Thursday** | **Required Reading Topics** | **Labs / Projects DUE Wednesdays at 11:55pm** |
-| --- | ---   | ---                                | ---                                                |
-| 1   |  1/22 | Introduction                       |                       |
-| 2   |  1/29 | Chapter 1 and Github Reading       | Course Project Idea   |
-| 3   |  2/5  | Chapter 2                          | Lab 1                 | 
-| 4   |  2/12 | Chapter 4                          | Lab 2                 |
-| 5   |  2/19 | Chapter 3 and Chapter 5            | Lab 3                 |
-| 6   |  2/26 | Chapter 6                          | | 
-| 7   |  3/5  | Chapter 7                          | |
-| 8   |  3/12 | Open lab (Project work time)       | |
-|     |  3/16 | Spring Break                       | |  
-| 9   |  3/26 | Exam 1                             | Project check-in 1    |  
-| 10  |  4/2  | Chapter 8                          | |
-| 11  |  4/9  | Chapter 9 and Chapter 10           | |
-| 12  |  4/16 | Chapter 11                         | |
-| 13  |  4/23 | Chapter 12                         | Project check-in 2    |  
-| 14  |  4/30 | Open lab (Final Project)           | | 
-| 15  |  5/7  | Building a virtual server (Lab 10) | | 
-| 16  |  5/14 | Exam 2                             | Project and Lab 10    |
+| **Week** | **Wednesday** | **Topics** | **Readings**  | **Important Dates** |
+| ---      | ---           | ---        | ---           | ---                 |
+| 1   |  1/22 | Intro to class and LAMP                                                       | Syllabus              | |
+| 2   |  1/28 | Intro to PHP, MySQL and Web Applications                                      | Chapters 1,2          | |
+| 3   |  2/4  | Basic PHP Syntax & HTML Forms / Data types, literals, Variables and Constants | Chapter 4             | | 
+| 4   |  2/11 | More PHP Syntax / Operators, Expressions, Conditionals & Loops                | Chapters 5,7          | Project 1 due by start of class |
+| 5   |  2/18 | Strings and String Manipulation Functions                                     | Chapter 6             | |
+| 6   |  2/25 | Arrays & Associative Arrays                                                   | Chapter 8             | | 
+| 7   |  3/4  | Exam 1, covers Units 1-8                                                      |                       | |
+| 8   |  3/11 | Object-Oriented PHP                                                           | Chapter 17            | |
+|     |  3/15 | Spring Break                                                                  |                       | |  
+| 9   |  3/25 | Functions & Writing Your Own Functions                                        | Chapter 9             | Project 2 due by start of class |  
+| 10  |  4/1  | Using HTML Forms with PHP                                                     | Chapter 10            | |
+| 11  |  4/8  | Accessing Files & Directories with PHP                                        | Chapter 11            | |
+| 12  |  4/15 | Pattern Matching & Regular Expressions                                        | Chapter 12            | |
+| 13  |  4/22 | Using the MySQL DBMS                                                          | Chapter 13,14         | |  
+| 14  |  4/29 | Accessing a MySQL Database using PHP                                          | Chapter 15            | Project 3 due by start of class | 
+| 15  |  5/6  | Cookies and Session Controll in PHP / Security & Debugging                    | Chapter 16,Appendix D | | 
+| 16  |  5/13 | Exam 2 covers Units 1-15                                                      |                       | |
