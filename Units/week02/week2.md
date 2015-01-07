@@ -147,4 +147,52 @@ A dynamic Web site is one with content that is regenerated every time a user vis
 * These include a command line MySQL client, tools to manage MySQL user permissions, and utilities to import and export MySQL databases. Also included are command line tools to view and copy MySQL databases and tables, and retrieve server status information.
 
 ---
+#Let's write some code
 
+---
+PHP Web pages are HTML pages with PHP commands embedded in them. The Web server processes the PHP commands and sends their output (and any HTML from the file) to the browser.
+
+Open your Nitrous.io web IDE and create a file called TestPHP.php in ```workspace/www/``` and then type the following lines:
+
+```
+<html>
+ <head>
+  <title>Test PHP</title>
+ </head>
+ <body>
+  <?php phpinfo() ?>
+ </body>
+</html>
+
+```
+Save the file.
+
+
+Now, use the preview menu and choose port 3000, add the filename ```TestPHP.php``` after the port so you'll have similar to the following:
+
+```
+http://intense-winterfell-97-176159.use1.nitrousbox.com:3000/TestPHP.php
+```
+
+A web page describing your computer's PHP installation in great detail should be displayed.
+
+
+Create a new file called ```hello.php``` next . Type the following:
+
+```
+<html>
+ <head>
+  <title>Look Out World!</title>
+ </head>
+ <body>
+  <?php echo 'Hello, world!' ?>
+ </body>
+</html>
+```
+Now, use the preview menu and choose port 3000, add the filename ```hello.php``` after the port so you'll have similar to the following:
+
+You should see this output.
+
+```
+Hello, world!
+```
