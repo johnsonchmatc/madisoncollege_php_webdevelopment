@@ -1,8 +1,5 @@
 #Project One
-
 ##Simple PHP Application
-Table of Contents
-
 ###Concepts
 
 This project is designed to get you started with PHP web applications. You will learn these concepts:
