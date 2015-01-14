@@ -136,23 +136,24 @@ Syllabus Changes: As your instructor, I retain the right to make changes based o
 ### **Evaluation**
 
 | **Course Itemse** | **Total Possible Points** |
-| Projects	        | 280 |
+| ---               | --- |
+| Project/Labs      | 155 |
 | Exams	            | 100 |
-| Total             |	380 |
+| Total             |	255 |
 
 
 
 ### **Grading Scale** 
 
 | *Grade* | *% Attained* |
-| --- | --- |
-| A | 92-100 |
-| AB | 88-91 |
-| B | 82-87 |
-| BC | 78-81 |
-| C | 70-77 |
-| D | 60-69 |
-| F | 0-59 |
+| ---     | ---          |
+| A       | 92-100       |
+| AB      | 88-91        |
+| B       | 82-87        |
+| BC      | 78-81        |
+| C       | 70-77        |
+| D       | 60-69        |
+| F       | 0-59         |
 
 #Course Calendar 
 
@@ -173,7 +174,7 @@ Revision C 01/01/2015
 | 10  |  4/1  | Using HTML Forms with PHP                                                     | Chapter 10            | |
 | 11  |  4/8  | Accessing Files & Directories with PHP                                        | Chapter 11            | |
 | 12  |  4/15 | Pattern Matching & Regular Expressions                                        | Chapter 12            | |
-| 13  |  4/22 | Using the MySQL DBMS                                                          | Chapter 13,14         | |  
-| 14  |  4/29 | Accessing a MySQL Database using PHP                                          | Chapter 15            | Project 3 due by start of class | 
+| 13  |  4/22 | Using the MySQL DBMS                                                          | Chapter 13,14         | Project 3 due by start of class |  
+| 14  |  4/29 | Accessing a MySQL Database using PHP                                          | Chapter 15            | | 
 | 15  |  5/6  | Cookies and Session Controll in PHP / Security & Debugging                    | Chapter 16,Appendix D | | 
-| 16  |  5/13 | Exam 2 covers Units 1-15                                                      |                       | |
+| 16  |  5/13 | Exam 2 covers Units 1-15                                                      |                       | Project 4 due by start of class |
