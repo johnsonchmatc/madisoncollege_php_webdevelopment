@@ -6,7 +6,7 @@ Catalog #152 10152166-0002
 
 * *Credits:* 3
 * *Course Format:* face to face
-* *Class Schedule:* We 5:30 – 9:20 PM 01/22/2015 - 05/14/2015
+* *Class Schedule:* We 5:30 – 9:20 PM 01/21/2015 - 05/14/2015
 * *Location:* Truax-Health Building Rm 318
 * *Instructor:* Chris Johnson
 * *Email:* cgjohnson1@madisoncollege.edu
@@ -160,7 +160,7 @@ Revision C 01/01/2015
 
 | **Week** | **Wednesday** | **Topics** | **Readings**  | **Important Dates** |
 | ---      | ---           | ---        | ---           | ---                 |
-| 1   |  1/22 | Intro to class and LAMP                                                       | Syllabus              | |
+| 1   |  1/21 | Intro to class and LAMP                                                       | Syllabus              | |
 | 2   |  1/28 | Intro to PHP, MySQL and Web Applications                                      | Chapters 1,2          | |
 | 3   |  2/4  | Basic PHP Syntax & HTML Forms / Data types, literals, Variables and Constants | Chapter 4             | | 
 | 4   |  2/11 | More PHP Syntax / Operators, Expressions, Conditionals & Loops                | Chapters 5,7          | Project 1 due by start of class |

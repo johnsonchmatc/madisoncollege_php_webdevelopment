@@ -153,5 +153,17 @@ PHP supports three other types of tags, the full PHP tags are the most reliable,
 
 ---
 ###What is a function?
+Here is a date function call, what do you think it does?
+```
+date("m-d-y")
+```
+Let's look at the PHP [documentation](http://php.net/manual/en/)
 
 ---
+#Brake
+
+---
+#Data Types
+
+---
+
