@@ -19,7 +19,7 @@ When the Blackboard screen comes up, click login
 
 You will see a number of headings including: 
   * "My Courses," "Today's Announcements", etc.
-  * Click on the words "Ruby on Rails Development" right underneath the "My Courses" heading. This will take you to our class web-site.
+  * Click on the words "PHP Web with MySQL" right underneath the "My Courses" heading. This will take you to our class web-site.
   * Your password for Blackboard is the same as the password for your Madison College email.
   * Blackboard requires all students to use their Madison College student email account. However, many students prefer to use a different email address.
   If you wish to use a different address, go into your [student email account](https://mail.madisoncollege.edu/CookieAuth.dll?GetLogon?curl=Z2Fowa&reason=0&formdir=1)and modify your account so that mail is forwarded to the email address that you want to use.
@@ -54,7 +54,7 @@ At the end of every class I’ll have you fill out an exit ticket.  The exit tic
   * TO USE THE BLACKBOARD TO SEND AN EMAIL, choose Communication from the main set of buttons along the left side of the course page. Choose Send email then choose Select Users. Select your instructor's name from the list of users. Follow directions given for subject line and message. Choose Send Copy of Message to self. Attach the required file by clicking the Add button in Section 4 of the screen; choose Browse to find the attachment, double click on the desired filename, click Submit to add the attachment (repeat this step for each attachment). Click Submit to send the email to your instructor.
   
 ##Final Thoughts
-I look forward to working and learning with you this semester.  To get off to a good start make sure to complete the steps below.
+I look forward to working and learning with you this semester. This is the first time I am teaching this class. I have been working to organize the materials I was given but will be changing things on a regular basis. If you find something you believe to be an error please let me know right away so I can fix it! I will try to make blackboard link to the course GitHub site, which will contain the most up to date materials. To get off to a good start make sure to complete the steps below.
   
 ####STEPS TO COMPLETE:
   
