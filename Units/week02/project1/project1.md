@@ -1,5 +1,9 @@
 #Project One
 ##Simple PHP Application
+
+Total Points: 20
+Due: 2/11/2015 at the start of class
+
 ###Concepts
 
 This project is designed to get you started with PHP web applications. You will learn these concepts:
