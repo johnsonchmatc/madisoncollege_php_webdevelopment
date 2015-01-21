@@ -4,6 +4,7 @@
 
 ##Lectures
 * [Week 1](Units/week01/week01.md)
+
 <!--* [Week 2](Lectures/week02)-->
 <!--* [Week 3](Lectures/week03)-->
 <!--* [Week 4](Lectures/week04)-->
