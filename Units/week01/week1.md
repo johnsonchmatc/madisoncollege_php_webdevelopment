@@ -9,6 +9,10 @@
 * Software Engineer and Scrum Master at Getty Images
 * Author at Pragmatic Bookshelf
 * Owner at JohnsonCH, LLC
+
+---
+#Internships
+^ Ask me about them if you are interested.
 	
 ---
 #Hobbies
@@ -22,6 +26,8 @@
 * Wife: Laura
 * Daughter: Kenzie
 * Dogs: Scooter and Miley
+
+![fit right](https://farm9.staticflickr.com/8656/16327076071_c858d4f2ef_h_d.jpg)
 
 ---
 #About you
