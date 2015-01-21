@@ -20,7 +20,7 @@
 
 ---
 ##Add the following code to the page:
-```
+```php
 <?php phpinfo(); ?>
 ```
 
