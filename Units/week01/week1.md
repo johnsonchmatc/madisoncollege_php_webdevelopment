@@ -57,7 +57,7 @@
 ---
 #Projects, Labs and Exams
 * Labs
-* Course Project
+* Projects
 * Exams 
 
 ---
@@ -72,8 +72,9 @@
 ---
 
 #Preparing our shop
-* Nitrious.io 
 * IRC http://officehours.johnsonch.com/
+* Nitrious.io 
+
 
 ---
 #Socrative
