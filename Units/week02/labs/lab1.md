@@ -1,6 +1,7 @@
 #Exercise 1
 
 Open your Nitrous.io editor and create a file named lab1x1.php inside of workspace > www, as seen in the following figure:
+
 ![](https://dl.dropboxusercontent.com/s/j063lu83mwnk1yf/2015-01-24%20at%202.23%20PM%202x.png?dl=0)
 
 ```
