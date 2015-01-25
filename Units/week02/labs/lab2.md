@@ -2,23 +2,19 @@
 
 Log in to your nitrous server.
 
-Use a command line similar to the following to log in to MySQL. Use the user name given to you by your instructor rather than the one used here.
+Go to [https://code.google.com/p/northwindextended/downloads/detail?name=Northwind.MySQL5.sql&can=2&q=](https://code.google.com/p/northwindextended/downloads/detail?name=Northwind.MySQL5.sql&can=2&q=) to download the Northwind Database.
+
+Upload the file you downloaded to your Nitrous server.
+![](https://dl.dropboxusercontent.com/s/0wnukop87hyfdw1/2015-01-24%20at%202.38%20PM%202x.png?dl=0)
+
+Next note were your database was uploaded to.  You can verify by using the console
 
 ```
-mysql -u root 
-```
-
-Again you will be prompted for a password. Use the password provided by your instructor.
-
-Enter the following series of commands in MySQL, and answer the questions below:
+$ ls
 
 ```
-USE winestore;
-SHOW TABLES;
-SELECT * FROM region;
-```
 
-How many tables are there in the winestore database? \_\_\_\_\_\_\_\_\_\_
+How many tables are there in the northwind database? \_\_\_\_\_\_\_\_\_\_
 
 What is the name of region number 7? \_\_\_\_\_\_\_\_\_\_\_\_ 
 

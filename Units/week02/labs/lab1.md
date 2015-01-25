@@ -1,6 +1,7 @@
 #Exercise 1
 
-Open a text editor and enter the following in a new file.
+Open your Nitrous.io editor and create a file named lab1x1.php inside of workspace > www, as seen in the following figure:
+![](https://dl.dropboxusercontent.com/s/j063lu83mwnk1yf/2015-01-24%20at%202.23%20PM%202x.png?dl=0)
 
 ```
 <html>
@@ -19,9 +20,5 @@ Open a text editor and enter the following in a new file.
  </body>
 </html>
 ```
-Save the file as lab1x1.php into your document root directory.
+Save the file and use Nitrous.io's preview menu and choose port 3000 to view your page. When you are satisfied show your instructor.
 
-Open a browser and enter the URL:
-
-http://localhost/lab1x1.php
-Show the contents of the file and the screen output to your instructor.

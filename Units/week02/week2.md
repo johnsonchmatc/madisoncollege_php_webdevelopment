@@ -2,94 +2,84 @@
 ##Week 2
 
 ----
-###Agenda 
-- Static vs Dynamic Web Sites
-- How-To of HTTP Request/Response
-- What Does PHP Do?
-- A Brief History of PHP
-- Installing PHP
+#Agenda 
+* Open Source
+* Static vs Dynamic Web Sites
+* What is an HTTP request?
+* What is PHP?
+* What does a PHP script look like?
 
 ----
-###Agenda cont.
-- What Does MySQL Do?
-- A Brief History of MySQL
-- Installing MySQL
-- First PHP Scripts
+#Agenda (cont)
+* PHP Functions
+* PHP vs HTML
+* What is MySQL?
+* What does SQL look like?
+* Why PHP and MySQL?
+* Where to get help
 
 ---
-##Static Web Sites
+#Static Web Sites
 
-> The dream behind the Web is a common information space in which we communicate by sharing information. . . .
-  -Tim Berners-Lee
+Simply a page of content that is rendered the same every time it is requested.
 
 ---
-##Dynamic Web Sites
+#Dynamic Web Sites
 
 A dynamic Web site is one with content that is regenerated every time a user visits or reloads the site.
 
 ---
-##What Is Open Source?
+#What is an HTTP request?
+
+^ When one computer talks to another over the HTT protocol 
+
+---
+#What is the HTT protocol (HTTP)?
+^ Hypertext Transfer Protocol
+
+---
+#What does an HTTP request look like?
+![inline fit](http://help.sap.com/static/saphelp_nwpi711/en/48/3a063a902131c3e10000000a42189d/ppt_img.gif)
+
+---
+#What Is Open Source?
 
 > 'Free software' is a matter of liberty, not price. To understand the concept, you should think of 'free' as in 'free speech,' not as in 'free beer.'
   -The Free Software Foundation, http://www.gnu.org/philosophy/free-sw.html
 
 ---
-##Basics of HTTP
-* Hypertext Transfer Protocol
-* simple and stateless
-* client/server architecture 
-* Common standard ports are 80 (http) and 443 (https)
+#What Is Open Source?
+* What is the difference between Open Source and Freeware? 
+
+^ Freewhere is software that is free to use but you do not have access to the source of that application.  Open Source means you have the ability to view and modify the code of the application.  Ideally an open source project will accept modifications from the community.
+
+* Is PHP open source?
 
 ---
-##HTTP Request
-
-^ TODO
-
----
-##HTTP Response
-
-^ TODO
+#How can I contribute to PHP?
+* [http://php.net/get-involved.php](http://php.net/get-involved.php)
+* [https://github.com/php/php-src](https://github.com/php/php-src)
 
 ---
-##What is PHP?
-###Recursive acronym for "PHP: Hypertext Preprocessor"
+#What is PHP?
+> PHP is a popular general-purpose scripting language that is especially suited to web development.
+Fast, flexible and pragmatic, PHP powers everything from your blog to the most popular websites in the world. - php.net
 
 ---
-##What is PHP?
-* PHP is a simple, fast, portable scripting language well suited for development of database-enabled Web sites. 
-* It was developed in 1995 and is currently powering tens of millions of Web sites worldwide.
-
----
-##PHP can be used in three primary ways:
-* Server-side scripting:
-  * PHP was originally designed to create dynamic web content. To generate HTML, you need the PHP parser and a web server to send the documents. PHP has also become popular for generating XML documents, graphics, Flash animations, PDF files, and more.
-
----
-##PHP can be used in three primary ways:
-* Command-line scripting:
-  * PHP can run scripts from the command line, much like Perl, awk, or the Unix shell. You might use the command line scripts for system administration tasks, such as backup and log parsing
-
----
-##PHP can be used in three primary ways:
-* Client-side GUI applications:
-  * Using PHP-GTK (http://gtk.php.net), you can write full-blown, cross-platform GUI applications in PHP.
-
-^For this course we'll just be focusing on Server-side scripting
-
----
-##History of PHP
+#History of PHP
 * June 8, 1995 PHP 1.0 is posted to the usenet group comp.infosystems.www.authoring.cgi
 * It was created by Rasmus Lerdorf as PHP Tools.
 * Then he set to work integrating his tools with the Apache web server and less than a year later, PHP 2.0 was posted to the same usenet group.
 
 ^ PHP stood for Personal Home Page at the time
+
 ---
-##History of PHP
-###Here is how Lerndorf described PHP at the time:
+#History of PHP
+##Here is how Lerndorf described PHP at the time:
 > "PHP/FI is a server-side HTML embedded scripting language. It has built-in access logging and access restriction features and also support for embedded SQL queries to mSQL and/or Postgres95 backend databases.
 
 ---
-##History of PHP
+#History of PHP
 * It is most likely the fastest and simplest tool available for creating database-enabled web sites.
 
 * It will work with any UNIX-based web server on every UNIX flavor out there. The package is completely free of charge for all uses including commercial."
@@ -97,102 +87,84 @@ A dynamic Web site is one with content that is regenerated every time a user vis
 ---
 #And the rest, as they say, is history...
 
----
-##Some language design notes:
-* PHP is a very Perl-like in sytnax
-
-^ but whereas Perl is an all-purposelanguage, PHP was designed for the Web. 
-
-* PHP can be embedded with HTML so that whenever a page is rendered the code is executed.
-* PHP includes automatic interpretation of form variables, which makes working with forms easier.
+![fit](https://dl.dropboxusercontent.com/s/6sv291dt8qyh23z/2015-01-25%20at%202.21%20PM%202x.png?dl=0)
 
 ---
-##Some language design notes:
-* It enabled users to create simple dynamic Web sites by having the ability to use an RDBMS.
-
-^ in this course we'll work with the MySQL RDBMS
-
----
-##Timeline
-* 1995 - PHP Released
-* 1997 PHP/FI 2.0
-  * Added core team of developers
-* 1998 - Zeev Suraski and Andi Gutmans released PHP 3.0
-
-^ Zeev Suraski and Andi Gutmans, two students attending Technion-Israel Institute of Technology, needed a language for their university e-commerce project. They chose PHP/FI for their project. Dissatisfied with its limitations and bugs, they put their project aside, and rewrote PHP almost from scratch. PHP 3.0 was a significant departure from the previous code base.
-
-^ The new language supported add-on modules and had a much more consistent syntax. At this time, the meaning of the acronym changed as well. PHP now stands for PHP: Hypertext Preprocessor. PHP 3.0 was released in 1998 and is the closest version to PHP today.
-
-* 2000 - PHP 4
-
-^ By May 2000, PHP 4 was released. The core of PHP 4 was entirely rewritten to improve the performance of complex Web applications and improve modularity of the platform. Zeev Suraski and Andi Gutmans, the authors of PHP 3, introduced a new parsing engine, called the Zend engine, which is the scripting language that powers PHP today.
-
-^ Version 4 offered an open Application Programming Interface (API), allowing other programmers to write modules for PHP, modules that would extend its functionality, modules that allowed PHP 4 to support most of the available databases and Web servers available.
-
-* 2004 - PHP 5
-
-^ The latest incarnation of PHP was released in July 2004. PHP 5 added a whole new object-oriented model to the language.
-
----
-##What is MySQL?
-
-* MySQL is a widely-used Open Source relational database management system (RDBMS) using the industry standard SQL query language that is very scalable and especially suited for Web development.
-
----
-###Server-side tools: 
-* The MySQL database server, which is the core software engine responsible for creating and managing databases, executing queries and returning query results, and maintaining security. They also include additional tools to manage multiple MySQL servers, optimize and repair MySQL tables, and create bug reports.
-
----
-###Client-side tools: 
-* These include a command line MySQL client, tools to manage MySQL user permissions, and utilities to import and export MySQL databases. Also included are command line tools to view and copy MySQL databases and tables, and retrieve server status information.
-
----
-#Let's write some code
-
----
-PHP Web pages are HTML pages with PHP commands embedded in them. The Web server processes the PHP commands and sends their output (and any HTML from the file) to the browser.
-
-Open your Nitrous.io web IDE and create a file called TestPHP.php in ```workspace/www/``` and then type the following lines:
-
+#What does a PHP script look like?
+```php
+<?php phpinfo(); ?>
 ```
+
+---
+#How does PHP work with HTTP?
+
+![inline fit](http://www3.dcu.ie/~costelle/sites/default/files/phpnet4_0.png)
+
+---
+#PHP Functions
+> An independent piece of program code that is create to make programing easier.
+
+```php
+Today is <?php date("m-d-Y"); ?>
+```
+^ This is PHP's date function, the implementation of this is written in C
+
+* [http://php.net/manual/en/function.date.php](http://php.net/manual/en/function.date.php)
+
+---
+#PHP vs HTML
+```php
 <html>
- <head>
-  <title>Test PHP</title>
- </head>
- <body>
-  <?php phpinfo() ?>
- </body>
-</html>
-
-```
-Save the file.
-
-
-Now, use the preview menu and choose port 3000, add the filename ```TestPHP.php``` after the port so you'll have similar to the following:
-
-```
-http://intense-winterfell-97-176159.use1.nitrousbox.com:3000/TestPHP.php
-```
-
-A web page describing your computer's PHP installation in great detail should be displayed.
-
-
-Create a new file called ```hello.php``` next . Type the following:
-
-```
-<html>
- <head>
-  <title>Look Out World!</title>
- </head>
- <body>
-  <?php echo 'Hello, world!' ?>
- </body>
+  <head>
+    <title>My Awesome Page</html>
+  </head>
+  <body>
+    <h1>Today is <?php date("m-d-Y"); ?></h1>
+  </body>
 </html>
 ```
-Now, use the preview menu and choose port 3000, add the filename ```hello.php``` after the port so you'll have similar to the following:
 
-You should see this output.
+---
+#What is MySQL?
 
-```
-Hello, world!
-```
+---
+###Installing MySQL (on nitrous.io)
+* Use the Autoparts menu to search for MySQL and choose install
+
+![inline fit](https://dl.dropboxusercontent.com/s/u1bye8731rnjc2s/2015-01-24%20at%202.28%20PM%202x.png?dl=0)
+
+
+---
+###Installing MySQL (on nitrous.io)
+* When it is complete you should see the following:
+
+![inline fit](https://dl.dropboxusercontent.com/s/0roui7h5k0to0w2/2015-01-24%20at%202.30%20PM%202x.png?dl=0_)
+
+* Choose done
+
+---
+###Installing MySQL (on nitrous.io)
+* As noted you can start the server with `$ parts start mysql`
+* You can stop the server with `$ parts stop mysql`
+* You can connect to the server with `$ mysql`
+
+---
+#What does SQL look like?
+^ ``` show databases; ```
+^ ``` use northwind; ```
+^ ``` show tables; ````
+^ ``` select * from ;```
+
+---
+#Why PHP and MySQL?
+* Both Open Source
+* Commonly used together
+* Both have a low barrior to entry
+
+---
+#Where can I get help?
+* [http://php.net/support.php](http://php.net/support.php)
+
+---
+#Notes for next week
+
