@@ -32,9 +32,7 @@ This project will introduce the PHP programming language and its environment.
 
 ###Exercises
 
-Create a directory named "project1" under your web server's document root directory on your hard drive. Place all HTML files and PHP scripts for this project in this new directory. 
-
-Note: If you are working on an MATC lab computer, always save a copy of this directory and all the files in it to either the class server, a USB thumb drive, a floppy disk or similar media, at the end of each work session. Otherwise your work will be lost!
+Create a directory named "project1" under your web server's document root directory (workspace/www). Place all HTML files and PHP scripts for this project in this new directory. 
 
 ####Exercise 1
 
