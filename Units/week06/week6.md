@@ -1,15 +1,2 @@
-#Ruby on Rails Development
+#Basic PHP Syntax and HTML Forms
 ##Week 6
----
-#Standup
-
----
-#Chapter 7 
-
----
-#Factory Girl
-
----
-##Project questions or Demo
-
----

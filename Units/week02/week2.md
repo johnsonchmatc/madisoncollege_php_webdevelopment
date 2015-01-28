@@ -1,5 +1,6 @@
 #Introduction to PHP, MySQL and Web Applications
-##Week 2
+##Chapters 1 and 2
+###Week 2
 
 ----
 #Agenda 

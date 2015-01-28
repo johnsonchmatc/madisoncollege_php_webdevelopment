@@ -1,9 +1,2 @@
-#Ruby on Rails Development
+#Basic PHP Syntax and HTML Forms
 ##Week 7
----
-#Standup
-
----
-#Chapter 8 
-
----
