@@ -9,14 +9,15 @@
 * What is an HTTP request?
 * What is PHP?
 * What does a PHP script look like?
+* PHP Functions
 
 ----
 #Agenda (cont)
-* PHP Functions
 * PHP vs HTML
 * What is MySQL?
 * What does SQL look like?
 * Why PHP and MySQL?
+* Debugging
 * Where to get help
 
 ---
@@ -161,6 +162,10 @@ Today is <?php date("m-d-Y"); ?>
 * Both Open Source
 * Commonly used together
 * Both have a low barrior to entry
+
+---
+#Debugging
+* Apache log
 
 ---
 #Where can I get help?

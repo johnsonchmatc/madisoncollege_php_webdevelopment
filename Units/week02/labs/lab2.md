@@ -12,8 +12,11 @@ Next note were your database was downloaded to.  You can verify by using the con
 ```
 $ ls
 ```
+Log into your mysql server ```$ mysql -u root```
 
-Then import the database file with the following command
+Next we need to create the northwind database with the following command ```> create database northwind;``` and then exit the mysql client by typing ```> exit```.
+
+With the database created import the database file with the following command
 ```
 $ mysql -u root northwind < northwind.sql
 ```
