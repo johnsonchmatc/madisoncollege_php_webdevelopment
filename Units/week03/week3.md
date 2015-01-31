@@ -4,7 +4,6 @@
 
 ---
 ##Agenda 
-###Based on Quigley Chapters 2 & 4
 - Getting Started with PHP
 - Introduction to Data Types
 - Using Variables and Constants
@@ -12,84 +11,6 @@
 
 ---
 #Getting Started with PHP
-
----
-![fit](images/life-cycle.png)
-
-
-^ 1. The user makes a request for a Web site by typing the address of the Web site in the browser's URL location box. The browser attempts to transmit the "request" to the server indicated by the URL using the HTTP protocol.
-
-^ 2. The network can be a very large network such as the Internet, an intranet within an organization, or a wireless network on a personal desktop computer. The HTTP protocol is used to transfer documents to and from the server.
-
-^ 3. Web servers are generic programs capable of accepting Web-based requests and providing the response to them. With dynamic Web sites, Web servers turn over the request for a specific file to an appropriate helper application.
-
-^ 4. PHP is a module that resides within the Web server. The server opens the file (script) and reads it line by line. It hands over any PHP instructions to the PHP module for processing and replaces the PHP code with the output it generated back into the page.
-
-^ 5. If the Web page consists of PHP with MySQL (or any other database) statements, then PHP may make further requests to the database to retrieve, send, or update information on the fly.
-
-^ 6. The Web server responds to the browser's request. If the request just involves static HTML, this response is simply retrieving the file from server's local file system. A dynamic web site's response includes any output returned by modules such as the PHP module.
-
----
-###The Anatomy of a PHP Script
-
-A PHP script is a file (ending with a .php extension) consisting of text, HTML, and PHP instructions interspersed throughout the file. The PHP instructions are contained within two HTML style tags:
-
-```<?php``` is the opening tag ```?>``` is the closing tag.
-
-Everything between these two tags is interpreted by the PHP module (also called interpreter) and converted to regular text and HTML before being sent back to the requesting browser.
-
-^ If, for example, one of the PHP instructions is to get today's date from the server, PHP will get the date and replace the PHP instruction with the current date. When the browser gets the file, it will not see the PHP tags or any of the PHP instructions; it will get only what PHP generated as a result of its processing.
-
----
-###Example
-What the PHP interpreter gets:
-```
-<?php
-  echo "Hello, world.<br />";
-?>
-```
-What the Web browser gets:
-
-```Hello, world.```
-
----
-###The Steps of Writing a PHP Script
-
-- Because PHP is a scripting language designed to be integrated with other text documents, most commonly HTML, you will write your scripts in a text editor.
-- Some popular text editors are BBEdit (Macintosh), Wordpad, Notepad (Windows), pico, vi, emacs (Linux/UNIX), and so on.
-- Also available are third-party editors, such as jEdit, TextPad and WinEdit, as well as integrated development environments (IDEs) such as Dreamweaver and Eclipse.
-
----
-###PHP Tags
-
-- The script file may contain HTML, XHTML, XML, and so on, but PHP will consider the file as just plain text and leave it alone, unless you explicitly embed the PHP statements between its own special tags:
-```
-<?php
-  statement;
-  statement;
-?>
-```
-
----
-###PHP Tags
-- Each statement must be terminated with a semicolon (unless it is the last line of the script). If you forget the semicolon PHP will produce an error message similar to this:
-
-```Parse error: syntax error, unexpected T_PRINT in c:\wamp\www\exemples\first.php on line 4```
-
----
-###Additional PHP Tags
-PHP supports three other types of tags, the full PHP tags are the most reliable, some servers may not support all. 
-
-```
-|Tags       |Description                                   |
-|-----------|----------------------------------------------|
-|PHP tags   | <?php phpinfo(); ?>                          |
-|HTML style | <script language="php"> phpinfo(); </script> |
-|ASP style  | <% php phpinfo(); %>                         |
-|PHP short  | <?= php phpinfo(); ?>                        |
-```
-
-> Each are using the ```phpinfo()``` function as example code.
 
 ---
 ###Mixing in PHP
@@ -143,28 +64,103 @@ PHP supports three other types of tags, the full PHP tags are the most reliable,
 ```
 
 ---
-###Functions
-- A big part of any programming language is the set of functions that are built into the language or packaged in special libraries.
-
-- Later in the course you will learn how create your own functions, but for now, we concentrate on the "built-in" functions that are part of the PHP language.
-
----
-###What is a function?
-> 'A block of statements that can be used repeatedly in a program' - w3schools.com
-
----
-###What is a function?
-Here is a date function call, what do you think it does?
-```
-date("m-d-y")
-```
-Let's look at the PHP [documentation](http://php.net/manual/en/)
-
----
-#Brake
-
----
 #Data Types
+
+---
+#What fundamental basic data types does PHP support?
+
+---
+#Fundamental basic data types does PHP support?
+- Integers
+- Floats
+- Strings
+- Bolleans
+
+^ also called scalars
+^ assigned single literal value
+
+---
+#What is the difference between Integers and Floats?
+
+---
+#The difference between Integers and Floats
+* Integers are whole numbers Floats are fractional numbers
+^ 1,2,3 vs 1.5,2.3,6.6
+
+---
+#What is a String?
+
+---
+#A string is:
+> A group of characters enclosed in either single or double quotes
+
+* Quotes must match
+
+```
+  "This is a string"
+  'This is also a string'
+  "This is not a string'
+  "This is 'actually' a string"
+  'This is another "example"'
+```
+
+---
+#The Here Document
+##A special Kind of Quoting
+
+```
+print <<<EOF
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vulputate, 
+arcu a pellentesque viverra, elit metus pretium dui, nec congue ligula 
+velit vitae nunc. Aliquam est elit, faucibus vitae tincidunt sed, venenatis 
+vitae urna. Duis dignissim vel odio ac convallis. Suspendisse sodales viverra 
+ante, in consectetur nulla finibus a. Integer faucibus auctor ipsum, nec 
+tincidunt metus mattis id. Morbi non leo tristique, facilisis neque a, 
+volutpat purus. Class aptent taciti sociosqu ad litora torquent per 
+conubia nostra, per inceptos himenaeos.
+EOF
+```
+
+---
+#What is a Boolean?
+
+---
+#A Boolean is:
+^ A logical value that is either 'true' or 'false' 
+
+---
+#What composite data types does PHP support?
+
+---
+#PHP supports the following composite data types:
+- Arrays
+- Objects
+- NULL
+- Resources
+
+---
+#Array
+- Simply a collection of values
+- We'll talk more in week 6
+---
+#What is a NULL data type?
+
+---
+#NULL
+- Means 'no vlaue', not even an empty string '' or 0 is type NULL
+
+---
+#What is a Resource data type
+
+---
+#Resources
+- Simply a reference to an external resource
+- Used for working with files and databases
+
+---
+#Objects
+* A way of repersenting every day data
+* We'll talk more about these week 8
 
 ---
 
