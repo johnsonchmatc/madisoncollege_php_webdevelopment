@@ -1,4 +1,7 @@
 #Exercise 1
+
+Copy and paste the following content in to your www/labs/week03 folder as a new file called myform.html.
+
 ```
 <html>
  <head>
@@ -142,20 +145,16 @@
 ```
 #Exercise 2
 
-# Create a script named myscript.php and save it into your labs directory.
-# Add PHP variables to hold the values of the fields from the HTML form.
-# PHP uses the $_POST[ ] array to hold form field values after the form is posted.
-# For example, if there is a form field called "name", your variable assignment statement will look like:
-<br /><pre>
-$name = $_POST['name'];
-</pre>
-# Add PHP code blocks embedded in HTML to print the descriptions and values of all fields entered in the myform.html HTML form.
-# If a form field is empty, print a "no value submitted" message instead of the field value.
-# Test your code and show it to your instructor.
+- Create a script named myscript.php and save it into your labs/week03 directory.
+- Add PHP variables to hold the values of the fields from the HTML form.
+- PHP uses the $_POST[ ] array to hold form field values after the form is posted.
 
+For example, if there is a form field called "name", your variable assignment statement will look like:
 
-<br />
+```
+  $name = $_POST['name'];
+```
 
----
+Add PHP code blocks embedded in HTML to print the descriptions and values of all fields entered in the myform.html HTML form. If a form field is empty, print a "no value submitted" message instead of the field value.
 
-[[Unit Two => 152-166 Unit Two Index]]
+Test your code and show it to your instructor.
