@@ -142,6 +142,7 @@ EOF
 #Array
 - Simply a collection of values
 - We'll talk more in week 6
+
 ---
 #What is a NULL data type?
 
@@ -163,4 +164,82 @@ EOF
 * We'll talk more about these week 8
 
 ---
+#Debugging data types
+```
+<?php gettype($myVariable); ?>
+```
 
+[samples/datatypes.php](sampes/datatypes.php)
+^ note using the express <?= rather than <?php echo
+
+---
+#Variables
+
+---
+#What are the 3 kinds of variables PHP supports?
+
+---
+#3 kinds of variables in PHP
+
+1. Predefined
+1. User-defined
+1. Form variables related to names in an HTML form
+
+---
+#Valid variable names
+```
+$name1
+$price_tag
+$_abc
+$Abc_22
+$A23
+```
+^ notice they all start with a $ and then have a letter or an _
+
+----
+#Invalid variable names
+```
+$10names
+box.front
+$name#last
+A-23
+$5
+```
+
+---
+#Declaring and Intializing Variables
+* When are they delaared?
+^ normally before they are used
+* What are some ways variables 
+^ in the script, an HTML form, a query string, cookies, server or server environments
+
+---
+#Displaying Variables
+
+[samples/datatypes.php](sampes/datatypes.php)
+
+---
+#String Interpolation
+```
+<?php echo "Hello $name_variable" ?>
+```
+Is the same as
+```
+<?php echo "Hello" . $name_variable ?>
+This is also known as concatenation
+
+---
+#Managing Variables
+
+---
+#Actvity
+```
+* isset()        * is_int()      * is_scalar()
+* empty()        * is_integer()  * is_string()  
+* is_bool()      * is_long()     * unset()
+* is_callable()  * is_null()
+* is_double()    * is_numeric()
+* is_float()     * is_object()
+* is_real()      * is_resource()
+```
+* http://php.net/manual/en/
