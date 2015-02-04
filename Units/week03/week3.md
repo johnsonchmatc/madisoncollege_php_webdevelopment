@@ -29,6 +29,7 @@
    </body>
 </html>
 ```
+
 ^ Here we're using php to generate the text for the header, this is a trivial example but imaging setting the header to be 'Welcome <username> to our great site' 
 
 ---
@@ -46,11 +47,13 @@
    </body>
 </html>
 ```
+
 ^ What is wrong with this code?
 
 ---
 ###Commenting your code
-- We all write code for a reason, we may need at times to share why something is the way it is.
+- We all write code for a reason, we may need at times to share **WHY** something is the way it is.
+
 ```
 <?php
   //Single line comment
@@ -64,6 +67,46 @@
 ```
 
 ---
+###Commenting your code (bad)
+```
+<?php
+  /*
+    We are formating phone numbers by stripping all characters
+    then putting parnes around the first 3 numbers adding a
+    space then grouping the next 3 numbers adding a dash
+    then the last 4 numbers
+  */
+  function formatPhoneNumber($phone_string){
+    if(  preg_match( '/^\+\d(\d{3})(\d{3})(\d{4})$/', $data,  $matches ) )
+    {
+      $result = "($matches[1]) $matches[2]-$matches[3]";
+      return $result;
+    }
+  }
+?>
+```
+
+---
+###Commenting your code (good)
+```
+<?php
+  /*
+    The business has a requirement that all phone numbers be
+    formatted with the (123) 123-1234 format 
+  */
+  function formatPhoneNumber($phone_string){
+    if(  preg_match( '/^\+\d(\d{3})(\d{3})(\d{4})$/', $data,  $matches ) )
+    {
+      $result = "($matches[1]) $matches[2]-$matches[3]";
+      return $result;
+    }
+  }
+?>
+```
+
+* The main block explains why
+
+---
 #Data Types
 
 ---
@@ -74,7 +117,7 @@
 - Integers
 - Floats
 - Strings
-- Bolleans
+- Booleans
 
 ^ also called scalars
 ^ assigned single literal value
@@ -84,7 +127,9 @@
 
 ---
 #The difference between Integers and Floats
+
 * Integers are whole numbers Floats are fractional numbers
+
 ^ 1,2,3 vs 1.5,2.3,6.6
 
 ---
@@ -126,6 +171,7 @@ EOF
 
 ---
 #A Boolean is:
+
 ^ A logical value that is either 'true' or 'false' 
 
 ---
@@ -148,7 +194,7 @@ EOF
 
 ---
 #NULL
-- Means 'no vlaue', not even an empty string '' or 0 is type NULL
+- Means 'no value', not even an empty string '' or 0 is type NULL
 
 ---
 #What is a Resource data type
@@ -160,7 +206,7 @@ EOF
 
 ---
 #Objects
-* A way of repersenting every day data
+* A way of representing every day data
 * We'll talk more about these week 8
 
 ---
@@ -169,7 +215,8 @@ EOF
 <?php gettype($myVariable); ?>
 ```
 
-[samples/datatypes.php](sampes/datatypes.php)
+[samples/datatypes.php](https://github.com/johnsonch/madisoncollege_php_webdevelopment/blob/master/Units/week03/samples/datatypes.php)
+
 ^ note using the express <?= rather than <?php echo
 
 ---
@@ -207,10 +254,13 @@ $5
 ```
 
 ---
-#Declaring and Intializing Variables
-* When are they delaared?
+#Declaring and Initializing Variables
+* When are they declared?
+
 ^ normally before they are used
+
 * What are some ways variables 
+
 ^ in the script, an HTML form, a query string, cookies, server or server environments
 
 ---
@@ -223,16 +273,20 @@ $5
 ```
 <?php echo "Hello $name_variable" ?>
 ```
-Is the same as
+
+* Is the same as
+
 ```
 <?php echo "Hello" . $name_variable ?>
-This is also known as concatenation
+```
+
+* This is also known as concatenation
 
 ---
 #Managing Variables
 
 ---
-#Actvity
+#Activity
 ```
 * isset()        * is_int()      * is_scalar()
 * empty()        * is_integer()  * is_string()  
@@ -243,3 +297,16 @@ This is also known as concatenation
 * is_real()      * is_resource()
 ```
 * http://php.net/manual/en/
+
+---
+#Form Variables
+
+---
+#Setting the form
+
+[samples/postform.html](samples/postform.html)
+
+---
+#Processing the form
+
+[samples/postformprocess.php](samples/postformprocess.php)
