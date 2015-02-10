@@ -133,3 +133,13 @@ $x !== $y           $x is not identical to $y
 ```
 
 ---
+#Comparison Operators
+* The result of the comparison is either true or false
+* Numbers are compared as you would expect
+* Strings are compared letter by letter using ASCII values
+* [samples/vote.php]()
+
+---
+#What is equal
+* [samples/what_is_equal.php]()
+
