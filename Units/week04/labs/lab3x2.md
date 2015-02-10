@@ -13,11 +13,5 @@
 
 * Create a file named ```lab3x2.php``` in your ```lab03``` directory.
 * Write a for loop that employs variable variables to process the form input and display which movie or movies the user wants to rent.
-* Show your instructor the working ```lab3x2.html``` and *lab3x2.php* files and demonstrate how they work.
+* Show your instructor the working ```lab3x2.html``` and ```lab3x2.php``` files and demonstrate how they work.
 
-
-<br />
-
----
-
-[[Unit Three => 152-166 Unit Three Index]]
