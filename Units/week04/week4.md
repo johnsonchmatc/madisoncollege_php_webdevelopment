@@ -115,3 +115,21 @@ $x--      Postdecrement   Subtracts 1 from $x	  $x = 3; --$x; $x is now 2
 
 ---
 #Comparison Operators
+* Used to compare numbers or strings
+
+---
+#Comparison Operators
+
+```
+Operator/Operands 	Function
+$x == $y            $x is equal to $y
+$x != $y            $x is not equal to $y
+$x > $y             $x is greater than $y
+$x >= $y            $x is greater than or equal to $y
+$x < $y             $x is less than $y
+$x <= $y            $x is less than or equal to $y
+$x === $y           $x is identical to $y in value and type
+$x !== $y           $x is not identical to $y
+```
+
+---
