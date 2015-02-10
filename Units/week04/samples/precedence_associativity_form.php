@@ -3,41 +3,44 @@
     <title>Precedence and Associativity()</title>
   </head>
   <body>
+
+
     <?php
       // Because this page also contains the form for users to fill out
       // we guard our entire PHP processing with this if statement 
       if (isset($_POST["submit"])) {
         $error_messages = array();
-        
-        if (isset($_POST["first"])){
-          $first_number = $_POST["first"];
-        }else{
+
+        // We need a friendly way to capture empty values 
+        if (empty($_POST["first"])){
           array_push($errors, 'Please Input a value for First Number:');
+        }else{
+          $first_number = $_POST["first"];
         }
 
-        if (isset($_POST["second"])){
-          $second_number = $_POST["second"];
-        }else{
+        if (empty($_POST["second"])){
           array_push($errors, 'Please Input a value for Second Number:');
+        }else{
+          $second_number = $_POST["second"];
         }
 
-        if (isset($_POST["third"])){
-          $thrid_number = $_POST["thrid"];
-        }else{
+        if (empty($_POST["third"])){
           array_push($errors, 'Please Input a value for Third Number:');
+        }else{
+          $thrid_number = $_POST["thrid"];
         }
 
-        if (isset($_POST["fourth"])){
-          $fourth_number = $_POST["fourth"];
-        }else{
+        if (empty($_POST["fourth"])){
           array_push($errors, 'Please Input a value for Fourth Number:');
+        }else{
+          $fourth_number = $_POST["fourth"];
         }
       }
     ?>
 
 
     <?php if (isset($errors) && count($errors) > 0) : ?>
-      <h3>There were errors that prevented the email from sending</h3>
+      <h3>There were errors that prevented the calculations from being made.</h3>
       <ul class="errors">
         <?php foreach($errors as $error) : ?>
           <li><?= $error; ?></li> 
@@ -45,12 +48,13 @@
       </ul>
     <?php endif; ?>
 
-    <form action="precedence_associativity_form.php" method="POST">
     <h2>Please enter the values to calculate:</h2>
-    <p>First Number: <input type="text" size=3 name="first"><p>
-    <p>Second Number: <input type="text" size=3 name="second"></p>
-    <p>Third Number: <input type="text" size=3 name="third"></p>
-    <p>Fourth Number: <input type="text" size=3 name="fourth"></p>
+
+    <form action="precedence_associativity_form.php" method="POST">
+      <p>First Number: <input type="text" size=3 name="first"><p>
+      <p>Second Number: <input type="text" size=3 name="second"></p>
+      <p>Third Number: <input type="text" size=3 name="third"></p>
+      <p>Fourth Number: <input type="text" size=3 name="fourth"></p>
 
      <input type=submit value="submit">
      <input type=reset value="clear">

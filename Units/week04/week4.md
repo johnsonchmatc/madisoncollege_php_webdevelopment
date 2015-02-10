@@ -59,3 +59,59 @@ $result = 5 + 4
 ![fit inline](https://dl.dropboxusercontent.com/s/rip7cpkwivn2jor/2015-02-08%20at%207.03%20AM.png?dl=0)
 
 ---
+#Precedence and Associativity Examples
+* [samples/precedence_associativity.php](https://github.com/johnsonch/madisoncollege_php_webdevelopment/blob/master/Units/week04/samples/precedence_associativity.php)
+* [samples/precedence_associativity_form.php](https://github.com/johnsonch/madisoncollege_php_webdevelopment/blob/master/Units/week04/samples/precedence_associativity_form.php)
+
+---
+#Short Circut Assignment Operators
+>Allow you to perform an arthmetic or string operation by compingin an assignment operator with an arithmetic or string operator.
+
+---
+#Short Circut Assignment Operators
+Examples:
+
+```
+Operator 	Example  	Meaning
+  =	      $x = 5;	  Assign 5 to variable $x.
+  +=      $x += 3;	Add 3 to $x and assign result to $x.
+  -=      $x -= 2;	Subtract 2 from $x and assign result to $x.
+  *=      $x *= 4;	Multiply $x by 4 and assign result to $x.
+  /=      $x /= 2;	Divide $x by 2 and assign result to $x.
+  %=      $x %= 2;	Divide $x by 2 and assign remainder to $x.
+```
+
+---
+#Autoincrement and Autodecrement Operators
+> To make programs easier to read, to simplify typing, and, at the machine level, to produce more efficient code, the autoincrement (++) and autodecrement (--) operators are provided.
+
+---
+#Autoincrement and Autodecrement Operators
+Examples:
+
+```
+Operator 	Function      	What It Does         	Examples
+++$x      Preincrement    Adds 1 to $x	        $x = 3; $x++; $x is now 4
+$x++      Postincrement   Adds 1 to $x	        $x = 3; ++$x; $x is now 4
+--$x      Predecrement    Subtracts 1 from $x	  $x = 3; $x--; $x is now 2
+$x--      Postdecrement   Subtracts 1 from $x	  $x = 3; --$x; $x is now 2
+```
+
+---
+#Math functions
+* [http://php.net/manual/en/ref.math.php](http://php.net/manual/en/ref.math.php)
+
+---
+#Casting Operators
+> Sometimes you just gotta persuade something to be something else. -Me
+
+* PHP is loosely typed so variables can be different data types at different times
+* Casting will allow you to tell functions how to work with your variable
+* Pseudo typing your variables
+
+---
+#Casting Operators
+[samples/casting_operators.php]()
+
+---
+#Comparison Operators
