@@ -52,7 +52,7 @@
     ?>
 
 
-    <?php if (isset($errors) && count($errors) > 0) : ?>
+    <?php if (isset($error_messages) && count($error_messages) > 0) : ?>
       <h3>There were errors that prevented the calculations from being made.</h3>
       <ul class="errors">
         <?php foreach($error_messages as $error) : ?>
