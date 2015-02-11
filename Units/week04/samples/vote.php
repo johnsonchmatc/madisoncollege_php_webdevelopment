@@ -62,9 +62,9 @@
 ?>
       
       <?php if (isset($over_18) && $over_18 == true) :?>
-      <h4>Congratulations you are old enough to vote in the United States</h4>
-      <?php else :?>
-      <h4>You are not old enough to vote in the United States</h4>
+        <h4>Congratulations you are old enough to vote in the United States</h4>
+      <?php else : ?>
+        <h4>You are not old enough to vote in the United States</h4>
       <?php endif; ?>
   </body>
 </html>
