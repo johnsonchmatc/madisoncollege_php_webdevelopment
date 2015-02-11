@@ -9,7 +9,7 @@
 #An operator is:
 * A symbol that produces a result based on some rules
 * Examples include:
-```
+```php
 +
 -
 =
@@ -25,7 +25,7 @@
 * Data objects that are manipulated by operators
 * Can be a string, number, boolean or combination of of these three
 * Example:
-```
+```php
 $result = 5 + 4
 ```
 
@@ -47,7 +47,7 @@ What are the operands?
 
 ---
 ##An assignment statement evaluates the expression on the right side of the equal sign and assigns the result to the variable on the left.
-```
+```php
 $result = 5 + 4
 ```
 
@@ -71,8 +71,8 @@ $result = 5 + 4
 #Short Circut Assignment Operators
 Examples:
 
-```
-Operator 	Example  	Meaning
+```php
+//Operator 	Example  	Meaning
   =	      $x = 5;	  Assign 5 to variable $x.
   +=      $x += 3;	Add 3 to $x and assign result to $x.
   -=      $x -= 2;	Subtract 2 from $x and assign result to $x.
@@ -89,8 +89,8 @@ Operator 	Example  	Meaning
 #Autoincrement and Autodecrement Operators
 Examples:
 
-```
-Operator 	Function      	What It Does         	Examples
+```php
+//Operator 	Function      	What It Does         	Examples
 ++$x      Preincrement    Adds 1 to $x	        $x = 3; $x++; $x is now 4
 $x++      Postincrement   Adds 1 to $x	        $x = 3; ++$x; $x is now 4
 --$x      Predecrement    Subtracts 1 from $x	  $x = 3; $x--; $x is now 2
@@ -120,8 +120,8 @@ $x--      Postdecrement   Subtracts 1 from $x	  $x = 3; --$x; $x is now 2
 ---
 #Comparison Operators
 
-```
-Operator/Operands 	Function
+```php
+//Operator/Operands 	Function
 $x == $y            $x is equal to $y
 $x != $y            $x is not equal to $y
 $x > $y             $x is greater than $y
@@ -141,5 +141,150 @@ $x !== $y           $x is not identical to $y
 
 ---
 #What is equal
+* ```==``` tests the value is equal
+* ```===``` tests if the value is equal but also the same data type
 * [samples/what_is_equal.php]()
 
+---
+#Logical Operators
+> Logical operators let you test combinations of expressions resulting in boolean value, true and false.
+
+* [samples/logical_operators.php]()
+
+---
+#Break
+
+---
+#Conditionals
+* Ternary
+* if/else
+* Switch
+
+---
+#Conditionals - Ternary
+```php
+$able_to_vote = ($age > 18) ? true : false;
+$variable = empty($_POST['first_name']) ? null : $_POST['first_name'];
+```
+
+---
+#Conditionals - if/else
+
+```php
+if ($age > 18){
+  echo 'You can vote';
+}else{
+  echo 'You can not vote';
+}
+```
+
+```php
+<?php if ($age > 18) : ?>
+  <h1>You can vote</h1>
+<?php else : ?>
+  <h1>You can not vote</h1>
+<?php endif; ?>
+```
+
+---
+#Conditionals - if/elseif/else
+```php
+if ($age > 18){
+  echo 'You can vote';
+}elseif ($age > 16) {
+  echo 'You can drive';
+}else{
+  echo 'Get back to school!'
+}
+```
+
+```php
+<?php if ($age > 18) : ?>
+  <h1>You can vote</h1>
+<?php elseif ($age > 16) : ?>
+  <h1>You can drive</h1>
+<?php else : ?>
+  <h1>Get back to school!</h1>
+<?php endif; ?>
+```
+
+---
+#Conditionals - Switch
+```php
+$hungry_for = 'chocolate'
+switch ($hungry_for) {
+  case 'burgers':
+    echo 'Head to the Dane';
+    break;
+  case 'ice cream':
+    echo 'Go to Culvers, and it is custard!';
+    break;
+  case 'chocolate':
+    echo 'Grab a Snickers';
+    break;
+  case 'pad thai':
+    echo 'Bandung has the best';
+    break;
+  default:
+    echo 'I do not have any suggestions for you';
+    break;
+}
+```
+
+---
+#Loops
+* While
+* Do/While
+* For
+* Foreach
+
+---
+#Loops - While
+* Count up
+
+```php
+$counter = 0;
+while ($counter < 10) {
+  echo $counter;
+  $counter++;
+}
+```
+
+* Count down
+
+```php
+$counter = 10;
+while ($counter > 10) {
+  echo $counter;
+  $counter--;
+}
+```
+
+---
+#Loops - Do/While
+```php
+$die_1 = 1;
+$die_2 = 2;
+do{
+  $die_1 = rand(1,6);
+  $die_2 = rand(1,6);
+  echo "You rolled a $die_1 and a $die_2);
+}while( $die_1 != $die_2 );
+```
+
+---
+#Loops - For 
+```php
+for( $counter = 0; $counter < 10; $counter++){
+  echo $counter . ',';
+}
+```
+---
+#Loops - Foreach
+```php
+foreach($error_messages as $error){
+  echo $error;
+}
+```
+
+---
