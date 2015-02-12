@@ -2,27 +2,25 @@
 * [Syllabus](syllabus.md)
 * [Introduction Letter](introletter.md)
 
-##Lectures
+##Units
 * [Week 1](Units/week01/week01.md)
-
-<!--* [Week 2](Lectures/week02)-->
-<!--* [Week 3](Lectures/week03)-->
-<!--* [Week 4](Lectures/week04)-->
-<!--* [Week 5](Lectures/week05)-->
-<!--* [Week 6](Lectures/week06)-->
-<!--* [Week 7](Lectures/week07)-->
-<!--* [Week 8](Lectures/week08)-->
-<!--* [Week 9](Lectures/week09)-->
-<!--* [Week 10](Lectures/week10)-->
-<!--* [Week 11](Lectures/week11)-->
-<!--* [Week 12](Lectures/week12)-->
-<!--* [Week 13](Lectures/week13)-->
-<!--* [Week 14](Lectures/week14)-->
-<!--* [Week 15](Lectures/week15)-->
-<!--* [Week 16](Lectures/week16)-->
-
-##Labs
+* [Week 2](Units/week02/week02.md)
+* [Week 3](Units/week03/week03.md)
+* [Week 4](Units/week04/week04.md)
+* [Week 5](Units/week05/week05.md)
+* [Week 6](Units/week06/week06.md)
+* [Week 7](Units/week07/week07.md)
+* [Week 8](Units/week08/week08.md)
+* [Week 9](Units/week09/week09.md)
+* [Week 10](Units/week10/week10.md)
+* [Week 11](Units/week11/week11.md)
+* [Week 12](Units/week12/week12.md)
+* [Week 13](Units/week13/week13.md)
+* [Week 14](Units/week14/week14.md)
+* [Week 15](Units/week15/week15.md)
+* [Week 16](Units/week16/week16.md)
 
 ##Projects
+* [Project 1](Units/week02/project1/project1.md)
 
 ##Exams
