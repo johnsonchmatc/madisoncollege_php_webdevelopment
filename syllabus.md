@@ -165,7 +165,7 @@ Revision D 01/26/2015
 | 2   |  1/28 | Intro to PHP, MySQL and Web Applications                                      | Chapters 1,2          | |
 | 3   |  2/4  | Basic PHP Syntax & HTML Forms / Data types, literals, Variables and Constants | Chapter 4             | | 
 | 4   |  2/11 | More PHP Syntax / Operators, Expressions, Conditionals & Loops                | Chapters 5,7          | |
-| 5   |  2/18 | Strings and String Manipulation Functions                                     | Chapter 6             | Project 1 due by start of class |
+| 5   |  2/18 | Strings and String Manipulation Functions                                     | Chapter 6             | Project 1 due by end of class |
 | 6   |  2/25 | Arrays & Associative Arrays                                                   | Chapter 8             | | 
 | 7   |  3/4  | Exam 1, covers Units 1-8                                                      |                       | |
 | 8   |  3/11 | Object-Oriented PHP                                                           | Chapter 17            | |
