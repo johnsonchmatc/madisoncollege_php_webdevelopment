@@ -75,6 +75,8 @@
        <?php 
           $result_1 = $first_number + $second_number * $third_number / $fourth_number;
           $result_2 = ($first_number + $second_number) * $third_number / ($second_number - $fourth_number);
+
+          $first_number += $second_number
         ?>
     
         <p>
