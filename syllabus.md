@@ -167,14 +167,14 @@ Revision D 01/26/2015
 | 4   |  2/11 | More PHP Syntax / Operators, Expressions, Conditionals & Loops                | Chapters 5,7          | |
 | 5   |  2/18 | Strings and String Manipulation Functions                                     | Chapter 6             | Project 1 due by end of class |
 | 6   |  2/25 | Arrays & Associative Arrays                                                   | Chapter 8             | | 
-| 7   |  3/4  | Exam 1, covers Units 1-8                                                      |                       | |
-| 8   |  3/11 | Object-Oriented PHP                                                           | Chapter 17            | |
+| 7   |  3/4  | Object-Oriented PHP                                                           | Chapter 17            | |
+| 8   |  3/11 | Exam 1, covers Units 1-8                                                      |                       | |
 |     |  3/15 | Spring Break                                                                  |                       | |  
-| 9   |  3/25 | Functions & Writing Your Own Functions                                        | Chapter 9             | Project 2 due by start of class |  
-| 10  |  4/1  | Using HTML Forms with PHP                                                     | Chapter 10            | |
+| 9   |  3/25 | Functions & Writing Your Own Functions                                        | Chapter 9             | |  
+| 10  |  4/1  | Using HTML Forms with PHP                                                     | Chapter 10            | Project 2 due by end of class |
 | 11  |  4/8  | Accessing Files & Directories with PHP                                        | Chapter 11            | |
 | 12  |  4/15 | Pattern Matching & Regular Expressions                                        | Chapter 12            | |
-| 13  |  4/22 | Using the MySQL DBMS                                                          | Chapter 13,14         | Project 3 due by start of class |  
+| 13  |  4/22 | Using the MySQL DBMS                                                          | Chapter 13,14         | Project 3 due by end of class |  
 | 14  |  4/29 | Accessing a MySQL Database using PHP                                          | Chapter 15            | | 
 | 15  |  5/6  | Cookies and Session Controll in PHP / Security & Debugging                    | Chapter 16,Appendix D | | 
-| 16  |  5/13 | Exam 2 covers Units 1-15                                                      |                       | Project 4 due by start of class |
+| 16  |  5/13 | Exam 2 covers Units 1-15                                                      |                       | Project 4 due by end of class |
