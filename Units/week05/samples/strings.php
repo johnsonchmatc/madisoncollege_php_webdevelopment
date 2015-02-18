@@ -10,35 +10,43 @@
   <body>
     <?php
       $strings = array();
-      $errors = array();
-      if (isset($_POST["submit"]){
-        if (isset($_POST["string"]){
+      $error_messages = array();
+      if (isset($_POST["submit"])){
+        if (isset($_POST["input_string"]) && strlen($_POST["input_string"]) > 0){
+          $input_string = $_POST["input_string"];
           empty($_POST["stristr"]) ? false : array_push($strings, 'stristr');
+          empty($_POST["strtoupper"]) ? false : array_push($strings, 'strtoupper');
         }else{
-          array_push($errors, 'Please fill out the Input String field');
+          array_push($error_messages, 'Please fill out the Input String field');
         }
-      }else{
-        $string = '';
-        $stristr_index = '';
       }
     ?> 
 
     <?php
       if (isset($strings) && count($strings) > 0){
-        $outputs = array()
+        $outputs = array();
         foreach($strings as $string){
           switch ($string) {
           case 'stristr':
-            if(isset($_POST['stristr_index']){
-              $input = $_POST["string"];
+            if(isset($_POST['stristr_index'])){
+              $input = $_POST["input_string"];
               $function = 'stristr()';
               $index = $_POST['stristr_index'];
-              $result = stristr($_POST["string"], $index);
-              echo "Evaluating '$function' on '$input' with an index of '$index' yeilds '$result'"
+              $result = stristr($input, $index);
+              array_push($outputs,"Evaluating '$function' on '$input' with an index of '$index' yeilds '$result'");
             }else{
-              array_push($errors, 'Please fill out the Index you would like to find in the string');
+              array_push($error_messages, 'Please fill out the Index you would like to find in the string');
             } 
             break;
+          case 'strtoupper':
+              $input = $_POST["input_string"];
+              $function = 'strtoupper()';
+              $result = strtoupper($input);
+              array_push($outputs,"Evaluating '$function' on '$input' yeilds '$result'");
+            break;
+          default:
+            break;
+          }
         }
       }
     ?>
@@ -52,13 +60,30 @@
       </ul>
     <?php endif; ?>
 
-    <form action="vote.php" method="POST">
-      Input String: <input type="text" name="string" value="<?= $string ?>">
-      stristr()<input type="checkbox" name="stristr" value="1"> Find Index Of: <input type="text" name="stristr_index" value="<?= $stristr_index ?>">
-      <input type=submit value="submit" name="submit">
-      <input type=reset value="clear">
-    <form>
+<form action="sample.php" method="POST">
+  Input String: <input type="text" name="input_string" value="<?= isset($_POST['input_string']) ? $_POST['input_string'] : '' ?>"><br>
+  <p>
+    stristr()<input type="checkbox" name="stristr" value="1" <?= isset($_POST['stristr']) ? 'checked="true"' : null ?>>
+    Find Index Of: <input type="text" name="stristr_index" value="<?= isset($_POST['stristr_index']) ? $_POST['stristr_index'] : '' ?>">
+  </p>
+  <p>
+    strtoupper()<input type="checkbox" name="strtoupper" value="1" <?= isset($_POST['strtoupper']) ? 'checked="true"' : null ?>>
+  </p>
+  <p>
+    <input type=submit value="submit" name="submit">
+    <input type=reset value="clear">
+  </p>
+<form>
 
+    <?php if (isset($outputs) && count($outputs) > 0) : ?>
+      <h3>Here are your outputs:</h3>
+      <ul>
+        <?php foreach($outputs as $message) : ?>
+          <li><?= $message; ?></li> 
+        <?php endforeach; ?>
+      </ul>
+    <?php endif; ?>
 
   </body>
 </html>
+
