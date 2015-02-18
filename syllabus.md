@@ -157,7 +157,7 @@ Syllabus Changes: As your instructor, I retain the right to make changes based o
 
 #Course Calendar 
 
-Revision D 01/26/2015
+Revision E 02/17/2015
 
 | **Week** | **Wednesday** | **Topics** | **Readings**  | **Important Dates** |
 | ---      | ---           | ---        | ---           | ---                 |
