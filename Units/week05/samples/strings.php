@@ -16,6 +16,8 @@
           $input_string = $_POST["input_string"];
           empty($_POST["stristr"]) ? false : array_push($strings, 'stristr');
           empty($_POST["strtoupper"]) ? false : array_push($strings, 'strtoupper');
+          empty($_POST["strrev"]) ? false : array_push($strings, 'strrev');
+          empty($_POST["strtok"]) ? false : array_push($strings, 'strtok');
         }else{
           array_push($error_messages, 'Please fill out the Input String field');
         }
@@ -38,12 +40,32 @@
               array_push($error_messages, 'Please fill out the Index you would like to find in the string');
             } 
             break;
+          case 'strtok':
+            if(isset($_POST['strtok_token']) && strlen($_POST['strtok_token']) > 0){
+              $input = $_POST["input_string"];
+              $function = 'strtrok()';
+              $token = $_POST['strtok_token'];
+              $result = strtok($input, $token);
+              $token_results = '';
+              while ($result !== false) {
+                $token_results =  $token_results . "$result";
+                $result = strtok($token);
+              }
+              array_push($outputs,"Evaluating '$function' on '$input' with an index of '$token' yeilds '$token_results'");
+            }else{
+              array_push($error_messages, 'Please fill out a token to parse');
+            }
           case 'strtoupper':
               $input = $_POST["input_string"];
               $function = 'strtoupper()';
               $result = strtoupper($input);
               array_push($outputs,"Evaluating '$function' on '$input' yeilds '$result'");
             break;
+          case 'strrev':
+              $input = $_POST["input_string"];
+              $function = 'strrev()';
+              $result = strrev($input);
+              array_push($outputs,"Evaluating '$function' on '$input' yeilds '$result'");
           default:
             break;
           }
@@ -60,7 +82,7 @@
       </ul>
     <?php endif; ?>
 
-<form action="sample.php" method="POST">
+<form action="strings.php" method="POST">
   Input String: <input type="text" name="input_string" value="<?= isset($_POST['input_string']) ? $_POST['input_string'] : '' ?>"><br>
   <p>
     stristr()<input type="checkbox" name="stristr" value="1" <?= isset($_POST['stristr']) ? 'checked="true"' : null ?>>
@@ -69,6 +91,12 @@
   <p>
     strtoupper()<input type="checkbox" name="strtoupper" value="1" <?= isset($_POST['strtoupper']) ? 'checked="true"' : null ?>>
   </p>
+  <p>
+    strrev()<input type="checkbox" name="strrev" value="1" <?= isset($_POST['strrev']) ? 'checked="true"' : null ?>>
+  </p>
+  <p>
+    strtok()<input type="checkbox" name="strtok" value="1" <?= isset($_POST['strtok']) ? 'checked="true"' : null ?>>
+    Token: <input type="text" name="strtok_token" value="<?= isset($_POST['strtok_token']) ? $_POST['strtok_token'] : '' ?>">
   <p>
     <input type=submit value="submit" name="submit">
     <input type=reset value="clear">
