@@ -157,7 +157,8 @@ Syllabus Changes: As your instructor, I retain the right to make changes based o
 
 #Course Calendar 
 
-Revision E 02/17/2015
+Revision F 02/25/2015
+* Labs are due before class the following week.
 
 | **Week** | **Wednesday** | **Topics** | **Readings**  | **Important Dates** |
 | ---      | ---           | ---        | ---           | ---                 |
