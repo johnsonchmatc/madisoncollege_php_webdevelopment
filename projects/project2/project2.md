@@ -51,13 +51,13 @@ Use the PHP include() directive to add the restaurant's standard HTML page heade
 The files can be found here:
 * [files.zip](files.zip)
 
-Note: This file also contains the header.jpg and style.css files used by header.php .
+Note: This file also contains the header.jpg and style.css files used by header.php. Download these by clicking on the 'Raw' button on github.
 
 Your form should use the POST method, and it's action should be to load the PHP script contactUs.php that you will create in Exercise 2.
 
 Here is an example of what your Contact form might look like:
 
-[](contactForm.png)
+![](https://raw.githubusercontent.com/johnsonch/madisoncollege_php_webdevelopment/master/projects/project2/contactForm.png)
 
 ####Exercise 2
 
