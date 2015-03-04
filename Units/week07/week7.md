@@ -75,7 +75,7 @@ echo "Hello, $full_name"; // Hello, Bob Smith
 ---
 #Callbacks
 
-![inline fit](https://www.youtube.com/watch?v=gFJsBQIqpto)
+![inline fit]('https://www.youtube.com/watch?v=gFJsBQIqpto')
 
 ---
 #Scope
