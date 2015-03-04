@@ -18,74 +18,168 @@
 * Limit the number of arguments
 
 ---
-#Demo
+#Defining functions
+
+```php
+function my_great_function(){
+  //do some great things
+}
+```
 
 ---
+#Calling functions
+
+```php
+my_great_function();
 ```
-<html>
- <head>
-  <title>Process Form using POST</title>
- </head>
- <body bgcolor = "lightgreen"><font size="+1">
-  <h2>Here is the form input:</h2>
-  <?php
-  if(isset($_POST["submit"])){
-    $form_variables = get_variables_from_request();
-    print_statement($form_variables);
-  }
-    
-    function print_statement($vars){
-      print_welcome($vars['your_name']);
-      print_phone_message($vars['your_phone']);
-      print_email_message($vars['your_email_addr']);
-    }
 
-    function print_welcome($name){
-      print "Welcome to PHP $name!<br />";
-    }
-    
-    function print_phone_message($phone){
-      print "Can I call you at $phone?<br />";
-    }
-    
-    function print_email_message($email){
-      print "Is it ok to send you email at $email?<br />";
-    }
+---
+#Functions with parameters
+```php
+function say_hello($name){
+  echo "Hello $name";
+}
 
-    function get_variables_from_request(){
-      $return_array = array();
-      $keys = array('your_name', 'your_phone', 'your_email_addr');
-      foreach($keys as $key){
-       $return_array[$key] = validate_input_params($key);        
-      }
-      return $return_array;
-    }
-
-    function validate_input_params($key){
-      if(isset($_POST[$key]) && $_POST[$key] != ""){
-        return $_POST[$key];
-      }else{
-        return "";
-      }
-    }
-  ?>
-   
-   <form action="#" method="POST">
-   <p>
-     Please enter your name: <br />
-   <input type="text" size=50 name="your_name">
-   <p>
-     Please enter your phone: <br />
-   <input type="text" size=50 name="your_phone">
-   <p>
-     Please enter your email address:<br />
-   <input type="text" size=50 name="your_email_addr">
-   <p>
-   <input type=submit name="submit" value="submit">
-   <input type=reset value="clear">
-  </form>
- </body>
-</html>
+say_hello("Bob"); // Hello Bob
 ```
+
+---
+#Function with default parameters
+```php
+function say_hello($name="Jim"){
+  echo "Hello $name";
+}
+
+say_hello("Bob"); // Hello Bob
+say_hello(); // Hello Jim
+```
+
+---
+#Passing variables by reference
+```php
+$full_name = '';
+$first_name = 'Bob';
+$last_name = 'Smith';
+
+function combine_name(&$full_name, $first, $last){
+  $full_name = "$first $last";
+}
+
+echo "Hello, $full_name"; // Hello,
+
+combine_name($full_name, $first_name, $last_name);
+
+echo "Hello, $full_name"; // Hello, Bob Smith
+```
+
+---
+#Callbacks
+
+![inline fit](https://www.youtube.com/watch?v=gFJsBQIqpto)
+
+---
+#Scope
+* Local
+  * only available to the function, and while the function is executing
+* Global
+  * visible to an entire script
+* Static
+  * only available to a function, but persist from call to call
+
+---
+#Scope - Local
+```php
+function who() {
+  // Local variable; disappears when function ends
+  $friend = "Joe"; 
+  print "In the function $friend is your local friend.<br />";
+ }
+```
+
+---
+#Scope - Global
+```php
+function raise_sal() {
+  global $salary;
+  $salary *= 1.1; // 10 percent raise
+}
+$salary = 50000;
+raise_sal();
+echo 'Congratulations! Your new salary is: $'. $salary .'<br />';
+```
+
+^ Could also accomplish this by passing a reference
+
+---
+#Scope - Static
+```php
+function trackme() {
+  static $count = 0;
+  $count++;
+  echo "You have been here $count times.\n<br />";
+}
+trackme(); // You have been here 1 times
+trackme(); // You have been here 2 times
+trackme(); // You have been here 3 times
+```
+
+---
+#Recursive Functions
+
+> A recursive function is a function that calls itself. Recursive functions are often used to handle certain types of mathematical problems such as:
+
+* traverse directories, linked lists, and binary trees
+* crack passwords
+* create anagrams, and magic squares
+
+---
+#Recursive Functions
+##Fibonacci sequence
+In the beginnning of the 13th century an Italian mathemetician, Leonardo Fibonacci, came up with a formula, called the Fibonacci sequence, to solve the following problem presented at a mathematical competition in Pisa:
+
+---
+#Recursive Functions
+##Fibonacci sequence
+> How many rabbits would be produced in a year if, beginning with a single pair of rabbits, every month each pair reproduces a new pair of rabbits, which become productive when they are one month old, and none of them die, and so on?
+
+---
+#Recursive Functions
+##Fibonacci sequence
+Fibonacci came up with a formula, named after himself, to answer the rabbit question. The Fibonacci sequence normally starts with 0 and 1, and then produces the next Fibonacci number by adding the two previous Fibonacci numbers together: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946 . . .
+
+---
+#Recursive Functions
+##Fibonacci sequence
+* [fibonacci](samples/fibonacci.php)
+
+---
+#Code Organization 
+* Store code that can be re-used in separate files and include with either require() or include()
+
+> The require() function is identical to include(), except that it handles errors differently. If an error occurs, the include() function generates a warning, but the script will continue execution. The require() generates a fatal error, and the script will stop. -Stackoverflow
+
+---
+#Code Organization 
+```php
+<?php
+  require("mylibrary.php");
+  echo "The average is ", ave(array(11,3,5,7,34));
+?>
+
+<?php   include("mylibrary.php");
+  echo "The average is ", ave(array(11,3,5,7,34));
+?>
+```
+
+---
+#Code Organization 
+* Best practice is to include your files relative to the file that is including them
+* If you do not enclose the code of the included file with PHP tags, when PHP starts processing, it will treat the code as though it were an HTML document, causing an error.
+
+---
+#Demo
+##Let's look at some more code
+* [form post](samples/form_post.php)
+* [fizzbuzz](samples/fizzbuzz)
 
 ---
