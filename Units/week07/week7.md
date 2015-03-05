@@ -77,6 +77,8 @@ echo "Hello, $full_name"; // Hello, Bob Smith
 
 ![inline fit](https://www.youtube.com/watch?v=gFJsBQIqpto)
 
+^ https://www.youtube.com/watch?v=gFJsBQIqpto
+
 ---
 #Scope
 * Local
