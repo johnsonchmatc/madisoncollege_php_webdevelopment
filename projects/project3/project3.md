@@ -2,7 +2,7 @@
 
 ##Enhancing the PHP Application
 
-###Table of Contents
+##Table of Contents
 
 1. Concepts
 2. Readings
@@ -10,6 +10,7 @@
 4. Exercises
 5. Submitting the project.
 
+###Concepts
 This project is designed to enhance a simple PHP web application to use 
 additional HTML Form features, a file, and regular expressions. You will learn 
 these concepts:

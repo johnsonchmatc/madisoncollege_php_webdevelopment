@@ -1,0 +1,363 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+  
+  <meta name="generator" content="HTML Tidy, see www.w3.org" />
+
+  
+  
+  <title>Project Four</title>
+  <link href="basic.css" rel="stylesheet" type="text/css" />
+
+  
+  <script type="text/javascript" language="JavaScript">
+
+<!--
+
+function putSemester() {
+
+    var today=new Date();
+
+    var thisMonth=today.getMonth()+1;
+
+    var thisYear=today.getFullYear();
+
+    if(thisMonth <=6) {
+
+        return "Spring, " + thisYear;
+
+    }
+
+    else {
+
+       return "Fall, " + thisYear;
+
+    }
+
+}//-->
+
+  
+
+  </script>
+  
+  <style type="text/css">
+
+<!--
+
+    .bgStripes {
+
+        background-image:url(../../../images/Xstripes.gif);
+
+        background-attachment: fixed;
+
+    }
+
+    
+
+    body {
+
+        background-color:white;
+
+    }
+
+    
+
+    strong {
+
+        font-family: Arial, Helvetica, sans-serif;
+
+    }
+
+    
+
+ 
+
+-->
+
+  
+
+  </style>
+</head>
+
+
+<body style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);">
+
+<table class="bgStripes" border="0" width="100%">
+
+  <tbody>
+
+    <tr name="firstRow">
+
+      <td valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">
+      
+      <script type="text/javascript">
+
+          <!--
+
+            document.write(putSemester());
+
+            -->
+
+      
+
+      </script>
+      </span> <br />
+
+      </td>
+
+      <td style="text-align: center;"><span style="font-weight: bold; font-size: medium; color: darkblue;">PHP
+and
+MySQL Development</span> </td>
+
+      <td align="right" valign="top" width="80"><span style="font-size: x-small; font-weight: bold;">3
+Credits</span> </td>
+
+    </tr>
+
+    <tr>
+
+      <td colspan="3" style="text-align: center;"><span style="font-size: xx-small; font-weight: bold;">152-166</span> </td>
+
+    </tr>
+
+  
+  </tbody>
+</table>
+
+<h2>Project Four<br />
+
+</h2>
+
+<blockquote>
+  
+  <h4>Implement a simple MySQL-based user authentication system. <br />
+
+  </h4>
+
+</blockquote>
+
+<h3>Table of Contents</h3>
+
+<ul>
+
+  <li><a href="#concepts">1. Concepts</a></li>
+
+  <li><a href="#readings">2. Readings</a></li>
+
+  <li><a href="#overview">3. Project Overview</a></li>
+
+  <li><a href="#execs">4. Exercises</a></li>
+
+  <li><a href="#submit">5. Submitting the project.</a></li>
+
+</ul>
+
+<h3><a id="concepts" name="concepts"></a>1.
+Concepts</h3>
+
+<blockquote>
+  
+  <p>This project is designed to
+have you create MySQL tables in your database, create a foreign key
+constraint, implement PHP scripts, to query a table to
+authenticate users and insert records in a second table for session
+control. You will learn these
+concepts:</p>
+
+  
+  <ul>
+
+    <li>Do CREATE TABLE and ALTER TABLE queries on
+a
+MySQL database<br />
+
+    </li>
+
+    <li>Use PHP
+code to query user records in a table</li>
+    <li>Authenticate users with an encrypted password</li>
+
+    <li>Use
+PHP code to save session information in a table and use it for authentication<br />
+
+    </li>
+
+  
+  </ul>
+
+</blockquote>
+
+<h3><a id="readings" name="readings"></a>2.
+Readings</h3>
+
+<blockquote>
+  
+  <p>To prepare for this project
+you should study or review the following:</p>
+
+  
+  <p><a id="readings" name="readings"><strong>PHP and MySQL Web Development, 3rd
+Edition.</strong> Luke Welling
+&amp; Laura Thomson, Sams</a></p>
+
+  
+  <ul>
+
+    <li>Chapter 12, MySQL Administration<br />
+
+    </li>
+
+    <li>Chapter 13, Advanced MySQL Programming</li>
+
+    <li>Chapter 14, Running an E-Commerce Site</li>
+    <li>Chapter 15, E-Commerce Security Issues</li>
+    <li>Chapter 16, Implementing Authentication with PHP and MySQL</li>
+    <li>Chapter 17, Implementing Secure Transactions with PHP and MySQL</li>
+
+  
+  </ul>
+
+</blockquote>
+
+<h3><a id="overview" name="overview"></a>3.
+Project Overview</h3>
+
+<blockquote>
+  
+  <p>This project requires you
+to implement simple authentication
+using PHP and
+MySQL.</p>
+
+</blockquote>
+
+<h3><a id="execs" name="execs"></a>4.
+Exercises</h3>
+
+<blockquote> <a id="ex1" name="ex1"></a>Create
+a directory named <span style="font-weight: bold;">project4</span>
+under your web server's document root directory on your hard drive.
+Place all HTML files and PHP scripts for this project in this new
+directory. <br />
+
+  <br />
+
+  <span style="font-weight: bold;">Note:</span>
+If you are working on an MATC lab computer, always save a copy of this
+directory and all the files in it to either the class server, a USB
+thumb drive, a floppy disk or similar media, at the end of each work
+session. Otherwise your work will be lost!
+  
+  <h4>Exercise 1</h4>
+
+  
+  <blockquote>
+    
+    <p>Download the project zip file containing PHP code for simple user authentication<span style="font-weight: bold;"></span>.</p>
+
+    
+    <ol>
+
+      <li><span style="font-weight: bold;"></span>Download and unzip the
+<a href="project4.zip">project4.zip</a> file
+from the Blackboard version of this document. Note that it contains
+"inc", "lib" and "sql" subdirectories. You should copy all files and
+directories to your <span style="font-weight: bold;">project 4</span> directory. </li>
+
+      <li><span style="font-weight: bold;"></span>Modify
+the <span style="font-weight: bold;">config.inc.php</span>
+file in the "inc" directory to contain the class server name (itmysql.matcmadison.edu), your MySQL
+username, password and personal database name (same as your username). <br />
+
+      </li>
+
+      <li>Execute the <span style="font-weight: bold;">structure.sql</span>
+script in the "sql" directory to create the tables used by the PHP scripts <span style="font-weight: bold;"></span>
+in your personal database on the class server. Note that a test user is inserted in the <span style="font-weight: bold;">users</span> table.<br />
+
+      </li>
+
+      <li>Get the "phplogin" application working using your personal
+database on the class server. You may run the application entirely on
+the class server or run the PHP code on your home PC or a lab computer.
+Note that the scripts use the older "mysql" set of PHP functions to
+communicate with the database.
+        
+      </li>
+
+      <li>Zip or archive all of the application files into a file named
+<span style="font-weight: bold;">p4ex1.zip</span> or
+<span style="font-weight: bold;">p4ex1.tar.gz</span> for submission.
+      
+      </li>
+    
+    </ol>
+
+  </blockquote>
+
+  
+  <h4>Exercise 2</h4>
+
+  <blockquote>
+  <ol>
+
+    <li>Modify the PHP code of the "phplogin" application to use the
+newer "mysqli" library of functions to access the MySQL database. (Make
+sure you have saved the version of the application from Exercise 1
+before you begin these modifications!)
+      
+      </li>
+
+    <li>Get the PHP
+application working with the "mysqli" functions.
+    </li>
+    
+    <li>Zip or archive all the application files into a file named
+<span style="font-weight: bold;">p4ex2.zip</span> or
+<span style="font-weight: bold;">p4ex2.tar.gz</span> for submission.
+
+    </li>
+
+  
+  </ol>
+  </blockquote>
+    <p><span style="font-weight: bold;">Note:</span>
+You may, alternatively, create subdirectories (say "ex1" and "ex2")
+under your <span style="font-weight: bold;">project4</span> directory
+to separate the code of the two versions of the "phplogin" application
+so you can work on both at the same time.
+
+    </p>
+
+
+</blockquote>
+
+<h3><a id="submit" name="submit"></a>5.
+Submitting the project</h3>
+
+<blockquote>
+  
+  <p>All of your PHP scripts and
+HTML files for
+this project should be in a directory and its subdirectories. Using a compression program
+like WinZip, zip this directory and its contents into a single file
+named <strong>project4.zip</strong>
+.&nbsp; If you are using Linux or Macintosh OSX then you should tar
+and gzip your
+directory into a file named <strong>project4.tar.gz</strong>
+.&nbsp; Submit
+the <strong>project4.tar.gz</strong>
+or <strong>project4.zip</strong>
+file to your instructor via Blackboard,
+using
+the new <span style="text-decoration: underline; font-style: italic;">Blackboard
+Assignment Submission Procedures</span>.
+You may submit 2 separate zip or archive files for this project through Blackboard, <span style="font-weight: bold;">p4ex1.zip</span> and <span style="font-weight: bold;">p4ex2.zip</span>, instead of a single file. In <strong>addition</strong>
+to this your instructor might grade your projects with you in the lab.</p>
+
+</blockquote>
+
+<hr width="50%" />
+</body>
+</html>
