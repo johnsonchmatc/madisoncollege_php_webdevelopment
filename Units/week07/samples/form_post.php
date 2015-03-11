@@ -5,6 +5,7 @@
  <body bgcolor = "lightgreen"><font size="+1">
   <h2>Here is the form input:</h2>
   <?php
+  //Our processing will blow up if the form has not been submitted
   if(isset($_POST["submit"])){
     $form_variables = get_variables_from_request();
     print_statement($form_variables);
@@ -37,9 +38,9 @@
       return $return_array;
     }
 
-    function validate_input_params($key){
-      if(isset($_POST[$key]) && $_POST[$key] != ""){
-        return $_POST[$key];
+    function validate_input_params($input_key){
+      if(isset($_POST[$input_key]) && $_POST[$input_key] != ""){
+        return $_POST[$input_key];
       }else{
         return "";
       }
