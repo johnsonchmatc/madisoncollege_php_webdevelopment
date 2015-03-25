@@ -1,6 +1,6 @@
 #Functions & Writing Your Own Functions
 ##Week 7
-###Chapter 17
+###Chapter 9
 
 ---
 #What is a function?
