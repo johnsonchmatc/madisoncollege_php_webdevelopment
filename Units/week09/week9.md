@@ -312,4 +312,7 @@ NOTE: The book's wording is a bit confusing.  I think the author is trying to ge
 ##What are final methods?
 * Methods that can be used in a subclass but not overrridden
 
+---
+##Going further
 
+* [http://phpenthusiast.com/object-oriented-php-tutorials](http://phpenthusiast.com/object-oriented-php-tutorials)
