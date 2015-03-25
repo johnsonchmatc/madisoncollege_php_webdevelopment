@@ -2,7 +2,7 @@
 ##Simple PHP Application
 
 Total Points: 20
-Due: 2/11/2015 at the start of class
+Due: 4/01/2015 by end of class
 
 ###Concepts
 
