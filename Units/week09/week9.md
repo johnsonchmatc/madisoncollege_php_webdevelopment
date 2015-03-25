@@ -156,12 +156,12 @@ class Employee{
 
 * Scopes of members of a class
 * Determines what has access to the member
-* Public
-  * Default scope and allows access from everywhere
-* Private
-  * Only accessible inside the class
-* Protected
-  * Only accessible inside the class and to it's sub classess
+
+---
+##What are private, public and protected properties?
+* **Public**: Default scope and allows access from everywhere
+* **Private**: Only accessible inside the class
+* **Protected**:  Only accessible inside the class and to it's sub classes
 
 ---
 ##How do you define private, public and protected properties?
@@ -225,6 +225,9 @@ echo $student->gpa(); // 4.0
 ## What are constructors and destructors?
 * A constructor, as the term implies, is a builder or creator. When you assign values to properties in a class, PHP will automatically build or construct a new object when "new" is called by the user of the class.
   * You can create a custom constructor: ```function __construct($owner, $make)```
+
+---
+## What are constructors and destructors?
 * A destructor method is called right before the object is released. Releasing an object means that all references to the object have been unset or the object has gone out of scope.
 
 ---
@@ -295,6 +298,28 @@ echo $teacher->fullName(); // Mr. Simpson
 * A setter is a method used to assign a value to a class variable, and a getter is a method used to retrieve the value of a class variable. Simply said, "Put something in, set it; take something out, get it."
 
 ^ User-Defined Setters and Getters:  You can make public methods that let the function caller get or set properties of the object.
+
+---
+##What are getters and setters?
+```php
+class Person{
+  private $first_name;
+  private $last_name;
+
+  public function setFirstName($name){
+    $this->$first_name = $name;
+  }
+
+  public function getFirstName(){
+    return $this->$first_name;
+  }
+
+}
+
+$me = new Person;
+$me->setFirstName('CJ');
+echo $me->getFirstName(); // CJ
+```
 
 ---
 ##What are getters and setters?

@@ -80,8 +80,8 @@ Create an include file named contact.inc.php and in it define a class named Cont
 ```
 protected $name
 protected $phone
-protected $email\_user
-protected $email\_domain
+protected $email_user
+protected $email_domain
 protected $message
 ```
 
