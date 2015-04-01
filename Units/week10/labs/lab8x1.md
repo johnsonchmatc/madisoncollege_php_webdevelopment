@@ -18,7 +18,7 @@
     * Apple Wireless Keyboard $69.00
     * Solid State Drive $89.99
     * Chromebook $149.00
-  * A Hidden field with your name as the value
+  * A Hidden field with your name as the value ```<input type="hidden" name="my_name" value="CJ" />```
 
 * The ACTION attribute of the form tag should be assigned the name of the PHP 
 script that will handle your form. Your form should use the GET method. Call it 
@@ -35,6 +35,8 @@ and fix any errors you encounter.
 
 * Use the ```$_GET``` superglobal array to assign the form fields to PHP variables. 
 Give the PHP variables names that differ from the form field names.
+
+* Output the variables on the page however you want
 
 * Note: Do not use an ```extract($_REQUEST)``` or ```extract($_GET)``` funtion 
 call to create the PHP variables!

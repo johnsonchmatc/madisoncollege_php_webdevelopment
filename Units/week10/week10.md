@@ -136,8 +136,8 @@ How we were doing things before:
 ---
 #Checkboxes
 A New way:
-* [samples/checkboxes/old.html](samples/checkboxes/old.html)
-* [samples/checkboxes/old.php](samples/checkboxes/old.php)
+* [samples/checkboxes/new.html](samples/checkboxes/new.html)
+* [samples/checkboxes/new.php](samples/checkboxes/new.php)
 
 ---
 #Multi Select
