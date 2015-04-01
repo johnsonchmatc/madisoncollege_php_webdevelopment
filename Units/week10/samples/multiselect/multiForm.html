@@ -1,0 +1,32 @@
+<html>
+ <head>
+  <title>Multiple Choice</title>
+ </head>
+ <body>
+  <form action="multi.php" method="POST">
+   <b>Choose a vacation spot:</b>
+   <br />
+   <select name="location[]" multiple="multiple">
+       <option>Maui
+       <option>Bali
+       <option>Miami
+       <option>Riviera
+   </select> <p>
+   <b>Select a city:</b>
+   <br />
+   <input type="checkbox" name="place[]" value="New York" />New York
+   <br />
+   <input type="checkbox" name="place[]" value="Chicago" />Chicago
+   <br />
+   <input type="checkbox" name="place[]" value="London" />London
+   <br />
+   <input type="checkbox" name="place[]" value="Tokyo" />Tokyo
+   <br />
+   <input type="checkbox" name="place[]" value="San Francisco"
+          Checked />San Francisco
+   <p>
+   <input type="submit" value="submit" />
+   <input type="reset" value="clear" />
+  </form>
+ </body>
+</html>

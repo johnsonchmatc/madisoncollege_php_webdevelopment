@@ -134,10 +134,21 @@ How we were doing things before:
 * [samples/checkboxes/old.php](samples/checkboxes/old.php)
 
 ---
-#Multi Select and Checkboxes
+#Checkboxes
 A New way:
 * [samples/checkboxes/old.html](samples/checkboxes/old.html)
 * [samples/checkboxes/old.php](samples/checkboxes/old.php)
 
 ---
 #Multi Select
+* [samples/multiselect/multiForm.html](samples/multiselect/multiForm.html)
+* [samples/multiselect/multi.php](samples/multiselect/multi.php)
+
+---
+#File Upload
+
+* [http://php.net/manual/en/features.file-upload.post-method.php](http://php.net/manual/en/features.file-upload.post-method.php)
+* [samples/upload/uploadPicture.html](samples/upload/uploadPicture.html)
+* [samples/upload/uploadPicture.php](samples/upload/uploadPicture.php)
+
+---

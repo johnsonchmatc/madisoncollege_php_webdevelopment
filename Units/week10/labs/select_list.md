@@ -1,5 +1,5 @@
 ```
-<select>
+<select name="state">
 	<option value="AL">Alabama</option>
 	<option value="AK">Alaska</option>
 	<option value="AZ">Arizona</option>
