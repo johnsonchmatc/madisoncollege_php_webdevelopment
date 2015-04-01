@@ -128,3 +128,16 @@ NOTE: This is an instructor opinion on simple security
 * Again know what your data is
 
 ---
+#Checkboxes
+How we were doing things before:
+* [samples/checkboxes/old.html](samples/checkboxes/old.html)
+* [samples/checkboxes/old.php](samples/checkboxes/old.php)
+
+---
+#Multi Select and Checkboxes
+A New way:
+* [samples/checkboxes/old.html](samples/checkboxes/old.html)
+* [samples/checkboxes/old.php](samples/checkboxes/old.php)
+
+---
+#Multi Select
