@@ -49,8 +49,8 @@
 
 * The following steps are essential in producing a form. The next example illustrates how each of these steps is applied.
 
-* START: Start the form with the HTML <form> tag.
-* ACTION: The action attribute of the <form> tag is the URL of the PHP script that will process the data input from the form.
+* START: Start the form with the HTML ```<form>``` tag.
+* ACTION: The action attribute of the ```<form>``` tag is the URL of the PHP script that will process the data input from the form.
 
 ---
 #The steps to produce a form
@@ -60,7 +60,7 @@
 ---
 #The steps to produce a form
 * SUBMIT: Create a submit button so that the form can be processed. This will launch the program listed in the action attribute.
-* END: End the form with the </form> tag. End the HTML document with the </html> tag.
+* END: End the form with the ```</form>``` tag. End the HTML document with the ```</html>``` tag.
 
 ---
 #Let's look at some examples
