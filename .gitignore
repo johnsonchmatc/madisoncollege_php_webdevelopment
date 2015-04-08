@@ -4,3 +4,4 @@ exittickets/
 .DS_Store
 announcements.md
 *.bak
+*/.svn/
