@@ -30,7 +30,7 @@
 
 ---
 #Opening a File for Reading
-* ``file_exists()``` function checks to see if the file exists, and the 
+* ```file_exists()``` function checks to see if the file exists, and the 
 * ```is_readable()``` function will return true if a file exists and has read permission.
 * Example: [samples/uploadFile.php](samples/uploadFile.php)
 
@@ -78,4 +78,3 @@ fopen($filename, "ab")
 
 * Let's add some of these to the upload example
 
----
