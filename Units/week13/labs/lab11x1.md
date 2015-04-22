@@ -1,7 +1,7 @@
 #Exercise 1
 
 * Log into your mysql server ```$ mysql -u root```
-* Make sure you have the northwind database ```> show databases;``` will show you all of the databases you have created.  If you don't see northwind in there refer to the directions in [../../week02/labs/lab2.md](week02/labs/lab2.md)
+* Make sure you have the northwind database ```> show databases;``` will show you all of the databases you have created.  If you don't see northwind in there refer to the directions in [week02/labs/lab2.md](../../week02/labs/lab2.md)
 
 For each of the following lines craft a query to get the results, save the query and results in a text document to show your instructor.
 
