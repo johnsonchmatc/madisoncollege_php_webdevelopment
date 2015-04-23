@@ -323,4 +323,14 @@ or
 
 ^ ```
 select e.FirstName, e.LastName, t.TerritoryDescription from Employees as e, EmployeeTerritories as et,Territories as t WHERE e.EmployeeID = et.EmployeeID and t.TerritoryID = et.TerritoryID ORDER BY TerritoryDescription ASC;
+
+## Insert
+insert into Products (ProductName,SupplierID,CategoryID) VALUES  ("iPod", 1, 1);
+
+## Update
+update Products set ProductName="iPad" where ProductName="iPod";
+
+## Select with joins and ordering
+select CompanyName as Supplier, ProductName, CategoryName,  UnitPrice from Products p, Suppliers s, Categories c WHERE p.SupplierID 
+= s.SupplierID AND p.CategoryID = c.CategoryID ORDER BY ProductName DESC; 
 ```
