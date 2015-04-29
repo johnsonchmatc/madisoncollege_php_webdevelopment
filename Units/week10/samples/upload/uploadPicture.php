@@ -10,7 +10,7 @@
 
         $filename = $_FILES['picture_file']['name'];
         $filesize = $_FILES['picture_file']['size'];
-        $directory = $_SERVER['DOCUMENT_ROOT'] .'/pictures/';
+        $directory = './pictures/';
         $uploadFile = $directory . $filename;
 
         echo "The moved file is: $uploadFile<br />";
@@ -27,5 +27,7 @@
        width="250" border="3">
   </center>
   </font>
+   
+   <?php echo "You are: " . $_POST['my_name'] ?>
  </body>
 </html>
