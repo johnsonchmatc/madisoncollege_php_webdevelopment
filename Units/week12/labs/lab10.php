@@ -94,24 +94,10 @@ $search_string = <<<EOF
 EOF;
 
 
-//find product names
- $product_result = preg_match_all('/((?<=<name>)([\w+\ ]*)(?=<\/name>))/', $search_string, $product_matches);
-
-$products = $product_matches[0];
-
-$price_result = preg_match_all('/((?<=<price type=\"decimal\">)(\d+\.\d+)(?=<\/price>))/', $search_string, $price_matches);
-
-$prices = $price_matches[0];
-
-$i = 0;
-
-foreach ($products as $product){
-  echo "<p>$product $$prices[$i]";
-  $i++;
-}
-
   
 
 
-//list products and their price
+//find product names store as $product_names array
+//find product prices store as $product_prices array
+//Display the <name of the product> $<price of product> HINT: use the arrays and loops to organize the information.
 ?>

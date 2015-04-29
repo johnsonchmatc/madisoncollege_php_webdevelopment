@@ -84,6 +84,8 @@ order to a file named orders.txt in your project3 directory.
 Write the data to the file in comma-delimited format (CSV) with a newline 
 character (\n) to mark end-of-record.
 
+The (CSV) should contain the customer's name, address and order quantity.
+
 As part of your data validation, you should check for any embedded commas in all 
 variables to be written to the data record. If any are found, the value of the 
 variable must be enclosed in double quotes when it is written to the file. As an 

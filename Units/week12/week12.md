@@ -114,6 +114,8 @@ $preg_match_all = preg_match_all($regex, $search_string );
 print '<pre>Found '. $preg_match_all." matches\n"; //What will preg_match_all return?
 ```
 
+[Match All Class Example](https://gist.github.com/johnsonch/2f9f65f5b06aaa55cad4)
+
 ---
 #Capturing output
 ```php
