@@ -71,8 +71,14 @@ fields.
 Display the customer name and address along with other order information already
 being displayed by the PHP script.
 
-Create the ```order_master``` and ```order_detail``` tables in your personal 
-database schema on the class server using the following CREATE TABLE statements:
+Create a custom database for yourself on your nitrous box.  Use the ```$ mysql -u root``` to gain access to the MySQL CLI. Then create a database called personal with the following code.
+
+```
+CREATE DATABASE personal;
+```
+
+Next create the ```order_master``` and ```order_detail``` tables in your personal 
+database schema on your nitrous using the following CREATE TABLE statements:
 
 ```
 CREATE TABLE order_master
@@ -147,10 +153,6 @@ from each order_detail record for that order on an indented line beneath it.
 
 Loop through the order_master records, displaying each one followed by its 
 corresponding detail records.
-
-Be sure to use ```stripslashes()``` to strip off any backslashes added when the 
-records were read from the database if the ```magic_qutoes_gpc``` directive is 
-turned on.
 
 Close the MySQL database explicitly, before ending your script.
 
