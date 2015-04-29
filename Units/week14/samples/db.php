@@ -1,5 +1,5 @@
 <?php
-  $db = mysql_connect('localhost','root');
+  @ $db = mysql_connect('localhost','root');
   if (!$db) {
     exit('Connection to server failed: '. mysql_error());
   }
