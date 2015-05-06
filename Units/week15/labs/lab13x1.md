@@ -31,5 +31,5 @@ If the form posted a username and password
   * compare the generated hash to the one pulled from the ```Password``` field
   in the database
   * if the hashes are equal log the user in by using the following code 
-  ```$_SESSION['Authenticated'] = 0;```
+  ```$_SESSION['Authenticated'] = 1;```
 
