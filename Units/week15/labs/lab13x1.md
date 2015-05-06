@@ -33,3 +33,4 @@ If the form posted a username and password
   * if the hashes are equal log the user in by using the following code 
   ```$_SESSION['Authenticated'] = 1;```
 
+Show the results and code to your instructor.

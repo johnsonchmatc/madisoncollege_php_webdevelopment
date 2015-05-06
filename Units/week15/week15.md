@@ -105,3 +105,11 @@ if (! empty($_COOKIE['usr'])) {
 ```
 
 ---
+#Security
+
+* Know your input
+  * Use ```addslashes()``` to prevent simple SQL injection
+* Use SSL
+* Don't store senstive information, if you can avoid it
+* Encrypt data in the database
+
