@@ -8,4 +8,5 @@ announcements.md
 Units/week12/images/
 *.key
 .vagrant/
+.idea/
 www/
