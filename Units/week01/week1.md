@@ -11,10 +11,6 @@
 * Owner at JohnsonCH, LLC
 
 ---
-#Internships
-^ Ask me about them if you are interested.
-	
----
 #Hobbies
 * Software development
 * Networking
@@ -73,7 +69,13 @@
 
 #Preparing our shop
 * IRC http://officehours.johnsonch.com/
-* Nitrious.io 
+* [Github](https://github.com) -> [Github Education](https://education.github.com/discount_requests/new)
+* [Try Git](https://try.github.io)
+* Development Options
+  * [c9.io](cloud_9.md)
+  * [Ubuntu VM](ubuntu_vm.md)
+  * [XAMPP](xampp.md)
+  * [Vagrant](vagrant.md)
 
 
 ---

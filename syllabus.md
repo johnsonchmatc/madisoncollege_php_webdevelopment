@@ -61,7 +61,7 @@ Nonattendance does not constitute an official withdrawal and students will be he
 
 Stop payment of a check does not constitute a formal cancellation. Registrants will be held liable for the fee until the date of official cancellation. Allow four weeks from the date of cancellation to receive a full refund of payment.
 
-**Attendance:** You are expected to attend class. Poor attendance can lead to failure in the class. If you cannot attend a class, it is your responsibility to obtain the material missed. Lecture will not be repeated for individual students. If you withdraw from the class, please notify the instructor, and The Center for Agriscience and Technologies Office, room 173. Non-attendance will not automatically withdraw you from a course. 
+**Attendance:** You are expected to attend class. Poor attendance can lead to failure in the class. If you cannot attend a class, it is your responsibility to obtain the material missed. Lecture will not be repeated for individual students. If you withdraw from the class, please notify the instructor, and The Business and Applied Arts Office. Non-attendance will not automatically withdraw you from a course. 
 
 **Submitting Work:** All work must be submitted as directed in the assignment instructions. 
 
@@ -175,5 +175,5 @@ Revision A 08/08/2015
 | 11  | 11/23 | Object Oriented PHP                             |                       | |
 | 12  | 11/30 | Regular expressions                             |  Chapter 10           | |
 | 13  | 12/07 | Drawing dynamic graphics                        |  Chapter 11           | Project 3 due by end of class |  
-| 14  | 12/14 | Web services                                    |  Chapter 12           | | 
+| 14  | 12/14 | Web services                                    |  Chapter 12                      | | 
 | 15  | 12/21 | Exam 2 comprehensive                            |                       | Project 3 due by end of class | 
