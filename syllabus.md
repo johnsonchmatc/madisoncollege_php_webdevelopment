@@ -1,13 +1,13 @@
 #PHP Web Development with MySQL
 
-Catalog #152 10152166-0002
+Catalog #152 10152166-0004
 
 ##General Information
 
 * *Credits:* 3
 * *Course Format:* face to face
-* *Class Schedule:* We 5:30 – 9:20 PM 01/21/2015 - 05/14/2015
-* *Location:* Truax-Health Building Rm 318
+* *Class Schedule:* M 5:30 – 9:20 PM 08/31/2015 - 12/21/2015
+* *Location:* Truax-Health Building Rm 341
 * *Instructor:* Chris Johnson
 * *Email:* cgjohnson1@madisoncollege.edu
 * *Phone:* 608.301.5232
@@ -27,10 +27,8 @@ This course introduces the student to dynamic web page development using the PHP
 
 ###Textbook
 ####Required
-* PHP and MySQL by Example Ellie Quigley with Marko Gargenta, Prentice Hall
+* Head First PHP & MySQL
 
-####Optional
-* A recommended book is: PHP and MySQL Web Development, 4th Edition, Luke Welling & Laura Thompson, Sams
 
 ###Course Competencies:
 * Upon successful completion of this course, the student will be able to :
@@ -122,11 +120,11 @@ Phone the student help desk: (608) 243-4444; toll-free at (866) 277-4445. They c
 Syllabus Changes: As your instructor, I retain the right to make changes based on the timeline of the class, feedback from learners and/or logistical issues and will inform you as soon as a change is made.
 
 #Grading Policy
-* All work that is to be graded must be accomplished by your own effort. Points will be deducted for not submitting assigned work by the due date. 
-* Ten percent of the points will be taken off for each day that the assignment is late.
-* Assignments will NOT be accepted if they are more than 10 DAYS late.
-* Assignments will NOT be accepted after the START of the class period in which the final exam is administered.
-* Assignments are NOT accepted after the instructor goes over the answers to the assignment in class.
+* All work that is to be graded must be accomplished by your own effort. 
+* No points will be given for late assignments/labs/exams.
+* All assignments/labs/exams must meet the [course style guide](https://github.com/johnsonchmatc/php-style-guide)
+* All assignments/labs/exams must run (no errors, and must produce output). If there are compilation errors or no output, the most the assignment can receive is 50% of the points. 
+* If there is output, but not all objectives are met from the assignment/lab/exam's rubric points will be removed for each item missing or incorrect.
 * There is no make-up of tests or other scheduled, graded classroom activities.
 * It is the responsibility of the student to make up any missed work and/or pick up any missed materials. Missing a class is NOT an excuse for failure to hand in work due.
 * There is no extension of assignment due dates without prior notification of circumstance. All work that is to be graded must be accomplished by your own effort.
@@ -137,9 +135,10 @@ Syllabus Changes: As your instructor, I retain the right to make changes based o
 
 | **Course Itemse** | **Total Possible Points** |
 | ---               | --- |
-| Project/Labs      | 155 |
-| Exams	            | 100 |
-| Total             |	255 |
+| Labs              | 140 |
+| Projects          | 80  |
+| Exams	            | 200 |
+| Total             |	420 |
 
 
 
@@ -157,25 +156,24 @@ Syllabus Changes: As your instructor, I retain the right to make changes based o
 
 #Course Calendar 
 
-Revision G 03/02/2015
+Revision A 08/08/2015
 * Labs are due before class the following week.
 
-| **Week** | **Wednesday** | **Topics** | **Readings**  | **Important Dates** |
+| **Week** | **Monday** | **Topics** | **Readings**  | **Important Dates** |
 | ---      | ---           | ---        | ---           | ---                 |
-| 1   |  1/21 | Intro to class and LAMP                                                       | Syllabus              | |
-| 2   |  1/28 | Intro to PHP, MySQL and Web Applications                                      | Chapters 1,2          | |
-| 3   |  2/4  | Basic PHP Syntax & HTML Forms / Data types, literals, Variables and Constants | Chapter 4             | | 
-| 4   |  2/11 | More PHP Syntax / Operators, Expressions, Conditionals & Loops                | Chapters 5,7          | |
-| 5   |  2/18 | Strings and String Manipulation Functions                                     | Chapter 6             | Project 1 due by end of class |
-| 6   |  2/25 | Arrays & Associative Arrays                                                   | Chapter 8             | | 
-| 7   |  3/25 | Functions & Writing Your Own Functions                                        | Chapter 9             | |  
-| 8   |  3/11 | Exam 1, covers Units 1-8                                                      |                       | |
-|     |  3/15 | Spring Break                                                                  |                       | |  
-| 9   |  3/4  | Object-Oriented PHP                                                           | Chapter 17            | |
-| 10  |  4/1  | Using HTML Forms with PHP                                                     | Chapter 10            | Project 2 due by end of class |
-| 11  |  4/8  | Accessing Files & Directories with PHP                                        | Chapter 11            | |
-| 12  |  4/15 | Pattern Matching & Regular Expressions                                        | Chapter 12            | |
-| 13  |  4/22 | Using the MySQL DBMS                                                          | Chapter 13,14         | Project 3 due by end of class |  
-| 14  |  4/29 | Accessing a MySQL Database using PHP                                          | Chapter 15            | | 
-| 15  |  5/6  | Cookies and Session Controll in PHP / Security & Debugging                    | Chapter 16,Appendix D | | 
-| 16  |  5/13 | Exam 2 covers Units 1-15                                                      |                       | Project 4 due by end of class |
+| 1   | 08/31 | Intro to class and Development Environments     | Syllabus              | |
+|     | 09/07 | Labor Day                                       |                       | |
+| 2   | 09/14 | Intro to PHP, MySQL and converting HTML to PHP  | Chapters 1,2          | |
+| 3   | 09/21 | Database operations                             | Chapter 3             | | 
+| 4   | 09/28 | More dynamic pages                              | Chapter 4             | |
+| 5   | 10/05 | Uploading files                                 | Chapter 5             | Project 1 due by end of class |
+| 6   | 10/12 | Authentication                                  | Chapter 6             | | 
+| 7   | 10/19 | Remember me and eliminating duplication         | Chapter 7 and 7.5     | |  
+| 8   | 10/26 | Harvesting data                                 | Chapter 8             | |
+| 9   | 11/09 | Exam 1, covers Weeks 1-7                        |                       | |
+| 10  | 11/16 | String and Custom functions                     |  Chapter 9            | Project 2 due by end of class |
+| 11  | 11/23 | Object Oriented PHP                             |                       | |
+| 12  | 11/30 | Regular expressions                             |  Chapter 10           | |
+| 13  | 12/07 | Drawing dynamic graphics                        |  Chapter 11           | Project 3 due by end of class |  
+| 14  | 12/14 | Web services                                    |  Chapter 12           | | 
+| 15  | 12/21 | Exam 2 comprehensive                            |                       | Project 3 due by end of class | 
