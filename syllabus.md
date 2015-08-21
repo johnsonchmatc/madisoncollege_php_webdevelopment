@@ -135,10 +135,11 @@ Syllabus Changes: As your instructor, I retain the right to make changes based o
 
 | **Course Itemse** | **Total Possible Points** |
 | ---               | --- |
-| Labs              | 140 |
+| Labs              | 130 |
 | Projects          | 80  |
 | Exams	            | 200 |
-| Total             |	420 |
+| Participation     | 40  |
+| Total             |	450 |
 
 
 
@@ -161,19 +162,19 @@ Revision A 08/08/2015
 
 | **Week** | **Monday** | **Topics** | **Readings**  | **Important Dates** |
 | ---      | ---           | ---        | ---           | ---                 |
-| 1   | 08/31 | Intro to class and Development Environments     | Syllabus              | |
-|     | 09/07 | Labor Day                                       |                       | |
-| 2   | 09/14 | Intro to PHP, MySQL and converting HTML to PHP  | Chapters 1,2          | |
-| 3   | 09/21 | Database operations                             | Chapter 3             | | 
-| 4   | 09/28 | More dynamic pages                              | Chapter 4             | |
-| 5   | 10/05 | Uploading files                                 | Chapter 5             | Project 1 due by end of class |
-| 6   | 10/12 | Authentication                                  | Chapter 6             | | 
-| 7   | 10/19 | Remember me and eliminating duplication         | Chapter 7 and 7.5     | |  
-| 8   | 10/26 | Harvesting data                                 | Chapter 8             | |
-| 9   | 11/09 | Exam 1, covers Weeks 1-7                        |                       | |
-| 10  | 11/16 | String and Custom functions                     |  Chapter 9            | Project 2 due by end of class |
-| 11  | 11/23 | Object Oriented PHP                             |                       | |
-| 12  | 11/30 | Regular expressions                             |  Chapter 10           | |
-| 13  | 12/07 | Drawing dynamic graphics                        |  Chapter 11           | Project 3 due by end of class |  
-| 14  | 12/14 | Web services                                    |  Chapter 12                      | | 
-| 15  | 12/21 | Exam 2 comprehensive                            |                       | Project 3 due by end of class | 
+| 1   | 08/31 | Intro to class and Development Environments     | Syllabus          | Lab 1 |
+|     | 09/07 | Labor Day                                       |                   | |
+| 2   | 09/14 | Intro to PHP, MySQL and converting HTML to PHP  | Chapters 1,2      | Lab 2 |
+| 3   | 09/21 | Database operations                             | Chapter 3         | Lab 3 | 
+| 4   | 09/28 | More dynamic pages                              | Chapter 4         | Lab 4 |
+| 5   | 10/05 | Uploading files                                 | Chapter 5         | Lab 5, Project 1 due by end of class |
+| 6   | 10/12 | Authentication                                  | Chapter 6         | Lab 6 | 
+| 7   | 10/19 | Remember me and eliminating duplication         | Chapter 7 and 7.5 | Lab 7 |  
+| 8   | 10/26 | Harvesting data                                 | Chapter 8         | Lab 8 |
+| 9   | 11/09 | Exam 1, covers Weeks 1-7                        |                   | |
+| 10  | 11/16 | String and Custom functions                     | Chapter 9         | Lab 9, Project 2 due by end of class |
+| 11  | 11/23 | Object Oriented PHP                             |                   | Lab 10 |
+| 12  | 11/30 | Regular expressions                             | Chapter 10        | Lab 11 |
+| 13  | 12/07 | Drawing dynamic graphics                        | Chapter 11        | Lab 12, Project 3 due by end of class |  
+| 14  | 12/14 | Web services                                    | Chapter 12        | Lab 13 | 
+| 15  | 12/21 | Exam 2 comprehensive                            |                   | Project 4 due by end of class | 
