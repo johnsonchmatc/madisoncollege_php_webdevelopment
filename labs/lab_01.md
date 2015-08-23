@@ -19,5 +19,7 @@
 
 
 ##Turn in instructions
-* Go to the github ui for your respository, create a merge request for your ```lab_1``` branch and ```master``` then assign it to the instructor (johnsonch) 
-* Then go to blackboard and submit your github username and the number of the merge request 
+* Go to the github ui for your respository, create a merge request for your 
+```lab_1``` branch and ```master``` then assign it to the instructor (johnsonch) 
+ Then go to blackboard and submit your github username and the number of the 
+merge request, or show the mergre request to your instructor.

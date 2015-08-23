@@ -162,7 +162,7 @@ Revision A 08/08/2015
 
 | **Week** | **Monday** | **Topics** | **Readings**  | **Important Dates** |
 | ---      | ---           | ---        | ---           | ---                 |
-| 1   | 08/31 | Intro to class and Development Environments     | Syllabus          | Lab 1 |
+| 1   | 08/31 | Intro to class and Development Environments     | Syllabus, Book Intro | Lab 1 |
 |     | 09/07 | Labor Day                                       |                   | |
 | 2   | 09/14 | Intro to PHP, MySQL and converting HTML to PHP  | Chapters 1,2      | Lab 2 |
 | 3   | 09/21 | Database operations                             | Chapter 3         | Lab 3 | 

@@ -31,7 +31,6 @@ Send me email ASAP if you have difficulty signing on to our Blackboard course cg
 * Please note that you MUST have an email address to use this course. Remember that Madison College offers all students a free email address that you can now access email from Madison College’s homepage.
 * Access to a computer with a web browser and internet access.
 * A Github.com account, which we will setup in class.
-* A Nitrous.io account use this link [https://www.nitrous.io/join/xAc6XsTB2BA](https://www.nitrous.io/join/xAc6XsTB2BA) to get extra N2O, which we will setup in class.
 
 ###Assignments
 The format of the course is broken down into "weeks". The course will last for 16 weeks and each of these weeks there are various assignments. You will find the outline for the weeks of the  course under the "Classes" section in Blackboard. Weekly assignments include readings, videos, labs, projects and discussions. Please look at the "Classes" section in Blackboard for more detail on the actual assignments.  Due Dates for all assignments are listed in the syllabus.
@@ -41,13 +40,13 @@ On the syllabus you will find the schedule for readings and labs. Please come to
   
 
 ###Exams
-There will be two 'Exams' they will be taken in class.
+There will be two Exams they will be taken in class.
 
 ###Socrative
 At the end of every class I’ll have you fill out an exit ticket.  The exit ticket is un-graded and my way of taking attendance along with accessing your understanding of the material from the day.  You can login to the site at http://beta.socrative.com using the room code of "johnsonchmatc" 
 
 ##Ways to Get Help
-  * IRC: [Tutorial](https://github.com/johnsonch/madisoncollege_ruby_on_rails/blob/master/irc.md)
+  * IRC: [Tutorial](https://github.com/johnsonchmatc/madisoncollege_ruby_on_rails/blob/master/irc.md)
   * EMAIL: You can contact me via email at cgjohnson1@madisoncollege.edu and I will do my very best to get back to you within 24-48 hours. I will do my best to check my email Monday morning through Friday at 4:30pm.
   * PHONE: You can contact me via telephone at 608-301-5232. This is usually not a very efficient method as we will probably end up playing "telephone tag."
   * BLACKBOARD ASSISTANCE: If you experience problems with Blackboard, help is available at the Madison College Library Student Helpdesk. To get help, you can visit room 230 in the library, call 243-4444, or send email to student-help@madisoncollege.edu If you find that Blackboard is "down" and the Student Helpdesk is closed (after hours, weekends, and holidays), you may call 246-6666 to leave a message so it can be addressed as soon as staff is available.
@@ -58,7 +57,7 @@ I look forward to working and learning with you this semester. This is the first
   
 ####STEPS TO COMPLETE:
   
-1.	You need to go to our Blackboard site or course [github site](https://github.com/johnsonch/madisoncollege_php_webdevelopment) to get a copy of the syllabus which is the place to start so we all have the same expectations.
+1.	You need to go to our Blackboard site or course [github site](https://github.com/johnsonchmatc/madisoncollege_php_webdevelopment) to get a copy of the syllabus which is the place to start so we all have the same expectations.
   
 2.	Check your email often.  Your instructor will send you messages on a regular basis.
   

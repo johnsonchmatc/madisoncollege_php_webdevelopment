@@ -2,7 +2,7 @@
 ##Mad libs
 
 Total Points: 20
-Due: 2/11/2015 at the start of class
+Due: 10/05/2015
 
 ##Problem
 Mad libs are a simple game where you create a story template with blanks for words. 
@@ -23,13 +23,22 @@ Enter an adverb: quickly
 Do you walk your blue dog quickly? That's hilarious!
 ```
 
+##Directions:
+* Create a folder called ```project_1``` in your ```php_course_work``` folder 
+* Create a branch called ```project_1``` in your repository 
+* Code a solution to the problem, keeping all code in your ```project_1``` folder.
+* Add and commit the files along your way. 
+* Remember to push frequently to github as a backup.
+```$ git push origin project_1```
+
 ##Grading Rubric 
 These are elements in addition to the points 
-* Everthing should be contained in one self posting page
 * The database should store the noun, verb, adverb and completed story
 * The page should have some styled elements
 
-####Submitting the project
 
-All of your PHP scripts and HTML files for this project should be in one directory. Using a compression program like WinZip, zip this directory and its contents into a single file named project1.zip .  If you are using Linux or Macintosh OSX then you should tar and gzip your directory into a file named project1.tar.gz .  Submit the project1.tar.gz or project1.zip file to your instructor via Blackboard, using the new Blackboard Assignment Submission Procedures.  In addition to this your instructor might grade your projects with you in the lab.
-
+##Turn in instructions
+* Go to the github ui for your respository, create a merge request for your 
+```project_1``` branch and ```master``` then assign it to the instructor (johnsonch) 
+* Then go to blackboard and submit your github username and the number of the 
+merge request
