@@ -4,7 +4,7 @@
 ##Directions:
 * Create a folder called ```lab_8``` in your ```php_course_work``` folder 
 * Create a branch called ```lab_8``` in your repository 
-* Follow Chapter 8 from the book and complete all of the test drives 
+* Follow Chapter 9 from the book and complete all of the test drives 
 adding the code to your ```lab_8``` folder.
 * Add and commit the files along your way. 
 * Remember to push frequently to github as a backup.
