@@ -48,6 +48,9 @@
 #Syllabus
 
 ---
+#Coding Standards
+
+---
 #Questions?
 
 ---
@@ -64,6 +67,55 @@
 * What was your first day like?
 * What was your favorite thing about that job?
 * What was the worst thing about that job?
+
+---
+
+#Short Lecture
+
+---
+#	Open Source
+
+---
+#	Static vs. Dynamic Websites
+
+---
+#Static Web Sites
+
+Simply a page of content that is rendered the same every time it is requested.
+
+---
+#Dynamic Web Sites
+
+A dynamic Web site is one with content that is regenerated every time a user visits or reloads the site.
+
+---
+#	HTTP
+
+---
+#What does an HTTP request look like?
+![inline fit](http://help.sap.com/static/saphelp_nwpi711/en/48/3a063a902131c3e10000000a42189d/ppt_img.gif)
+
+
+---
+#	PHP History
+
+---
+#	Simple PHP script
+
+---
+#	PHP Functions
+
+---
+#	PHP and HTML
+
+---
+#	MySQL
+
+---
+#	Debugging
+
+---
+#	Getting Help
 
 ---
 

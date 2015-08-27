@@ -27,7 +27,7 @@ This course introduces the student to dynamic web page development using the PHP
 
 ###Textbook
 ####Required
-* Head First PHP & MySQL
+* Head First PHP & MySQL (ISBN-13: 978-0596006303)
 
 
 ###Course Competencies:

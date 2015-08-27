@@ -7,7 +7,7 @@ I am sending you a brief letter to get you going with the PHP Web Development co
 My name is Chris Johnson and I will be your teacher for this face to face learning experience. I am a part-time Information Technology Instructor at Madison College. You can reach me via email at cgjohnson1@madisoncollege.edu. Please read through the following information which clarifies the details of the class.
 
 ##Class Structure
-Thiw will be a face to face class with a combinations of discussions, lectures and labs. 
+There will be a face to face class with a combinations of discussions, lectures and labs. 
 
 ##Accessing the Class
 In order to get started in this class, you need to get to the Blackboard site, which is where our class is located, and log on.
