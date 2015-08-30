@@ -31,7 +31,7 @@ sample and ```</pre>``` to end it.
 ```$ git push origin project_3```
 
 ##Grading Rubric 
-These are elements in addition to the points 
+These are elements in addition to the points outlined in the syllabus.
 * The database should store the blog entries.
 * The page should have some styled elements.
 

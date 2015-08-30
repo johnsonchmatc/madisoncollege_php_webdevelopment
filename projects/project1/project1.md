@@ -32,7 +32,7 @@ Do you walk your blue dog quickly? That's hilarious!
 ```$ git push origin project_1```
 
 ##Grading Rubric 
-These are elements in addition to the points 
+These are elements in addition to the points outlined in the syllabus.
 * The database should store the noun, verb, adverb and completed story
 * The page should have some styled elements
 

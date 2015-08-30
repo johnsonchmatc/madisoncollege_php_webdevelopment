@@ -41,8 +41,7 @@ for PHP math functions.
 ```$ git push origin project_2```
 
 ##Grading Rubric 
-These are elements in addition to the points 
-* The database should store the noun, verb, adverb and completed story
+These are elements in addition to the points outlined in the syllabus.
 * The page should have some styled elements
 
 ##Submitting the project
