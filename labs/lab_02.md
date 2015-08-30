@@ -10,6 +10,10 @@ adding the code to your ```lab_2``` folder.
 * Remember to push frequently to github as a backup.
 ```$ git push origin lab_2```
 
+##Notes
+* Create a file called lab2.sql and add all of the SQL statements you create for
+  chapter 2 to that file.
+
 ##Turn in instructions
 * Go to the github ui for your respository, create a merge request for your 
 ```lab_2``` branch and ```master``` then assign it to the instructor (johnsonch) 
