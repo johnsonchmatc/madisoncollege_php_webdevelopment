@@ -14,7 +14,8 @@ Catalog #152 10152166-0004
 * *Office Hours:*
 	* Email for an appointment
 	* IRC #johnsonch_office_hours on irc.freenode.net
-  * [IRC Tutorial](https://github.com/johnsonch/madisoncollege_ruby_on_rails/blob/master/irc.md)
+    * [http://officehours.johnsonch.com](http://officehours.johnsonch.com)
+    * [IRC Tutorial](https://github.com/johnsonch/madisoncollege_ruby_on_rails/blob/master/irc.md)
 
 
 ##Class Information
@@ -131,6 +132,9 @@ Syllabus Changes: As your instructor, I retain the right to make changes based o
 * There is no make-up of tests or other scheduled, graded classroom activities.
 * It is the responsibility of the student to make up any missed work and/or pick up any missed materials. Missing a class is NOT an excuse for failure to hand in work due.
 * There is no extension of assignment due dates without prior notification of circumstance. All work that is to be graded must be accomplished by your own effort.
+
+**Extra Credit**
+If you find errors in the samples for lecture or any of my examples for a given class period by the end of it I will award you 5 extra credit points for each issue, if you can prove it by using the [course style guide](https://github.com/johnsonchmatc/php-style-guide). 
 
 **Grades Posted in Blackboard:** All assignment grades are posted in Blackboard. Your instructor needs to manually grade the assignments. Sometimes this happens very quickly and sometimes it takes a week. When you've posted a quiz or lab answers, it will show up in the gradebook as a green box with a white ! in it. This means that your instructor has received your work, but has not graded it yet. Discussion boards show up in the gradebook as a green box with a white ! in it until your instructor has graded the assignment, then it will have a score in it. 
 

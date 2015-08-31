@@ -23,7 +23,7 @@
 * Daughter: Kenzie
 * Dogs: Scooter and Miley
 
-![fit right](https://farm9.staticflickr.com/8656/16327076071_c858d4f2ef_h_d.jpg)
+![fit right](https://dl.dropboxusercontent.com/s/j163v0j78anj18d/2015-08-31%20at%205.17%20PM.png)
 
 ---
 #About you
@@ -67,6 +67,18 @@
 * What was your first day like?
 * What was your favorite thing about that job?
 * What was the worst thing about that job?
+
+---
+#Preparing our shop
+* IRC http://officehours.johnsonch.com/
+* [Github](https://github.com) -> [Github Education](https://education.github.com/discount_requests/new)
+* [Try Git](https://try.github.io)
+* Development Options
+  * [c9.io](cloud_9.md)
+  * [Ubuntu VM](ubuntu_vm.md)
+  * [XAMPP](xampp.md)
+  * [Vagrant](vagrant.md)
+
 
 ---
 
@@ -206,18 +218,6 @@ Today is <?php date("m-d-Y"); ?>
 
 ---
 
-#Preparing our shop
-* IRC http://officehours.johnsonch.com/
-* [Github](https://github.com) -> [Github Education](https://education.github.com/discount_requests/new)
-* [Try Git](https://try.github.io)
-* Development Options
-  * [c9.io](cloud_9.md)
-  * [Ubuntu VM](ubuntu_vm.md)
-  * [XAMPP](xampp.md)
-  * [Vagrant](vagrant.md)
-
-
----
 #Socrative
 * http://beta.socrative.com
 * Room ID: johnsonchmatc

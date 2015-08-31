@@ -11,7 +11,7 @@ adding the code to your ```lab_2``` folder.
 ```$ git push origin lab_2```
 
 ##Notes
-* Create a file called lab2.sql and add all of the SQL statements you create for
+* Create a file called ```lab2.sql``` and add all of the SQL statements you create for
   chapter 2 to that file.
 * If you would like to use PHP My Admin with Cloud9 installation directions are here:
   [https://docs.c9.io/docs/setting-up-phpmyadmin](https://docs.c9.io/docs/setting-up-phpmyadmin)
