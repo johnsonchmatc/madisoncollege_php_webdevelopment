@@ -102,6 +102,9 @@ If you have an accommodation card from their office indicating that you have a d
 
 **Blackboard:** A Blackboard course site has been created for this class. You can access this course by logging in to the following page:  [https://blackboard.madisoncollege.edu/](https://blackboard.madisoncollege.edu/)
 
+**Recorded Lectures:**
+Lectures and other materials may be available on the [PHP Fall 2015 Playlist on Youtube](https://www.youtube.com/playlist?list=PLBxMGz0mvrK1raVJ6nZlWP5CZHgisbAhL)
+
 Madison College Blackboard Student Support information: [http://madisoncollege.edu/blackboard-help](http://madisoncollege.edu/blackboard-help). Consult your instructor for support with Blackboard problems
 
 Computer difficulties are not a long-term excuse for non-participation. If you experience problems with your computer, call the computer help desk at (608) 243-4444 or toll-free at (866) 277-4445. They can talk you through fixing many, many problems.
