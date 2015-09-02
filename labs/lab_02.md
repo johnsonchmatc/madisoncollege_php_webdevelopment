@@ -9,8 +9,8 @@
 * Your terminal should have the following text ```workspace/php_course_work (master)```
   ![](https://dl.dropboxusercontent.com/s/pbafbzkizoq2981/2015-09-02%20at%207.51%20AM.png?dl=0)
   
-* Create a folder called ```lab_2``` in your ```php_course_work``` folder 
 * Create a branch called ```lab_2``` in your repository using the command ```$ git checkout -b lab_2```
+* Create a folder called ```lab_2``` in your ```php_course_work``` folder 
 * Follow Chapters 1 and 2 from the book and complete all of the test drives adding the code to your ```lab_2``` folder.
 * Add and commit the files along your way, at least after completeting each test drive using the following sequece of commands:
 * Verify you have changes with ```$ git status``` you should see something like the following:
