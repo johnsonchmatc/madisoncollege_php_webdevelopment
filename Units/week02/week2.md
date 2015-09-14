@@ -167,7 +167,7 @@ EOF
 ---
 #A Boolean is:
 
-^ A logical value that is either 'true' or 'false' 
+> A logical value that is either 'true' or 'false' 
 
 ---
 #What composite data types does PHP support?
@@ -182,7 +182,7 @@ EOF
 ---
 #Array
 - Simply a collection of values
-- We'll talk more in week 6
+- There are two types: Regular and Associative
 
 ---
 #What is a NULL data type?
@@ -202,7 +202,7 @@ EOF
 ---
 #Objects
 * A way of representing every day data
-* We'll talk more about these week 8
+* We'll talk more about these week 10
 
 ---
 #Debugging data types
@@ -210,7 +210,7 @@ EOF
 <?php gettype($myVariable); ?>
 ```
 
-[samples/datatypes.php](https://github.com/johnsonch/madisoncollege_php_webdevelopment/blob/master/Units/week03/samples/datatypes.php)
+[samples/datatypes.php](https://github.com/johnsonch/madisoncollege_php_webdevelopment/blob/master/Units/week02/samples/datatypes.php)
 
 ^ note using the express <?= rather than <?php echo
 
@@ -261,7 +261,7 @@ $5
 ---
 #Displaying Variables
 
-[samples/datatypes.php](sampes/datatypes.php)
+[samples/datatypes.php](https://github.com/johnsonch/madisoncollege_php_webdevelopment/blob/master/Units/week02/samples/datatypes.php)
 
 ---
 #String Interpolation
@@ -344,3 +344,15 @@ $5
 #PHP mysqli
 
 [samples/database.php](https://github.com/johnsonch/madisoncollege_php_webdevelopment/blob/master/Units/week02/samples/database.php)
+
+---
+#For next week
+* Read Chapter 3
+* Attempt Lab 3
+* Start looking at Project 1
+
+---
+
+#Socrative
+* http://beta.socrative.com
+* Room ID: johnsonchmatc
