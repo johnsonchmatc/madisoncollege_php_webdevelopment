@@ -332,14 +332,15 @@ $5
 
 
 ---
-*	MySQL
-  *	```CREATE DATABASE database_name```
-  *	```CREATE TABLE table_name```
-  *	```INSERT INTO table_name (column_name1, column_name2, …) VALUES ('value1', 'value2', …)```
-  *	```SELECT columns FROM table_name```
-  *	```SELECT * FROM table_name```
-  *	```SELECT * FROM table_name WHERE column_name = ''```
-*	PHP mysqli
-  *	mysqli_connect()
-  *	mysqli_query()
-  *	mysqli_close()
+#MySQL
+*	```CREATE DATABASE database_name```
+*	```CREATE TABLE table_name```
+*	```INSERT INTO table_name (column_name1, column_name2, …) VALUES ('value1', 'value2', …)```
+*	```SELECT columns FROM table_name```
+*	```SELECT * FROM table_name```
+*	```SELECT * FROM table_name WHERE column_name = ''```
+
+---
+#PHP mysqli
+
+[samples/database.php](https://github.com/johnsonch/madisoncollege_php_webdevelopment/blob/master/Units/week02/samples/database.php)
