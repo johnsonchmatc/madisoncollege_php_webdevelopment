@@ -164,8 +164,8 @@ If you find errors in the samples for lecture or any of my examples for a given 
 
 #Course Calendar 
 
-Revision A 08/24/2015
-* Labs are due before class the following week.
+Revision B 09/13/2015
+* Labs are due at the end of class each week, or as noted in individual lab documents.
 
 | **Week** | **Monday** | **Topics** | **Readings**  | **Important Dates** |
 | ---      | ---           | ---        | ---           | ---                 |
