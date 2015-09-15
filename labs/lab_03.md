@@ -9,6 +9,10 @@
   ![](https://dl.dropboxusercontent.com/s/pbafbzkizoq2981/2015-09-02%20at%207.51%20AM.png?dl=0)
 1. Now make sure you have all the code from github on your local branch using 
   ```$ git pull origin master```
+    * If you get a screen that has a message about merging master into master
+      and there are some keyboard shortcuts at the bottom IE "^x, ^o" it is an
+      interactive commit message, press the control key and "o" to save the
+      message, then control and "x" to exit.
 1. Create a folder called ```lab_3``` in your ```php_course_work``` folder 
 1. Create a branch called ```lab_3``` in your repository 
 1. Follow Chapter 3 from the book and complete all of the test drives 
