@@ -1,6 +1,9 @@
 <?php
-    $mysqli = mysqli_connect("localhost", "root", "root", "northwind");
-    $result = mysqli_query($mysqli, "SELECT * from Products;");
+    $mysqli = mysqli_connect("localhost", "johnsonch", "root", "northwind");
+    
+    $query = "SELECT * from Products;";
+    
+    $result = mysqli_query($mysqli, $query);
     if (!$result) {
         exit('Database query error: '. mysql_error($db));
     }
