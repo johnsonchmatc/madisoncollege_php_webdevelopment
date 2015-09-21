@@ -6,6 +6,7 @@ announcements.md
 *.bak
 */.svn/
 Units/week12/images/
+Units/week03/sample/
 *.key
 .vagrant/
 .idea/

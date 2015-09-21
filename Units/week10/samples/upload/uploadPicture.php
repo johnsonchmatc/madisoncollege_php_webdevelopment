@@ -5,8 +5,7 @@
  <body bgcolor="#33ff33">
   <font face="verdana" size="+1">
   <?php
-    echo 'The uploaded file is: ',
-        $_FILES['picture_file']['tmp_name'],'<br />';
+    echo 'The uploaded file is: ', $_FILES['picture_file']['tmp_name'],'<br />';
 
         $filename = $_FILES['picture_file']['name'];
         $filesize = $_FILES['picture_file']['size'];
