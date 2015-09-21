@@ -42,8 +42,6 @@
 * Week 9
 * Week 15
 
-
-
 ##Topics
 | Topic                 | Week first covered  |
 | --------------------- | ------------------- |
@@ -65,3 +63,4 @@
 | Regular Expressions   |                     |
 | Cookies               |                     |
 | Session control       |                     |
+
