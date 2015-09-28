@@ -1,3 +1,6 @@
+footer:@johnsonch :: Chris Johnson :: Web Development with PHP and MySQL 
+autoscale: true
+
 #More PHP Syntax / Operators, Expressions, Conditionals & Loops
 ##Chapters 5 and 7
 ###Week 4
@@ -231,3 +234,8 @@ switch ($hungry_for) {
 }
 ```
 
+---
+#Checkbox arrays
+
+
+* [samples/checkboxes.php](https://github.com/johnsonch/madisoncollege_php_webdevelopment/blob/master/Units/week04/samples/checkboxes.php)
