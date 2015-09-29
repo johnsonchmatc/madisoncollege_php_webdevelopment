@@ -2,7 +2,7 @@ footer:@johnsonch :: Chris Johnson :: Web Development with PHP and MySQL
 autoscale: true
 
 #More PHP Syntax / Operators, Expressions, Conditionals & Loops
-##Chapters 5 and 7
+##Chapter 4
 ###Week 4
 
 ---
@@ -153,9 +153,6 @@ $x !== $y           $x is not identical to $y
 > Logical operators let you test combinations of expressions resulting in boolean value, true and false.
 
 * [samples/logical_operators.php]()
-
----
-#Break
 
 ---
 #Conditionals
