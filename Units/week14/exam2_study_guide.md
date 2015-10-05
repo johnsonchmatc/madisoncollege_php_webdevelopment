@@ -1,5 +1,32 @@
 ##Exam 2 Study Guide
 
+Be able to explain these functions and how the affect the variables in the script.
+```
+<?php
+  $friend = "Sam";
+  $friend2 = who();
+  echo 'My friends are: ', $friend, ' ', $friend2, '<br />';
+  
+  function who() {
+    $friend = "Joe"; 
+    return $friend;
+  }
+  
+  $friend3 = who();
+  print 'My friends are: '. $friend .' '. $friend3 .'<br />';
+  
+  
+  function raise_sal() {
+    global $salary;
+    $salary *= 1.1;
+  }
+  
+  $salary = 50000;
+  raise_sal();
+  echo 'Congratulations! Your new salary is: $'. $salary .'<br />';
+?>
+```
+
 In the following code know what each of the MySQL specific functions purpose is.
 
 ```
@@ -87,63 +114,6 @@ results will be returned from the two regular expression functions.
 </html>
 ```
 
-Understand what each of the mysql commands is doing and what output it might produce.
-```
-$ mysql -u root -p
-Enter password: 
-Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 1
-Server version: 5.0.45 MySQL Community Server (GPL)
-
-Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
-
-mysql> use sample3db;
-Database changed
-GRANT ALL PRIVILEGES ON sample3db.* TO 'bob'@'localhost' IDENTIFIED BY 'guess';
-Query OK, 0 rows affected (0.00 sec)
-
-mysql> set password for bob@localhost = password('robert');
-Query OK, 0 rows affected (0.00 sec)
-
-mysql> DELETE FROM mysql.user WHERE user = 'bob';
-Query OK, 1 row affected (0.00 sec)
-
-mysql> flush privileges;
-Query OK, 0 rows affected (0.00 sec)
-```
-
-Understand what each of the PHP file functions do, and what is the purpose and 
-location of ```$_SERVER['DOCUMENT_ROOT']``` on your nitrous box.
-
-```   
-<html>
- <head>
-  <title>Sample4 Script</title>
- </head>
- <body bgcolor="lavender">
-  <?php
-    $filename = $_SERVER['DOCUMENT_ROOT'] .'/files/data.txt';
-
-    if (! file_exists($filename)) {
-      exit("No such file as: $filename");
-    }
-    
-    $fh = fopen($filename,'rb');
-    while(! feof($fh)) {
-      $line = fgets($fh);   
-      print $line .'<br />';
-    }
-    fclose($fh);
-    
-    $lines = file($filename);
-    foreach ($lines as $line_num => $line) {
-      $line_num++;
-      echo '<b>'. $line_num .'</b>: '. $line .'<br />';
-    }
-  ?>
- </body>
-</html>
-```
 
 Given the following contents in the text file e2sample6.txt
 ```
@@ -204,42 +174,3 @@ Be able to explain each of the file functions do.
 </html>
 ```
 
-In the following authentication and protected action scripts be able to explain
-what is stopping a user from accessing the protected script and how. What the built
-in functions are and how they work.
-
-Authentication Script
-```
-<?php // Sample7 authentication
-  session_start();
-  if (isset($_POST['username']) &&
-      ($_POST['username'] == 'user') &&
-      isset($_POST['password']) &&
-      ($_POST['password'] == 'pass')) {
-    $_SESSION['Authenticated'] = 1;
-  }
-  else {
-    $_SESSION['Authenticated'] = 0;
-  }
-  session_write_close();
-  header('Location: e2sample7x2.php');
-?>
-```
-Protected content script
-```
-<?php
-  session_start();
-?>
-<html>
- <head><title>Sample7 protected content</title></head>
- <body>
-  <?php
-    if (isset($_SESSION['Authenticated']) && ($_SESSION['Authenticated'] == 1)) {
-  ?>
-  <p>Hello. Since you are logged in, you can view protected content!</p>
-  <?php } else { ?>
-  <p>Sorry, since you are not logged in, you cannot view protected content.</p>
-  <?php } ?>
- </body>
-</html>
-```
