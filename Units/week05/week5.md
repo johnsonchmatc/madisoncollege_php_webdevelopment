@@ -178,6 +178,9 @@ move_uploaded_file($_FILES['image']['tmp_name'], $target);
 
 ---
 #Super Global ```$_GET[]```
+* Similiar to ```$_POST[]```, ```$_GET[]``` is a super global array variable that holds either form data when sent from a form, or data embedded in a URL
+* When sending a GET request from a form, the data is automatically sent and accessed using the name attributes as indexed keys into the array
+* When embedded in a URL, the data is built manually as part of the URL; each value in the array is indexed using the name of each piece of data
 
 ---
 #Labrat
