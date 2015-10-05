@@ -180,3 +180,154 @@ move_uploaded_file($_FILES['image']['tmp_name'], $target);
 #Super Global ```$_GET[]```
 
 ---
+#Labrat
+* Get the project setup
+
+```
+$ cd ~/workspace/
+$ git clone git@github.com:johnsonchmatc/labrat.git
+$ cd labrat
+$ git checkout week_05_start
+$ git checkout -b week_05_in_class
+```
+
+* Open the labrat.sql file and connect to your mysql server ```$ mysql -u root```
+
+* Use the following from the labrat.sql file to create a database and our first table
+
+```sql
+//Create database
+create database labrat;
+
+//Create table
+
+CREATE TABLE `Assets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Description` text,
+  `AssetID` varchar(255) DEFAULT NULL,
+  `SerialNumber` varchar(255) DEFAULT NULL,
+  `Name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+```
+
+* Go manually add new assets
+* Create a new file assets/bulk_import.php and add the following code:
+
+```php
+<?php include('../header.php') ?>        
+<?php include('../db.php') ?>
+
+<?php include('../footer.php') ?>        
+```
+
+* Next let's add the form for uploading a file
+
+```php
+<form class="form-horizontal" action="<?= $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data" role="form">
+  <fieldset>
+    <legend>Bulk Import Assets</legend>
+
+    <div class="form-group">
+      <label for="BulkAssetFile" class="col-lg-2 control-label">Bulk Asset Import CSV File</label>
+      <div class="col-lg-10">
+        <input type="file" class="form-control" name="BulkAssetFile" id="BulkAssetFile" >
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="submit" name="submit" value="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+```
+
+* Now we need to handle the post data
+
+```php
+if (isset($_POST['submit'])) {
+    $temp_file = $_FILES['BulkAssetFile']['tmp_name'];
+    $row = 1;
+
+    if (($handle = fopen($temp_file, "r")) !== FALSE) {
+        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+            for ($i=0; $i < count($data); $i++) {
+                echo $data[$i] . "<br />\n";
+            }
+            $row++;
+        }
+        fclose($handle);
+    }
+}
+```
+
+
+* Now let's pull the data out of the CSV
+
+```php
+$asset_id = $data[0];
+$asset_name =  addslashes($data[1]);
+$serial_number = addslashes($data[2]);
+$description = $data[3];
+
+$query = "INSERT INTO Assets (AssetID, SerialNumber, Name, Description) 
+                 VALUES ('$asset_id', '$serial_number', '$asset_name', '$description');";
+$result = mysqli_query($mysqli, $query);
+if (!$result) {
+    echo $query;
+    exit("Database query error: ". mysqli_error($mysqli));
+}
+```
+
+* After we are done processing let's unlink the file and redirect the user back to the assets/index.php file
+
+```php
+//Assume that if we got here we are good to go
+unlink($temp_file);
+header('Location: index.php');
+```
+
+* Now we can go to the base home page and add a recently added items panel
+* Start off with the querey to get items
+
+```php
+<?php
+    $query = "SELECT * FROM Assets ORDER BY id DESC;";
+    $result = mysqli_query($mysqli, $query);
+    if (!$result) {
+        exit("Database query ($query) error: ". mysql_error($mysqli));
+    }
+?>
+```
+
+* THen add the loop to show things, but oops we forgot to add a date to our database
+```php
+<?php while ($record = mysqli_fetch_array($result)) { ?>
+  <tr>
+    <td><?= $record['Name'] ?></td>
+    <td><?= $record['AssetID'] ?></td>
+    <td><?= $record['SerialNumber'] ?></td>
+    <td></td>
+  </tr>
+<?php } ?>
+```
+
+* Let's alter the database to support a created at
+
+```sql
+ALTER TABLE Assets ADD COLUMN CreatedAt datetime;
+```
+
+* Now we need to go modify our inserts to put the current date
+```php
+date("Y-m-d H:i:s")
+```
+
+* Now we can add the date to our table
+
+```php
+<td><?= $record['SerialNumber'] ?></td>
+```
+
