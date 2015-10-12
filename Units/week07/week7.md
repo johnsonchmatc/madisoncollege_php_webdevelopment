@@ -1,6 +1,9 @@
-#Functions & Writing Your Own Functions
-##Week 7
-###Chapter 9
+footer:@johnsonch :: Chris Johnson :: Web Development with PHP and MySQL :: Week 7
+autoscale: true
+
+#Web Development with PHP and MySQL
+##Chapter 7 and 7.5
+###Week 7
 
 ---
 #What is a function?

@@ -5,6 +5,7 @@
 * You will be able to use notes and nitrous to test and verify things.
 * You will be given the entire class time to answer the questions and will turn in the results on paper.  
 * The exam will be posted online for you to access during the class period.
+* The exam will be limited to 2 hours.
 
 ### Examples and things to consider
 Be able to describe the different kinds of variables being used. Are they scaler? What are their data types?
