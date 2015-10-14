@@ -1,6 +1,7 @@
 #Madison College PHP Web Development 
 * [Syllabus](syllabus.md)
 * [Introduction Letter](introletter.md)
+* [Coding Style Gide](https://github.com/johnsonchmatc/php-style-guide)
 
 ##Units
 * [Week 1](Units/week01/week1.md)
@@ -39,28 +40,6 @@
 * [Project 4](projects/project4/project4.md)
 
 ##Exams
-* Week 9
+* Week 9 - [Study Guide](https://github.com/johnsonchmatc/madisoncollege_php_webdevelopment/blob/master/Units/week05/exam1_study_guide.md)
 * Week 15
-
-##Topics
-| Topic                 | Week first covered  |
-| --------------------- | ------------------- |
-| Forms                 | Week 2              |
-| Strings               | Week 2              |
-| Variables             | Week 2              |
-| Loops                 | Week 3              |
-| Accessing MySQL       | Week 3              |
-| Expressions           | Week 4              |
-| Conditionals          | Week 4              |
-| Data types            |                     | 
-| literals              |                     | 
-| Constants             |                     |
-| Operators             |                     |
-| String manipulation   |                     |
-| Arrays                |                     |
-| Functions             |                     |
-| Objects Oriented PHP  |                     |
-| Regular Expressions   |                     |
-| Cookies               |                     |
-| Session control       |                     |
 
