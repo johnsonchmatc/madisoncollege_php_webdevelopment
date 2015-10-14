@@ -108,7 +108,7 @@
                 <div class="form-group">
                   <label for="task" class="col-lg-2 control-label">Task</label>
                   <div class="col-lg-10">
-                    <input type="text" class="form-control" id="task" name="task">
+                  <input type="text" class="form-control" id="task" name="task" />
                   </div>
                 </div>
 

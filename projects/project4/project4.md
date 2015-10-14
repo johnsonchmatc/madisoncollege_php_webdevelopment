@@ -21,11 +21,10 @@ and then shows the images
 
 ##Directions:
 * Create a folder called ```project_4``` in your ```php_course_work``` folder 
-* Create a branch called ```project_4``` in your repository 
 * Code a solution to the problem, keeping all code in your ```project_4``` folder.
 * Add and commit the files along your way. 
 * Remember to push frequently to github as a backup.
-```$ git push origin project_4```
+```$ git push origin master```
 
 ##Grading Rubric 
 These are elements in addition to the points called out on the syllabus
@@ -33,7 +32,4 @@ These are elements in addition to the points called out on the syllabus
 * The page should be styled and look appealing when showing the images.
 
 ##Submitting the project
-* Go to the github ui for your respository, create a merge request for your 
-```project_4``` branch and ```master``` then assign it to the instructor (johnsonch) 
-* Then go to blackboard and submit your github username and the number of the 
-merge request
+* Then go to blackboard and submit your github username and respository url.
