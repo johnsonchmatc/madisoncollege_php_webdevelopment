@@ -164,7 +164,7 @@ If you find errors in the samples for lecture or any of my examples for a given 
 
 #Course Calendar 
 
-Revision B 09/13/2015
+Revision C 10/20/2015
 * Labs are due at the end of class each week, or as noted in individual lab documents.
 
 | **Week** | **Monday** | **Topics** | **Readings**  | **Important Dates** |
@@ -178,10 +178,11 @@ Revision B 09/13/2015
 | 6   | 10/12 | Authentication                                  | Chapter 6         | Lab 6 | 
 | 7   | 10/19 | Remember me and eliminating duplication         | Chapter 7 and 7.5 | Lab 7 |  
 | 8   | 10/26 | String and Custom functions                     | Chapter 9         | Lab 8 |
-| 9   | 11/09 | Exam 1, covers Weeks 1-7                        |                   | |
-| 10  | 11/16 | Object Oriented PHP                             |                   | Lab 9, Project 2 due by end of class |
-| 11  | 11/23 | Object Oriented PHP                             |                   | Lab 10 |
-| 12  | 11/30 | Regular expressions                             | Chapter 10        | Lab 11 |
-| 13  | 12/07 | Drawing dynamic graphics                        | Chapter 11        | Lab 12, Project 3 due by end of class |  
-| 14  | 12/14 | Web services                                    | Chapter 12        | Lab 13 | 
-| 15  | 12/21 | Exam 2 comprehensive                            |                   | Project 4 due by end of class | 
+| 9   | 11/02 | Exam 1, covers Weeks 1-7                        |                   | |
+| 10  | 11/09 | Object Oriented PHP                             |                   | Lab 9, Project 2 due by end of class |
+| 11  | 11/16 | Object Oriented PHP                             |                   | Lab 10 |
+| 12  | 11/23 | Regular expressions                             | Chapter 10        | Lab 11 |
+| 13  | 11/30 | Drawing dynamic graphics                        | Chapter 11        | Lab 12, Project 3 due by end of class |  
+| 14  | 12/07 | Web services                                    | Chapter 12        | Lab 13 | 
+| 15  | 12/14 | TBD                                             |                   |        |
+| 16  | 12/21 | Exam 2 comprehensive                            |                   | Project 4 due by end of class | 
