@@ -21,7 +21,20 @@ CREATE TABLE IF NOT EXISTS `Madlibs` (
 );
 ```
 * Next create a file called index.php and add the contents from this [gist](https://gist.github.com/johnsonch/26abec9d0d0b843deb99)
-* Then create a file called madlibs.php and create your class inside of there.
+* Then create a file called madlibs.php and create the following class class inside of there (make sure it's inside of a ```<?php ?>``` tag).
+
+```php
+class Madlib
+{
+  private $noun;
+  private $verb;
+  private $adjective;
+  private $adverb;
+  private $story;
+  
+}
+```
+
 * Next use Object Oriented PHP with the provided code to do the following:
   * Generate and save a madlib story
   * Show all completed madlibs pulled from the provided database
