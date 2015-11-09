@@ -199,8 +199,8 @@ class Car{
 class Car{
   ...
   function __construct($specified_owner,$specified_make){
-    $this->$owner = $specified_owner;
-    $this->$make = $specified_make;
+    $this->owner = $specified_owner;
+    $this->make = $specified_make;
   }
 
   public function whoOwns(){
@@ -228,11 +228,11 @@ class Person{
   private $last_name;
 
   public function setFirstName($name){
-    $this->$first_name = $name;
+    $this->first_name = $name;
   }
 
   public function getFirstName(){
-    return $this->$first_name;
+    return $this->first_name;
   }
 
 }
