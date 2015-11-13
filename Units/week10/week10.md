@@ -94,7 +94,9 @@ $bmw->owner = 'Laura';
 class Car{
   ...
   public function whoOwns(){
+   echo "<pre>";
    print_r($this);
+   echo "</pre>";
    /*
       Car object
       (
@@ -183,6 +185,7 @@ class Car{
   * setting a property value,
   * retrieving a value, or
   * destroying an object.
+* [http://php.net/manual/en/language.oop5.magic.php](http://php.net/manual/en/language.oop5.magic.php)
 
 ---
 ## What are constructors and destructors?

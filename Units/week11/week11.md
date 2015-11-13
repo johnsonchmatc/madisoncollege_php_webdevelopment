@@ -14,12 +14,20 @@ autoscale: true
 ##What is inheritance?
 ```php
 class Person{
-  public $first_name;
-  public $last_name;
+  private $first_name;
+  private $last_name;
   function __construct($first, $last){
     $this->$first_name = $first;
     $this->$last_name = $last;
   }
+
+  public function getFirstName(){
+    $this->first_name;
+  }
+  public function getLastName(){
+    $this->last_name;
+  }
+
 }
 
 class Teacher extends Person{
@@ -37,8 +45,8 @@ class Student extends Person{
 $student = new Student('Bart', 'Simpson');
 $teacher = new Teacher('Homer', 'Simpson');
 
-echo $teacher->first_name; // Homer
-echo $student->first_name; // Bart
+echo $teacher->getFirstName; // Homer
+echo $student->getFirstName; // Bart
 echo $student->salary(); // KABOOOOOOOMMMM
 echo $student->gpa(); // 4.0
 ```
@@ -52,8 +60,8 @@ echo $student->gpa(); // 4.0
 
 ```php
 class Person{
-  public $first_name;
-  public $last_name;
+  private $first_name;
+  private $last_name;
   function __construct($first, $last){
     $this->$first_name = $first;
     $this->$last_name = $last;
