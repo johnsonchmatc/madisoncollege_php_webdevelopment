@@ -13,33 +13,41 @@ autoscale: true
 ---
 ##What is inheritance?
 ```php
-class Person{
-  private $first_name;
-  private $last_name;
-  function __construct($first, $last){
-    $this->$first_name = $first;
-    $this->$last_name = $last;
-  }
+class Person
+{
+    private $first_name;
+    private $last_name;
+    function __construct($first, $last)
+    {
+        $this->$first_name = $first;
+        $this->$last_name = $last;
+    }
 
-  public function getFirstName(){
-    $this->first_name;
-  }
-  public function getLastName(){
-    $this->last_name;
-  }
+    public function getFirstName()
+    {
+        $this->first_name;
+    }
+    public function getLastName()
+    {
+        $this->last_name;
+    }
 
 }
 
-class Teacher extends Person{
-  public function salary(){
-    return 0;
-  }
+class Teacher extends Person
+{
+    public function salary()
+    {
+        return 0;
+    }
 }
 
-class Student extends Person{
-  public function gpa(){
-    return 4.0;
-  }
+class Student extends Person
+{
+    public function gpa()
+    {
+        return 4.0;
+    }
 }
 
 $student = new Student('Bart', 'Simpson');
@@ -59,28 +67,34 @@ echo $student->gpa(); // 4.0
 ##How do you overrride properties or methods?
 
 ```php
-class Person{
-  private $first_name;
-  private $last_name;
-  function __construct($first, $last){
-    $this->$first_name = $first;
-    $this->$last_name = $last;
-  }
+class Person
+{
+    private $first_name;
+    private $last_name;
+    function __construct($first, $last)
+    {
+        $this->$first_name = $first;
+        $this->$last_name = $last;
+    }
 
-  public function fullName(){
-    echo "$this->$first_name $this->$last_name";
-  }
+    public function fullName()
+    {
+        echo "$this->$first_name $this->$last_name";
+    }
 }
 
-class Teacher extends Person{
+class Teacher extends Person
+{
 ...
-  public function fullName(){
-    echo "$this->$title $this->$last_name";
-  }
+    public function fullName()
+    {
+        echo "$this->$title $this->$last_name";
+    }
   
 }
 
-class Student extends Person{
+class Student extends Person
+{
 ...
 }
 
