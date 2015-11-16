@@ -14,11 +14,11 @@ autoscale: true
 ##What is inheritance?
 ```php
 class Person{
-  private $first_name;
-  private $last_name;
+  protected $first_name;
+  protected $last_name;
   function __construct($first, $last){
-    $this->$first_name = $first;
-    $this->$last_name = $last;
+    $this->first_name = $first;
+    $this->last_name = $last;
   }
 
   public function getFirstName(){
@@ -59,36 +59,50 @@ echo $student->gpa(); // 4.0
 ##How do you overrride properties or methods?
 
 ```php
-class Person{
-  private $first_name;
-  private $last_name;
-  function __construct($first, $last){
-    $this->$first_name = $first;
-    $this->$last_name = $last;
+class Person
+{
+  protected $first_name;
+  protected $last_name;
+  
+  public function __construct($first, $last)
+  {
+    $this->first_name = $first;
+    $this->last_name = $last;
   }
 
-  public function fullName(){
-    echo "$this->$first_name $this->$last_name";
-  }
-}
-
-class Teacher extends Person{
-...
-  public function fullName(){
-    echo "$this->$title $this->$last_name";
+  public function fullName()
+  {
+    echo "$this->first_name $this->last_name";
   }
   
 }
 
-class Student extends Person{
-...
+class Teacher extends Person{
+  
+  private $title;
+ 
+  public function setTitle($title)
+  {
+    $this->title =  $title;
+  }
+  
+  public function fullName()
+  {
+    echo "$this->title $this->last_name";
+  }
+  
 }
+
+class Student extends Person
+{
+}
+
 
 $student = new Student('Bart', 'Simpson');
 $teacher = new Teacher('Homer', 'Simpson');
-$teacher->$title = 'Mr.';
+$teacher->setTitle('Mr.');
 
 echo $student->fullName(); // Bart Simpson
+echo "<br />";
 echo $teacher->fullName(); // Mr. Simpson
-
 ```
