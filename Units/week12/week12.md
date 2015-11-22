@@ -1,9 +1,10 @@
-#Regular Expressions and Pattern Matching
-##Chapter 12
+footer:@johnsonch :: Chris Johnson :: Web Development with PHP and MySQL :: Week 12
+autoscale: true
+
+#Web Development with PHP and MySQL
+##Regular Expressions and Pattern Matching
 ###Week 12
 
-----
-#What is a Regular Expression?
 
 ---
 #What is a Regular Expression?
@@ -11,7 +12,7 @@
 > A sequence of characters that forms a search pattern, mainly for use in pattern matching...
 
 ---
-> Some people, when confronted with a problem, think 
+> Some people, when confronted with a problem, think
 “I know, I'll use regular expressions.”   Now they have two problems.
 
 ---
@@ -40,6 +41,43 @@ else {
 }
 
 ```
+
+---
+#Let's break regular expressions down a bit
+
+---
+
+* Regular Expressions allow us to match patterns. First some rules on what makes up a regular expression or as is commonly known as regex:
+    * All regular expressions must start with a forward slash ```/```, and end with a forward slash ```/```
+    * A carat ```^``` means to start matching at the beginning of the string
+    * A ```$``` means that the string must end
+    * ```\d``` means look for a single digit
+    * ```\w``` means look for a single alphanumeric character 0-9, A-Z, a-z
+    * ```\s``` means look for a single white-space character
+    * ```.``` means to look for any one character except a newline
+    * ```{n}``` means to repeat the previous pattern n times. So, ```\d{10}``` means look for 10 digits
+* The above expressions are called metacharacters
+
+---
+#Regexing a phone number
+
+* Some examples of phone number formats
+
+```
+(608) 123-4567
+(608)123-4567
+608-123-4567
+608 123 4567
+608.123.4567
+```
+
+---
+#Regexing a phone number
+
+* If we want to match a 10 digit phone number with dashes - in between the area code, prefix, and the suffix, our regex would look like this:
+
+![fit inline](http://flibbertigiblets.com/phpWebDevMySQL/images/regex-01.png)
+
 ---
 #How do you expect me to remember this crap?
 
@@ -48,7 +86,10 @@ else {
 
 ---
 #Remember one tool!
-[http://rubular.com/](http://rubular.com/)
+[http://www.phpliveregex.com/](http://www.phpliveregex.com/)
+
+---
+#And Practice
 
 ---
 #PHP Regex functions (Perl style)
@@ -85,7 +126,7 @@ spliti()	      Splits a string into an array by a regular expression and is case
 $regex = '/Pat/';
 $search_array = array('Margaret',
                       'Patsy',
-                      'Patrick', 
+                      'Patrick',
                       'Patricia',
                       'Jim');
 
@@ -94,13 +135,26 @@ print '<pre>Found '. count($newArray)." matches\n";
 print_r($newArray);
 ```
 
+* Output
+
+```
+Found 3 matches
+Array
+(
+    [1] => Patsy
+    [2] => Patrick
+    [3] => Patricia
+)
+```
+
 ---
 #preg\_match() vs preg\_match\_all()
+
 ```php
 $regex = '/Pat/';
 $search_array = array('Margaret',
                       'Patsy',
-                      'Patrick', 
+                      'Patrick',
                       'Patricia',
                       'Jim');
 $search_string = implode(',',$search_array);
@@ -114,7 +168,17 @@ $preg_match_all = preg_match_all($regex, $search_string );
 print '<pre>Found '. $preg_match_all." matches\n"; //What will preg_match_all return?
 ```
 
-[Match All Class Example](https://gist.github.com/johnsonch/2f9f65f5b06aaa55cad4)
+---
+* Output
+
+```
+preg_match()
+
+Found 1 matches
+preg_match_all()
+
+Found 3 matches
+```
 
 ---
 #Capturing output
@@ -122,7 +186,7 @@ print '<pre>Found '. $preg_match_all." matches\n"; //What will preg_match_all re
 $regex = '/([Pp]at[a-z]*)/';
 $search_array = array('Margaret',
                       'Patsy',
-                      'Patrick', 
+                      'Patrick',
                       'Patricia',
                       'Jim');
 $search_string = implode(',',$search_array);
@@ -198,4 +262,4 @@ print '</pre>';
 #Getting Control - The RegEx Metacharacters
 
 * Regular expression metacharacters are characters that do not represent themselves. They are endowed with special powers to allow you to control the search pattern in some way.
-* [http://rubular.com/](http://rubular.com/) has a good common list 
+* [http://www.phpliveregex.com/](http://www.phpliveregex.com/) has a good common list
