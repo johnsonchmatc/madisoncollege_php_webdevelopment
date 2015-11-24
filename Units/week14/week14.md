@@ -1,121 +1,180 @@
-#Accessing a MySQL Database Using PHP
-##Chapter 15
-##Week 14 
+footer:@johnsonch :: Chris Johnson :: Web Development with PHP and MySQL :: Week 14
+autoscale: true
+
+#Web Development with PHP and MySQL
+##Web Services
+###Week 14
 
 ---
-#Connecting to MySQL
+#What is a web service?
 
-```php
-  @ $db = mysql_connect('localhost','root');
-  if (!$db) {
-    exit('Connection to server failed: '. mysql_error());
-  }
-  if (! mysql_select_db('northwind', $db)) {
-    exit('Database select error: '. mysql_error($db));
-  } 
+---
+#What is RSS?
+
+---
+#What is XML?
+
+---
+#What is JSON?
+
+---
+#Let's build something to show the weather
+
+---
+#We'll need the following:
+
+* API Key from [openweathermap.org](openweathermap.org)
+* PHP Composer, [installation directions](https://laracasts.com/discuss/channels/tips/testing-cloud9-ide-with-composer-laravel)
+* [Guzzler](https://github.com/guzzle/guzzle)
+
+#Let's get our API Key
+
+from [openweathermap.org](openweathermap.org).
+
+> An application programming interface key (API key) is a code passed in by
+computer programs calling an API (application programming interface) to identify
+the calling program, its developer, or its user to the Web site.
+
+We can explore the weather API using a command line tool called curl
+
+```bash
+curl 'api.openweathermap.org/data/2.5/weather?zip=53523,us&appid=<INSERT API KEY>'
 ```
 
-^ the ```@``` ignores errors about ```mysql_connect``` being deprecated.
+#Now install PHP Composer
 
----
-#Executing a query
-```php
-  $result = mysql_query('select * from Products;', $db);
-  if (!$result) {
-    exit('Database query error: '. mysql_error($db));
-  }
+Composer is a dependency management tool for PHP, it's what well use to install
+Guzzle
+
+First we need open a terminal and cd into the directory where we'll create our
+weather app. I've chosen ```weather_app``` to put my code in.
+
+```bash
+$ mkdir weather_app
+$ cd weather_app
 ```
 
----
-#Using the results
+To install composer we'll use the following commands
+
+```bash
+$ curl -sS https://getcomposer.org/installer | php
+$ sudo mv composer.phar /usr/local/bin/composer
+```
+
+This downloads composer and then renames it from composer.phar to composer and
+moves it into an executable directory. Many libraries that composer can install
+reference ```composer.phar``` on Cloud 9 it's recommended to have it be a single
+word as the executable so by renaming the app from composer.phar to composer we
+we just need to run it using the word composer. (Whew that's a mouth full!)
+
+Next we'll install Guzzle by using the following command:
+
+```bash
+$ composer require guzzlehttp/guzzle
+```
+
+Now we'll have a folder named ```vendor``` which contains all of the Guzzle code!
+
+Next we'll create a file called ```index.php``` and we can add the contents of
+this [gist]() so we'll have some nice bootstrap theme and a form to take in a postal
+code all wired up for us!
+
+Let's start the fun now!
+
+We'll start by adding a php code block at the top the file and add some code
+to load Guzzle.
 
 ```php
-<table>
-  <tr>
-    <th>Product Name</th>
-    <th>Price</th>
-    <th>In Stock?</th>
-  </tr>
-<?php while ($record = mysql_fetch_assoc($result)) { ?>
-    <tr>
-      <td><?= $record["ProductName"]?></td>
-      <td><?= $record["UnitPrice"]?></td>
-      <td><?= $record["UnitsInStock"] > 0 ? "Yes" : "No" ?></td>
-    </tr>
 <?php
-  }
+    require_once 'vendor/autoload.php';
+    use GuzzleHttp\Client;
+    use GuzzleHttp\Post\PostBody;
+    use GuzzleHttp\Stream\StreamInterface;
+    use GuzzleHttp\Exception\RequestException;
 ?>
 ```
 
----
-#Writing to the database
+This code requires a file that is maintained by Composer and contains the path to
+load all the required files.  The ```use``` keyword loads in our classes for us.
+
+Now we can add a guard to not run our API code if there is no postal code in the
+```$_POST``` super global. Under our use statements let's add the following check.
 
 ```php
-// We always want to check to make sure our incoming data is OK
-if (isset($_POST['ProductName'])){
-  $product_name = $_POST['ProductName']; //May even want to validate data specificly
-}
-if (isset($_POST['UnitPrice'])){
-  $unit_price = $_POST['UnitPrice'];
-}
-if (isset($_POST['SupplierID'])){
-  $supplier_id = $_POST['SupplierID'];
-}
+if (isset($_POST['submit']) && isset($_POST['postal_code']) && !empty($_POST['postal_code']))
+{
 
-if ($product_name != "" && $unit_price != "" && $supplier_id != ""){
-  $product_insert = mysql_query("INSERT INTO Products 
-                                (ProductName, UnitPrice, SupplierID) VALUES 
-                                ('$product_name', '$unit_price', '$supplier_id')", $db);
-  if (!$product_insert) {
-    exit('Database query error: '. mysql_error($db));
-  }else{
-    echo "<h2 class='success'>product $product_name added successfully <h2>";
-  }
-}else{
-  echo "<h2 class='error'>you are mising a value, please fill out all fields</h2>";
 }
 ```
 
----
-#```mysqli()``` - connection
+Then we'll extract the ```postal_code``` from the ```$_POST``` super global and
+interpolate it into our API url
 
 ```php
-$db = new mysqli("localhost", "root", "", "northwind");
-if ($db->connect_errno) {
-    echo "Failed to connect to MySQL: (" . $db->connect_errno . ") " . $mysqli->connect_error;
+$postal_code = $_POST['postal_code'];
+$api_key = '<YOUR API KEY>';
+$url = "api.openweathermap.org/data/2.5/weather?zip=$postal_code,us&appid=$api_key";
+```
+
+Next we'll use some of our knowledge from our object oriented weeks and setup our
+Guzzle client.
+
+```php
+$client = new Client();
+```
+
+The web isn't always reliable, so we're going to wrap our request in a try/catch
+block.
+
+```php
+try{
+    $response = $client->request('GET', $url, []);
+    $response_body = $response->getBody();
+    $decoded_body = json_decode($response_body);
+
+} catch (RequestException $e){
+    echo "HTTP Request failed\n";
+    echo "<pre>";
+    print_r($e->getRequest());
+    echo "</pre>";
+    if ($e->hasResponse()) {
+        echo $e->getResponse();
+    }
 }
 ```
 
----
-#```mysqli()``` - execute query
+First we start by making the call using the ```request()``` method on the
+```$client``` object. We pass 3 parameters into that method, first is the HTTP
+verb we want to use, the second is the URL to request against and the third is
+an array of properties (more for posts).  The result of that which we've assigned
+to ```$response``` is an object with a method ```getBody()``` which returns the
+body or content of the request.  Lastly we're going to convert the returned JSON
+to an object we can get data from.
+
+Lastly we can display our found information down below our form, let's add the
+following code:
 
 ```php
-  $result = $db->query("select * from Customers;");
-  if (!$result) {
-    exit('Database query error: '. mysql_error($db));
-  }
+<?php if($decoded_body): ?>
+    <div class="row">
+        <?php
+            function convert_kelvin_to_fahrenheit($kelvin_temperature)
+            {
+                return ((((int) $kelvin_temperature - 273.15)* 1.8000) + 32.00);
+            }
+       ?>
+
+        Current Temperature: <?= convert_kelvin_to_fahrenheit($decoded_body->main->temp) ?> <br />
+        Current Humdity: <?= $decoded_body->main->humidity ?>% <br />
+        Minimum Temperature: <?= convert_kelvin_to_fahrenheit($decoded_body->main->temp_min) ?> <br />
+        Maximum Temperature: <?= convert_kelvin_to_fahrenheit($decoded_body->main->temp_max) ?> <br />
+
+    </div>
+<?php endif ?>
 ```
 
----
-#```mysqli()``` - working with data
+The basic API returns temperatures in Kelvin so we'll use a function to convert
+them to Fahrenheit. This is where the ```json_decode``` works well because we
+can access the properties of the JSON data like object properties.
 
-```php
-<h1>Customers</h1>
-<table>
-  <tr>
-    <th>Company Name</th>
-    <th>Address</th>
-    <th>City</th>
-    <th>Phone</th>
-  </tr>
-<?php while ($record = $result->fetch_assoc()) { ?>
-    <tr>
-      <td><?= $record["CompanyName"] ?></td>
-      <td><?= $record["Address"] ?></td>
-      <td><?= $record["City"] ?></td>
-      <td><?= $record["Phone"] ?></td>
-    </tr>
-  <?php
-  }
-?>
-```
+Now to test our our working app!

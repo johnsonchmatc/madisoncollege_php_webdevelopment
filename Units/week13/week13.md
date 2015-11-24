@@ -1,336 +1,180 @@
-#Introduction to the MySQL DBMS
-##Chapter 12
-###Week 12
+footer:@johnsonch :: Chris Johnson :: Web Development with PHP and MySQL :: Week 13
+autoscale: true
 
-----
-#About Databases
-* A way of organizing and storing data
-* Many are considered "Relational" in that each table's data relates to another
-* Relational Database Management Systems (RDBMS) work well with OOP languages
-* MySQL is the most commonly used database program for developing database-driven Web sites with PHP.
-
-----
-#About Databases - MySQL
-PHP and MySQL fit very well together, and share the following traits:
-* Ease of use
-* Scalable
-* Battle tested
-
-----
-#About Databases - MySQL
-Note:
-Although PHP can be used with any database through its set of ODBC functions, it comes loaded with MySQL specific functions. This set of specific functions makes for a tight integration between the PHP language and the MySQL database.
+#Web Development with PHP and MySQL
+##Web Services
+###Week 13
 
 ---
-#Talking to the Database
-
-To communicate with the MySQL server, you will need a language, and SQL (Structured Query Language) is the language of choice for most modern multiuser, relational databases.
-
-SQL provides the syntax and language constructs needed to talk to relational databases in a standardized, cross-platform structured way.
+#What is a web service?
 
 ---
-#Talking to the Database
-
-Like the English language with a variety of dialects (British, American, Australian, etc.), there are many different versions of the SQL language.
-
-The version of SQL used by MySQL follows the ANSI (American National Standards Institute) standard, meaning that it must support the major keywords (e.g. SELECT, UPDATE, DELETE, INSERT, WHERE) as defined in the standard.
-
+#What is RSS?
 
 ---
-#MySQL Strengths and Weaknesses
-
-MySQL runs on more than 20 platforms including Linux, Windows, OS/X, HP-UX, AIX, Netware, giving you the kind of flexibility that puts you in control.
-
-Having said that, like any tool, MySQL is right for certain types of applications and not as suitable for others. Let's look at what the strengths and weaknesses of MySQL are.
+#What is XML?
 
 ---
-#Easy to Use
-
-MySQL is a relatively easy to use and administer database system. Large database systems with all the bells and whistles often require a knowledgable database administrator (DBA) to set up and administer it.
-
-MySQL is a database built for programmers with very little overhead in terms of maintenance.
+#What is JSON?
 
 ---
-#Large Community of Developers
-
-What makes MySQL so appealing is the large community of other developers who are building applications around it. This makes it a relatively safe choice.
-
-If you ever need anything, chances are that someone already experienced that issue and has it resolved. You can often find the solutions with a little searching online.
+#Let's build something to show the weather
 
 ---
-#Open Source License
+#We'll need the following:
 
-MySQL is free to use as long as you do not bundle it with your commercial product. As an application provider, you can always tell your customers to download and set up their own MySQL database to which your application will connect.
+* API Key from [openweathermap.org](openweathermap.org)
+* PHP Composer, [installation directions](https://laracasts.com/discuss/channels/tips/testing-cloud9-ide-with-composer-laravel)
+* [Guzzler](https://github.com/guzzle/guzzle)
 
-This is a fairly easy procedure and there is no license cost involved, making it an attractive choice for application developers.
+#Let's get our API Key
 
----
-#The Anatomy of a Relational Database
-##The main components of an RDBMS are:
+from [openweathermap.org](openweathermap.org).
 
-* The database server
-* The database
-* Tables
-* Records and fields
-* Schema
+> An application programming interface key (API key) is a code passed in by
+computer programs calling an API (application programming interface) to identify
+the calling program, its developer, or its user to the Web site.
 
+We can explore the weather API using a command line tool called curl
 
----
-#The Database Server
-
-The database server is the actual server process running the databases. It controls the storage of the data, grants access to users, updates and deletes records, and communicates with other servers.
-
-The database server is normally on a dedicated host computer, serving and managing multiple clients over a network, but can also be used as a standalone server on the local host machine to serve a single client.
-
----
-#The Database
-
-A database is a collection of related data elements, usually corresponding to a specific application. 
-
-```
-+------------+
-| Database   |
-+------------+
-| mysql      |
-| northwind  |
-| phpmyadmin |
-| test       |
-+------------+
+```bash
+curl 'api.openweathermap.org/data/2.5/weather?zip=53523,us&appid=<INSERT API KEY>'
 ```
 
----
-#Tables
-##Each database consists of two-dimensional tables. 
+#Now install PHP Composer
 
-```> show tables;```
+Composer is a dependency management tool for PHP, it's what well use to install
+Guzzle
 
-```
-+----------------------+
-| Tables_in_northwind  |
-+----------------------+
-| Categories           | 
-| CustomerCustomerDemo | 
-| CustomerDemographics | 
-| Customers            | 
-| EmployeeTerritories  | 
-| Employees            | 
-| Order_Details        | 
-| Orders               | 
-| Products             | 
-| Region               | 
-| Shippers             | 
-| Suppliers            | 
-| Territories          | 
-| USStates             | 
-+----------------------+
+First we need open a terminal and cd into the directory where we'll create our
+weather app. I've chosen ```weather_app``` to put my code in.
+
+```bash
+$ mkdir weather_app
+$ cd weather_app
 ```
 
----
-#Rows and Columns (Records and Fields)
+To install composer we'll use the following commands
 
-A table has a name and consists of a set of rows and columns. It resembles a spreadsheet where each row, also called a record, is comprised of vertical columns, also called fields.
-
-```
-+-----------+------------------+----------------+
-| ShipperID | CompanyName      | Phone          |
-+-----------+------------------+----------------+
-|         1 | Speedy Express   | (503) 555-9831 | 
-|         2 | United Package   | (503) 555-3199 | 
-|         3 | Federal Shipping | (503) 555-9931 | 
-+-----------+------------------+----------------+
+```bash
+$ curl -sS https://getcomposer.org/installer | php
+$ sudo mv composer.phar /usr/local/bin/composer
 ```
 
----
-#Rows and Columns (Records and Fields)
-There are two basic operations you can perform on a relational table. You can retrieve a subset of its columns and you can retrieve a subset of its rows. The following figures are samples of the two operations.
+This downloads composer and then renames it from composer.phar to composer and
+moves it into an executable directory. Many libraries that composer can install
+reference ```composer.phar``` on Cloud 9 it's recommended to have it be a single
+word as the executable so by renaming the app from composer.phar to composer we
+we just need to run it using the word composer. (Whew that's a mouth full!)
 
+Next we'll install Guzzle by using the following command:
 
-```mysql> select companyname from shippers;```
-
-```
-+------------------+
-| companyname      |
-+------------------+
-| Speedy Express   | 
-| United Package   | 
-| Federal Shipping | 
-+------------------+
+```bash
+$ composer require guzzlehttp/guzzle
 ```
 
----
-#Rows and Columns (Records and Fields)
+Now we'll have a folder named ```vendor``` which contains all of the Guzzle code!
 
-```mysql> select * from shippers where companyname = 'Federal Shipping';```
+Next we'll create a file called ```index.php``` and we can add the contents of
+this [gist]() so we'll have some nice bootstrap theme and a form to take in a postal
+code all wired up for us!
 
-```
-+-----------+------------------+----------------+
-| ShipperID | CompanyName      | Phone          |
-+-----------+------------------+----------------+
-|         3 | Federal Shipping | (503) 555-9931 | 
-+-----------+------------------+----------------+
-```
+Let's start the fun now!
 
----
-#Columns/Fields
+We'll start by adding a php code block at the top the file and add some code
+to load Guzzle.
 
-* Columns are also known as fields or attributes.
-
-```
-+-------------+-------------+------+-----+---------+----------------+
-| Field       | Type        | Null | Key | Default | Extra          |
-+-------------+-------------+------+-----+---------+----------------+
-| ShipperID   | int(11)     | NO   | PRI | NULL    | auto_increment | 
-| CompanyName | varchar(40) | NO   |     |         |                | 
-| Phone       | varchar(24) | YES  |     | NULL    |                | 
-+-------------+-------------+------+-----+---------+----------------+
+```php
+<?php
+    require_once 'vendor/autoload.php';
+    use GuzzleHttp\Client;
+    use GuzzleHttp\Post\PostBody;
+    use GuzzleHttp\Stream\StreamInterface;
+    use GuzzleHttp\Exception\RequestException;
+?>
 ```
 
----
-#Rows/Records
+This code requires a file that is maintained by Composer and contains the path to
+load all the required files.  The ```use``` keyword loads in our classes for us.
 
-* A record is a row in the table. 
+Now we can add a guard to not run our API code if there is no postal code in the
+```$_POST``` super global. Under our use statements let's add the following check.
 
-```mysql> select * from region;```
+```php
+if (isset($_POST['submit']) && isset($_POST['postal_code']) && !empty($_POST['postal_code']))
+{
 
-```
-+----------+-------------------+
-| RegionID | RegionDescription |
-+----------+-------------------+
-|        1 | Eastern           | 
-|        2 | Western           | 
-|        3 | Northern          | 
-|        4 | Southern          | 
-+----------+-------------------+
-4 rows in set (0.00 sec)
+}
 ```
 
----
-#Primary Key and Indexes
+Then we'll extract the ```postal_code``` from the ```$_POST``` super global and
+interpolate it into our API url
 
-* A primary key is a unique identifier for each record. 
-
-```mysql> describe categories;```
-
-```
-+--------------+-------------+------+-----+---------+----------------+
-| Field        | Type        | Null | Key | Default | Extra          |
-+--------------+-------------+------+-----+---------+----------------+
-| CategoryID   | int(11)     | NO   | PRI | NULL    | auto_increment | 
-| CategoryName | varchar(15) | NO   | MUL |         |                | 
-| Description  | longtext    | YES  |     | NULL    |                | 
-| Picture      | longblob    | YES  |     | NULL    |                | 
-+--------------+-------------+------+-----+---------+----------------+
+```php
+$postal_code = $_POST['postal_code'];
+$api_key = '<YOUR API KEY>';
+$url = "api.openweathermap.org/data/2.5/weather?zip=$postal_code,us&appid=$api_key";
 ```
 
----
-#Primary Key and Indexes
+Next we'll use some of our knowledge from our object oriented weeks and setup our
+Guzzle client.
 
-* Indexes are like the indexes in the back of a book that help you find a specific topic more quickly than searching through the entire book.
-
----
-#The Database Schema
-
-* Designing a very small database is not difficult, but designing one for a large Web-based application can be daunting.
-* Database design is both an art and a science 
-
-^ When discussing the design of the database, you will encounter the term "database schema", which refers to the structure of the database. It describes the design of the database similar to a template or blueprint.
-
-^ It describes all the tables, and their layout, but does not contain the actual data in the database. In MySQL, we use the "show tables" command to list all the tables in a particular schema. Note that MySQL uses the term database to refer to what other database vendors may call a schema.
-
----
-#The Database Schema
-
-```mysql> show tables;```
-
-```
-+----------------------+
-| Tables_in_northwind  |
-+----------------------+
-| Categories           | 
-| CustomerCustomerDemo | 
-| CustomerDemographics | 
-| Customers            | 
-| EmployeeTerritories  | 
-| Employees            | 
-| Order_Details        | 
-| Orders               | 
-| Products             | 
-| Region               | 
-| Shippers             | 
-| Suppliers            | 
-| Territories          | 
-| USStates             | 
-+----------------------+
-14 rows in set (0.00 sec)
+```php
+$client = new Client();
 ```
 
----
-#The Database Schema
+The web isn't always reliable, so we're going to wrap our request in a try/catch
+block.
 
-```
-mysql> describe Employees;                                                                                                                                                             
-```
+```php
+try{
+    $response = $client->request('GET', $url, []);
+    $response_body = $response->getBody();
+    $decoded_body = json_decode($response_body);
 
-```
-+-----------------+--------------+------+-----+---------+----------------+                                                                                                             
-| Field           | Type         | Null | Key | Default | Extra          |                                                                                                             
-+-----------------+--------------+------+-----+---------+----------------+                                                                                                             
-| EmployeeID      | int(11)      | NO   | PRI | NULL    | auto_increment |                                                                                                             
-| LastName        | varchar(20)  | NO   | MUL | NULL    |                |                                                                                                             
-| FirstName       | varchar(10)  | NO   |     | NULL    |                |                                                                                                             
-| Title           | varchar(30)  | YES  |     | NULL    |                |                                                                                                             
-...
-| ReportsTo       | int(11)      | YES  | MUL | NULL    |                |                                                                                                             
-| PhotoPath       | varchar(255) | YES  |     | NULL    |                |                                                                                                             
-| Salary          | float        | YES  |     | NULL    |                |                                                                                                             
-+-----------------+--------------+------+-----+---------+----------------+ 
+} catch (RequestException $e){
+    echo "HTTP Request failed\n";
+    echo "<pre>";
+    print_r($e->getRequest());
+    echo "</pre>";
+    if ($e->hasResponse()) {
+        echo $e->getResponse();
+    }
+}
 ```
 
----
-#Connecting to the Database
+First we start by making the call using the ```request()``` method on the
+```$client``` object. We pass 3 parameters into that method, first is the HTTP
+verb we want to use, the second is the URL to request against and the third is
+an array of properties (more for posts).  The result of that which we've assigned
+to ```$response``` is an object with a method ```getBody()``` which returns the
+body or content of the request.  Lastly we're going to convert the returned JSON
+to an object we can get data from.
 
+Lastly we can display our found information down below our form, let's add the
+following code:
+
+```php
+<?php if($decoded_body): ?>
+    <div class="row">
+        <?php
+            function convert_kelvin_to_fahrenheit($kelvin_temperature)
+            {
+                return ((((int) $kelvin_temperature - 273.15)* 1.8000) + 32.00);
+            }
+       ?>
+
+        Current Temperature: <?= convert_kelvin_to_fahrenheit($decoded_body->main->temp) ?> <br />
+        Current Humdity: <?= $decoded_body->main->humidity ?>% <br />
+        Minimum Temperature: <?= convert_kelvin_to_fahrenheit($decoded_body->main->temp_min) ?> <br />
+        Maximum Temperature: <?= convert_kelvin_to_fahrenheit($decoded_body->main->temp_max) ?> <br />
+
+    </div>
+<?php endif ?>
 ```
-$ mysql
-Welcome to the MySQL monitor. Commands end with ; or \g.
-Your MySQL connection id is 3 to server version: 4.1.8-nt-log
 
-Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+The basic API returns temperatures in Kelvin so we'll use a function to convert
+them to Fahrenheit. This is where the ```json_decode``` works well because we
+can access the properties of the JSON data like object properties.
 
-mysql>
-```
-
----
-#Connecting to the Database
-
-* Regardless of the type of client you choose, you will always need to specify the username, and the host you are connecting to (unless it is "localhost").
-
-* Most configurations expect you to have a password, although MySQL accounts may be configured to not require one. You have the option to specify a database to use as well.
-
----
-#MySQL Command-Line Options
-
-To connect to a database using this client, you will enter information similar to the following lines:
-
-```mysql --user=root --password=my_password --host=localhost```
-
-or
-
-```mysql -u root -p my_password -h localhost```
-
-
----
-#Let's play with some queries
-
-^ ```
-select e.FirstName, e.LastName, t.TerritoryDescription from Employees as e, EmployeeTerritories as et,Territories as t WHERE e.EmployeeID = et.EmployeeID and t.TerritoryID = et.TerritoryID ORDER BY TerritoryDescription ASC;
-
-## Insert
-insert into Products (ProductName,SupplierID,CategoryID) VALUES  ("iPod", 1, 1);
-
-## Update
-update Products set ProductName="iPad" where ProductName="iPod";
-
-## Select with joins and ordering
-select CompanyName as Supplier, ProductName, CategoryName,  UnitPrice from Products p, Suppliers s, Categories c WHERE p.SupplierID 
-= s.SupplierID AND p.CategoryID = c.CategoryID ORDER BY ProductName DESC; 
-```
+Now to test our our working app!
