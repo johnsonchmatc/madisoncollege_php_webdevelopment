@@ -76,12 +76,12 @@ $ composer require guzzlehttp/guzzle
 Now we'll have a folder named ```vendor``` which contains all of the Guzzle code!
 
 Next we'll create a file called ```index.php``` and we can add the contents of
-this [gist]() so we'll have some nice bootstrap theme and a form to take in a postal
+this [gist](https://gist.github.com/johnsonch/14f737293042d1137f82) so we'll have some nice bootstrap theme and a form to take in a postal
 code all wired up for us!
 
 Let's start the fun now!
 
-We'll start by adding a php code block at the top the file and add some code
+We'll start by creating another file called ```weather.php``` and adding a php code block at the top the file and add some code
 to load Guzzle.
 
 ```php
