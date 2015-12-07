@@ -6,21 +6,21 @@ Be able to explain these functions and how the affect the variables in the scrip
   $friend = "Sam";
   $friend2 = who();
   echo 'My friends are: ', $friend, ' ', $friend2, '<br />';
-  
+
   function who() {
-    $friend = "Joe"; 
+    $friend = "Joe";
     return $friend;
   }
-  
+
   $friend3 = who();
   print 'My friends are: '. $friend .' '. $friend3 .'<br />';
-  
-  
+
+
   function raise_sal() {
     global $salary;
     $salary *= 1.1;
   }
-  
+
   $salary = 50000;
   raise_sal();
   echo 'Congratulations! Your new salary is: $'. $salary .'<br />';
@@ -32,59 +32,25 @@ In the following code know what each of the MySQL specific functions purpose is.
 ```
 <?php
   // Sample1 Script
-  $link = mysql_connect('itins3.matcmadison.edu','astudent','phpmysql');
+
+  $link = mysqli_connect('itins3.matcmadison.edu','astudent','phpmysql', 'Northwind');
   if (!$link)
     exit('Connection to MySQL server failed!');
 
-  $database = 'Northwind';
-  if (! mysql_select_db($database, $link))
-    exit('Selection of database '. $database .' failed!');
-
   $query = 'SELECT CompanyName, Phone from Shippers';
-  $result = mysql_query($query, $link);
+  $result = mysqli_query($link, $query);
   if (!$result)
-    die('Query failed: '. mysql_error($link));
+    die('Query failed: '. mysqli_error($link));
 
-  $record = mysql_fetch_assoc($result);
+  $record = mysqli_fetch_assoc($result);
   foreach ($record as $key => $value) {
-    print "$key: $value<br />";
+?>
+    <?= "$key: $value" ?></br>
+<?php
   }
   print '<br />';
 
-  mysql_close($link);
-?>
-```
-
-Be able to determine what will be displayed for each of the loops. Also know
-what each of the built in MySQL functions in this script do and return.
-
-```
-<?php
-  // Sample5 Script
-  @ $db = mysql_connect('itins3.matcmadison.edu','astudent','phpmysql');
-  if (!$db) {
-    exit('Connection to server failed: '. mysql_error());
-  }
-  if (! mysql_select_db('Northwind', $db)) {
-    exit('Database select error: '. mysql_error($db));
-  } 
-  $result = mysql_query('SELECT * FROM Customers', $db);
-  if (! $result) {
-    exit('Database query error: '. mysql_error($db));
-  }
-
-  print "<table>";
-  for ($i=0; $i < mysql_num_fields($result); $i++) {
-    print '<th><u>'. mysql_field_name($result, $i) .'</u></th>';
-  }
-  while ($record = mysql_fetch_row($result)) {
-    print '<tr>';
-    for ($j=0; $j < mysql_num_fields($result); $j++) {
-      print '<td>'. $record[$j] .'</td>';
-    }
-    print '</tr>';
-  }
-  print '</table>';
+  mysqli_close($link);
 ?>
 ```
 
@@ -93,24 +59,24 @@ results will be returned from the two regular expression functions.
 
 ```
 <html>
-  <head>
-   <title>Sample2 Script</title>
-  </head>
-  <body bgcolor="lavender">
-   <?php
-     $regex = '/pat/i';
-     $search_array = array('Fitzpatrick','Peggy','Patrick',
-                           'Patricia','Johnathon');
-     $newArray = preg_grep($regex, $search_array);
-     print '<pre>Found '. count($newArray)." matches\n";
-     print_r($newArray);
+ <head>
+  <title>Sample2 Script</title>
+ </head>
+ <body bgcolor="lavender">
+  <?php
+    $regex = '/pat/i';
+    $search_array = array('Fitzpatrick','Peggy','Patrick',
+                          'Patricia','Johnathon');
+    $newArray = preg_grep($regex, $search_array);
+    print '<pre>Found '. count($newArray)." matches\n";
+    print_r($newArray);
 
-     $newArray = preg_grep($regex, $search_array, PREG_GREP_INVERT);
-     print 'Found '. count($newArray)." that didn't match\n";
-     print_r($newArray);
-     print '</pre>';
-   ?>
-  </body>
+    $newArray = preg_grep($regex, $search_array, PREG_GREP_INVERT);
+    print 'Found '. count($newArray)." that didn't match\n";
+    print_r($newArray);
+    print '</pre>';
+  ?>
+ </body>
 </html>
 ```
 
@@ -156,7 +122,7 @@ Be able to explain each of the file functions do.
     $outputstring="$name\t$address\t$email\t$title\n";
     echo 'The data to be written:<br />';
     echo $outputstring .'<br>';
-    
+
     $filename = $_SERVER['DOCUMENT_ROOT'] .'/files/info.txt';
     $filehandle = fopen($filename, "ab");
     if (fwrite($filehandle, $outputstring,
@@ -169,6 +135,118 @@ Be able to explain each of the file functions do.
       echo "<pre>$text</pre>";
     }
     fclose($filehandle);
+  ?>
+ </body>
+</html>
+```
+
+Where is this script looking for the file data.txt to be located?  What happens
+if the file isn't there? If the file is there what does the script do?
+```
+<html>
+ <head>
+  <title>Sample4 Script</title>
+ </head>
+ <body bgcolor="lavender">
+  <?php
+    $filename = $_SERVER['DOCUMENT_ROOT'] .'/files/data.txt';
+
+    if (! file_exists($filename)) {
+      exit("No such file as: $filename");
+    }
+
+    $fh = fopen($filename,'rb');
+    while(! feof($fh)) {
+      $line = fgets($fh);
+      print $line .'<br />';
+    }
+    fclose($fh);
+
+    $lines = file($filename);
+    foreach ($lines as $line_num => $line) {
+      $line_num++;
+      echo '<b>'. $line_num .'</b>: '. $line .'<br />';
+    }
+  ?>
+ </body>
+</html>
+```
+
+What is the purpose of the function ```mysqli_fetch_field_direct()```? What does
+```mysqli_num_fields()``` do?
+
+```
+<?php
+    $db = mysqli_connect('localhost','root','', 'northwind');
+    if (!$db) {
+        exit('Connection to server failed: '. mysqli_error($db));
+    }
+
+    $result = mysqli_query($db, 'SELECT * FROM Customers');
+    if (! $result) {
+        exit('Database query error: '. mysqli_error($db));
+    }
+?>
+
+<table>
+    <?php for ($i=0; $i < mysqli_num_fields($result); $i++): ?>
+        <th><u> <?= mysqli_fetch_field_direct($result, $i)->name ?> </u></th>
+    <?php endfor; ?>
+
+    <?php while ($record = mysqli_fetch_row($result)): ?>
+        <tr>
+            <?php for ($j=0; $j < mysqli_num_fields($result); $j++): ?>
+                  <td><?= $record[$j] ?></td>
+            <?php endfor; ?>
+        </tr>
+    <?php endwhile; ?>
+</table>
+```
+
+In this code what is the purpose of ```enctype="multipart/form-data"```? What is
+the ```move_uploaded_file()``` and what is the end result of it being run in this
+php script?
+
+####HTML Form
+```
+<html>
+ <head>
+  <title>Sample7 Form</title>
+ </head>
+ <body bgcolor="lavender">
+  <form
+       enctype="multipart/form-data"
+       action="e2sample7.php"
+       method="POST">
+   Browse and select the file you want to upload: <br />
+   <input name="my_file" type="file" />
+   <br />
+   <input type=submit value="Get File"/>
+  </form>
+ </body>
+</html>
+```
+
+####PHP Script
+```
+<html>
+ <head>
+  <title>Sample7 Script</title>
+ </head>
+ <body bgcolor="#33ff33">
+  <?php
+    echo 'The uploaded file is: ',
+         $_FILES['my_file']['tmp_name'],'<br />';
+    $filename = $_FILES['my_file']['name'];
+    $filesize = $_FILES['my_file']['size'];
+    $directory = $_SERVER['DOCUMENT_ROOT'] .'/files/';
+    $uploadFile = $directory . $filename;
+    echo "The moved file is: $uploadFile<br />";
+    if (move_uploaded_file($_FILES['my_file']['tmp_name'],
+                           $uploadFile)) {
+      echo 'The file was successfully uploaded.<br />';
+      echo "The size of file, $filename, is $filesize bytes.<br />";
+    }
   ?>
  </body>
 </html>
