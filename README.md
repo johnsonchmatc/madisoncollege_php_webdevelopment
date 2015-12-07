@@ -1,4 +1,4 @@
-#Madison College PHP Web Development 
+#Madison College PHP Web Development
 * [Syllabus](syllabus.md)
 * [Introduction Letter](introletter.md)
 * [Coding Style Gide](https://github.com/johnsonchmatc/php-style-guide)
@@ -41,5 +41,6 @@
 
 ##Exams
 * Week 9 - [Study Guide](https://github.com/johnsonchmatc/madisoncollege_php_webdevelopment/blob/master/Units/week05/exam1_study_guide.md)
-* Week 15
+* Week 16 - [Study Guide](https://github.com/johnsonchmatc/madisoncollege_php_webdevelopment/blob/master/Units/week14/exam2_study_guide.md)
+
 
