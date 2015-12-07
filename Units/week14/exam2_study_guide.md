@@ -252,3 +252,38 @@ php script?
 </html>
 ```
 
+In this code which class is the Parent class and which is the Child? What methods
+are not available in the Child class?  What methods are available in the child
+class?
+
+```
+class Member {
+
+  public $username = "";
+  private $loggedIn = false;
+
+  public function login() {
+    $this->loggedIn = true;
+  }
+
+  public function logout() {
+    $this->loggedIn = false;
+  }
+
+  public function isLoggedIn() {
+    return $this->loggedIn;
+  }
+}
+
+class Administrator extends Member {
+
+  public function createForum( $forumName ) {
+    echo "$this->username created a new forum: $forumName<br>";
+  }
+
+  public function banMember( $member ) {
+    echo "$this->username banned the member: $member->username<br>";
+  }
+
+}
+```
